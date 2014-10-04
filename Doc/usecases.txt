@@ -2,7 +2,7 @@
 
 2. As a user, I want to view a question and its answers.
 
-3. As a user, I want to view the replies to a question or answer.
+3. As a user, I want to view the replies to a question or answer. [X, mostly done]
 
 4. As an author, I want to make questions. [X]
 
