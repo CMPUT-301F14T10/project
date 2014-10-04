@@ -4,9 +4,9 @@
 
 3. As a user, I want to view the replies to a question or answer.
 
-4. As an author, I want to make questions.
+4. As an author, I want to make questions. [X]
 
-5. As an author, I want to answer questions by making an answer.
+5. As an author, I want to answer questions by making an answer. [X]
 
 6. As an author, I want to reply to questions and answers to clarify things.
 
