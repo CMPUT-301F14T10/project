@@ -4,20 +4,28 @@ import java.util.ArrayList;
 
 public class Answer {
 	protected String answerName;
-	protected ArrayList<String> replies;
+	protected ArrayList<String> answerReplies;
 	
 	
-	public Answer(String answerName, ArrayList<String> replies) {
+	public Answer(String answerName, ArrayList<String> answer_replies) {
 		this.answerName=answerName;
-		this.replies=replies;
+		this.answerReplies=new ArrayList<String>();
 	}
 	
 	public String getAnswer() {
 		return this.answerName;
 	}
 	
+	
+	public void addReply(String reply) {
+		answerReplies.add(reply);
+	}
+	
 	public ArrayList<String> getReplies () {
-		return this.replies;
+		return this.answerReplies;
+	}
+	public int getSizeReplies() {
+		return answerReplies.size();
 	}
 
 }
