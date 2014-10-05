@@ -3,3 +3,4 @@ OK, I made some JUnit tests and some classes. The classes I made so far are Ques
 Since the author adds replies and an author has a username, do you think we should make a separate Reply class with a string for the reply content itself & a string for the author of that reply using their username. Also should we add an author(String) attribute for Question & Answer too since they also are made by an author. Just some thoughts. - Geneva
 
 Yeah it seems like a good idea. I hadn't accounted for those yet. -Paul
+OK I have made the Reply class and added author attribute for question and answer. -Paul
