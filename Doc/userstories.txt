@@ -42,4 +42,4 @@
 
 22. As a user, by default, I should see the most fresh comments.
 
-23. As an author, I set my username.
+23. As an author, I set my username. [X]
