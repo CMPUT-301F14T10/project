@@ -143,9 +143,86 @@ public class QuestionListTest extends TestCase {
 		//See replies to question
 		assertTrue("Question replies = 1", sameQuestion2.getSizeReplies()==1);
 		
+		
 		AnswerList answers= sameQuestion2.getAnswerList();
 		Answer testAnswer2= answers.getAnswer(0);
 		assertTrue("Answer replies=1", testAnswer2.getSizeReplies()==1 );
+	}
+	
+	//Use case 23
+	
+	public void testSetUserName() {
+		QuestionList questionList= new QuestionList();
+		String questionName= "How does this work?";
+		AnswerList answerList=new AnswerList ();
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "Me";
+		Question questionTest= new Question(questionName,answerList, question_replies,author);
+		questionTest.setAuthor("Paul");
+		//Testing set author name for question
+		
+		questionList.add(questionTest);
+		String name= questionTest.getAuthor();
+		assertTrue("Author name is Paul", questionTest.getAuthor().equals(name));
+		
+
+		int question_index= questionList.questionIndex(questionTest);
+		assertTrue("question index is 0", question_index==0);
+		
+		//Adding an answer
+		Question sameQuestion= questionList.get(question_index);
+		ArrayList<Reply> answer_replies= new ArrayList<Reply>();
+		String answerName= "An answer";
+		
+		//Add replies to answer
+		//answer_replies.add("Answer reply 1");
+		
+		String answer_author= "Me";
+		String answer_r_author= "7-11";
+		Answer testAnswer= new Answer(answerName, answer_replies, answer_author);
+		
+		String name2="Jack";
+		testAnswer.setAuthor(name2);
+		
+		assertTrue("Answer author is jack",testAnswer.getAuthor().equals(name2));
+		
+		
+		Reply a_reply= new Reply("Go to stackoverflow",answer_r_author);
+		
+		a_reply.setAuthor("Will");
+		assertTrue ("reply author is Will", a_reply.getAuthor().equals("Will"));
+		testAnswer.addReply(a_reply);
+	}
+	
+	//Use case 6
+	public void testReplyClarify() {
+		QuestionList questionList= new QuestionList();
+		String questionName= "A question?";
+		AnswerList answerList= new AnswerList();
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "A author";
+		
+		//Add question_replies
+		Question questionTest= new Question(questionName, answerList,question_replies,author);
+		Reply a_reply=new Reply("What are you talking about", "Walter");
+		questionTest.addQuestionReply(a_reply);
+		
+		assertTrue("Reply list isnt empty", questionTest.getSizeReplies()==1);
+		
+		questionList.add(questionTest);
+		
+		//Adding an answer
+
+		ArrayList<Reply> answer_replies= new ArrayList<Reply>();
+		String author2="Author 2";
+		String answerName= "An answer";
+
+		
+		Answer testAnswer= new Answer(answerName, answer_replies,author2);
+		Reply answer_reply= new Reply("What are you asking", "Jason");
+		testAnswer.addReply(answer_reply);
+		assertTrue("Reply list isn't empty", testAnswer.getSizeReplies()==1);
+	
 	}
 	
 
