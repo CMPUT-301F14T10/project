@@ -8,7 +8,7 @@
 
 5. As an author, I want to answer questions by making an answer. [X]
 
-6. As an author, I want to reply to questions and answers to clarify things.
+6. As an author, I want to reply to questions and answers to clarify things. [X]
 
 7. As an author, I want to attach a picture to my questions or my answers.
 
@@ -42,4 +42,4 @@
 
 22. As a user, by default, I should see the most fresh comments.
 
-23. As an author, I set my username.
+23. As an author, I set my username. [X]
