@@ -1,3 +1,5 @@
 OK, I made some JUnit tests and some classes. The classes I made so far are QuestionList, Question, AnswerList and Answer. I know it deviates a bit from the UML diagram we discussed. Hopefully you guys don't mind, but we can always change it up on Monday or something. The Question class has an answerlist (from AnswerList class),the question itself (a string) and an arraylist of replies. The QuestionList class is pretty much just an arraylist of Questions. The AnswerList class is an arraylist of Answers. The Answer class is comprised of the answer itself (a string) and an arraylist of replies. By the way, I just named the project QueueUnderflow, we can always change it later. Check out the partial uml if you guys want.
 
 Since the author adds replies and an author has a username, do you think we should make a separate Reply class with a string for the reply content itself & a string for the author of that reply using their username. Also should we add an author(String) attribute for Question & Answer too since they also are made by an author. Just some thoughts. - Geneva
+
+Yeah it seems like a good idea. I hadn't accounted for those yet. -Paul
