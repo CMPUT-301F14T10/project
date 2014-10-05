@@ -1,0 +1,7 @@
+Author: The alias the customer will be posting questions/answers/replies as.
+Most Recent Question: Designated by the timestamp on the question that is the closest to the current time.
+Most Recent Answer: Designated by the timestamp on the answer that is the closest to the current time.
+Answers: Answers provided by other authors to a posted question meant to provide solutions to the question.
+Replies: Small notes written by other authors to a posted question or answer for extra clarification/understanding.
+Navigation Drawer: 
+Cached: 
