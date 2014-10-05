@@ -1,0 +1,45 @@
+1. As a user, I want browse questions.
+
+2. As a user, I want to view a question and its answers.
+
+3. As a user, I want to view the replies to a question or answer. [X, mostly done]
+
+4. As an author, I want to make questions. [X]
+
+5. As an author, I want to answer questions by making an answer. [X]
+
+6. As an author, I want to reply to questions and answers to clarify things.
+
+7. As an author, I want to attach a picture to my questions or my answers.
+
+8. As a sysadmin, I do not want the pictures to be large (> 64kb).
+
+9. As a user, I want to sort questions by if they have pictures.
+
+10. As a user, I want to sort questions by date or some scoring system.
+
+11. As a user, I want to upvote the questions of other users.
+
+12. As a user, I want to upvote the answers of other users
+
+13. As a user, I want to see the most upvoted questions and most upvoted answers.
+
+14. As a user, I want to see how many answers a question has received. [X]
+
+15. As a user, I want to search for questions or answers.
+
+16. As an author, I want my device to remember which questions I asked.
+
+17. As a user, I want questions and answers that I read or questions and answers that I've indicated I want to read, to be locally cached so I can read them when I am not on the internet.
+
+18. As a user, I want to explicitly save some questions as favorites.
+
+19. As a user, My favorites and their replies should always be available to me regardless of network connectivity.
+
+20. As an author, I want to author replies, questions and answers offline.
+
+21. As an author, I want to push my replies, questions and answers online once I get connectivity.
+
+22. As a user, by default, I should see the most fresh comments.
+
+23. As an author, I set my username.
