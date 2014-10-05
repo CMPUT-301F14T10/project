@@ -14,6 +14,9 @@ public class QuestionList {
 		questionList.add(question);
 		
 	}
+	public ArrayList <Question> getQuestionList() {
+		return questionList;
+	}
 	
 	public int size() {
 		return questionList.size();

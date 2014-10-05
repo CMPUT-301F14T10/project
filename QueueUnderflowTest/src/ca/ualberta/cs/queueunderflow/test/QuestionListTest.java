@@ -13,6 +13,21 @@ import ca.ualberta.cs.queueunderflow.Reply;
 
 public class QuestionListTest extends TestCase {
 	
+	//Use case 1
+	public void testBrowseQuestions() {
+		QuestionList questionList= new QuestionList();
+		String questionName= "How does this work?";
+		AnswerList answerList=new AnswerList ();
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "Me";
+		Question questionTest= new Question(questionName,answerList, question_replies,author,0);
+		questionList.add(questionTest);
+		
+		assertTrue("Question List isn't empty", questionList.getQuestionList().contains(questionTest));
+	}
+	
+	
+	
 	//Use case 4
 	public void testAddQuestion() {
 		QuestionList questionList= new QuestionList();
@@ -143,11 +158,12 @@ public class QuestionListTest extends TestCase {
 		//See replies to question and answer
 		
 		assertTrue("Question replies = 1", sameQuestion2.getSizeReplies()==1);
-		
+		assertTrue(sameQuestion2.getReplies().contains(q_reply));
 		
 		AnswerList answers= sameQuestion2.getAnswerList();
 		Answer testAnswer2= answers.getAnswer(0);
 		assertTrue("Answer replies=1", testAnswer2.getSizeReplies()==1 );
+		assertTrue(testAnswer2.getReplies().contains(a_reply));
 	}
 	
 	//Use case 23
