@@ -8,7 +8,7 @@
 
 5. As an author, I want to answer questions by making an answer. [X]
 
-6. As an author, I want to reply to questions and answers to clarify things.
+6. As an author, I want to reply to questions and answers to clarify things. [X]
 
 7. As an author, I want to attach a picture to my questions or my answers.
 
