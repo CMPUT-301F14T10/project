@@ -7,13 +7,14 @@ public class Question {
 	protected AnswerList answerList;
 	protected ArrayList <Reply> questionReplies;
 	protected String author;
+	protected int upvote;
 	
-	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author) {
+	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote) {
 		this.questionName=questionName;
 		this.answerList= answerList;
 		this.questionReplies= new ArrayList<Reply> ();
 		this.author=author;
-		
+		this.upvote=upvote;
 	}
 	
 	public void setAuthor(String author) {
@@ -50,6 +51,13 @@ public class Question {
 	
 	public int getSizeReplies() {
 		return questionReplies.size();
+	}
+	
+	public void upvoteQuestion() {
+		upvote+=1;
+	}
+	public int getUpvotes() {
+		return upvote;
 	}
 	
 }

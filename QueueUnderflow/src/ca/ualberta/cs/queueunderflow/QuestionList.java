@@ -30,4 +30,24 @@ public class QuestionList {
 	public void set(int index, Question question) {
 		questionList.set(index, question);
 	}
+	public Question search(String question) {
+		boolean test= false;
+		Question q=questionList.get(0);
+		for (int i=0; i<questionList.size(); i++) {
+			q=questionList.get(i);
+			String q_name=q.getQuestion();
+			if (q_name.equals(question)) {
+				test=true;
+				break;
+			}
+			
+		}
+		if (test==true) {
+			return q;
+		}
+		else {
+			return null;
+		}
+		
+	}
 } 
