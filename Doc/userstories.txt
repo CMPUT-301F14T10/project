@@ -1,4 +1,5 @@
-1. As a user, I want browse questions. []
+1. As a user, I want browse questions. [X]
+
 2. As a user, I want to view a question and its answers. [X]
 
 3. As a user, I want to view the replies to a question or answer. [X]
