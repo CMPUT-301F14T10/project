@@ -5,13 +5,23 @@ import java.util.ArrayList;
 public class Question {
 	protected String questionName;
 	protected AnswerList answerList;
-	protected ArrayList <String> questionReplies;
+	protected ArrayList <Reply> questionReplies;
+	protected String author;
 	
-	public Question (String questionName, AnswerList answerList, ArrayList <String> questionReplies) {
+	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author) {
 		this.questionName=questionName;
 		this.answerList= answerList;
-		this.questionReplies= new ArrayList<String> ();
+		this.questionReplies= new ArrayList<Reply> ();
+		this.author=author;
 		
+	}
+	
+	public void setAuthor(String author) {
+		this.author=author;
+	}
+	
+	public String getAuthor() {
+		return this.author;
 	}
 	
 	public String getQuestion() {
@@ -29,11 +39,11 @@ public class Question {
 		return answerList.size();
 	}
 	
-	public void addQuestionReply(String reply) {
+	public void addQuestionReply(Reply reply) {
 		questionReplies.add(reply);
 	}
 	
-	public ArrayList<String> getReplies() {
+	public ArrayList<Reply> getReplies() {
 		return this.questionReplies;
 		
 	}

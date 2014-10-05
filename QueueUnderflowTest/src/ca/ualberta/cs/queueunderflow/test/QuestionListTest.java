@@ -9,6 +9,7 @@ import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.AnswerList;
 import ca.ualberta.cs.queueunderflow.QuestionList;
 import ca.ualberta.cs.queueunderflow.Question;
+import ca.ualberta.cs.queueunderflow.Reply;
 
 public class QuestionListTest extends TestCase {
 	
@@ -17,8 +18,9 @@ public class QuestionListTest extends TestCase {
 		QuestionList questionList= new QuestionList();
 		String questionName= "How does this work?";
 		AnswerList answerList=new AnswerList ();
-		ArrayList <String> question_replies= new ArrayList <String >();
-		Question questionTest= new Question(questionName,answerList, question_replies);
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "Me";
+		Question questionTest= new Question(questionName,answerList, question_replies,author);
 		questionList.add(questionTest);
 		
 		assertTrue("Question List isn't empty", questionList.size()==1);
@@ -30,8 +32,9 @@ public class QuestionListTest extends TestCase {
 		QuestionList questionList= new QuestionList();
 		String questionName= "A question?";
 		AnswerList answerList= new AnswerList();
-		ArrayList <String> question_replies= new ArrayList <String >();
-		Question questionTest= new Question(questionName,answerList, question_replies);
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "Me";
+		Question questionTest= new Question(questionName,answerList, question_replies,author);
 		questionList.add(questionTest);
 		
 		//Testing the questionIndex method of questionlist class
@@ -40,9 +43,10 @@ public class QuestionListTest extends TestCase {
 		
 		//Adding an answer
 		Question sameQuestion= questionList.get(question_index);
-		ArrayList<String> answer_replies= new ArrayList<String>();
+		ArrayList<Reply> answer_replies= new ArrayList<Reply>();
 		String answerName= "An answer";
-		Answer testAnswer= new Answer(answerName, answer_replies);
+		String authorName= "You";
+		Answer testAnswer= new Answer(answerName, answer_replies,authorName);
 		
 		sameQuestion.addAnswer(testAnswer);
 		
@@ -57,10 +61,10 @@ public class QuestionListTest extends TestCase {
 		QuestionList questionList= new QuestionList();
 		String questionName= "A question?";
 		AnswerList answerList= new AnswerList();
-		ArrayList <String> question_replies= new ArrayList <String >();
-		
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "A author";
 		//Add question_replies
-		Question questionTest= new Question(questionName, answerList,question_replies);
+		Question questionTest= new Question(questionName, answerList,question_replies,author);
 		questionList.add(questionTest);
 		
 		//Testing the questionIndex method of questionlist class
@@ -69,14 +73,15 @@ public class QuestionListTest extends TestCase {
 		
 		//Adding an answer
 		Question sameQuestion= questionList.get(question_index);
-		ArrayList<String> answer_replies= new ArrayList<String>();
+		ArrayList<Reply> answer_replies= new ArrayList<Reply>();
+		String author2="Author 2";
 		String answerName= "An answer";
 		String answerName2= "Answer 2";
 		String answerName3= "Answer 3";
 		
-		Answer testAnswer= new Answer(answerName, answer_replies);
-		Answer testAnswer2= new Answer(answerName2,answer_replies);
-		Answer testAnswer3= new Answer(answerName3, answer_replies);
+		Answer testAnswer= new Answer(answerName, answer_replies,author2);
+		Answer testAnswer2= new Answer(answerName2,answer_replies,author2);
+		Answer testAnswer3= new Answer(answerName3, answer_replies,author2);
 		
 		sameQuestion.addAnswer(testAnswer);
 		sameQuestion.addAnswer(testAnswer2);
@@ -96,13 +101,14 @@ public class QuestionListTest extends TestCase {
 		QuestionList questionList= new QuestionList();
 		String questionName= "A question?";
 		AnswerList answerList= new AnswerList();
-		ArrayList <String> question_replies= new ArrayList <String >();
-		
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author="A author";
 		//Adding replies to question
-		String q_reply= "Q reply 1";
+		String reply_author= "I dunno";
+		Reply q_reply= new Reply("Whats going on",reply_author);
 		//question_replies.add(q_reply);
 		
-		Question questionTest= new Question(questionName, answerList,question_replies);
+		Question questionTest= new Question(questionName, answerList,question_replies,author);
 		questionTest.addQuestionReply(q_reply);
 		questionList.add(questionTest);
 		
@@ -112,15 +118,17 @@ public class QuestionListTest extends TestCase {
 		
 		//Adding an answer
 		Question sameQuestion= questionList.get(question_index);
-		ArrayList<String> answer_replies= new ArrayList<String>();
+		ArrayList<Reply> answer_replies= new ArrayList<Reply>();
 		String answerName= "An answer";
 		
 		//Add replies to answer
 		//answer_replies.add("Answer reply 1");
 		
-		String answer_r="A reply answer";
-		Answer testAnswer= new Answer(answerName, answer_replies);
-		testAnswer.addReply(answer_r);
+		String answer_author= "Me";
+		String answer_r_author= "7-11";
+		Answer testAnswer= new Answer(answerName, answer_replies, answer_author);
+		Reply a_reply= new Reply("Go to stackoverflow",answer_r_author);
+		testAnswer.addReply(a_reply);
 		
 		sameQuestion.addAnswer(testAnswer);
 		
