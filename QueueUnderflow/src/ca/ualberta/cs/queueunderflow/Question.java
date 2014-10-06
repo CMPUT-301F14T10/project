@@ -13,12 +13,8 @@ public class Question {
 	protected String author;
 	protected int upvote;
 	protected boolean hasPicture;
-<<<<<<< Updated upstream
 	protected Picture image;
-	
-=======
 	protected Timestamp timestamp;
->>>>>>> Stashed changes
 	
 	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote
 			,boolean hasPicture,Picture image) {
@@ -28,12 +24,8 @@ public class Question {
 		this.author=author;
 		this.upvote=upvote;
 		this.hasPicture=hasPicture;
-<<<<<<< Updated upstream
 		this.image=image;
-	
-=======
 		this.timestamp = new Timestamp((new Date()).getTime());
->>>>>>> Stashed changes
 	}
 	
 	public void setAuthor(String author) {
@@ -83,21 +75,20 @@ public class Question {
 		return this.hasPicture;
 	}
 	
-<<<<<<< Updated upstream
 	public void setPicture (Picture pic) {
 		this.image= pic;
 	}
 	
 	public Picture getPicture() {
 		return this.image;
-=======
+	}
+	
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
 	
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
->>>>>>> Stashed changes
 	}
 	
 }
