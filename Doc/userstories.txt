@@ -36,7 +36,7 @@
 
 19. As a user, My favorites and their replies should always be available to me regardless of network connectivity. [X]
 
-20. As an author, I want to author replies, questions and answers offline.
+20. As an author, I want to author replies, questions and answers offline. [X, mock implementation]
 
 21. As an author, I want to push my replies, questions and answers online once I get connectivity.
 
