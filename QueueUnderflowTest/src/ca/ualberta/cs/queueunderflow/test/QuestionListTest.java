@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.AnswerList;
+import ca.ualberta.cs.queueunderflow.Favorites;
+import ca.ualberta.cs.queueunderflow.MasterAnswerList;
 import ca.ualberta.cs.queueunderflow.QuestionList;
 import ca.ualberta.cs.queueunderflow.Question;
 import ca.ualberta.cs.queueunderflow.Reply;
@@ -295,6 +297,7 @@ public class QuestionListTest extends TestCase {
 	
 	public void testSearchQuestion() {
 		QuestionList questionList= new QuestionList();
+		MasterAnswerList master= new MasterAnswerList();
 		String questionName= "A question?";
 		AnswerList answerList= new AnswerList();
 		ArrayList <Reply> question_replies= new ArrayList <Reply >();
@@ -314,14 +317,33 @@ public class QuestionListTest extends TestCase {
 		Answer testAnswer= new Answer(answerName, answer_replies,authorName,0);
 		
 		sameQuestion.addAnswer(testAnswer);
-		
+		master.addAnswer(testAnswer);
 		//Testing to see if the answer_list of a question is not empty
 		questionList.set(question_index, sameQuestion);
 		assertTrue("Answer List isn't empty",questionList.get(question_index).getAnswerListSize()==1 ) ;
 		
 		String search_question= "A question?";
 		assertTrue("Search doesn't return null",questionList.search(search_question)!=null);
+		
+		String search_answer="An answer";
+		assertTrue("Answer search doesn't return null",master.search(search_answer)!=null);
 	}
+	
+	//Use case 18
+	public void testSaveFavorites() {
+		String questionName= "How does this work?";
+		AnswerList answerList=new AnswerList ();
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "Me";
+		Question questionTest= new Question(questionName,answerList, question_replies,author,0);
+		
+		Favorites favorite_questions= new Favorites();
+		favorite_questions.add(questionTest);
+		
+		assertTrue("Favorites size is equal 1", favorite_questions.size()==1);
+		
+	}
+	
 	
 	
 
