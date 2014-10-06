@@ -395,6 +395,57 @@ public class QuestionListTest extends TestCase {
 
 	
 	
+	public void testSortByDate() {
+		String questionName= "Oldest";
+		AnswerList answerList=new AnswerList ();
+		ArrayList <Reply> question_replies= new ArrayList <Reply >();
+		String author= "long time ago";
+		Question question1= new Question(questionName,answerList, question_replies,author,0,false);
+		
+		for (int i = 0; i < 9990; i++) {
+			// this is just so the timestamp won't be the same for each question
+			// this will make them milliseconds off
+		}
+		
+		String questionName2= "in between";
+		AnswerList answerList2=new AnswerList ();
+		ArrayList <Reply> question_replies2= new ArrayList <Reply >();
+		String author2= "middle";
+		Question question2= new Question(questionName2,answerList2, question_replies2,author2,0,false);
+		
+		for (int i = 0; i < 9990; i++) {
+			//this is just so the timestamp won't be the same for each question
+			// this will make them milliseconds off
+		}
+		
+		String questionName3= "Freshest";
+		AnswerList answerList3=new AnswerList ();
+		ArrayList <Reply> question_replies3= new ArrayList <Reply >();
+		String author3= "Now";
+		Question question3= new Question(questionName3,answerList3, question_replies3,author3,0,false);
+		
+		QuestionList questionList = new QuestionList();
+		questionList.add(question2);
+		questionList.add(question1);
+		questionList.add(question3);
+		
+		ArrayList<Question> mostRecentList = new ArrayList<Question>();
+		mostRecentList.add(question3);
+		mostRecentList.add(question2);
+		mostRecentList.add(question1);
+		
+		ArrayList<Question> leastRecentList = new ArrayList<Question>();
+		leastRecentList.add(question1);
+		leastRecentList.add(question2);
+		leastRecentList.add(question3);
+		
+		ArrayList<Question> questionList3 = questionList.sortByDate("most recent");
+		assertEquals("questionList3 is sorted by date, most recent to least recent", questionList3, mostRecentList);
+		
+		ArrayList<Question> questionList4 = questionList.sortByDate("least recent");
+		assertEquals("questionList4 is sorted by date, least recent to most recent", questionList4, leastRecentList);
+	}
+	
 	
 
 }

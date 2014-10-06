@@ -1,10 +1,13 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class QuestionList {
 	protected ArrayList <Question> questionList;
 	protected ArrayList <Question> questionList2;
+	protected ArrayList <Question> questionList3;
 	
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
@@ -65,5 +68,35 @@ public class QuestionList {
 			}
 		}
 		return questionList2;
+	}
+	
+	public ArrayList<Question> sortByDate(String method) {
+		questionList3 = new ArrayList<Question>();
+		
+		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
+			
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return lhs.getTimestamp().compareTo(rhs.getTimestamp());
+			}
+		};
+		
+		Comparator<Question> mostRecentComparator = new Comparator<Question>() {
+			
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return (lhs.getTimestamp().compareTo(rhs.getTimestamp())) * -1;
+			}
+		};
+		questionList3 = (ArrayList<Question>) questionList.clone();
+		
+		if (method == "most recent") {
+			Collections.sort(questionList3, mostRecentComparator);
+		}
+		else if (method == "least recent") {
+			Collections.sort(questionList3, leastRecentComparator);
+		}
+
+		return questionList3;
 	}
 } 
