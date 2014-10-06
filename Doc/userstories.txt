@@ -16,7 +16,7 @@
 
 9. As a user, I want to sort questions by if they have pictures.[X]
 
-10. As a user, I want to sort questions by date or some scoring system. [working on it now -Geneva]
+10. As a user, I want to sort questions by date or some scoring system. [X]
 
 11. As a user, I want to upvote the questions of other users. [X]
 
