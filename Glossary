@@ -1,7 +1,8 @@
-Author: The alias the customer will be posting questions/answers/replies as.
+Author: The alias the customer will be posting questions/answers/replies as. Can be set by the customer.
+Question: A question asked by a customer that can be replied or answered. Has upvotes and can have a picture attached.
 Most Recent Question: Designated by the timestamp on the question that is the closest to the current time.
 Most Recent Answer: Designated by the timestamp on the answer that is the closest to the current time.
-Answers: Answers provided by other authors to a posted question meant to provide solutions to the question.
+Answers: Answers provided by other authors to a posted question meant to provide solutions to the question. Can have a picture attached.
 Replies: Small notes written by other authors to a posted question or answer for extra clarification/understanding.
+Cached: Specific questions the user will be able to view without a network connection. Saved on the phone's memory. If an answer or question is replied to while offline, it will be pushed from the cache when back online.
 Navigation Drawer: 
-Cached: 
