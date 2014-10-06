@@ -34,7 +34,7 @@
 
 18. As a user, I want to explicitly save some questions as favorites. [X]
 
-19. As a user, My favorites and their replies should always be available to me regardless of network connectivity.
+19. As a user, My favorites and their replies should always be available to me regardless of network connectivity. [X]
 
 20. As an author, I want to author replies, questions and answers offline.
 
