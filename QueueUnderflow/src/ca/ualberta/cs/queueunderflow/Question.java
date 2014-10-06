@@ -2,6 +2,8 @@ package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
 
+
+
 public class Question {
 	protected String questionName;
 	protected AnswerList answerList;
@@ -9,16 +11,19 @@ public class Question {
 	protected String author;
 	protected int upvote;
 	protected boolean hasPicture;
+	protected Picture image;
 	
 	
 	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote
-			,boolean hasPicture) {
+			,boolean hasPicture,Picture image) {
 		this.questionName=questionName;
 		this.answerList= answerList;
 		this.questionReplies= new ArrayList<Reply> ();
 		this.author=author;
 		this.upvote=upvote;
 		this.hasPicture=hasPicture;
+		this.image=image;
+	
 	}
 	
 	public void setAuthor(String author) {
@@ -60,11 +65,20 @@ public class Question {
 	public void upvoteQuestion() {
 		upvote+=1;
 	}
+	
 	public int getUpvotes() {
 		return upvote;
 	}
 	public boolean hasPicture() {
 		return this.hasPicture;
+	}
+	
+	public void setPicture (Picture pic) {
+		this.image= pic;
+	}
+	
+	public Picture getPicture() {
+		return this.image;
 	}
 	
 }
