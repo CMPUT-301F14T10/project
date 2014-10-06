@@ -38,7 +38,7 @@
 
 20. As an author, I want to author replies, questions and answers offline. [X, mock implementation]
 
-21. As an author, I want to push my replies, questions and answers online once I get connectivity.
+21. As an author, I want to push my replies, questions and answers online once I get connectivity. [X, mock implementation
 
 22. As a user, by default, I should see the most fresh comments.
 
