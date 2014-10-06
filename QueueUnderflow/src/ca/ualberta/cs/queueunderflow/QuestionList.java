@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class QuestionList {
 	protected ArrayList <Question> questionList;
+	protected ArrayList <Question> questionList2;
 	
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
@@ -52,5 +53,17 @@ public class QuestionList {
 			return null;
 		}
 		
+	}
+	
+	public ArrayList<Question> sortByPictures() {
+		questionList2= new ArrayList <Question>();
+		for (int i=0; i<questionList.size(); i++) {
+			Question testQuestion= questionList.get(i);
+			boolean result= testQuestion.hasPicture();
+			if (result) {
+				questionList2.add(testQuestion);
+			}
+		}
+		return questionList2;
 	}
 } 

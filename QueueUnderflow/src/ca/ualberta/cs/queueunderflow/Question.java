@@ -8,13 +8,17 @@ public class Question {
 	protected ArrayList <Reply> questionReplies;
 	protected String author;
 	protected int upvote;
+	protected boolean hasPicture;
 	
-	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote) {
+	
+	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote
+			,boolean hasPicture) {
 		this.questionName=questionName;
 		this.answerList= answerList;
 		this.questionReplies= new ArrayList<Reply> ();
 		this.author=author;
 		this.upvote=upvote;
+		this.hasPicture=hasPicture;
 	}
 	
 	public void setAuthor(String author) {
@@ -58,6 +62,9 @@ public class Question {
 	}
 	public int getUpvotes() {
 		return upvote;
+	}
+	public boolean hasPicture() {
+		return this.hasPicture;
 	}
 	
 }

@@ -7,6 +7,7 @@ public class Answer {
 	protected ArrayList<Reply> answerReplies;
 	protected String author;
 	protected int upvote;
+	protected boolean hasPicture;
 	
 	
 	public Answer(String answerName, ArrayList<Reply> answer_replies, String author, int upvote) {
@@ -47,6 +48,8 @@ public class Answer {
 	public int getUpvotes() {
 		return upvote;
 	}
+	
+
 	
 
 }
