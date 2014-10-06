@@ -26,7 +26,7 @@
 
 14. As a user, I want to see how many answers a question has received. [X]
 
-15. As a user, I want to search for questions or answers. [X, search for questions done, not answers part yet]
+15. As a user, I want to search for questions or answers. [X]
 
 16. As an author, I want my device to remember which questions I asked.
 
