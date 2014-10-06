@@ -77,7 +77,7 @@ public class QuestionList {
 			
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return lhs.getTimestamp().compareTo(rhs.getTimestamp());
+				return lhs.getDate().compareTo(rhs.getDate());
 			}
 		};
 		
@@ -85,7 +85,7 @@ public class QuestionList {
 			
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return (lhs.getTimestamp().compareTo(rhs.getTimestamp())) * -1;
+				return (lhs.getDate().compareTo(rhs.getDate())) * -1;
 			}
 		};
 		questionList3 = (ArrayList<Question>) questionList.clone();

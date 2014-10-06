@@ -1,6 +1,5 @@
 package ca.ualberta.cs.queueunderflow;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +13,7 @@ public class Question {
 	protected int upvote;
 	protected boolean hasPicture;
 	protected Picture image;
-	protected Timestamp timestamp;
+	protected Date date;
 	
 	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote
 			,boolean hasPicture,Picture image) {
@@ -25,7 +24,7 @@ public class Question {
 		this.upvote=upvote;
 		this.hasPicture=hasPicture;
 		this.image=image;
-		this.timestamp = new Timestamp((new Date()).getTime());
+		this.date = new Date();
 	}
 	
 	public void setAuthor(String author) {
@@ -83,12 +82,12 @@ public class Question {
 		return this.image;
 	}
 	
-	public Timestamp getTimestamp() {
-		return this.timestamp;
+	public Date getDate() {
+		return this.date;
 	}
 	
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+	public void setDate(Date timestamp) {
+		this.date = date;
 	}
 	
 }
