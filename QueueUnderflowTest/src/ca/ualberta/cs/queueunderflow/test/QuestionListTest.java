@@ -400,7 +400,7 @@ public class QuestionListTest extends TestCase {
 		AnswerList answerList=new AnswerList ();
 		ArrayList <Reply> question_replies= new ArrayList <Reply >();
 		String author= "long time ago";
-		Question question1= new Question(questionName,answerList, question_replies,author,0,false);
+		Question question1= new Question(questionName,answerList, question_replies,author,0,false,null);
 		
 		for (int i = 0; i < 9990; i++) {
 			// this is just so the timestamp won't be the same for each question
@@ -411,7 +411,7 @@ public class QuestionListTest extends TestCase {
 		AnswerList answerList2=new AnswerList ();
 		ArrayList <Reply> question_replies2= new ArrayList <Reply >();
 		String author2= "middle";
-		Question question2= new Question(questionName2,answerList2, question_replies2,author2,0,false);
+		Question question2= new Question(questionName2,answerList2, question_replies2,author2,0,false,null);
 		
 		for (int i = 0; i < 9990; i++) {
 			//this is just so the timestamp won't be the same for each question
@@ -422,7 +422,7 @@ public class QuestionListTest extends TestCase {
 		AnswerList answerList3=new AnswerList ();
 		ArrayList <Reply> question_replies3= new ArrayList <Reply >();
 		String author3= "Now";
-		Question question3= new Question(questionName3,answerList3, question_replies3,author3,0,false);
+		Question question3= new Question(questionName3,answerList3, question_replies3,author3,0,false,null);
 		
 		QuestionList questionList = new QuestionList();
 		questionList.add(question2);
