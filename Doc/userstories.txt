@@ -14,7 +14,7 @@
 
 8. As a sysadmin, I do not want the pictures to be large (> 64kb).
 
-9. As a user, I want to sort questions by if they have pictures.
+9. As a user, I want to sort questions by if they have pictures.[X]
 
 10. As a user, I want to sort questions by date or some scoring system.
 
