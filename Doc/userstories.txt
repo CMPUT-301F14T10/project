@@ -10,7 +10,7 @@
 
 6. As an author, I want to reply to questions and answers to clarify things. [X]
 
-7. As an author, I want to attach a picture to my questions or my answers.
+7. As an author, I want to attach a picture to my questions or my answers.[X, mock test and implementation done]
 
 8. As a sysadmin, I do not want the pictures to be large (> 64kb).
 
