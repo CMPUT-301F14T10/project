@@ -4,10 +4,13 @@ package ca.ualberta.cs.queueunderflow;
 public class Picture
 {
 	//Need to fix later on
-	protected String picture;
+	protected int picture;
 	
-	public Picture(String picture) {
+	public Picture(int picture) {
 		this.picture=picture;
+	}
+	public int getSize() {
+		return this.picture;
 	}
 	
 

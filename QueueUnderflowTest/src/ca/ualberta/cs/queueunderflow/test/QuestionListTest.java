@@ -363,13 +363,15 @@ public class QuestionListTest extends TestCase {
 		
 	}
 	
+	//Use case 7
+	
 	public void testInsertPictures() {
 		String questionName= "How does this work?";
 		AnswerList answerList=new AnswerList ();
 		ArrayList <Reply> question_replies= new ArrayList <Reply >();
 		String author= "Me";
 		Question questionTest= new Question(questionName,answerList, question_replies,author,0,true,null);
-		Picture pic= new Picture("A picture");
+		Picture pic= new Picture(10);
 		questionTest.setPicture(pic);
 		
 		assertTrue("Question has a picture", questionTest.getPicture()!=null);
@@ -383,6 +385,14 @@ public class QuestionListTest extends TestCase {
 		assertTrue("Answer has a picture", testAnswer.getPicture()!=null);
 		
 	}
+	
+	public void testPictureSize() {
+		Picture pic= new Picture(10);
+		
+		assertTrue("Picture isn't too big", pic.getSize()<64);
+	}
+	
+
 	
 	
 	
