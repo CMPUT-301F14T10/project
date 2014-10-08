@@ -32,7 +32,7 @@
 
 17. As a user, I want questions and answers that I read or questions and answers that I've indicated I want to read, to be locally cached so I can read them when I am not on the internet.
 
-18. As a user, I want to explicitly save some questions as favorites. 
+18. As a user, I want to explicitly save some questions as favorites. (Done)
 
 19. As a user, My favorites and their replies should always be available to me regardless of network connectivity. 
 
