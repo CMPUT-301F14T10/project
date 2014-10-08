@@ -70,9 +70,10 @@ public class QuestionList {
 		return questionList2;
 	}
 	
-	public ArrayList<Question> sortByDate(String method) {
+	public ArrayList<Question> sortBy(String method) {
 		questionList3 = new ArrayList<Question>();
 		
+		// Sort by date
 		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
 			
 			@Override
@@ -88,6 +89,22 @@ public class QuestionList {
 				return (lhs.getDate().compareTo(rhs.getDate())) * -1;
 			}
 		};
+		
+		// Sort by upvote
+		Comparator <Question> mostUpvotesComparator = new Comparator<Question>() {
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
+			}
+		};
+		
+		Comparator <Question> leastUpvotesComparator = new Comparator<Question>() {
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return lhs.getUpvotes() - rhs.getUpvotes();
+			}
+		};
+		
 		questionList3 = (ArrayList<Question>) questionList.clone();
 		
 		if (method == "most recent") {
@@ -96,7 +113,13 @@ public class QuestionList {
 		else if (method == "least recent") {
 			Collections.sort(questionList3, leastRecentComparator);
 		}
-
+		else if (method == "most upvotes") {
+			Collections.sort(questionList3, mostUpvotesComparator);
+		}
+		else if (method == "least upvotes") {
+			Collections.sort(questionList3, leastUpvotesComparator);
+		}
+		
 		return questionList3;
-	}
-} 
+	} 
+}

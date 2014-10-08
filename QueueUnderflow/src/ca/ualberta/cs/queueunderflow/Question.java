@@ -86,7 +86,7 @@ public class Question {
 		return this.date;
 	}
 	
-	public void setDate(Date timestamp) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

@@ -439,13 +439,39 @@ public class QuestionListTest extends TestCase {
 		leastRecentList.add(question2);
 		leastRecentList.add(question3);
 		
-		ArrayList<Question> questionList3 = questionList.sortByDate("most recent");
+		ArrayList<Question> questionList3 = questionList.sortBy("most recent");
 		assertEquals("questionList3 is sorted by date, most recent to least recent", questionList3, mostRecentList);
 		
-		ArrayList<Question> questionList4 = questionList.sortByDate("least recent");
+		ArrayList<Question> questionList4 = questionList.sortBy("least recent");
 		assertEquals("questionList4 is sorted by date, least recent to most recent", questionList4, leastRecentList);
 	}
 	
+	public void testSortByUpvotes() {
+		Question question1 = new Question("one upvote", new AnswerList(), new ArrayList<Reply>(), "author1", 1, false, null);
+		Question question2 = new Question("ten upvotes", new AnswerList(), new ArrayList<Reply>(), "author2", 10, false, null);
+		Question question3 = new Question("five upvotes", new AnswerList(), new ArrayList<Reply>(), "author3", 5, false, null);
 	
+		QuestionList questionList = new QuestionList();
+		questionList.add(question1);
+		questionList.add(question2);
+		questionList.add(question3);
+		
+		ArrayList<Question> mostUpvotesList = new ArrayList<Question>();
+		mostUpvotesList.add(question2);
+		mostUpvotesList.add(question3);
+		mostUpvotesList.add(question1);
+		
+		ArrayList<Question> leastUpvotesList = new ArrayList<Question>();
+		leastUpvotesList.add(question1);
+		leastUpvotesList.add(question3);
+		leastUpvotesList.add(question2);
+		
+		ArrayList<Question> questionList1 = questionList.sortBy("most upvotes");
+		assertEquals("questionList1 is sorted by most upvotes to least", mostUpvotesList, questionList1);
+		
+		ArrayList<Question> questionList2 = questionList.sortBy("least upvotes");
+		assertEquals("questionList2 is sorted by least upvotes to most", leastUpvotesList, questionList2);
+	}
+
 
 }
