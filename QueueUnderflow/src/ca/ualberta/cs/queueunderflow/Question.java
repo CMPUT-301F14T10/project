@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -14,16 +15,16 @@ public class Question {
 	protected boolean hasPicture;
 	protected Picture image;
 	protected Date date;
+	//protected Calendar calendar;
 	
-	public Question (String questionName, AnswerList answerList, ArrayList<Reply> question_replies, String author, int upvote
-			,boolean hasPicture,Picture image) {
+	public Question (String questionName, String author) {
 		this.questionName=questionName;
-		this.answerList= answerList;
+		this.answerList= new AnswerList();
 		this.questionReplies= new ArrayList<Reply> ();
 		this.author=author;
-		this.upvote=upvote;
-		this.hasPicture=hasPicture;
-		this.image=image;
+		this.upvote=0;
+		this.hasPicture=false;
+		this.image=null;
 		this.date = new Date();
 	}
 	
@@ -67,6 +68,10 @@ public class Question {
 		upvote+=1;
 	}
 	
+	public void setUpvotes(int number) {
+		this.upvote=number;
+	}
+	
 	public int getUpvotes() {
 		return upvote;
 	}
@@ -76,6 +81,7 @@ public class Question {
 	
 	public void setPicture (Picture pic) {
 		this.image= pic;
+		this.hasPicture=true;
 	}
 	
 	public Picture getPicture() {

@@ -75,10 +75,10 @@ public class QuestionList {
 		
 		// Sort by date
 		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
-			
+
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return lhs.getDate().compareTo(rhs.getDate());
+				return (lhs.getDate().compareTo(rhs.getDate()));
 			}
 		};
 		
@@ -86,8 +86,8 @@ public class QuestionList {
 			
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return (lhs.getDate().compareTo(rhs.getDate())) * -1;
-			}
+				return (lhs.getDate().compareTo(rhs.getDate())) * -1;			
+				}
 		};
 		
 		// Sort by upvote
@@ -107,10 +107,10 @@ public class QuestionList {
 		
 		questionList3 = (ArrayList<Question>) questionList.clone();
 		
-		if (method == "most recent") {
+		if (method.equals("most recent")) {
 			Collections.sort(questionList3, mostRecentComparator);
 		}
-		else if (method == "least recent") {
+		else if (method.equals("least recent")) {
 			Collections.sort(questionList3, leastRecentComparator);
 		}
 		else if (method == "most upvotes") {
