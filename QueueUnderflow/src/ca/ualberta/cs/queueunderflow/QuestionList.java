@@ -79,14 +79,15 @@ public class QuestionList {
 			@Override
 			public int compare(Question lhs, Question rhs) {
 				return (lhs.getDate().compareTo(rhs.getDate()));
+			
 			}
 		};
 		
 		Comparator<Question> mostRecentComparator = new Comparator<Question>() {
-			
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return (lhs.getDate().compareTo(rhs.getDate())) * -1;			
+				return (lhs.getDate().compareTo(rhs.getDate())) * -1;	
+				
 				}
 		};
 		
