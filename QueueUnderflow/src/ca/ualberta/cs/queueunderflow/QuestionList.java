@@ -9,9 +9,33 @@ public class QuestionList {
 	protected ArrayList <Question> questionList2;
 	protected ArrayList <Question> questionList3;
 	
+	protected boolean online;
+	
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
-		
+		this.online=false;
+	}
+	
+	public boolean getOnline() {
+		return this.online;
+	}
+	
+	public void setOnline() {
+		if (this.online==false) {
+			this.online=true;
+		}
+		else {
+			this.online=false;
+		}
+	}
+	
+	public boolean pushOnline() {
+		if (this.online) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void add (Question question) {

@@ -1,7 +1,6 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -15,6 +14,7 @@ public class Question {
 	protected boolean hasPicture;
 	protected Picture image;
 	protected Date date;
+
 	//protected Calendar calendar;
 	
 	public Question (String questionName, String author) {

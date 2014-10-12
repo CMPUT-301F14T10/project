@@ -18,6 +18,48 @@ import ca.ualberta.cs.queueunderflow.Reply;
 
 public class QuestionListTest extends TestCase {
 	
+	
+	//Use CASE 4
+	public void testAskQuestion() {
+		
+		//Add a question to the list
+		QuestionList questionList= new QuestionList();
+		String questionName= "How does this work?";
+
+		String author= "Me";
+		Question questionTest= new Question(questionName,author);
+		Picture pic= new Picture(32);
+		questionTest.setPicture(pic);
+		
+		questionList.add(questionTest);
+		assertTrue("Question List isn't empty", questionList.size()==1);
+		
+		//Exception: Where the question entered is whitespaces only
+		String questionName2= "        ";
+		String empty= questionName2.trim();
+		String result;
+		if (empty.length()==0) {
+			result="Reenter a question";
+		}
+		else {
+			result=null;
+		}
+		assertTrue("questionName2 is empty", result!=null);
+		
+		//Exception: Where there is no online connectivity
+		QuestionList questionList3= new QuestionList();
+		String questionName3= "Are we online?";
+		String author3= "Me";
+		Question questionTest3= new Question(questionName3,author3);
+		questionList3.add(questionTest3);
+		assertFalse("No network connectivity, push online later.",questionList3.pushOnline());
+		
+		
+	}
+	
+	//*********************Below are the user stories, not actual use cases****************
+	
+	
 	//Use case 1
 	public void testBrowseQuestions() {
 		QuestionList questionList= new QuestionList();
@@ -380,10 +422,11 @@ public class QuestionListTest extends TestCase {
 		
     	
 		Calendar cal = Calendar.getInstance();
-		cal.set(2013, Calendar.JANUARY, 9);
-		//cal.setTime(question1.getDate());
-		//cal.add(Calendar.DATE, -2);
+		//cal.set(2013, Calendar.JANUARY, 9);
+		cal.setTime(question1.getDate());
+		//cal.set(Calendar.DATE ,2);
 		//cal.set(2000, 11, 9);
+		cal.add(Calendar.SECOND,-5);
 		Date question1date = cal.getTime();
 		question1.setDate(question1date);
 		
@@ -397,9 +440,11 @@ public class QuestionListTest extends TestCase {
 		}
 		
 		Calendar cal2 = Calendar.getInstance();  
-		//cal2.setTime(question2.getDate());
+		cal2.setTime(question2.getDate());
 		//cal2.set(2005, 11, 11);
-		cal2.set(2014, Calendar.JANUARY, 11);
+		//cal2.set(2014, Calendar.JANUARY, 11);
+		//cal.set(Calendar.DATE ,8);
+		cal2.add(Calendar.SECOND,-3);
 
 		//cal2.add(Calendar.DATE, -1);
 		Date question2date = cal2.getTime();
@@ -425,8 +470,8 @@ public class QuestionListTest extends TestCase {
 		questionList.add(question3);
 		*/
 		
-		questionList.add(question1);
 		questionList.add(question2);
+		questionList.add(question1);
 		questionList.add(question3);
 		
 		ArrayList<Question> mostRecentList = new ArrayList<Question>();
