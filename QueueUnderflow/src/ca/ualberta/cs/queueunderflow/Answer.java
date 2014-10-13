@@ -52,6 +52,10 @@ public class Answer {
 		return upvote;
 	}
 	
+	public void setUpvotes(int number) {
+		this.upvote=number;
+	}
+	
 	public boolean hasPicture() {
 		return this.hasPicture;
 	}

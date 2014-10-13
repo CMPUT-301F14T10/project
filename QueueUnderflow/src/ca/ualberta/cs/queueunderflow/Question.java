@@ -15,7 +15,6 @@ public class Question {
 	protected Picture image;
 	protected Date date;
 
-	//protected Calendar calendar;
 	
 	public Question (String questionName, String author) {
 		this.questionName=questionName;
@@ -68,6 +67,7 @@ public class Question {
 		upvote+=1;
 	}
 	
+	
 	public void setUpvotes(int number) {
 		this.upvote=number;
 	}
@@ -95,5 +95,6 @@ public class Question {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 	
 }
