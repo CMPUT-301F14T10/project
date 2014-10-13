@@ -17,9 +17,123 @@ import ca.ualberta.cs.queueunderflow.Question;
 import ca.ualberta.cs.queueunderflow.Reply;
 
 public class QuestionListTest extends TestCase {
+	//Use CASE 1 (incorporates user story 1 and 14)
 	
+	public void testBrowseQuestions() {
+		
+		QuestionList questionList= new QuestionList();
+		String questionName= "A question?";
+		String author= "A author";
+		Question questionTest= new Question(questionName,author);
+		questionList.add(questionTest);
+		
+		/*Testing the questionIndex method of questionlist class, used to get a question
+		in the question list
+		 */
+		 
+		int question_index= questionList.questionIndex(questionTest);
+		assertTrue("question index is 0", question_index==0);
+		
+		
+		Question sameQuestion= questionList.get(question_index);
+		String author2="Answering the question author";
+		String answerName= "Answer 1";
+		String answerName2= "Answer 2";
+		String answerName3= "Answer 3";
+		
+		Answer testAnswer= new Answer(answerName,author2);
+		Answer testAnswer2= new Answer(answerName2,author2);
+		Answer testAnswer3= new Answer(answerName3,author2);
+		
+		sameQuestion.addAnswer(testAnswer);
+		sameQuestion.addAnswer(testAnswer2);
+		sameQuestion.addAnswer(testAnswer3);
+		
+		//Add the question (with answers) back to question list
+		questionList.set(question_index, sameQuestion);
+		
+		//Testing to see how many answers a question has received
+		int question_index2= questionList.questionIndex(sameQuestion);
+		Question sameQuestion2= questionList.get(question_index2);
+		assertTrue("The answers this question received=3", sameQuestion2.getAnswerListSize()==3);
+	}
 	
-	//Use CASE 4
+	//Use CASE 2 (incorporates user stories 2 and 22)
+	public void testViewQuestionsAndAnswers () {
+		
+		String questionName= "A question?";
+		String author= "Me";
+		Question questionTest= new Question(questionName,author);
+		
+		//Exception: There are no answers to the question selected
+		assertTrue("No answers for this question yet",questionTest.getAnswerListSize()==0);
+
+		String answerName= "An answer";
+		String authorName= "You";
+		Answer testAnswer= new Answer(answerName,authorName);
+		questionTest.addAnswer(testAnswer);
+		
+		//Testing to see if the answer_list of a question is not empty
+		AnswerList question_answer= questionTest.getAnswerList();
+		assertTrue("question_answer isn't empty", question_answer.size()==1);
+	}
+	
+	//Use CASE 3 (incorporates user story 3)
+	public void testViewReplies() {
+		String questionName= "A question?";
+		String author="A author";
+		Question questionTest= new Question(questionName,author);
+
+		//Exception: If no replies, display “No Replies” message. 
+		assertTrue("No Replies",questionTest.getSizeReplies()==0);
+		
+		//Adding replies to question
+		String reply_author= "I dunno";
+		Reply question_reply= new Reply("Whats going on",reply_author);
+		
+	
+		questionTest.addQuestionReply(question_reply);
+		QuestionList questionList= new QuestionList();
+		questionList.add(questionTest);
+		
+		int question_index= questionList.questionIndex(questionTest);
+		
+		//Adding an answer
+		Question sameQuestion= questionList.get(question_index);
+		String answerName= "An answer";
+		
+		//Add replies to answer
+		//answer_replies.add("Answer reply 1");
+		
+		String answer_author= "Me";
+		String answer_reply_author= "7-11";
+		Answer testAnswer= new Answer(answerName,answer_author);
+		
+		//Exception: If no replies, display “No Replies” message. 
+		assertTrue("No Replies",testAnswer.getSizeReplies()==0);
+		
+		//Add replies to answer
+		Reply answer_reply= new Reply("Go to stackoverflow",answer_reply_author);
+		testAnswer.addReply(answer_reply);
+		sameQuestion.addAnswer(testAnswer);
+		questionList.set(question_index, sameQuestion);
+		
+		//Testing to see how many answers a question has received
+		int question_index2= questionList.questionIndex(sameQuestion);
+		Question sameQuestion2= questionList.get(question_index2);
+		assertTrue("The answers this question received=1", sameQuestion2.getAnswerListSize()==1);
+		
+		//See replies to question and answer
+		assertTrue("Question replies = 1", sameQuestion2.getSizeReplies()==1);
+		assertTrue(sameQuestion2.getReplies().contains(question_reply));
+		
+		AnswerList answers= sameQuestion2.getAnswerList();
+		Answer testAnswer2= answers.getAnswer(0);
+		assertTrue("Answer replies=1", testAnswer2.getSizeReplies()==1 );
+		assertTrue(testAnswer2.getReplies().contains(answer_reply));
+	}
+	
+	//Use CASE 4 (incorporates user stories 4 and 7)
 	public void testAskQuestion() {
 		
 		//Add a question to the list
@@ -57,11 +171,11 @@ public class QuestionListTest extends TestCase {
 		
 	}
 	
-	//*********************Below are the user stories, not actual use cases****************
+	//*********************Below are the user stories in implementation, not actual use cases****************
 	
 	
 	//Use case 1
-	public void testBrowseQuestions() {
+	public void testBrowseQuestions2() {
 		QuestionList questionList= new QuestionList();
 		String questionName= "How does this work?";
 		String author= "Me";
