@@ -424,10 +424,13 @@ public class QuestionListTest extends TestCase {
 		
 		Question question1= new Question(questionName, author);
 		
+		//Exception: No upvoted questions
+		assertTrue("No upvoted questions", question1.getUpvotes()==0);
+		
 		//Exception: No answers to a questions
 		assertTrue("No answers currently", question1.getAnswerListSize()==0);
 		
-		//Exception: No upvoted answers
+		
 		
 		String answer_test= "Answer1";
 		String answer_test2= "Answer2";
