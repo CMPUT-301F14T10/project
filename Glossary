@@ -1,8 +1,16 @@
-Author: The alias the customer will be posting questions/answers/replies as. Can be set by the customer.
-Question: A question asked by a customer that can be replied or answered. Has upvotes and can have a picture attached.
-Most Recent Question: Designated by the timestamp on the question that is the closest to the current time.
-Most Recent Answer: Designated by the timestamp on the answer that is the closest to the current time.
 Answers: Answers provided by other authors to a posted question meant to provide solutions to the question. Can have a picture attached.
-Replies: Small notes written by other authors to a posted question or answer for extra clarification/understanding.
+Author/Username: The alias the customer will be posting questions/answers/replies as. Can be set by the customer.
+Browse Questions: Allows the customer to view question titles from the main page in the list along with the number of answers they have.
 Cached: Specific questions the user will be able to view without a network connection. Saved on the phone's memory. If an answer or question is replied to while offline, it will be pushed from the cache when back online.
-Navigation Drawer: 
+Favorites: Questions (as well as its answers/replies) that are cached locally and viewable in the future without need of an internet connection.
+Most Recent Answer: Designated by the timestamp on the answer that is the closest to the current time.
+Most Recent Question: Designated by the timestamp on the question that is the closest to the current time.
+Navigation Drawer: A touch-screen shortcut accessible by swiping from the left edge of the screen to the center. This will pull out the navigation drawer which contains shortcuts to various lists such as "My Questions", "Favorites", etc.
+Push Answers: Allows the author to write answers, questions, or replies without an internet connection, but have them immediately posted as soon as an internet connection is established.
+Question: A question asked by a customer that can be replied or answered. Has upvotes and can have a picture attached.
+Questions Asked: The device will remember which questions the author asked.
+Reading List: Selected questions and their answers will be cached locally to be viewed in the future without need of an internet connection.
+Replies: Small notes written by other authors to a posted question or answer for extra clarification/understanding.
+Sysadmin: The individual in charge of managing each question posted on Queue Underflow. Has an important job to verify that photos uploaded are not larger than 64kB.
+Upvote: An action performable by any author which essentially gives the selected question/answer one point, showing that the author thought the question/answer was helpful and should be more easily seen by others.
+View Questions And Answers: Allows the customer to view a question's answers, as well as other questions related to the current question.

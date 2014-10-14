@@ -2,15 +2,15 @@
 
 2. As a user, I want to view a question and its answers. [X]
 
-3. As a user, I want to view the replies to a question or answer. [X]
+3. As a user, I want to view the replies to a question or answer. [X, use cases done]
 
-4. As an author, I want to make questions. [X]
+4. As an author, I want to make questions. [X, use case done]
 
-5. As an author, I want to answer questions by making an answer. [X]
+5. As an author, I want to answer questions by making an answer. [X, use case done]
 
-6. As an author, I want to reply to questions and answers to clarify things. [X]
+6. As an author, I want to reply to questions and answers to clarify things. [X, use case done]
 
-7. As an author, I want to attach a picture to my questions or my answers.[X, mock test and implementation done]
+7. As an author, I want to attach a picture to my questions or my answers.[X, use case done]
 
 8. As a sysadmin, I do not want the pictures to be large (> 64kb). [X, mock implementation done]
 
@@ -18,15 +18,15 @@
 
 10. As a user, I want to sort questions by date or some scoring system. [X]
 
-11. As a user, I want to upvote the questions of other users. [X]
+11. As a user, I want to upvote the questions of other users. [X, use case done]
 
-12. As a user, I want to upvote the answers of other users [X]
+12. As a user, I want to upvote the answers of other users [X, use case done]
 
-13. As a user, I want to see the most upvoted questions and most upvoted answers.
+13. As a user, I want to see the most upvoted questions and most upvoted answers. [most upvoted questions done, most upvoted answers not done yet]
 
 14. As a user, I want to see how many answers a question has received. [X]
 
-15. As a user, I want to search for questions or answers. [X]
+15. As a user, I want to search for questions or answers. [X, use case done]
 
 16. As an author, I want my device to remember which questions I asked.
 
@@ -36,9 +36,9 @@
 
 19. As a user, My favorites and their replies should always be available to me regardless of network connectivity. [X]
 
-20. As an author, I want to author replies, questions and answers offline. [X, mock implementation]
+20. As an author, I want to author replies, questions and answers offline. [X]
 
-21. As an author, I want to push my replies, questions and answers online once I get connectivity. [X, mock implementation
+21. As an author, I want to push my replies, questions and answers online once I get connectivity. [X]
 
 22. As a user, by default, I should see the most fresh comments.
 

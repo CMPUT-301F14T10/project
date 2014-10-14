@@ -11,14 +11,13 @@ public class Answer {
 	protected Picture image;
 	
 	
-	public Answer(String answerName, ArrayList<Reply> answer_replies, String author, int upvote,
-			boolean hasPicture, Picture image) {
+	public Answer(String answerName,String author) {
 		this.answerName=answerName;
 		this.answerReplies=new ArrayList<Reply>();
 		this.author=author;
-		this.upvote=upvote;
-		this.hasPicture=hasPicture;
-		this.image=image;
+		this.upvote=0;
+		this.hasPicture=false;;
+		this.image=null;
 	}
 	
 	public void setAuthor(String author) {
@@ -51,6 +50,10 @@ public class Answer {
 	}
 	public int getUpvotes() {
 		return upvote;
+	}
+	
+	public void setUpvotes(int number) {
+		this.upvote=number;
 	}
 	
 	public boolean hasPicture() {

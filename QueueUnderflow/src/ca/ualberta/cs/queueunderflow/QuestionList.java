@@ -9,9 +9,33 @@ public class QuestionList {
 	protected ArrayList <Question> questionList2;
 	protected ArrayList <Question> questionList3;
 	
+	protected boolean online;
+	
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
-		
+		this.online=false;
+	}
+	
+	public boolean getOnline() {
+		return this.online;
+	}
+	
+	public void setOnline() {
+		if (this.online==false) {
+			this.online=true;
+		}
+		else {
+			this.online=false;
+		}
+	}
+	
+	public boolean pushOnline() {
+		if (this.online) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void add (Question question) {
@@ -70,33 +94,57 @@ public class QuestionList {
 		return questionList2;
 	}
 	
-	public ArrayList<Question> sortByDate(String method) {
+	public ArrayList<Question> sortBy(String method) {
 		questionList3 = new ArrayList<Question>();
 		
+		// Sort by date
 		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
-			
+
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return lhs.getDate().compareTo(rhs.getDate());
+				return (lhs.getDate().compareTo(rhs.getDate()));
+			
 			}
 		};
 		
 		Comparator<Question> mostRecentComparator = new Comparator<Question>() {
-			
 			@Override
 			public int compare(Question lhs, Question rhs) {
-				return (lhs.getDate().compareTo(rhs.getDate())) * -1;
+				return (lhs.getDate().compareTo(rhs.getDate())) * -1;	
+				
+				}
+		};
+		
+		// Sort by upvote
+		Comparator <Question> mostUpvotesComparator = new Comparator<Question>() {
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
 			}
 		};
+		
+		Comparator <Question> leastUpvotesComparator = new Comparator<Question>() {
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				return lhs.getUpvotes() - rhs.getUpvotes();
+			}
+		};
+		
 		questionList3 = (ArrayList<Question>) questionList.clone();
 		
-		if (method == "most recent") {
+		if (method.equals("most recent")) {
 			Collections.sort(questionList3, mostRecentComparator);
 		}
-		else if (method == "least recent") {
+		else if (method.equals("least recent")) {
 			Collections.sort(questionList3, leastRecentComparator);
 		}
-
+		else if (method == "most upvotes") {
+			Collections.sort(questionList3, mostUpvotesComparator);
+		}
+		else if (method == "least upvotes") {
+			Collections.sort(questionList3, leastUpvotesComparator);
+		}
+		
 		return questionList3;
-	}
-} 
+	} 
+}
