@@ -9,10 +9,7 @@ import ca.ualberta.cs.queueunderflow.QuestionList;
 import junit.framework.TestCase;
 
 public class UseCase10 extends TestCase {
-<<<<<<< HEAD
-=======
-	
->>>>>>> b276022bec7b228e126fe6f42c8febf3b2091006
+
 	//Use CASE 10 (incorporates user stories 9 and 10)
 	public void testSortQuestionBy() {
 		String questionName= "Oldest question";
@@ -89,9 +86,5 @@ public class UseCase10 extends TestCase {
 		ArrayList<Question> questionList6 = questionList.sortBy("least upvotes");
 		assertEquals("questionList2 is sorted by least upvotes to most", leastUpvotesList, questionList6);
 	}
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> b276022bec7b228e126fe6f42c8febf3b2091006
+
 }

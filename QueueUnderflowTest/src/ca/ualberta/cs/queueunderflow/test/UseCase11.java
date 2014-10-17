@@ -7,17 +7,10 @@ import junit.framework.TestCase;
 
 public class UseCase11 extends TestCase {
 	
-<<<<<<< HEAD
-	public void testUpvote() {
+	//Use CASE 11 (incorporates user stories 9 and 10)
+	public void testUpvote() {	
 		User user=new User();
 		user.setUserName("A user");
-=======
-	//Use CASE 11 (incorporates user stories 9 and 10)
-	public void testUpvote() {
-		User user=new User();
-		user.setUserName("Paul");
->>>>>>> b276022bec7b228e126fe6f42c8febf3b2091006
-		
 		String userName= user.getUserName();
 		String questionName= "A question?";
 		String author= userName;
@@ -43,8 +36,5 @@ public class UseCase11 extends TestCase {
 		assertTrue("Question already upvoted", user.alreadyUpvotedQuestion(questionTest));
 		assertTrue("Answer already upvoted", user.alreadyUpvotedAnswer(testAnswer));
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> b276022bec7b228e126fe6f42c8febf3b2091006
+
 }
