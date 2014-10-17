@@ -378,7 +378,6 @@ public class QuestionListTest extends TestCase {
 	
 	
 	//Use CASE 11 (incorporates user stories 9 and 10)
-	
 	public void testUpvote() {
 		User user=new User();
 		user.setUserName("Paul");
@@ -429,8 +428,6 @@ public class QuestionListTest extends TestCase {
 		
 		//Exception: No answers to a questions
 		assertTrue("No answers currently", question1.getAnswerListSize()==0);
-		
-		
 		
 		String answer_test= "Answer1";
 		String answer_test2= "Answer2";
