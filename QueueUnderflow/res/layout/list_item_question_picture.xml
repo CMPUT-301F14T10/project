@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--  Note : For the ImageView (@+id/imagePreview), the src is set to @drawable/user_pic for now. This is a temporary placeholder until we implement picture attachments, in which the src will be set to the
+			image that the user provided.  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/upvoteBtn"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/item_upvote_btn"
+            android:paddingBottom="0dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/upvoteDisplay"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:gravity="center_horizontal"
+            android:layout_below="@+id/upvoteBtn"
+            android:paddingTop="0dp"
+            android:text="100"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Question" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp" >
+
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@+id/authorTextView"
+                android:text="Date"
+                android:textSize="9sp" />
+            
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" >
+        
+            <ImageView
+                android:id="@+id/imagePreview"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/user_pic"
+                android:visibility="visible" />
+        </LinearLayout>
+        
+      <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true" >
+            
+
+          
+            <CheckBox
+                android:id="@+id/favBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/replyBtn"
+                android:layout_alignParentLeft="true"
+                android:button="@drawable/favorite"
+                android:clickable="true" />
+
+            <CheckBox
+                android:id="@+id/offlineBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/replyBtn"
+                android:layout_toRightOf="@+id/favBtn"
+                android:button="@drawable/offline"
+                android:clickable="true" />
+            
+            <ImageButton
+                android:id="@+id/answerBtn"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:scaleType="fitCenter"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/replyBtn"
+                android:background="@android:color/transparent"
+                android:src="@drawable/item_answer_btn" />
+
+            <ImageButton
+                android:id="@+id/replyBtn"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:scaleType="fitCenter"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/offlineBtn"
+                android:background="@android:color/transparent"
+                android:src="@drawable/item_reply_btn" />
+
+            <ImageButton
+                android:id="@+id/hasPictureIcon"
+                android:layout_width="19dp"
+                android:layout_height="17dp"
+                android:layout_alignBottom="@+id/replyBtn"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-3dp"
+                android:layout_marginRight="10dp"
+                android:clickable="false"
+                android:src="@drawable/item_picture_indicator"
+                android:visibility="invisible" />
+            
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

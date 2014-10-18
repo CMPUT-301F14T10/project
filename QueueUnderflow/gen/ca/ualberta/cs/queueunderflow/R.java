@@ -22,21 +22,68 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int favorite=0x7f020000;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int item_answer_btn=0x7f020003;
+        public static final int item_download_btn=0x7f020004;
+        public static final int item_picture_indicator=0x7f020005;
+        public static final int item_reply_btn=0x7f020006;
+        public static final int item_star_btn=0x7f020007;
+        public static final int item_undowload_btn=0x7f020008;
+        public static final int item_unstar_btn=0x7f020009;
+        public static final int item_upvote_btn=0x7f02000a;
+        public static final int offline=0x7f02000b;
+        public static final int user_pic=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int answerBtn=0x7f08000b;
+        public static final int answerTextView=0x7f080000;
+        public static final int authorTextView=0x7f080001;
+        public static final int dateTextView=0x7f080002;
+        public static final int favBtn=0x7f080003;
+        public static final int hasPictureIcon=0x7f080006;
+        public static final int hasPictureMenu=0x7f080011;
+        public static final int imagePreview=0x7f080009;
+        public static final int leastRecentMenu=0x7f08000f;
+        public static final int mostRecentMenu=0x7f08000e;
+        public static final int mostUpvotesMenu=0x7f080010;
+        public static final int noPictureMenu=0x7f080012;
+        public static final int offlineBtn=0x7f080005;
+        public static final int questionTextView=0x7f08000a;
+        public static final int replyBtn=0x7f080004;
+        public static final int searchMenu=0x7f08000c;
+        public static final int sortByMenu=0x7f08000d;
+        public static final int upvoteBtn=0x7f080007;
+        public static final int upvoteDisplay=0x7f080008;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int list_item_answer=0x7f030001;
+        public static final int list_item_answer_picture=0x7f030002;
+        public static final int list_item_question=0x7f030003;
+        public static final int list_item_question_picture=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
+        public static final int addAnAnswer=0x7f050004;
+        public static final int answer=0x7f05000f;
         public static final int app_name=0x7f050000;
+        public static final int ask=0x7f05000d;
+        public static final int askAQuestion=0x7f050003;
+        public static final int cancel=0x7f05000e;
+        public static final int favorite=0x7f05000c;
+        public static final int hasPicture=0x7f050008;
         public static final int hello_world=0x7f050001;
+        public static final int leastRecent=0x7f050006;
+        public static final int mostRecent=0x7f050005;
+        public static final int mostUpvotes=0x7f050007;
+        public static final int noPicture=0x7f050009;
+        public static final int search=0x7f05000b;
+        public static final int sortBy=0x7f05000a;
     }
     public static final class style {
         /** 

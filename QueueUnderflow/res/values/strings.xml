@@ -5,4 +5,18 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="askAQuestion">Ask A Question</string>
+    <string name="addAnAnswer">Add An Answer</string>
+    <string name="mostRecent">Most Recent</string>
+    <string name="leastRecent">Least Recent</string>
+    <string name="mostUpvotes">Most Upvotes</string>
+    <string name="hasPicture">Has Picture</string>
+    <string name="noPicture">No Picture</string>
+    <string name="sortBy">Sort By</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="ask">Ask</string>
+    <string name="cancel">Cancel</string>
+    <string name="answer">Answer</string>
+    
 </resources>
