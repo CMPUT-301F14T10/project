@@ -4,6 +4,7 @@ import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.Question;
 import ca.ualberta.cs.queueunderflow.QuestionList;
 import ca.ualberta.cs.queueunderflow.Reply;
+import ca.ualberta.cs.queueunderflow.User;
 import junit.framework.TestCase;
 
 
@@ -11,10 +12,13 @@ public class UseCase6 extends TestCase
 {
 	//Use CASE 6 (incorporates user story 6)
 	public void testAddReply() {
+		User me= new User();
+		me.setUserName("Me");
+		
 		QuestionList questionList= new QuestionList();
 		String questionName= "A question?";
 
-		String author= "A author";
+		String author= "Some other user";
 		
 		//Add question_replies
 		Question questionTest= new Question(questionName,author);
@@ -31,15 +35,16 @@ public class UseCase6 extends TestCase
 		}
 		assertTrue("emptyAnswer is empty", result!=null);
 		
-		Reply question_reply=new Reply("What are you talking about", "Walter");
+		Reply question_reply=new Reply("What are you talking about", me.getUserName());
 		questionTest.addQuestionReply(question_reply);
 		assertTrue("Reply list isnt empty", questionTest.getSizeReplies()==1);
 		
 		//Add a answer and reply to the answer
-		String author2="Author 2";
+		String author2="Another user is answering";
 		String answerName= "An answer";
 		Answer testAnswer= new Answer(answerName,author2);
-		Reply answer_reply= new Reply("What are you asking", "Jason");
+		
+		Reply answer_reply= new Reply("Please clarify what you're asking", me.getUserName());
 		testAnswer.addReply(answer_reply);
 		assertTrue("Reply list isn't empty", testAnswer.getSizeReplies()==1);
 		

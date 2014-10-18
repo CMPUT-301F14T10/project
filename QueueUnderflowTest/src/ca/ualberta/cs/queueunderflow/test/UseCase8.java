@@ -3,15 +3,18 @@ package ca.ualberta.cs.queueunderflow.test;
 import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.Picture;
 import ca.ualberta.cs.queueunderflow.Question;
+import ca.ualberta.cs.queueunderflow.User;
 import junit.framework.TestCase;
 
 public class UseCase8 extends TestCase {
 	
 	//Use CASE 8 (incorporates user story 7 and 8)
 	public void testAddPhotoFromGallery() {
+		User me= new User();
+		me.setUserName("Me");
+		
 		String questionName= "How does this work?";
-		String author= "Me";
-		Question questionTest= new Question(questionName,author);
+		Question questionTest= new Question(questionName,me.getUserName());
 		Picture pic= new Picture(10);
 		questionTest.setPicture(pic);
 		

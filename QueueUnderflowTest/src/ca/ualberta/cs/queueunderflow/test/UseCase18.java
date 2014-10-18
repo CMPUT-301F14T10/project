@@ -4,18 +4,21 @@ import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.Question;
 import ca.ualberta.cs.queueunderflow.QuestionList;
 import ca.ualberta.cs.queueunderflow.Reply;
+import ca.ualberta.cs.queueunderflow.User;
 import junit.framework.TestCase;
 
 //Use CASE 18(incorporates user story 23)
 public class UseCase18 extends TestCase
 {
 	public void testSetUserName() {
+		User me= new User();
+		
 		QuestionList questionList= new QuestionList();
 		String questionName= "How does this work?";
-
 		String author= "Paul";
-		Question questionTest= new Question(questionName,author);
-		questionTest.setAuthor(author);
+		
+		me.setUserName(author);
+		Question questionTest= new Question(questionName,me.getUserName());
 		
 		//Exception: No username is typed in or only whitespace is typed in
 		String no_author= "         ";
@@ -32,7 +35,7 @@ public class UseCase18 extends TestCase
 
 		assertTrue("Answer author is Paul",testAnswer.getAuthor().equals(author));
 		Reply a_reply= new Reply("Go to stackoverflow",author);
-		assertTrue ("reply author is Will", a_reply.getAuthor().equals("Paul"));
+		assertTrue ("reply author is Paul", a_reply.getAuthor().equals("Paul"));
 		testAnswer.addReply(a_reply);
 	}
 }
