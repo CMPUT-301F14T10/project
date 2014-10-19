@@ -19,4 +19,6 @@
     <string name="cancel">Cancel</string>
     <string name="answer">Answer</string>
     
+    <string name="drawerOpen">Navigation drawer is open</string>
+    <string name="drawerClosed">Navigation drawer is closed</string>
 </resources>

@@ -4,21 +4,25 @@ import java.util.ArrayList;
 
 public class User {
 
-	protected String username;
+	protected static String username;
 	protected ArrayList <Question> upvotedQuestions;
 	protected ArrayList <Answer> upvotedAnswers;
 	protected ArrayList<Reply> upvotedReplies;
 	
 	public User() {
-		this.username=null;
 	}
 	public void setUserName(String userName) {
 		this.username=userName;
 		this.upvotedQuestions= new ArrayList<Question>();
 		this.upvotedAnswers= new ArrayList<Answer>();
 	}
-	public String getUserName() {
-		return this.username;
+	
+	
+	public static String getUsername() {
+		if (username == null) {
+			username = "Anonymous";
+		}
+		return username;
 	}
 	
 	public void addUpvotedQuestion(Question question) {
