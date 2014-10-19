@@ -27,7 +27,7 @@ public class SetUsernameFragment extends Fragment {
 		Button submitBtn = (Button) view.findViewById(R.id.submitBtn);
 		
 		/* Need to put some of this in a controller later */
-		currentUsername.setText(User.getUsername());
+		currentUsername.setText(User.getUserName());
 		submitBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -35,7 +35,7 @@ public class SetUsernameFragment extends Fragment {
 				String username = newUsername.getText().toString();
 				User user = new User();
 				user.setUserName(username);
-				currentUsername.setText(User.getUsername());
+				currentUsername.setText(User.getUserName());
 				Toast.makeText(getActivity(), "Username successfully set to " + username, Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -43,22 +43,3 @@ public class SetUsernameFragment extends Fragment {
 	}
 
 }
-
-//final TextView currentUsername = (TextView) getActivity().findViewById(R.id.currentUsername);
-//final EditText newUsername = (EditText) getActivity().findViewById(R.id.newUsername);
-//Button submitBtn = (Button) getActivity().findViewById(R.id.submitBtn);
-//
-//// Need to put some of this in a controller later
-//currentUsername.setText(User.getUsername());
-//submitBtn.setOnClickListener(new OnClickListener() {
-//	
-//	@Override
-//	public void onClick(View v) {
-//		String username = newUsername.getText().toString();
-//		User user = new User();
-//		user.setUserName(username);
-//		currentUsername.setText(User.getUsername());
-//		Toast.makeText(getActivity(), "Username successfully set to" + username, Toast.LENGTH_SHORT).show();
-//	}
-//});
-////

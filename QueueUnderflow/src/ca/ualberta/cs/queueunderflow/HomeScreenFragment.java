@@ -1,10 +1,15 @@
 package ca.ualberta.cs.queueunderflow;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class HomeScreenFragment extends Fragment {
 
@@ -16,8 +21,19 @@ public class HomeScreenFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
+
+		Button askQuestion = (Button) view.findViewById(R.id.askQBtn);
+		askQuestion.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), AskAQuestionActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		ListView listView = (ListView) view.findViewById(R.id.homeListView);
+		
 	}
 
 }

@@ -18,7 +18,7 @@ public class User {
 	}
 	
 	
-	public static String getUsername() {
+	public static String getUserName() {
 		if (username == null) {
 			username = "Anonymous";
 		}
