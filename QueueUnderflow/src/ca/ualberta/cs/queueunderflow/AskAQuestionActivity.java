@@ -21,8 +21,8 @@ public class AskAQuestionActivity extends Activity{
 		// Display the up caret to go back to the MainActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		EditText authorUsername = (EditText) findViewById(R.id.authorBox);
-		EditText questionInput = (EditText) findViewById(R.id.questionInput);
+		final EditText authorUsername = (EditText) findViewById(R.id.authorBox);
+		final EditText questionInput = (EditText) findViewById(R.id.questionInput);
 		Button askBtn = (Button) findViewById(R.id.askBtn);
 		
 		/* Need to put some of this in a controller later */
@@ -31,6 +31,14 @@ public class AskAQuestionActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				Question newQuestion = new Question(questionInput.getText().toString(), authorUsername.getText().toString());
+				
+				QuestionList homeScreenList = ListHandler.getMasterQList();
+				homeScreenList.add(newQuestion);
+				
+				QuestionList myQuestionsList = ListHandler.getMyQsList();
+				myQuestionsList.add(newQuestion);
+				
 				finish();
 			}
 		});

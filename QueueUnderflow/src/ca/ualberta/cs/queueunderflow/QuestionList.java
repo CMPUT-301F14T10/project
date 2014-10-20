@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class QuestionList {
+public class QuestionList extends TModel<TView>{
 	protected ArrayList <Question> questionList;
 	protected ArrayList <Question> questionList2;
 	protected ArrayList <Question> questionList3;
@@ -39,7 +39,9 @@ public class QuestionList {
 	}
 	
 	public void add (Question question) {
-		questionList.add(question);
+		// Add at position 0, so that freshest Q is always first
+		questionList.add(0, question);
+		notifyViews();
 		
 	}
 	public ArrayList <Question> getQuestionList() {
@@ -60,7 +62,9 @@ public class QuestionList {
 	
 	public void set(int index, Question question) {
 		questionList.set(index, question);
+		notifyViews();
 	}
+	
 	public Question search(String question) {
 		boolean test= false;
 		Question q=questionList.get(0);
