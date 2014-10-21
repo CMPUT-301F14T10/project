@@ -17,6 +17,10 @@ public class Question {
 
 	
 	public Question (String questionName, String author) {
+		questionName = questionName.trim();
+		if (questionName.length() == 0) {
+			throw new IllegalArgumentException("Not a valid question. Please enter another question.");
+		}
 		this.questionName=questionName;
 		this.answerList= new AnswerList();
 		this.questionReplies= new ArrayList<Reply> ();

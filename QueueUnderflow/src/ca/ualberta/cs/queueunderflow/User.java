@@ -11,8 +11,14 @@ public class User {
 	
 	public User() {
 	}
+	
 	public void setUserName(String userName) {
-		this.username=userName;
+		String tempUserName = userName.trim();
+		if (tempUserName.length() == 0) {
+			this.username = "Anonymous";
+			throw new IllegalArgumentException("Invalid username. Username is set to Anonymous.");
+		}
+		this.username=tempUserName;
 		this.upvotedQuestions= new ArrayList<Question>();
 		this.upvotedAnswers= new ArrayList<Answer>();
 	}

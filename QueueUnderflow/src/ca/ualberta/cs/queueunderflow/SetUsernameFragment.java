@@ -34,9 +34,20 @@ public class SetUsernameFragment extends Fragment {
 			public void onClick(View v) {
 				String username = newUsername.getText().toString();
 				User user = new User();
-				user.setUserName(username);
-				currentUsername.setText(User.getUserName());
-				Toast.makeText(getActivity(), "Username successfully set to " + username, Toast.LENGTH_SHORT).show();
+				
+				int flag = 0;
+				try {
+					user.setUserName(username);
+				} catch (IllegalArgumentException e){
+					currentUsername.setText(User.getUserName());
+					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+					flag = 1;
+				}
+				
+				if (flag == 0){
+					currentUsername.setText(User.getUserName());
+					Toast.makeText(getActivity(), "Username successfully set to " + user.getUserName(), Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		//
