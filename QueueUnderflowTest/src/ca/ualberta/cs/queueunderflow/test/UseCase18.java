@@ -17,14 +17,9 @@ public class UseCase18 extends TestCase
 		String questionName= "How does this work?";
 		String author= "Paul";
 		
+		// Checks if username is correctly set when making a question/answer/reply - valid username
 		me.setUserName(author);
 		Question questionTest= new Question(questionName,me.getUserName());
-		
-		//Exception: No username is typed in or only whitespace is typed in
-		String no_author= "         ";
-		String author_exception= no_author.trim();
-		assertTrue("No author specified, setting author to Anonymous",author_exception.length()==0);
-		
 		questionList.add(questionTest);
 		assertTrue("Author name is Paul or Anonymous", questionTest.getAuthor().equals("Paul"));
 		
@@ -37,5 +32,26 @@ public class UseCase18 extends TestCase
 		Reply a_reply= new Reply("Go to stackoverflow",author);
 		assertTrue ("reply author is Paul", a_reply.getAuthor().equals("Paul"));
 		testAnswer.addReply(a_reply);
+		
+		
+		
+		//Exception: No username is typed in or only whitespace is typed in
+		String no_author= "         ";
+		int flag = 0; // indicates if the whitespace exception is caught & handled
+		try {
+			me.setUserName(no_author);
+		} catch (IllegalArgumentException e) {
+			flag = 1;
+		}
+		assertTrue("Whitespace username exception caught & handled", flag == 1);
+		assertEquals("No author specified, author is set to Anonymous", "Anonymous", me.getUserName());
+		
+		// Checks if username is correctly set when making a question - invalid username entered, set to Anonymous
+		Question questionTest1= new Question(questionName,me.getUserName());
+		questionList.add(questionTest1);
+		assertTrue("Author name is Paul or Anonymous", questionTest1.getAuthor().equals("Anonymous"));
+
+		
+
 	}
 }
