@@ -26,8 +26,15 @@
             android:name=".AskAQuestionActivity"
             android:label="@string/title_activity_ask_aquestion" >
             <meta-data
-            	android:name="android.support.PARENT_ACTIVITY"
-            	android:value="ca.ualberta.cs.queueunderflow.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.ualberta.cs.queueunderflow.MainActivity" />
+        </activity>
+        <activity
+            android:name=".QAViewActivity"
+            android:label="@string/title_activity_qaview" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.ualberta.cs.queueunderflow.MainActivity" />
         </activity>
     </application>
 

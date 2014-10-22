@@ -1,41 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  Reference for the line "android:descendantFocusability="blockDescendants" to make list items clickable is from http://cyrilmottier.com/2011/11/23/listview-tips-tricks-4-add-several-clickable-areas/ 10-21-14 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants"  >
+    tools:context="ca.ualberta.cs.queueunderflow.QAViewActivity" >
+
+<LinearLayout
+    android:id="@+id/questionLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/upvoteBtn"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
+            android:src="@drawable/item_upvote_btn"
             android:paddingBottom="0dp"
-            android:src="@drawable/item_upvote_btn" />
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/upvoteDisplay"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:gravity="center_horizontal"
             android:layout_below="@+id/upvoteBtn"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
             android:paddingTop="0dp"
             android:text="100"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+        
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
@@ -69,19 +73,22 @@
                 android:layout_toRightOf="@+id/authorTextView"
                 android:text="Date"
                 android:textSize="9sp" />
+            
         </RelativeLayout>
 
-        <RelativeLayout
+      <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true" >
+            
 
+          
             <CheckBox
                 android:id="@+id/favBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignTop="@+id/replyBtn"
+                android:layout_alignParentLeft="true"
                 android:button="@drawable/favorite"
                 android:clickable="true" />
 
@@ -93,27 +100,27 @@
                 android:layout_toRightOf="@+id/favBtn"
                 android:button="@drawable/offline"
                 android:clickable="true" />
-
+            
             <ImageButton
                 android:id="@+id/answerBtn"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/replyBtn"
                 android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
                 android:src="@drawable/item_answer_btn" />
 
             <ImageButton
                 android:id="@+id/replyBtn"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/offlineBtn"
                 android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
                 android:src="@drawable/item_reply_btn" />
 
             <ImageButton
@@ -126,8 +133,55 @@
                 android:layout_marginRight="10dp"
                 android:clickable="false"
                 android:src="@drawable/item_picture_indicator"
-	            android:visibility="invisible" />
+                android:visibility="invisible" />
+            
         </RelativeLayout>
     </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/answerConstantLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/questionLayout"
+        android:paddingBottom="5dp"
+        android:paddingTop="8dp" >
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/answersCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Answers :"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="19sp" />
+        
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addAnAnswerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentBottom="true"
+        android:text="@string/addAnAnswer" />
+
+    <ExpandableListView
+        android:id="@+id/answersExpListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addAnAnswerBtn"
+        android:layout_below="@+id/answerConstantLayout"
+        android:layout_centerHorizontal="true" >
+
+    </ExpandableListView>
+
+</RelativeLayout>

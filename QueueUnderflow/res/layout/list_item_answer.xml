@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--  Reference for the line "android:descendantFocusability="blockDescendants" to make list items clickable is from http://cyrilmottier.com/2011/11/23/listview-tips-tricks-4-add-several-clickable-areas/ 10-21-14 -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants"  >
 
     <LinearLayout
         android:layout_width="263dp"

@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class HomeScreenFragment extends Fragment implements TView<QuestionList>{
 	
+	public static final int HOME_SCREEN_FRAGMENT = 1;
 	QuestionListAdapter adapter;
 
 	@Override
@@ -45,6 +47,22 @@ public class HomeScreenFragment extends Fragment implements TView<QuestionList>{
 			}
 		});
 		
+		ListView listView = (ListView) view.findViewById(R.id.homeListView);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// Go to QAViewActivity to see the Q & A
+				Intent intent = new Intent(getActivity(), QAViewActivity.class);
+				
+				// Pass position of question selected & the fragment so we can retreive the question & inflate it in QAView
+				intent.putExtra("position", position);
+				intent.putExtra("fromFragment", HOME_SCREEN_FRAGMENT);
+				
+				startActivity(intent);
+			}
+			
+		});
 		
 		
 	}

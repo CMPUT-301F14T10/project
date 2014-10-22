@@ -21,5 +21,6 @@
     <string name="drawerClosed">Navigation drawer is closed</string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_ask_aquestion">AskAQuestionActivity</string>
+    <string name="title_activity_qaview">QAViewActivity</string>
 
 </resources>

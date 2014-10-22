@@ -2,11 +2,13 @@
 
 <!--  Note : For the ImageView (@+id/imagePreview), the src is set to @drawable/user_pic for now. This is a temporary placeholder until we implement picture attachments, in which the src will be set to the
 			image that the user provided.  -->
+<!--  Reference for the line "android:descendantFocusability="blockDescendants" to make list items clickable is from http://cyrilmottier.com/2011/11/23/listview-tips-tricks-4-add-several-clickable-areas/ 10-21-14 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants"  >
 
     <RelativeLayout
         android:layout_width="wrap_content"
