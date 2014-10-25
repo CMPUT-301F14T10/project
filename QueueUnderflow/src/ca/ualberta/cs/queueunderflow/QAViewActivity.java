@@ -36,6 +36,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		// Retrieve the position of the question selected & the fragment where it was selected from
 		// The fragment where it was selected from informs us of which list to use from the ListHandler to inflate the view
+		
 		Intent intent = getIntent();
 		final int position = intent.getIntExtra("position", -1); 				// -1 is the default value if nothing was retrieved
 		int fromFragment = intent.getIntExtra("fromFragment", -1);
