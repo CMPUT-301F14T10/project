@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Answer {
 	protected String answerName;
@@ -9,6 +10,7 @@ public class Answer {
 	protected int upvote;
 	protected boolean hasPicture;
 	protected Picture image;
+	protected Date date;
 	
 	
 	public Answer(String answerName,String author) {
@@ -18,6 +20,7 @@ public class Answer {
 		this.upvote=0;
 		this.hasPicture=false;;
 		this.image=null;
+		this.date= new Date();
 	}
 	
 	public void setAuthor(String author) {
@@ -66,6 +69,9 @@ public class Answer {
 	
 	public Picture getPicture() {
 		return this.image;
+	}
+	public Date getDate() {
+		return this.date;
 	}
 	
 	

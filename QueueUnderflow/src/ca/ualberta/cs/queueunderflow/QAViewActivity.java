@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class QAViewActivity extends Activity implements TView<QuestionList>{
@@ -20,6 +23,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	public static final int FAVORITES_FRAGMENT = 2;
 	public static final int READING_LIST_FRAGMENT = 3;
 	public static final int MY_QUESTIONS_FRAGMENT = 4;
+	AnswerListAdapter adapter;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +104,17 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
+//				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);\
 //				startActivity(intent);
+				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
+				//Pass the position of the question to the new activity
+				intent.putExtra("question_position",position );
+				startActivity(intent);
+
 			}
 		});
 	}
+
 
 	
 	@Override

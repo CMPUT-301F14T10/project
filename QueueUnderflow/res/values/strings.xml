@@ -22,5 +22,6 @@
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_ask_aquestion">AskAQuestionActivity</string>
     <string name="title_activity_qaview">QAViewActivity</string>
+    <string name="title_activity_add_an_answer">AddAnAnswerActivity</string>
 
 </resources>
