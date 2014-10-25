@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,18 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
 			hasPictureIcon.setVisibility(View.VISIBLE);
 		}
+		
+		ImageButton answerBtn = (ImageButton) view.findViewById(R.id.answerBtn);
+		answerBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
+				//Pass the position of the question to the new activity
+				intent.putExtra("question_position",position);
+				activity.startActivity(intent);
+			}
+		});
 		
 		return view;
 	}

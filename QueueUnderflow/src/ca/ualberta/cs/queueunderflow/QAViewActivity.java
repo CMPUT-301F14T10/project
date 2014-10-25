@@ -104,8 +104,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);\
-//				startActivity(intent);
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position",position );
@@ -113,6 +111,13 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 
 			}
 		});
+        
+        ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
+        adapter = new AnswerListAdapter(this, R.layout.list_item_answer, R.layout.exp_list_item_reply, question.getAnswerList().getAnswerList());
+        answersExpListView.setAdapter(adapter);
+        
+        // This hides that expand arrow on the answer item
+        answersExpListView.setGroupIndicator(null);
 	}
 
 
@@ -143,6 +148,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	@Override
 	public void update(QuestionList model) {
 		ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-		// TODO - call answersExpListView's adapter.notifyDataSetChanged()
+		adapter.notifyDataSetChanged();
 	}
 }

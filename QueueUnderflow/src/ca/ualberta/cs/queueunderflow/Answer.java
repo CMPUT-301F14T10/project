@@ -36,9 +36,13 @@ public class Answer {
 	}
 	
 	
-	public void addReply(Reply reply) {
-		answerReplies.add(reply);
-	}
+    public Reply getReplyAt(int position) {
+        return answerReplies.get(position);
+    }
+     
+    public void addReply(Reply reply) {
+        answerReplies.add(0, reply);
+    }
 	
 	public ArrayList<Reply> getReplies () {
 		return this.answerReplies;

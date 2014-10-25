@@ -10,8 +10,8 @@ protected ArrayList <Answer> answerList;
 	}
 	
 	public void add (Answer answer) {
-		answerList.add(answer);
-		
+		// Add at position 0, so that freshest A is always first
+		answerList.add(0, answer);	
 	}
 	public int size() {
 		return answerList.size();
@@ -19,5 +19,9 @@ protected ArrayList <Answer> answerList;
 	
 	public Answer getAnswer(int i) {
 		return answerList.get(i);
+	}
+	
+	public ArrayList <Answer> getAnswerList() {
+		return answerList;
 	}
 }

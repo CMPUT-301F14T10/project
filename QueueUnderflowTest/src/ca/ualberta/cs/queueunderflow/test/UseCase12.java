@@ -46,7 +46,7 @@ public class UseCase12 extends TestCase {
 		question1.addAnswer(answer2);
 		
 		assertTrue("Question has two answers", question1.getAnswerListSize()==2);
-		assertTrue("Most upvoted answer is answer2", question1.getAnswerList().getAnswer(1) ==answer2);
+		assertTrue("Most upvoted answer is answer2", question1.getAnswerList().getAnswer(0) ==answer2);
 
 	}
 }
