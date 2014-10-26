@@ -72,7 +72,7 @@ public class AddAnAnswerActivity extends Activity
 		}
 		
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, R.layout.list_item_answer, R.layout.exp_list_item_reply, question.getAnswerList().getAnswerList());
+        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), 1, position);
         answersExpListView.setAdapter(adapter);
         
         // This hides that expand arrow on the answer item

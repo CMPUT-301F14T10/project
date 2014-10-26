@@ -1,7 +1,6 @@
 package ca.ualberta.cs.queueunderflow;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AskAQuestionActivity extends Activity{
@@ -22,7 +22,7 @@ public class AskAQuestionActivity extends Activity{
 		// Display the up caret to go back to the MainActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		final EditText authorUsername = (EditText) findViewById(R.id.authorBox);
+		final TextView authorUsername = (TextView) findViewById(R.id.authorBox);
 		final EditText questionInput = (EditText) findViewById(R.id.questionInput);
 		Button askBtn = (Button) findViewById(R.id.askBtn);
 		
@@ -33,7 +33,7 @@ public class AskAQuestionActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				try {
-					Question newQuestion = new Question(questionInput.getText().toString(), authorUsername.getText().toString());
+					Question newQuestion = new Question(questionInput.getText().toString(), User.getUserName());
 					QuestionList homeScreenList = ListHandler.getMasterQList();
 					homeScreenList.add(newQuestion);
 					

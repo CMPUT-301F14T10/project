@@ -1,14 +1,16 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
- 
+
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,17 +18,23 @@ import android.widget.TextView;
  
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  
+	private static int TYPE_ANSWER = 1;
+	
     private Activity activity;
     private int groupLayoutID;
     private int childLayoutID;
     private ArrayList<Answer> answerArray;
+    private int fromFragment;
+    private int questionPosition;
  
-    public AnswerListAdapter(Activity activity, int groupLayoutID, int childLayoutID, ArrayList<Answer> answerArray) {
+    public AnswerListAdapter(Activity activity, ArrayList<Answer> answerArray, int fromFragment, int questionPosition) {
         super();
         this.activity = activity;
-        this.groupLayoutID = groupLayoutID;
-        this.childLayoutID = childLayoutID;
+        this.groupLayoutID = R.layout.list_item_answer;
+        this.childLayoutID = R.layout.exp_list_item_reply;
         this.answerArray = answerArray;
+        this.fromFragment = fromFragment;
+        this.questionPosition = questionPosition;
     }
  
     @Override
@@ -120,6 +128,27 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
             ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
             hasPictureIcon.setVisibility(0);
         }
+        
+        ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);
+        replyBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				// Passing info about which questionList it's from, questionPosition & questionAnswer & the type (we're replying to an Answer) so we know where to add the reply to
+				Bundle args = new Bundle();
+				args.putInt("fromFragment", fromFragment);
+				args.putInt("questionPosition", questionPosition);
+				args.putInt("answerPosition", groupPosition);
+				args.putInt("type", TYPE_ANSWER);
+				
+				// Create & display reply dialog + attach arguments
+				DialogFragment replyDialog = new WriteReplyDialogFragment();
+				replyDialog.setArguments(args);
+				replyDialog.show(activity.getFragmentManager(), null);
+				
+			}
+		});
         
         return view;
     }

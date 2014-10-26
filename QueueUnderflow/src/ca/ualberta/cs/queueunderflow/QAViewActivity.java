@@ -77,7 +77,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		questionDisplay.setText(question.getQuestion());
 		
 		TextView authorDisplay = (TextView) findViewById(R.id.authorTextView);
-		authorDisplay.setText(questionList.get(0).getAuthor());
+		authorDisplay.setText(question.getAuthor());
 		
 		TextView dateDisplay = (TextView) findViewById(R.id.dateTextView);
 		dateDisplay.setText(DateFormat.format("MMM dd, yyyy", question.getDate()));
@@ -107,14 +107,14 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
-				intent.putExtra("question_position",position );
+				intent.putExtra("question_position", position);
 				startActivity(intent);
 
 			}
 		});
         
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, R.layout.list_item_answer, R.layout.exp_list_item_reply, question.getAnswerList().getAnswerList());
+        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position);
         answersExpListView.setAdapter(adapter);
         
         // This hides that expand arrow on the answer item

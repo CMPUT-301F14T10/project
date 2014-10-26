@@ -77,20 +77,19 @@
         android:text="Author :"
         android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/authorBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView2"
         android:ems="10"
-        android:hint="Author Username"
+        android:text="Author Username"
         android:paddingLeft="10dp"
         android:paddingTop="20dp"
-        android:textSize="18sp" >
-
-        <requestFocus />
-    </EditText>
+        android:textSize="18sp"
+        android:textColor="@android:color/darker_gray" >
+    </TextView>
 
     <EditText
         android:id="@+id/questionInput"

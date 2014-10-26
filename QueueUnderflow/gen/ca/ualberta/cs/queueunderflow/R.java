@@ -44,7 +44,7 @@ public final class R {
     public static final class id {
         public static final int AddAnAnswerButton=0x7f080001;
         public static final int AddAnswerEditText=0x7f080000;
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f08002a;
         public static final int addAnAnswerBtn=0x7f08001d;
         public static final int answerBtn=0x7f08000e;
         public static final int answerConstantLayout=0x7f080002;
@@ -54,6 +54,7 @@ public final class R {
         public static final int askBtn=0x7f080011;
         public static final int askQBtn=0x7f080020;
         public static final int authorBox=0x7f080019;
+        public static final int authorText=0x7f080028;
         public static final int authorTextView=0x7f080009;
         public static final int content_frame=0x7f08001b;
         public static final int currentUsername=0x7f080023;
@@ -63,27 +64,28 @@ public final class R {
         public static final int fromCamera=0x7f080016;
         public static final int fromGallery=0x7f080015;
         public static final int hasPictureIcon=0x7f08000f;
-        public static final int hasPictureMenu=0x7f08002e;
+        public static final int hasPictureMenu=0x7f080030;
         public static final int homeListView=0x7f08001f;
         public static final int imagePreview=0x7f080027;
         public static final int imagePreviewBtn=0x7f080017;
         public static final int imageView1=0x7f080021;
-        public static final int leastRecentMenu=0x7f08002c;
+        public static final int leastRecentMenu=0x7f08002e;
         public static final int left_drawer=0x7f08001c;
         public static final int linearLayout1=0x7f080010;
         public static final int linearLayout2=0x7f080014;
-        public static final int mostRecentMenu=0x7f08002b;
-        public static final int mostUpvotesMenu=0x7f08002d;
+        public static final int mostRecentMenu=0x7f08002d;
+        public static final int mostUpvotesMenu=0x7f08002f;
         public static final int newUsername=0x7f080024;
-        public static final int noPictureMenu=0x7f08002f;
+        public static final int noPictureMenu=0x7f080031;
         public static final int offlineBtn=0x7f08000d;
         public static final int questionInput=0x7f080013;
         public static final int questionLayout=0x7f080003;
         public static final int questionTextView=0x7f080008;
         public static final int replyBtn=0x7f08000c;
+        public static final int replyText=0x7f080029;
         public static final int replyTextView=0x7f08001e;
-        public static final int searchMenu=0x7f080029;
-        public static final int sortByMenu=0x7f08002a;
+        public static final int searchMenu=0x7f08002b;
+        public static final int sortByMenu=0x7f08002c;
         public static final int submitBtn=0x7f080025;
         public static final int textView1=0x7f080012;
         public static final int textView2=0x7f080018;
@@ -104,6 +106,7 @@ public final class R {
         public static final int list_item_drawer=0x7f030009;
         public static final int list_item_question=0x7f03000a;
         public static final int list_item_question_picture=0x7f03000b;
+        public static final int write_reply_dialog_fragment=0x7f03000c;
     }
     public static final class menu {
         public static final int add_an_answer=0x7f070000;
