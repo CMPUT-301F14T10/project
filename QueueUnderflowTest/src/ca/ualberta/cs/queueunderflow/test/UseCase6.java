@@ -35,6 +35,7 @@ public class UseCase6 extends TestCase
 		assertTrue("Whitespace reply exception caught & handled", flag == 1);
 		assertTrue("Whitespace only reply is not added to the question", questionTest.getSizeReplies() == 0);
 		
+		// Add a valid reply to a question
 		Reply question_reply=new Reply("What are you talking about", me.getUserName());
 		questionTest.addQuestionReply(question_reply);
 		assertTrue("Reply list isnt empty", questionTest.getSizeReplies()==1);
