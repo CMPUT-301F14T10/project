@@ -3,20 +3,15 @@ package ca.ualberta.cs.queueunderflow;
 import java.util.ArrayList;
  
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
-import android.provider.ContactsContract.CommonDataKinds.Relation;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
  
 public class AnswerListAdapter extends BaseExpandableListAdapter {

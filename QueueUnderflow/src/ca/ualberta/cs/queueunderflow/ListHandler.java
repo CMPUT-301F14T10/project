@@ -3,10 +3,11 @@ package ca.ualberta.cs.queueunderflow;
 public class ListHandler {
 
 	// Need to change this to a singleton pattern instead of static QuestionLists
-	static QuestionList qList;
-	static QuestionList readingList;
-	static QuestionList favQList;
-	static QuestionList myQList;
+
+	private static QuestionList qList;
+	private static QuestionList readingList;
+	private static QuestionList favQList;
+	private static QuestionList myQList;
 	
 	static public QuestionList getMasterQList() {
 		if (qList == null) {

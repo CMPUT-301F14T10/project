@@ -14,6 +14,10 @@ public class Answer {
 	
 	
 	public Answer(String answerName,String author) {
+		answerName = answerName.trim();
+		if (answerName.length() == 0) {
+			throw new IllegalArgumentException("Not a valid answer. Please re-enter a valid answer.");
+		}
 		this.answerName=answerName;
 		this.answerReplies=new ArrayList<Reply>();
 		this.author=author;

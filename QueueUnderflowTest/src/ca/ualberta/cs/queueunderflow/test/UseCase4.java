@@ -27,15 +27,15 @@ public class UseCase4 extends TestCase
 		
 		//Exception: Where the question entered is whitespaces only
 		String questionName2= "        ";
-		String empty= questionName2.trim();
-		String result;
-		if (empty.length()==0) {
-			result="Reenter a question";
+		int flag = 0; // indicates if the whitespace exception is caught & handled
+		try {
+			Question anotherQuestion = new Question(questionName2, me.getUserName());
+			questionList.add(anotherQuestion);
+		} catch (IllegalArgumentException e) {
+			flag = 1;
 		}
-		else {
-			result=null;
-		}
-		assertTrue("Reenter a valid question", result!=null);
+		assertTrue("Whitespace username exception caught & handled", flag == 1);
+		assertTrue("Whitespace only question is not added to the questionList", questionList.size() == 1);
 		
 		/*Exception: Where there is no online connectivity
 		 * 

@@ -24,15 +24,15 @@ public class UseCase5 extends TestCase
 		Question sameQuestion= questionList.get(question_index);
 		//Exception: Where the answer entered is whitespaces only
 		String emptyAnswer= "          ";
-		String empty= emptyAnswer.trim();
-		String result;
-		if (empty.length()==0) {
-			result="Reenter an valid answer";
+		int flag = 0; // indicates if the whitespace exception is caught & handled
+		try {
+			Answer answer1 = new Answer(emptyAnswer, me.getUserName());
+			sameQuestion.addAnswer(answer1);
+		} catch (IllegalArgumentException e) {
+			flag = 1;
 		}
-		else {
-			result=null;
-		}
-		assertTrue("emptyAnswer is empty", result!=null);
+		assertTrue("Whitespace username exception caught & handled", flag == 1);
+		assertTrue("Whitespace only answer is not added to the question", sameQuestion.getAnswerListSize() == 0);
 		
 		//Adding an answer
 		String answerName= "An answer";
