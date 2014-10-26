@@ -31,7 +31,7 @@ public class UseCase5 extends TestCase
 		} catch (IllegalArgumentException e) {
 			flag = 1;
 		}
-		assertTrue("Whitespace username exception caught & handled", flag == 1);
+		assertTrue("Whitespace answer exception caught & handled", flag == 1);
 		assertTrue("Whitespace only answer is not added to the question", sameQuestion.getAnswerListSize() == 0);
 		
 		//Adding an answer

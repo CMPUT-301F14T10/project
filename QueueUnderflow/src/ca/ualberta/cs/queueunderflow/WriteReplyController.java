@@ -3,13 +3,14 @@ package ca.ualberta.cs.queueunderflow;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class WriteReplyController {
 
 	private static int TYPE_QUESTION = 0;
 	private static int TYPE_ANSWER = 1;
 	
-	private Activity activity;		// In case we want to add a toast message later
+	private Activity activity;
 	private View view;
 	private Answer answer;
 	private Question question;
@@ -31,7 +32,14 @@ public class WriteReplyController {
 	public void addReply(int type) {;
 		
 		EditText replyText = (EditText) view.findViewById(R.id.replyText);
-		Reply newReply = new Reply(replyText.getText().toString(), User.getUserName());
+		Reply newReply;
+		
+		try {
+			newReply = new Reply(replyText.getText().toString(), User.getUserName());
+		} catch (IllegalArgumentException e) {
+			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		
 		if (type == TYPE_QUESTION) {
 			question.addQuestionReply(newReply);

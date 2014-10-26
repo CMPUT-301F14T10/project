@@ -25,15 +25,15 @@ public class UseCase6 extends TestCase
 		
 		//Exception: Reply is empty or whitespace characters only
 		String emptyReply= "          ";
-		String empty= emptyReply.trim();
-		String result;
-		if (empty.length()==0) {
-			result="Reenter an valid reply";
+		int flag = 0; // indicates if the whitespace exception is caught & handled
+		try {
+			Reply reply1 = new Reply(emptyReply, me.getUserName());
+			questionTest.addQuestionReply(reply1);
+		} catch (IllegalArgumentException e) {
+			flag = 1;
 		}
-		else {
-			result=null;
-		}
-		assertTrue("emptyAnswer is empty", result!=null);
+		assertTrue("Whitespace reply exception caught & handled", flag == 1);
+		assertTrue("Whitespace only reply is not added to the question", questionTest.getSizeReplies() == 0);
 		
 		Reply question_reply=new Reply("What are you talking about", me.getUserName());
 		questionTest.addQuestionReply(question_reply);

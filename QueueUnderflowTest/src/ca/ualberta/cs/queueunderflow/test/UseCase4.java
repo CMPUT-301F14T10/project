@@ -34,7 +34,7 @@ public class UseCase4 extends TestCase
 		} catch (IllegalArgumentException e) {
 			flag = 1;
 		}
-		assertTrue("Whitespace username exception caught & handled", flag == 1);
+		assertTrue("Whitespace question exception caught & handled", flag == 1);
 		assertTrue("Whitespace only question is not added to the questionList", questionList.size() == 1);
 		
 		/*Exception: Where there is no online connectivity

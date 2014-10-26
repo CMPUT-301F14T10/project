@@ -6,6 +6,10 @@ public class Reply {
 	protected String author;
 	
 	public Reply (String reply, String author) {
+		reply = reply.trim();
+		if (reply.length() == 0) {
+			throw new IllegalArgumentException("Not a valid reply. Please re-enter a valid reply.");
+		}
 		this.reply=reply;
 		this.author=author;
 	}
