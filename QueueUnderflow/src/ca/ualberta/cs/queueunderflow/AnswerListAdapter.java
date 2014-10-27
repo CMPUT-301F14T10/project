@@ -30,7 +30,8 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
     private ArrayList<Answer> answerArray;
     private int fromFragment;
     private int questionPosition;
- 
+    
+    //creates the AnswerListAdapter
     public AnswerListAdapter(Activity activity, ArrayList<Answer> answerArray, int fromFragment, int questionPosition) {
         super();
         this.activity = activity;
@@ -41,11 +42,13 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         this.questionPosition = questionPosition;
     }
  
+    //grabs the reply from the child of the group.
     @Override
     public Reply getChild(int groupPosition, int childPosition) {
         return answerArray.get(groupPosition).getReplyAt(childPosition);
     }
  
+    //grabs ChildID. Still needs to be done.
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub
