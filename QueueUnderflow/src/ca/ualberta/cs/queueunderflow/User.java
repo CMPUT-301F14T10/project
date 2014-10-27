@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 public class User {
 
+	//Changing all these fields to static too
 	protected static String username;
 	protected ArrayList <Question> upvotedQuestions;
 	protected ArrayList <Answer> upvotedAnswers;
 	protected ArrayList<Reply> upvotedReplies;
 	
 	public User() {
+		this.username="Anonymous";
+		this.upvotedQuestions= new ArrayList<Question>();
+		this.upvotedAnswers= new ArrayList<Answer>();
 	}
 	
 	public void setUserName(String userName) {
@@ -31,6 +35,7 @@ public class User {
 		return username;
 	}
 	
+	//Adding static to these 4 methods
 	public void addUpvotedQuestion(Question question) {
 		upvotedQuestions.add(question);
 	}
@@ -39,10 +44,13 @@ public class User {
 	}
 	
 	public boolean alreadyUpvotedQuestion(Question question){
+		//return this.upvotedQuestions.contains(question);
 		return this.upvotedQuestions.contains(question);
 	}
 	public boolean alreadyUpvotedAnswer(Answer answer){
+		//return this.upvotedAnswers.contains(answer);
 		return this.upvotedAnswers.contains(answer);
+
 	}
 	
 }

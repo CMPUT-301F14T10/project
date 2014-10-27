@@ -8,6 +8,8 @@ public class ListHandler {
 	private static QuestionList readingList;
 	private static QuestionList favQList;
 	private static QuestionList myQList;
+	private static User user;
+	//private static UserList myUList;
 	
 	static public QuestionList getMasterQList() {
 		if (qList == null) {
@@ -36,4 +38,13 @@ public class ListHandler {
 		}
 		return readingList;
 	}
+	
+	
+	static public User getUser(){
+		if (user == null) {
+			user = new User();
+		}
+		return user; 
+	}
+	
 }

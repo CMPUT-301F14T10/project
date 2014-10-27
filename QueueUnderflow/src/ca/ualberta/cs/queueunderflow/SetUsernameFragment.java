@@ -33,7 +33,8 @@ public class SetUsernameFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String username = newUsername.getText().toString();
-				User user = new User();
+				//User user = new User();
+				User user= ListHandler.getUser();
 				
 				int flag = 0;
 				try {

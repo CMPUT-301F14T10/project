@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.InputFilter.LengthFilter;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // Controller?
 public class QuestionListAdapter extends ArrayAdapter<Question> {
@@ -58,17 +57,31 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 		upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 		
-		ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
+		
+		final ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
 		upvoteBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				questionArray.get(position).upvoteQuestion();
-				TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-				upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 				
+				User user= ListHandler.getUser();
+				Question question= questionArray.get(position);
+				if (user.alreadyUpvotedQuestion(question)) {
+					Toast.makeText(getContext(), "YOU ONLY NEED TO CLICK ONCE", Toast.LENGTH_SHORT).show();
+				}
+				//d/s/fds/af/as/f/as/fsafsa
+				else {
+					user.addUpvotedQuestion(questionArray.get(position));
+					questionArray.get(position).upvoteQuestion();
+					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
+				}
+
+				
+				//upvoteBtn.setEnabled(false);
+				}	
 			}
-		});
+		);		
 		
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
@@ -87,46 +100,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			}
 		});
 		
-		CheckBox favBtn = (CheckBox) view.findViewById(R.id.favBtn);
-		favBtn.setChecked(questionArray.get(position).getIsFav());
-		favBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				Question question = questionArray.get(position);
-				
-				if (questionArray == ListHandler.getFavsList().getQuestionList()) {
-					Buffer buffer = new Buffer();	// Buffer hold list of questions to be REMOVED from the ListHandler.getFavsList()
-					if (isChecked == false) {	// unfavorited a question from the FavFragment
-						buffer.addToFavBuffer(position);
-					}
-					else {	// re-favorited a question after unfavoriting from the FavFragment
-						buffer.removeFromFavBuffer(position);
-					}
-				}
-				
-				else if (questionArray == ListHandler.getReadingList().getQuestionList()) {
-					Buffer buffer = new Buffer();	// Buffer hold list of questions to be REMOVED from the ListHandler.getReadingList()
-					if (isChecked == false) {	// un-marking a question from the ReadingListFragment
-						buffer.addToReadingListBuffer(position);
-					}
-					else {	// re-marking for offline reading after un-marking it from the ReadingListFragment
-						buffer.removeFromReadingListBuffer(position);
-					}
-				}
-				
-				else if (isChecked == true) {
-					if (!ListHandler.getFavsList().getQuestionList().contains(question)) {
-						ListHandler.getFavsList().add(question);
-					}
-				}
-				else if (isChecked == false) {
-					ListHandler.getFavsList().remove(question);
-				}
-				
-				questionArray.get(position).setIsFav(isChecked);
-			}
-		});
 		return view;
 	}
 }
