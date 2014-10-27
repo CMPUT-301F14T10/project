@@ -16,6 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
  
+/*
+ * AnswerListAdapter class which inherits functions from BaseExpandableListAdapter
+ * 
+ */
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  
 	private static int TYPE_ANSWER = 1;
