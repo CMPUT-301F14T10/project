@@ -65,7 +65,9 @@ public class Buffer {
 			questionList.set(index, null);
 		}
 		
-		questionList.getQuestionList().removeAll(null);
+		Vector<String> v = new Vector<String>(1);
+		v.add(null);
+		questionList.getQuestionList().removeAll(v);
 		readingListBuffer.clear();
 	}
 }
