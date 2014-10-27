@@ -15,6 +15,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/* This class is used for Adding Answers. It extends the activity class and 
+grabs the question from the position you grab.
+*/
+
 public class AddAnAnswerActivity extends Activity
 {
 	public static final int HOME_SCREEN_FRAGMENT = 1;
