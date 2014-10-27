@@ -150,5 +150,9 @@ public class QuestionList extends TModel<TView>{
 		}
 		
 		return questionList3;
-	} 
+	}
+	
+	public void remove(Question question) {
+		questionList.remove(question);
+	}
 }

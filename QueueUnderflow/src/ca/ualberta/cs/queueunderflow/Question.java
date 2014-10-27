@@ -15,6 +15,7 @@ public class Question {
 	protected Picture image;
 	protected Date date;
 
+	protected boolean isFav;
 	
 	public Question (String questionName, String author) {
 		questionName = questionName.trim();
@@ -29,6 +30,8 @@ public class Question {
 		this.hasPicture=false;
 		this.image=null;
 		this.date = new Date();
+		
+		this.isFav = false;
 	}
 	
 	public void setAuthor(String author) {
@@ -98,6 +101,14 @@ public class Question {
 	
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public void setIsFav(boolean isChecked) {
+		this.isFav = isChecked;
+	}
+	
+	public boolean getIsFav() {
+		return this.isFav;
 	}
 	
 	

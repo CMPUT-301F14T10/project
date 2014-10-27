@@ -21,10 +21,11 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 
 	public static final int HOME_SCREEN_FRAGMENT = 1;
 	public static final int FAVORITES_FRAGMENT = 2;
-	public static final int READING_LIST_FRAGMENT = 3;
-	public static final int MY_QUESTIONS_FRAGMENT = 4;
+	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	public static final int READING_LIST_FRAGMENT = 4;
 	AnswerListAdapter adapter;
 
+	private int fromFragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		Intent intent = getIntent();
 		final int position = intent.getIntExtra("position", -1); 				// -1 is the default value if nothing was retrieved
-		int fromFragment = intent.getIntExtra("fromFragment", -1);
+		fromFragment = intent.getIntExtra("fromFragment", -1);
 		
 		// If position or fragment was not successfully retrieved, finish & go back
 		if ((position == -1) || (fromFragment == -1)) {
@@ -143,7 +144,10 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		// Go back to MainActivity when the up caret is clicked
 		if (id == android.R.id.home) {
-			NavUtils.navigateUpFromSameTask(this);
+			//NavUtils.navigateUpFromSameTask(this);
+			Intent intent = NavUtils.getParentActivityIntent(this);
+			intent.putExtra("returnFragment", fromFragment);
+			NavUtils.navigateUpTo(this, intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
