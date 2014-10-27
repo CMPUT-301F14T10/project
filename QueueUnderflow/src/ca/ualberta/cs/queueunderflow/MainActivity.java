@@ -16,6 +16,11 @@ import android.widget.ListView;
 /* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
 public class MainActivity extends Activity {
 
+	public static final int HOME_SCREEN_FRAGMENT = 1;
+	public static final int FAVORITES_FRAGMENT = 2;
+	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	public static final int READING_LIST_FRAGMENT = 4;
+	
 	private DrawerLayout drawerLayout;
 	private ActionBarDrawerToggle drawerToggle;
 	private CharSequence drawerTitle;
@@ -59,8 +64,14 @@ public class MainActivity extends Activity {
         
         drawerLayout.setDrawerListener(drawerToggle);
         
+        int returnFragment = getIntent().getIntExtra("returnFragment", -1);
+        System.out.println("return fragment -->" + returnFragment);
+        if (returnFragment != -1) {
+        	System.out.println("selecting Item (returnFragment - 1) : " + (returnFragment-1));
+        	selectItem(returnFragment-1);
+        }
         // This automatically shows the HomeScreen after the app is first launched and a user hasn't selected a tab yet.
-        if (savedInstanceState == null) {
+        else if (savedInstanceState == null) {
         	selectItem(0);
         }
         
@@ -128,22 +139,23 @@ public class MainActivity extends Activity {
     	
     	switch(position) {
     	case 0:
-    		fragment = new HomeScreenFragment();
+    		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
     		break;
-//    	case 1:
-//    		fragment = new MyFavoritesFragment();
-//    		break;
-//    	case 2:
-//    		fragment = new MyQuestionsFragment();
-//    		break;
-//    	case 3:
-//    		fragment = new ReadingListFragment();
-//    		break;
+    	case 1:
+    		fragment = new SuperFragment(FAVORITES_FRAGMENT);
+    		System.out.println("inflating : " + FAVORITES_FRAGMENT + "favorites fragment");
+    		break;
+    	case 2:
+    		fragment = new SuperFragment(MY_QUESTIONS_FRAGMENT);
+    		break;
+    	case 3:
+    		fragment = new SuperFragment(READING_LIST_FRAGMENT);
+    		break;
     	case 4:
     		fragment = new SetUsernameFragment();
     		break;
     	default:
-    		fragment = new HomeScreenFragment();
+    		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
     		break;
     	}
     	
@@ -152,6 +164,8 @@ public class MainActivity extends Activity {
     	drawerList.setItemChecked(position, true);
     	setTitle(navDrawerTitles[position]);
     	drawerLayout.closeDrawer(drawerList);
+    	
+    	System.out.println(navDrawerTitles[position]);
     }
     
     @Override

@@ -19,8 +19,8 @@ public class AddAnAnswerActivity extends Activity
 {
 	public static final int HOME_SCREEN_FRAGMENT = 1;
 	public static final int FAVORITES_FRAGMENT = 2;
-	public static final int READING_LIST_FRAGMENT = 3;
-	public static final int MY_QUESTIONS_FRAGMENT = 4;
+	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	public static final int READING_LIST_FRAGMENT = 4;
 	AnswerListAdapter adapter;
 
 
