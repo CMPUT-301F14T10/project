@@ -36,12 +36,32 @@ public class AddAnAnswerActivity extends Activity
 		Button addBtn = (Button) findViewById(R.id.AddAnAnswerButton);
 		
 		Intent intent = getIntent();
+		
+		/* Get the position of the question and the fragment we clicked from */
+		
 		final int position = intent.getIntExtra("question_position", -1); 	// -1 is the default value if nothing was retrieved
+		final int fromFragment = intent.getIntExtra("fromFragment", -1);
 		
 		QuestionList questionList=ListHandler.getMasterQList();
+
+		//Get the question list associated with a specific fragment
+		switch (fromFragment) {
+			case (HOME_SCREEN_FRAGMENT):
+				questionList = ListHandler.getMasterQList();
+				break;
+			case (FAVORITES_FRAGMENT):
+				questionList = ListHandler.getFavsList();
+				break;
+			case (READING_LIST_FRAGMENT):
+				 questionList = ListHandler.getReadingList();
+				break;
+			case (MY_QUESTIONS_FRAGMENT):
+				questionList = ListHandler.getMyQsList();
+				break;
+			}
+		
 		// Get the question selected
 		final Question question = questionList.get(position);
-		
 		
 		// Set up the display to display question and expandable listview of answers
 		TextView questionDisplay = (TextView) findViewById(R.id.questionTextView);
@@ -85,19 +105,60 @@ public class AddAnAnswerActivity extends Activity
 			public void onClick(View v)
 			{				
 				try {
+					
+					/* What was done previously
 					Answer newAnswer = new Answer(answerText.getText().toString(),User.getUserName());
 					QuestionList homeScreenList = ListHandler.getMasterQList();
 					Question question= homeScreenList.get(position);
 					question.addAnswer(newAnswer);
-					
 					homeScreenList.set(position, question);
 					QuestionList myQuestionsList = ListHandler.getMyQsList();
 					myQuestionsList.set(position,question);
-									
 					finish();
-					} catch (IllegalArgumentException e) {
+					*/
+					
+					QuestionList myQuestionList= ListHandler.getMasterQList();
+					QuestionList homeScreenList = ListHandler.getMasterQList();
+					
+					switch (fromFragment) {
+						case (HOME_SCREEN_FRAGMENT):
+							myQuestionList = ListHandler.getMasterQList();
+							break;
+						case (FAVORITES_FRAGMENT):
+							myQuestionList = ListHandler.getFavsList();
+							break;
+						case (READING_LIST_FRAGMENT):
+							 myQuestionList = ListHandler.getReadingList();
+							break;
+						case (MY_QUESTIONS_FRAGMENT):
+							myQuestionList = ListHandler.getMyQsList();
+							break;
+						}
+					
+					//Add the answer to the questionlist you came from and the master questionlist
+					if (!(myQuestionList.equals(homeScreenList))){
+						Answer newAnswer = new Answer(answerText.getText().toString(),User.getUserName());
+						Question question2= myQuestionList.get(position);
+						question2.addAnswer(newAnswer);
+						myQuestionList.set(position,question);
 						
-						Toast.makeText(getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
+						int index= homeScreenList.questionIndex(question2);
+						homeScreenList.set(index, question2);
+						finish();
+					}
+					else {
+						Answer newAnswer = new Answer(answerText.getText().toString(),User.getUserName());
+						Question question2= myQuestionList.get(position);
+						question2.addAnswer(newAnswer);
+						myQuestionList.set(position,question);
+						finish();
+					}
+					
+
+					
+				} catch (IllegalArgumentException e) {
+						
+						Toast.makeText(getApplicationContext(), "Invalid answer. Please re-enter a answer.", Toast.LENGTH_SHORT).show();
 					}
 							
 			}

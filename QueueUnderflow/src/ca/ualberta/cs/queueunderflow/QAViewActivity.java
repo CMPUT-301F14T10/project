@@ -108,6 +108,10 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position", position);
+				//Think we need this?
+				int fromFragment = intent.getIntExtra("fromFragment", -1);
+				intent.putExtra("fromFragment",fromFragment);
+				
 				startActivity(intent);
 
 			}
