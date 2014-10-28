@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 public class QuestionList extends TModel<TView>{
 	protected ArrayList <Question> questionList;
+	//QuestionList 2 is used in sort by pictures, questionlist 3 is used in the other sort by categories
+	//Is subject to change
 	protected ArrayList <Question> questionList2;
 	protected ArrayList <Question> questionList3;
 	
