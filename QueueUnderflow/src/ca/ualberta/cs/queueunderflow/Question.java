@@ -16,6 +16,7 @@ public class Question {
 	protected Date date;
 
 	protected boolean isFav;
+	protected boolean isInReadingList;
 	
 	public Question (String questionName, String author) {
 		questionName = questionName.trim();
@@ -32,6 +33,7 @@ public class Question {
 		this.date = new Date();
 		
 		this.isFav = false;
+		this.isInReadingList = false;
 	}
 	
 	public void setAuthor(String author) {
@@ -103,12 +105,20 @@ public class Question {
 		this.date = date;
 	}
 	
+	public boolean getIsFav() {
+		return this.isFav;
+	}
+	
 	public void setIsFav(boolean isChecked) {
 		this.isFav = isChecked;
 	}
-	
-	public boolean getIsFav() {
-		return this.isFav;
+
+	public boolean getIsInReadingList() {
+		return this.isInReadingList;
+	}
+
+	public void setIsInReadingList(boolean isChecked) {
+		this.isInReadingList = isChecked;
 	}
 	
 	

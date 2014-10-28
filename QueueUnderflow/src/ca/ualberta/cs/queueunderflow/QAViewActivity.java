@@ -109,8 +109,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position", position);
-				//Think we need this?
-				int fromFragment = intent.getIntExtra("fromFragment", -1);
 				intent.putExtra("fromFragment",fromFragment);
 				
 				startActivity(intent);
@@ -144,8 +142,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		// Go back to MainActivity when the up caret is clicked
 		if (id == android.R.id.home) {
-			//NavUtils.navigateUpFromSameTask(this);
 			Intent intent = NavUtils.getParentActivityIntent(this);
+			// This is so we go back to the proper fragment that we came from in the main activity
 			intent.putExtra("returnFragment", fromFragment);
 			NavUtils.navigateUpTo(this, intent);
 			return true;
