@@ -69,9 +69,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				User user= ListHandler.getUser();
 				Question question= questionArray.get(position);
 				if (user.alreadyUpvotedQuestion(question)) {
-					Toast.makeText(getContext(), "YOU ONLY NEED TO CLICK ONCE", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
 				}
-				//d/s/fds/af/as/f/as/fsafsa
 				else {
 					user.addUpvotedQuestion(questionArray.get(position));
 					questionArray.get(position).upvoteQuestion();

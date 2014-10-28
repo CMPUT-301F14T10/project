@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QAViewActivity extends Activity implements TView<QuestionList>{
 
@@ -91,8 +92,27 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			
 			@Override
 			public void onClick(View v) {
+				User user= ListHandler.getUser();
+				
+				//If the user has already upvoted the question, they can't do so again
+				//If they didn't, upvote the question and add it to arraylist of already upvoted questions
+				if (user.alreadyUpvotedQuestion(question)) {
+					Toast.makeText(QAViewActivity.this,"Question was already upvoted", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					user.addUpvotedQuestion(question);
+					question.upvoteQuestion();
+					upvoteDisplay.setText(Integer.toString(question.getUpvotes()));
+
+
+				}
+				/*
 				question.upvoteQuestion();
 				upvoteDisplay.setText(Integer.toString(question.getUpvotes()));
+				*/
+
+			
+
 			}
 		});
 		
@@ -117,7 +137,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		});
         
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position);
+        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position,QAViewActivity.this);
         answersExpListView.setAdapter(adapter);
         
         // This hides that expand arrow on the answer item

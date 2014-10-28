@@ -85,8 +85,24 @@ public class AddAnAnswerActivity extends Activity
 			
 			@Override
 			public void onClick(View v) {
+				User user= ListHandler.getUser();
+				
+				//If the user has already upvoted the question, they can't do so again
+				//If they didn't, upvote the question and add it to arraylist of already upvoted questions
+				if (user.alreadyUpvotedQuestion(question)) {
+					Toast.makeText(AddAnAnswerActivity.this,"Question was already upvoted", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					user.addUpvotedQuestion(question);
+					question.upvoteQuestion();
+					upvoteDisplay.setText(Integer.toString(question.getUpvotes()));
+
+
+				}
+				/*
 				question.upvoteQuestion();
 				upvoteDisplay.setText(Integer.toString(question.getUpvotes()));
+				*/
 			}
 		});
 		
@@ -96,7 +112,7 @@ public class AddAnAnswerActivity extends Activity
 		}
 		
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), 1, position);
+        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), 1, position,AddAnAnswerActivity.this);
         answersExpListView.setAdapter(adapter);
         
         // This hides that expand arrow on the answer item

@@ -15,6 +15,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
  
 /*
  * AnswerListAdapter class which inherits functions from BaseExpandableListAdapter
@@ -30,9 +31,9 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
     private ArrayList<Answer> answerArray;
     private int fromFragment;
     private int questionPosition;
-    
+    private final Context context;
     //creates the AnswerListAdapter
-    public AnswerListAdapter(Activity activity, ArrayList<Answer> answerArray, int fromFragment, int questionPosition) {
+    public AnswerListAdapter(Activity activity, ArrayList<Answer> answerArray, int fromFragment, int questionPosition,Context context) {
         super();
         this.activity = activity;
         this.groupLayoutID = R.layout.list_item_answer;
@@ -40,6 +41,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         this.answerArray = answerArray;
         this.fromFragment = fromFragment;
         this.questionPosition = questionPosition;
+        this.context= context;
     }
  
     //grabs the reply from the child of the group.
@@ -59,7 +61,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view = inflater.inflate(childLayoutID, parent, false);
-         
+        
          
         TextView replyDisplay = (TextView) view.findViewById(R.id.replyTextView);
         replyDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getReply());
@@ -125,9 +127,22 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
              
             @Override
             public void onClick(View v) {
-                answerArray.get(groupPosition).upvoteAnswer();
+            	User user= ListHandler.getUser();
+                //answerArray.get(groupPosition).upvoteAnswer();
+            	Answer answer= answerArray.get(groupPosition);
+    			if (user.alreadyUpvotedAnswer(answer)) {
+					Toast.makeText(context, "Answer was already upvoted", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					user.addUpvotedAnswer(answerArray.get(groupPosition));
+					answerArray.get(groupPosition).upvoteAnswer();
+					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+					upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
+				}
+            	/*
                 TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
                 upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
+                */
             }
         });
          
