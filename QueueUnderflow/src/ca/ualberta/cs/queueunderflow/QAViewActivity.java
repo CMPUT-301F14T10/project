@@ -27,6 +27,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	AnswerListAdapter adapter;
 
 	private int fromFragment;
+	private Question question;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		}
 		
 		// Get the question selected
-		final Question question = questionList.get(position);
+		question = questionList.get(position);
 		
 		// Set up the display
 		TextView questionDisplay = (TextView) findViewById(R.id.questionTextView);
@@ -136,6 +137,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			}
 		});
         
+        TextView answersCount = (TextView) findViewById(R.id.answersCount);
+        answersCount.setText(Integer.toString(question.getAnswerListSize()));
+        
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
         adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position,QAViewActivity.this);
         answersExpListView.setAdapter(adapter);
@@ -176,5 +180,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	public void update(QuestionList model) {
 		ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
 		adapter.notifyDataSetChanged();
+		
+        TextView answersCount = (TextView) findViewById(R.id.answersCount);
+        answersCount.setText(Integer.toString(question.getAnswerListSize()));
 	}
 }
