@@ -11,6 +11,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/AddAnAnswerButton"
+        android:layout_toLeftOf="@+id/AddAnAnswerButton"
         android:ems="10" >
 
         <requestFocus />

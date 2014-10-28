@@ -14,6 +14,7 @@ public class ReplySerializer implements JsonSerializer<Reply>{
 	
 	//Source code link for serializing and deserializing: http://java-creed-examples.googlecode.com/svn/gson/Gson%20Serialiser%20Example/src/main/java/com/javacreed/examples/gson/part1/
 	// Link for serializing:http://www.javacreed.com/gson-serialiser-example/
+	
 	@Override
 	public JsonElement serialize(Reply reply,Type arg1,
 			JsonSerializationContext arg2){
