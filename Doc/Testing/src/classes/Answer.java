@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
+
 public class Answer {
 	protected String answerName;
 	protected ArrayList<Reply> answerReplies;
@@ -83,6 +84,10 @@ public class Answer {
 		return this.hasPicture;
 	}
 	
+	public void sethasPicture(boolean value) {
+		this.hasPicture=value;
+	}
+	
 	//it sets the image as pic.
 	public void setPicture (Picture pic) {
 		this.image= pic;
@@ -96,5 +101,13 @@ public class Answer {
 	// returns the current date
 	public Date getDate() {
 		return this.date;
+	}
+	
+	public void setDate(Date newDate) {
+		this.date=newDate;
+	}
+	
+	public void setReplyArray(ArrayList<Reply> newReplies) {
+		this.answerReplies=newReplies;
 	}
 }
