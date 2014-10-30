@@ -20,6 +20,8 @@ public class AnswerSerializing implements JsonSerializer<Answer> {
 			JsonSerializationContext arg2) {
 		final JsonObject answerObject= new JsonObject();
 		answerObject.addProperty("answerName", answer.getAnswer());
+		
+		//DON'T NEED
 		//For arraylist<reply>, have a jsonArray for it that contains
 		//json objects (replies)
 		
@@ -38,9 +40,12 @@ public class AnswerSerializing implements JsonSerializer<Answer> {
 		*/
 		
 		//answerObject.add("answerReplies",jsonAnswerReplies);
+		
+		
 		answerObject.addProperty("author",answer.getAuthor());
 		answerObject.addProperty("upvote", answer.getUpvotes());
 		answerObject.addProperty("hasPicture",answer.hasPicture());
+		
 		//The picture property will have to change when picture changes
 		int size=answer.getPicture().getSize();
 		answerObject.addProperty("picture",size);
@@ -51,12 +56,15 @@ public class AnswerSerializing implements JsonSerializer<Answer> {
 	    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
 	    Gson gson = gsonBuilder.create();
 	    Date answer_date= answer.getDate();
+	    
 	    //gsonBuilder.registerTypeAdapter(Date.class, new DateSerializing());
-	    final String date= gson.toJson(answer_date);
-	    answerObject.addProperty("date",date);
+	    //final String date= gson.toJson(answer_date);
+	    //answerObject.addProperty("date",date);
 	    
 	    String json= gson.toJson(answer.getReplies());
 	    answerObject.addProperty("answerReplies", json);
+	    String date= gson.toJson(answer_date);
+	    answerObject.addProperty("date", date);
 		return answerObject;
 	}
 

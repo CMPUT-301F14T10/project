@@ -29,6 +29,7 @@ public class AnswerDeserializing implements JsonDeserializer<Answer>
 	{
 final JsonObject answer= jsonAnswer.getAsJsonObject();
 		
+		
 	    final JsonElement jsonContent = answer.get("answerName");
 	    final String content = jsonContent.getAsString();
 	    
@@ -53,8 +54,8 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 	    }
 	    */
 	    
-	    Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
-	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);
+/*	    Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
+	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);*/
 	    
 	   // ArrayList<Reply> replyList= gson.fromJson(old_array,ArrayList.class);
 	    
@@ -65,9 +66,9 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 	    final int picture= answer.get("picture").getAsInt();
 	    Picture new_picture=new Picture(picture);
 	    
-	    String date = "\"2013-02-10T13:45:30+0100\"";
+	    //String date = "\"2013-02-10T13:45:30+0100\"";
 	    //String date_string= answer.get("date").getAsString();
-	    JsonElement jsonDate= answer.get("date");
+	    //JsonElement jsonDate= answer.get("date");
 	   // SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
 	    
 	   /* Date date= new Date();
@@ -79,21 +80,35 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 		}*/
 	    
 	    //gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializing());
-	    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+	    //gsonBuilder.setDateFormat("yy yy-MM-dd'T'HH:mm:ssZ");
 	   // Date answer_date= gson.fromJson(date_string, Date.class);
 	    
-	    Date answer_date= gson.fromJson(date, Date.class);
-
+	    //String testdate = "\"2013-02-10T13:45:30+0100\"";
 	    
+	    Gson gson2=gsonBuilder.create();
+	   
+	    String date= answer.get("date").getAsString();
+		SimpleDateFormat formatter = new SimpleDateFormat("M/d/yy hh:mm a");
+		Date converted= new Date();
+		try {
+			converted = formatter.parse(date);
+			//System.out.println(date);
+			//System.out.println(formatter.format(date));
+	 
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	    //Date answer_date= gson.fromJson(date_string,Date.class);
 	   // DateFormat df = new SimpleDateFormat("M/d/yy hh:mm a");
 		//String deserial_date= df.format(deserial);
+	    Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
+	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);
 	    Answer deserialized_answer= new Answer(content, author);
 	    
 	    deserialized_answer.setReplyArray(replyList);
 	    deserialized_answer.setUpvotes(upvote);
 	    deserialized_answer.setPicture(new_picture);
-	    deserialized_answer.setDate(answer_date);
+	    deserialized_answer.setDate(converted);
 	    deserialized_answer.sethasPicture(hasPicture);
 
 	    return deserialized_answer;

@@ -83,9 +83,11 @@ public class DeserializeTests {
 		System.out.println(json);
 		
 		//Serialize the answer first then deserialize it and see if its the same
+		
+		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerSerializing());
-	   // gsonBuilder2.setPrettyPrinting();
+	    gsonBuilder2.setPrettyPrinting();  
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(testAnswer);
 	    System.out.println(json2);

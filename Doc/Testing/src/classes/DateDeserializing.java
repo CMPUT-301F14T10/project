@@ -40,8 +40,8 @@ public class DateDeserializing implements JsonDeserializer<Date>{
 		String date = element.getAsString();
 		
 		//SimpleDateFormat formatter = new SimpleDateFormat("M/d/yy hh:mm a");
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy",Locale.ENGLISH);
-		formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+		//formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 		
 		try {
 			return formatter.parse(date);
