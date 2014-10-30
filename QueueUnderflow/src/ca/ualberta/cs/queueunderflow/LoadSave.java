@@ -13,19 +13,28 @@ import com.google.gson.GsonBuilder;
 public class LoadSave {
 
 	Context context;
-	final String favsKey = "favList";
+	final String favsfile = "favList";
+	final String favsKey = "favlist";
 	
-	public void SaveData(String key, String value)
+	private void saveData(String key, String value)
 	{
-		SharedPreferences settings = context.getSharedPreferences(favsKey, Context.MODE_PRIVATE);
+		SharedPreferences settings = context.getSharedPreferences(favsfile, Context.MODE_PRIVATE);
 		Editor editor = settings.edit();
 		editor.putString(favsKey, value);
 		editor.commit();
 	}
 	
+	private String loadData(String key)
+	{
+		SharedPreferences settings = context.getSharedPreferences(favsfile, Context.MODE_PRIVATE);
+		String lData = settings.getString(favsKey, "");
+		return lData;
+	}
+	
 	public void LoadFavorites()
 	{
-		
+		String gsonString = loadData(favsKey);
+		//Use deserializer here...
 	}
 	
 	public void SaveFavorites()
@@ -37,6 +46,6 @@ public class LoadSave {
 		
 		//Log.d("test", "printing string now...");
 		//Log.d("test", gsonString);
-		this.SaveData(favsKey, gsonString);
+		this.saveData(favsKey, gsonString);
 	}
 }
