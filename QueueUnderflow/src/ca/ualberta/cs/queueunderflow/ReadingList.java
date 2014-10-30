@@ -2,6 +2,8 @@ package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.queueunderflow.models.Question;
+
 public class ReadingList {
 	protected ArrayList<Question> readingList;
 	

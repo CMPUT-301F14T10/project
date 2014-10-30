@@ -1,8 +1,8 @@
 package ca.ualberta.cs.queueunderflow.test;
 
-import ca.ualberta.cs.queueunderflow.Answer;
-import ca.ualberta.cs.queueunderflow.AnswerList;
-import ca.ualberta.cs.queueunderflow.Question;
+import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.AnswerList;
+import ca.ualberta.cs.queueunderflow.models.Question;
 import junit.framework.TestCase;
 
 

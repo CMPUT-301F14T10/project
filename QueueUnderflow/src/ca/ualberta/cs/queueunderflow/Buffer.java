@@ -3,6 +3,8 @@ package ca.ualberta.cs.queueunderflow;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
+
 public class Buffer {
 
 	private static ArrayList<Integer> favBuffer;

@@ -1,5 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
+
 public class ListHandler {
 
 	// Need to change this to a singleton pattern instead of static QuestionLists

@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ca.ualberta.cs.queueunderflow.AskAQuestionActivity" >
+    tools:context="ca.ualberta.cs.queueunderflow.views.AskAQuestionActivity" >
 
 </menu>

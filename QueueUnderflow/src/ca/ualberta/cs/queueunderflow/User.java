@@ -2,6 +2,10 @@ package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.Reply;
+
 public class User {
 
 	//Changing all these fields to static too
