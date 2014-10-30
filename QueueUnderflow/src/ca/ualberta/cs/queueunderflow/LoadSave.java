@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
 
@@ -22,6 +23,11 @@ public class LoadSave {
 		editor.commit();
 	}
 	
+	public void LoadFavorites()
+	{
+		
+	}
+	
 	public void SaveFavorites()
 	{
 		GsonBuilder gsonbuild = new GsonBuilder();
@@ -29,15 +35,8 @@ public class LoadSave {
 		Gson gson = gsonbuild.create();
 		String gsonString = gson.toJson(ListHandler.getFavsList());
 		
-		System.out.print(gsonString);
-		
-		return;
-		
-		//this.SaveData(favsKey, gsonString);
-	}
-	
-	public void LoadFavorites()
-	{
-		
+		//Log.d("test", "printing string now...");
+		//Log.d("test", gsonString);
+		this.SaveData(favsKey, gsonString);
 	}
 }

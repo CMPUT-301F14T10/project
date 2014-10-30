@@ -2,16 +2,6 @@ package ca.ualberta.cs.queueunderflow.adapters;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.models.Reply;
-import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
-import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -20,16 +10,24 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
+import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 
 public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 	
@@ -209,6 +207,10 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				else if (isChecked == false) {
 					ListHandler.getFavsList().remove(question);
 				}
+				
+				//Save new favorite list.
+				LoadSave saver = new LoadSave();
+				saver.SaveFavorites();
 				
 				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
 			}

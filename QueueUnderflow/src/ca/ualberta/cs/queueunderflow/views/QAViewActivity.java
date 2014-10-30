@@ -1,33 +1,23 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.TView;
-import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.R.menu;
-import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
-import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.text.format.DateFormat;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.TView;
+import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
+import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 public class QAViewActivity extends Activity implements TView<QuestionList>{
 
