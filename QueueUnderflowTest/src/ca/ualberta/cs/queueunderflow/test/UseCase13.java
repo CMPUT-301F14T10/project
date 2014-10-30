@@ -1,9 +1,9 @@
 package ca.ualberta.cs.queueunderflow.test;
 
-import ca.ualberta.cs.queueunderflow.Answer;
 import ca.ualberta.cs.queueunderflow.MasterAnswerList;
-import ca.ualberta.cs.queueunderflow.Question;
-import ca.ualberta.cs.queueunderflow.QuestionList;
+import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import junit.framework.TestCase;
 
 public class UseCase13 extends TestCase {

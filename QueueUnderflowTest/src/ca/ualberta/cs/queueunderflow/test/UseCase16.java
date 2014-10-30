@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.test;
 
 import ca.ualberta.cs.queueunderflow.Favorites;
-import ca.ualberta.cs.queueunderflow.Question;
+import ca.ualberta.cs.queueunderflow.models.Question;
 import junit.framework.TestCase;
 
 public class UseCase16 extends TestCase {
