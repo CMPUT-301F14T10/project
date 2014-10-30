@@ -105,8 +105,7 @@ public class QuestionList extends TModel<TView>{
 		return questionList2;
 	}
 	
-	public ArrayList<Question> sortBy(String method) {
-		questionList3 = new ArrayList<Question>();
+	public void sortBy(String method) {
 		
 		// Sort by date
 		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
@@ -133,7 +132,7 @@ public class QuestionList extends TModel<TView>{
 				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
 			}
 		};
-		
+		// Not used
 		Comparator <Question> leastUpvotesComparator = new Comparator<Question>() {
 			@Override
 			public int compare(Question lhs, Question rhs) {
@@ -141,22 +140,15 @@ public class QuestionList extends TModel<TView>{
 			}
 		};
 		
-		questionList3 = (ArrayList<Question>) questionList.clone();
-		
 		if (method.equals("most recent")) {
-			Collections.sort(questionList3, mostRecentComparator);
+			Collections.sort(questionList, mostRecentComparator);
 		}
 		else if (method.equals("least recent")) {
-			Collections.sort(questionList3, leastRecentComparator);
+			Collections.sort(questionList, leastRecentComparator);
 		}
 		else if (method == "most upvotes") {
-			Collections.sort(questionList3, mostUpvotesComparator);
+			Collections.sort(questionList, mostUpvotesComparator);
 		}
-		else if (method == "least upvotes") {
-			Collections.sort(questionList3, leastUpvotesComparator);
-		}
-		
-		return questionList3;
 	}
 	
 	public void remove(Question question) {
