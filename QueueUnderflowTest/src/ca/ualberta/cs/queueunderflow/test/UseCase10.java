@@ -46,45 +46,38 @@ public class UseCase10 extends TestCase {
 		questionList.add(question1);
 		questionList.add(question3);
 		
-		ArrayList<Question> mostRecentList = new ArrayList<Question>();
-		mostRecentList.add(question3);
-		mostRecentList.add(question2);
+		// Note the QuestionList add method adds it to the front of the list thus we add them in reverse order here
+		QuestionList mostRecentList = new QuestionList();
 		mostRecentList.add(question1);
+		mostRecentList.add(question2);
+		mostRecentList.add(question3);
 		
-		ArrayList<Question> leastRecentList = new ArrayList<Question>();
-		leastRecentList.add(question1);
-		leastRecentList.add(question2);
+		QuestionList leastRecentList = new QuestionList();
 		leastRecentList.add(question3);
+		leastRecentList.add(question2);
+		leastRecentList.add(question1);
+		
+		QuestionList mostUpvotesList = new QuestionList();
+		mostUpvotesList.add(question1);
+		mostUpvotesList.add(question3);
+		mostUpvotesList.add(question2);
 		
 		
 		//Checking if the sorting methods work
-		ArrayList<Question> questionList3 = questionList.sortBy("most recent");
-		assertTrue("Questionlist3 1st slot is question3", questionList3.get(0).equals(question3));
-		assertTrue("Questionlist3 2nd slot is question2", questionList3.get(1).equals(question2));
-		assertTrue("Questionlist3 3rd slot ins question1", questionList3.get(2).equals(question1));
-		assertEquals("questionList3 is sorted by date, most recent to least recent", questionList3, mostRecentList);
+		questionList.sortBy("most recent");
+		assertTrue("Questionlist 1st slot is question3", questionList.get(0).equals(question3));
+		assertTrue("Questionlist 2nd slot is question2", questionList.get(1).equals(question2));
+		assertTrue("Questionlist 3rd slot ins question1", questionList.get(2).equals(question1));
+		assertEquals("questionList is sorted by date, most recent to least recent", questionList.getQuestionList(), mostRecentList.getQuestionList());
 		
-		ArrayList<Question> questionList4 = questionList.sortBy("least recent");
-		assertTrue("Questionlist4 1st slot is question1", questionList4.get(0).equals(question1));
-		assertTrue("Questionlist4 2nd slot is question2", questionList4.get(1).equals(question2));
-		assertTrue("Questionlist4 3rd slot ins question3", questionList4.get(2).equals(question3));
-		assertEquals("questionList4 is sorted by date, least recent to most recent", questionList4, leastRecentList);
+		questionList.sortBy("least recent");
+		assertTrue("Questionlist 1st slot is question1", questionList.get(0).equals(question1));
+		assertTrue("Questionlist 2nd slot is question2", questionList.get(1).equals(question2));
+		assertTrue("Questionlist 3rd slot ins question3", questionList.get(2).equals(question3));
+		assertEquals("questionList is sorted by date, least recent to most recent", questionList.getQuestionList(), leastRecentList.getQuestionList());
 		
-		ArrayList<Question> mostUpvotesList = new ArrayList<Question>();
-		mostUpvotesList.add(question2);
-		mostUpvotesList.add(question3);
-		mostUpvotesList.add(question1);
-		
-		ArrayList<Question> leastUpvotesList = new ArrayList<Question>();
-		leastUpvotesList.add(question1);
-		leastUpvotesList.add(question3);
-		leastUpvotesList.add(question2);
-		
-		ArrayList<Question> questionList5 = questionList.sortBy("most upvotes");
-		assertEquals("questionList1 is sorted by most upvotes to least", mostUpvotesList, questionList5);
-		
-		ArrayList<Question> questionList6 = questionList.sortBy("least upvotes");
-		assertEquals("questionList2 is sorted by least upvotes to most", leastUpvotesList, questionList6);
+		questionList.sortBy("most upvotes");
+		assertEquals("questionList1 is sorted by most upvotes to least", mostUpvotesList.getQuestionList(), questionList.getQuestionList());
 	}
 
 }

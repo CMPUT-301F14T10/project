@@ -132,13 +132,6 @@ public class QuestionList extends TModel<TView>{
 				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
 			}
 		};
-		// Not used
-		Comparator <Question> leastUpvotesComparator = new Comparator<Question>() {
-			@Override
-			public int compare(Question lhs, Question rhs) {
-				return lhs.getUpvotes() - rhs.getUpvotes();
-			}
-		};
 		
 		if (method.equals("most recent")) {
 			Collections.sort(questionList, mostRecentComparator);
