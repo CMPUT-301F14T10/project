@@ -18,6 +18,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -37,22 +38,23 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 	    final Gson gson = gsonBuilder.create();
 	    
 	    //JsonElement jsonArray= answer.get("answerReplies");
-	    //JsonArray old_array = jsonArray.getAsJsonArray();
+	   // JsonArray old_array = jsonArray.getAsJsonArray();
 	    
 	    
-	    //ArrayList<Reply> replyList= new ArrayList <Reply>();
+/*	    ArrayList<Reply> replyList= new ArrayList <Reply>();
 	    
-	    /*
+	    
 	    for (int i=0; i<old_array.size(); i++) {
 	       // JsonElement serial_reply=old_array.get(i);
-	        String serial_reply= old_array.get(i).getAsString();
+	        JsonElement serial_reply= old_array.get(i);
 		    gsonBuilder.registerTypeAdapter(Reply.class, new ReplyDeserializing());
 		    Gson gson2 = gsonBuilder.create();
-		    Reply deserialized= gson2.fromJson(serial_reply,Reply.class);
+		    String s= serial_reply.toString();
+		    Reply deserialized= gson2.fromJson(s,Reply.class);
 		    replyList.add(deserialized);
 
-	    }
-	    */
+	    }*/
+	    
 	    
 /*	    Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
 	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);*/
@@ -66,6 +68,8 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 	    final int picture= answer.get("picture").getAsInt();
 	    Picture new_picture=new Picture(picture);
 	    
+		Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
+	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);
 	    //String date = "\"2013-02-10T13:45:30+0100\"";
 	    //String date_string= answer.get("date").getAsString();
 	    //JsonElement jsonDate= answer.get("date");
@@ -100,17 +104,51 @@ final JsonObject answer= jsonAnswer.getAsJsonObject();
 		}
 	    //Date answer_date= gson.fromJson(date_string,Date.class);
 	   // DateFormat df = new SimpleDateFormat("M/d/yy hh:mm a");
-		//String deserial_date= df.format(deserial);
-	    Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
-	    ArrayList<Reply> replyList= new Gson().fromJson(answer.get("answerReplies"), listType);
-	    Answer deserialized_answer= new Answer(content, author);
+		//String deserial_date= df.format(deserial)
+		/*
+		JsonElement jsonElement= answer.get("answerReplies");
+		for (int i=0; i<jsonElement.)
+		*/
+	   // Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
+	   // ArrayList<Reply> replyList= new Gson().fromJson(old_array, listType);
 	    
+
+
+/*		ArrayList <Reply> replyList= new ArrayList<Reply>();
+
+		gsonBuilder.registerTypeAdapter(Reply.class,new ReplyDeserializing());
+	    JsonParser parser = new JsonParser();
+	    JsonArray array = (JsonArray) parser.parse(answer.get("answerReplies").getAsString());
+		for (int i=0; i<array.size();i++) {
+			String s= array.get(i).getAsString();
+			Reply reply= gson.fromJson(s, Reply.class);
+			replyList.add(reply);
+		}*/
+		
+		//Type listOfTestObject = new TypeToken<ArrayList<Reply>>(){}.getType();
+/*		ArrayList <Reply> replyList= new ArrayList<Reply>();
+		gsonBuilder.registerTypeAdapter(Reply.class,new ReplyDeserializing());
+		JsonArray deserialize= answer.get("answerReplies").getAsJsonArray();
+		for (int i=0; i<deserialize.size();i++) {
+			String s= deserialize.get(i).getAsString();
+			Reply reply= gson.fromJson(s, Reply.class);
+			replyList.add(reply);
+		}*/
+		//System.out.println(deserialize);
+		//ArrayList<Reply> replyList = gson2.fromJson(deserialize,listOfTestObject);
+		
+		//ArrayList <Reply> replyList= new ArrayList<Reply>();
+		//Reply reply= new Reply("dadf", "adfa");
+		//replyList.add(reply);
+		
+	    
+	    Answer deserialized_answer= new Answer(content, author);
 	    deserialized_answer.setReplyArray(replyList);
 	    deserialized_answer.setUpvotes(upvote);
 	    deserialized_answer.setPicture(new_picture);
 	    deserialized_answer.setDate(converted);
 	    deserialized_answer.sethasPicture(hasPicture);
-
+	   // deserialized_answer.setTest(deserialize);
 	    return deserialized_answer;
 	}
 

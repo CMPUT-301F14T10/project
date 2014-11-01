@@ -1,6 +1,7 @@
 package classes;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,11 +11,12 @@ import javax.sound.midi.SysexMessage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class DeserializeTests {
 	public static void main(final String[] args) throws IOException {
 		
-		/* Reply deserialization testing
+		 //Reply deserialization testing
 		
 		
 	    // Configure GSON
@@ -44,7 +46,7 @@ public class DeserializeTests {
 	    System.out.println(reply.getReply()+" "+reply.getAuthor());
 	    System.out.println(deserialized.getReply()+" "+deserialized.getAuthor());
 		
-		*/
+		
 		
 		/*Date deserialization test
 		
@@ -73,14 +75,20 @@ public class DeserializeTests {
 		Answer testAnswer= new Answer(answerName,authorName);
 		Reply answer_reply= new Reply("Please clarify what you're asking", "Anonymous");
 		testAnswer.addReply(answer_reply);
+		Reply reply2= new Reply("Please work", "Anonymous");
+		testAnswer.addReply(reply2);
 		Picture pic= new Picture(10);
 		testAnswer.setPicture(pic);
 	
-		ArrayList<Reply> replies;
+/*		ArrayList<Reply> replies;
 		replies=testAnswer.getReplies();
-	    Gson gson = new Gson();
+		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    gsonBuilder2.registerTypeAdapter(Reply.class, new ReplySerializing());
+
+	    Gson gson = gsonBuilder2.create();
 	    String json=gson.toJson(replies);
-		System.out.println(json);
+		System.out.println(json);*/
+		
 		
 		//Serialize the answer first then deserialize it and see if its the same
 		
@@ -90,12 +98,20 @@ public class DeserializeTests {
 	    gsonBuilder2.setPrettyPrinting();  
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(testAnswer);
+	    gsonBuilder2.setPrettyPrinting();
 	    System.out.println(json2);
 	    
+/*	    String serialized= "[{\"reply\":\"Please work\",\"author\":\"Anonymous\"},{\"reply\":\"Please clarify what you\\u0027re asking\",\"author\":\"Anonymous\"}]";
+	    Type listOfTestObject = new TypeToken<ArrayList<Reply>>(){}.getType();
+		ArrayList<Reply> replyList = gson2.fromJson(serialized,listOfTestObject);
+		
+		System.out.println(replyList.get(1).getReply());*/
+	    
+	    
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerDeserializing());
-	    Answer deserialized= gson2.fromJson(json2,Answer.class);
-	   // System.out.println(answerName);
-	    System.out.println(deserialized.getAnswer());
+	    Answer deserialized2= gson2.fromJson(json2,Answer.class);
+	    System.out.println(deserialized2.getAnswer());
+	    System.out.println(deserialized2.getTest());
 		
 	 
 	  }
