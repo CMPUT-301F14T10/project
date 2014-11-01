@@ -68,7 +68,7 @@ public class DeserializeTests {
 		*/
 		
 		
-		//Answer deserialization test
+		/*Answer deserialization test
 		
 		String answerName= "An answer";
 		String authorName= "You";
@@ -80,14 +80,14 @@ public class DeserializeTests {
 		Picture pic= new Picture(10);
 		testAnswer.setPicture(pic);
 	
-/*		ArrayList<Reply> replies;
+		ArrayList<Reply> replies;
 		replies=testAnswer.getReplies();
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Reply.class, new ReplySerializing());
 
 	    Gson gson = gsonBuilder2.create();
 	    String json=gson.toJson(replies);
-		System.out.println(json);*/
+		System.out.println(json);
 		
 		
 		//Serialize the answer first then deserialize it and see if its the same
@@ -101,11 +101,11 @@ public class DeserializeTests {
 	    gsonBuilder2.setPrettyPrinting();
 	    System.out.println(json2);
 	    
-/*	    String serialized= "[{\"reply\":\"Please work\",\"author\":\"Anonymous\"},{\"reply\":\"Please clarify what you\\u0027re asking\",\"author\":\"Anonymous\"}]";
+	    String serialized= "[{\"reply\":\"Please work\",\"author\":\"Anonymous\"},{\"reply\":\"Please clarify what you\\u0027re asking\",\"author\":\"Anonymous\"}]";
 	    Type listOfTestObject = new TypeToken<ArrayList<Reply>>(){}.getType();
 		ArrayList<Reply> replyList = gson2.fromJson(serialized,listOfTestObject);
 		
-		System.out.println(replyList.get(1).getReply());*/
+		System.out.println(replyList.get(1).getReply());
 	    
 	    
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerDeserializing());
@@ -113,6 +113,28 @@ public class DeserializeTests {
 	    System.out.println(deserialized2.getAnswer());
 	    System.out.println(deserialized2.getTest());
 		
+	    */
 	 
+	    
+		String answerName= "An answer";
+		String authorName= "You";
+		Answer testAnswer= new Answer(answerName,authorName);
+		Picture pic= new Picture(10);
+		testAnswer.setPicture(pic);
+		AnswerList answerList= new AnswerList();
+		answerList.add(testAnswer);
+		
+		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
+	    gsonBuilder2.setPrettyPrinting();
+	    final Gson gson2 = gsonBuilder2.create();
+	    final String json2=gson2.toJson(answerList);
+	    System.out.println(json2);
+	 
+	    //Answerlist deserializing
+	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListDeserialization());
+	    AnswerList deserialized2= gson2.fromJson(json2,AnswerList.class);
+	    System.out.println(deserialized2.getAnswerList());
+	    //System.out.println(deserialized2.getTest());
 	  }
 }
