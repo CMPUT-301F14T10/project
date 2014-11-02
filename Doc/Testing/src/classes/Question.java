@@ -48,12 +48,22 @@ public class Question {
 		return this.questionName;
 	}
 	
+	public void setQuestion(String newQuestion) {
+		this.questionName=newQuestion;
+	}
+	
 	public AnswerList getAnswerList () {
 		return this.answerList;
 	}
+	
+	public void setAnswerList(AnswerList newAnswers) {
+		this.answerList=newAnswers;
+	}
+	
 	public void addAnswer(Answer answer) {
 		answerList.add(answer);
 	}
+	
 	
 	public int getAnswerListSize() {
 		return answerList.size();
@@ -66,6 +76,10 @@ public class Question {
 	public ArrayList<Reply> getReplies() {
 		return this.questionReplies;
 		
+	}
+	
+	public void setReplyList(ArrayList <Reply> newReplies) {
+		this.questionReplies= newReplies;
 	}
 	
 	public int getSizeReplies() {

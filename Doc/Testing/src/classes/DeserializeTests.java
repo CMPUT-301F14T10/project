@@ -115,7 +115,7 @@ public class DeserializeTests {
 	    */
 	 
 	    
-	    
+	    /*
 		String answerName= "An answer";
 		String authorName= "You";
 		Answer testAnswer= new Answer(answerName,authorName);
@@ -159,9 +159,34 @@ public class DeserializeTests {
 		deserialized2.setAnswerList(answerList2);
 	    System.out.println(deserialized2.getAnswer(0).getAnswer());
 	    //System.out.println(deserialized2.getTest());
+	    */
 	    
+	    //Question testing
+		String questionName= "A question?";
+		Question questionTest= new Question(questionName,"Anonymous");
+		Reply question_reply= new Reply("Whats going on","Unknown");
+		questionTest.addQuestionReply(question_reply);
+		questionTest.setUpvotes(2);
+		
+		String answerName= "An answer";
+		Answer testAnswer= new Answer(answerName,"dfaf");
+		Reply answer_reply= new Reply("dafasf","ABCDEFG");
+		testAnswer.addReply(answer_reply);
+		Picture pic= new Picture(10);
+		testAnswer.setPicture(pic);
+		questionTest.addAnswer(testAnswer);
+		questionTest.setPicture(pic);
+		
+		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    gsonBuilder2.registerTypeAdapter(Question.class, new QuestionSerializing());
+	    gsonBuilder2.setPrettyPrinting();
+	    final Gson gson2 = gsonBuilder2.create();
+	    final String json2=gson2.toJson(questionTest);
+	    System.out.println(json2);
 	    
-	    
+	    gsonBuilder2.registerTypeAdapter(Question.class, new QuestionDeserializing());
+	    Question deserialized2= gson2.fromJson(json2,Question.class);
+	    //System.out.println(deserialized2.getAuthor());
 	    
 	  }
 }

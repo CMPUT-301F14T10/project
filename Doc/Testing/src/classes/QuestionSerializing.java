@@ -16,17 +16,32 @@ import com.google.gson.JsonSerializer;
 public class QuestionSerializing implements JsonSerializer<Question> {
 
 	public JsonElement serialize(Question question, Type arg1,
-			JsonSerializationContext arg2) {
+			JsonSerializationContext serialization_context) {
+		
 		JsonObject jsonQuestion= new JsonObject();
 		jsonQuestion.addProperty("questionName",question.getQuestion());
 		
+		
+		
+		/*
 	    GsonBuilder gsonBuilder = new GsonBuilder();
 	    gsonBuilder.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
 	    Gson gson = gsonBuilder.create();
 	    String jsonAnswerList= gson.toJson(question.getAnswerList());
 	    //JsonPrimitive element= new JsonPrimitive(jsonAnswerList);
 	    jsonQuestion.addProperty("answerList", jsonAnswerList);
+	    */
+		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
+	    final Gson gson2 = gsonBuilder2.create();
+	    //final String json2=gson2.toJson(question.getAnswerList());
+	    JsonElement jsonAnswerList=gson2.toJsonTree(question.getAnswerList());
+	    jsonQuestion.add("answerList",jsonAnswerList);
 	    
+        JsonElement replies=serialization_context.serialize(question.getReplies());
+	    jsonQuestion.add("questionReplies",replies);
+	    
+	    /*
 		final JsonArray jsonQuestionReplies= new JsonArray();
 		for (final Reply reply: question.getReplies()) {
 		
@@ -38,7 +53,8 @@ public class QuestionSerializing implements JsonSerializer<Question> {
 		    JsonPrimitive element= new JsonPrimitive(jsonReply);
 		    jsonQuestionReplies.add(element);
 		}
-		jsonQuestion.add("questionReplies",jsonQuestionReplies);
+		*/
+		//jsonQuestion.add("questionReplies",jsonQuestionReplies);
 		
 		jsonQuestion.addProperty("author", question.getAuthor());
 		jsonQuestion.addProperty("upvote", question.getUpvotes());
@@ -49,11 +65,12 @@ public class QuestionSerializing implements JsonSerializer<Question> {
 		jsonQuestion.addProperty("picture",size);
 		
 	    //May need a date serializer b/c date might end up being parsed wrong
-	    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+	    gsonBuilder2.setDateFormat("M/d/yy hh:mm a");
 	   // Gson gson = gsonBuilder.create();
 	    Date question_date= question.getDate();
-	    final String date= gson.toJson(question_date);
-	    jsonQuestion.addProperty("date",date);
+	    //final String date= gson.toJson(question_date);
+	    JsonElement date= serialization_context.serialize(question_date);
+	    jsonQuestion.add("date",date);
 	    
 	    jsonQuestion.addProperty("isFav",question.getIsFav());
 	    jsonQuestion.addProperty("IsInReadingList",question.getIsInReadingList());

@@ -31,7 +31,7 @@ public class Output {
 	    
 	    */
 		
-		// Answer serialization testing
+		/* Answer serialization testing
 		 
 		 
 		String answerName= "An answer";
@@ -50,7 +50,7 @@ public class Output {
 	    final String json2=gson2.toJson(testAnswer);
 	    System.out.println(json2);
 		
-		
+		*/
 		
 		/*AnswerList serialization test
 		
@@ -71,7 +71,7 @@ public class Output {
 		
 		*/
 		
-		/*Question serialization test
+		//Question serialization test
 		
 		String questionName= "A question?";
 		Question questionTest= new Question(questionName,"Anonymous");
@@ -95,7 +95,7 @@ public class Output {
 	    final String json2=gson2.toJson(questionTest);
 	    System.out.println(json2);
 		
-		*/
+		//
 		
 		/*QuestionList serializing
 		
