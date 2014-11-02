@@ -13,7 +13,6 @@ public class Answer {
 	protected boolean hasPicture;
 	protected Picture image;
 	protected Date date;
-	protected String test;
 	
 	//error checking for the answers in the question.
 	public Answer(String answerName,String author) {
@@ -28,7 +27,6 @@ public class Answer {
 		this.hasPicture=false;;
 		this.image=null;
 		this.date= new Date();
-		this.test=null;
 	}
 	
 	//allows author to set a username.
@@ -93,6 +91,7 @@ public class Answer {
 	//it sets the image as pic.
 	public void setPicture (Picture pic) {
 		this.image= pic;
+		this.hasPicture=true;
 	}
 	
 	//gets the picture and returns it as an image
@@ -113,10 +112,5 @@ public class Answer {
 		this.answerReplies=newReplies;
 	}
 	
-	public void setTest(String s) {
-		this.test=s;
-	}
-	public String getTest() {
-		return this.test;
-	}
+
 }

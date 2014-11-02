@@ -68,8 +68,8 @@ public class DeserializeTests {
 		*/
 		
 		
-		/*Answer deserialization test
-		
+		//Answer deserialization test
+		/*
 		String answerName= "An answer";
 		String authorName= "You";
 		Answer testAnswer= new Answer(answerName,authorName);
@@ -87,12 +87,12 @@ public class DeserializeTests {
 
 	    Gson gson = gsonBuilder2.create();
 	    String json=gson.toJson(replies);
-		System.out.println(json);
+		System.out.println(json);*/
 		
 		
 		//Serialize the answer first then deserialize it and see if its the same
 		
-		
+		/*
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerSerializing());
 	    gsonBuilder2.setPrettyPrinting();  
@@ -105,24 +105,42 @@ public class DeserializeTests {
 	    Type listOfTestObject = new TypeToken<ArrayList<Reply>>(){}.getType();
 		ArrayList<Reply> replyList = gson2.fromJson(serialized,listOfTestObject);
 		
-		System.out.println(replyList.get(1).getReply());
+		//System.out.println(replyList.get(1).getReply());
 	    
 	    
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerDeserializing());
 	    Answer deserialized2= gson2.fromJson(json2,Answer.class);
 	    System.out.println(deserialized2.getAnswer());
-	    System.out.println(deserialized2.getTest());
 		
 	    */
 	 
 	    
+	    
 		String answerName= "An answer";
 		String authorName= "You";
 		Answer testAnswer= new Answer(answerName,authorName);
+		Reply answer_reply= new Reply("Please clarify what you're asking", "Anonymous");
+		Reply answer_reply2= new Reply("adfdaf", "Anonymous");
+
 		Picture pic= new Picture(10);
 		testAnswer.setPicture(pic);
+		testAnswer.addReply(answer_reply);
+		testAnswer.addReply(answer_reply2);
 		AnswerList answerList= new AnswerList();
 		answerList.add(testAnswer);
+		
+		
+		String answerName2= "An ansr";
+		String authorName2= "You";
+		Answer testAnswer2= new Answer(answerName2,authorName2);
+		Reply answer_reply3= new Reply("Please clarify what you're asking", "Anonymous");
+		Reply answer_reply4= new Reply("adfdaf", "Anonymous");
+
+		Picture pic2= new Picture(20);
+		testAnswer2.setPicture(pic2);
+		testAnswer2.addReply(answer_reply3);
+		testAnswer2.addReply(answer_reply4);
+		answerList.add(testAnswer2);
 		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
@@ -133,8 +151,17 @@ public class DeserializeTests {
 	 
 	    //Answerlist deserializing
 	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListDeserialization());
-	    AnswerList deserialized2= gson2.fromJson(json2,AnswerList.class);
-	    System.out.println(deserialized2.getAnswerList());
+	    //AnswerList deserialized2= gson2.fromJson(json2,AnswerList.class);
+	    
+	    Type listOfTestObject = new TypeToken<ArrayList<Answer>>(){}.getType();
+		ArrayList <Answer> answerList2= gson2.fromJson(json2,listOfTestObject);
+		AnswerList deserialized2= new AnswerList();
+		deserialized2.setAnswerList(answerList2);
+	    System.out.println(deserialized2.getAnswer(0).getAnswer());
 	    //System.out.println(deserialized2.getTest());
+	    
+	    
+	    
+	    
 	  }
 }

@@ -61,10 +61,19 @@ public class AnswerSerializing implements JsonSerializer<Answer> {
 		answerObject.addProperty("upvote", answer.getUpvotes());
 		answerObject.addProperty("hasPicture",answer.hasPicture());
 		
-		//The picture property will have to change when picture changes
 		int size=answer.getPicture().getSize();
-		answerObject.addProperty("picture",size);
-		
+		answerObject.addProperty("picture", size);
+		//The picture property will have to change when picture changes
+		/*
+		if (answer.hasPicture()){
+			int size=answer.getPicture().getSize();
+			answerObject.addProperty("picture",size);
+		}
+		else {
+			int size=0;
+			answerObject.addProperty("picture",size);
+		}
+		*/
 	    GsonBuilder gsonBuilder = new GsonBuilder();
 	    
 	    //May need a date serializer b/c date might end up being parsed wrong

@@ -30,16 +30,51 @@ public class AnswerListSerializing implements JsonSerializer<AnswerList> {
 		}
 		
 		return answerListArray;*/
+		
+		/*
 		JsonObject jsonObject= new JsonObject();
 		ArrayList<Answer> serialize= answerList.getAnswerList();
 		for (int i=0; i<serialize.size(); i++) {
 			Answer answer= serialize.get(i);
 			JsonElement serial_answer=serialization_context.serialize(answer);
-			jsonObject.add(answer.getAnswer(), serial_answer);
+			String index= answer.getAnswer();
+			jsonObject.add(index, serial_answer);
 		}
 		//JsonElement answers= serialization_context.serialize(serialize);
 		//jsonObject.add(answerList.get, answers);
 		return jsonObject;
+		*/
+		
+		/*
+		//Can use this for searching perhaps 
+		JsonObject jsonObject= new JsonObject();
+		ArrayList<Answer> serialize= answerList.getAnswerList();
+		for (int i=0; i<serialize.size(); i++) {
+			Answer answer= serialize.get(i);
+			final GsonBuilder gsonBuilder2 = new GsonBuilder();
+		    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerSerializing());
+		    final Gson gson2 = gsonBuilder2.create();
+		    final JsonElement json2=gson2.toJsonTree(answer);
+		    jsonObject.add(answer.getAnswer(), json2);
+		}
+		return jsonObject;
+		*/
+
+		
+		
+		JsonArray jsonArray= new JsonArray();
+		ArrayList <Answer> serialize= answerList.getAnswerList();
+		for (int i=0; i<serialize.size(); i++) {
+			Answer answer= serialize.get(i);
+			
+			final GsonBuilder gsonBuilder2 = new GsonBuilder();
+		    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerSerializing());
+		    final Gson gson2 = gsonBuilder2.create();
+		    final JsonElement json2=gson2.toJsonTree(answer);
+		    jsonArray.add(json2);
+		}
+		return jsonArray;
+		
 	}
 
 }
