@@ -1,6 +1,7 @@
 package classes;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -31,13 +32,35 @@ public class QuestionSerializing implements JsonSerializer<Question> {
 	    //JsonPrimitive element= new JsonPrimitive(jsonAnswerList);
 	    jsonQuestion.addProperty("answerList", jsonAnswerList);
 	    */
+		
+		/*
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
 	    final Gson gson2 = gsonBuilder2.create();
 	    //final String json2=gson2.toJson(question.getAnswerList());
 	    JsonElement jsonAnswerList=gson2.toJsonTree(question.getAnswerList());
 	    jsonQuestion.add("answerList",jsonAnswerList);
-	    
+	    */
+		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    final Gson gson2 = gsonBuilder2.create();
+
+	    /*
+		JsonArray jsonArray= new JsonArray();
+		ArrayList <Answer> serialize= question.getAnswerList().getAnswerList();
+		for (int i=0; i<serialize.size(); i++) {
+			Answer answer= serialize.get(i);
+			
+			final GsonBuilder gsonBuilder3 = new GsonBuilder();
+		    gsonBuilder3.registerTypeAdapter(Answer.class, new AnswerSerializing());
+		    final Gson gson3 = gsonBuilder3.create();
+		    final JsonElement json3=gson3.toJsonTree(answer);
+		    jsonArray.add(json3);
+		}
+		jsonQuestion.add("answerList",jsonArray);
+		*/
+	    JsonElement answers= serialization_context.serialize(question.getAnswerList());
+		jsonQuestion.add("answerList",answers);
+
         JsonElement replies=serialization_context.serialize(question.getReplies());
 	    jsonQuestion.add("questionReplies",replies);
 	    

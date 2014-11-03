@@ -71,7 +71,7 @@ public class Output {
 		
 		*/
 		
-		//Question serialization test
+		/*Question serialization test
 		
 		String questionName= "A question?";
 		Question questionTest= new Question(questionName,"Anonymous");
@@ -95,9 +95,9 @@ public class Output {
 	    final String json2=gson2.toJson(questionTest);
 	    System.out.println(json2);
 		
-		//
+		*/
 		
-		/*QuestionList serializing
+		//QuestionList serializing
 		
 		String questionName= "A question?";
 		String author="A author";
@@ -131,14 +131,14 @@ public class Output {
 		
 		questionList.add(questionTest);
 		
-		/* Supposedly faster serialization for question list and have the question as the index
+		// Supposedly faster serialization for question list and have the question as the index
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(QuestionList.class, new QuestionListSerializing());
 	    //gsonBuilder2.setPrettyPrinting();
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(questionList);
 	    System.out.println(json2);
-	    */
+	    //
 		
 		/* Slower serialization for question list, don't have question as the index"
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();

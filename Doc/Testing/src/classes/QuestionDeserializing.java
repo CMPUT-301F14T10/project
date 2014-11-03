@@ -19,9 +19,10 @@ import com.google.gson.reflect.TypeToken;
 public class QuestionDeserializing implements JsonDeserializer<Question> {
 
 	public Question deserialize(JsonElement jsonObject, Type arg1,
-			JsonDeserializationContext arg2) throws JsonParseException {
+			JsonDeserializationContext context) throws JsonParseException {
 		
 		final JsonObject jsonQuestion= jsonObject.getAsJsonObject();
+		
 		final JsonElement jsonContent= jsonQuestion.get("questionName");
 	    final String question_content = jsonContent.getAsString();
 	    
@@ -38,7 +39,6 @@ public class QuestionDeserializing implements JsonDeserializer<Question> {
 	    ArrayList<Reply> replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"), listType);
 	    
 	    final GsonBuilder gsonBuilder = new GsonBuilder();
-	   // final Gson gson = gsonBuilder.create();
 	    
 	    Gson gson2=gsonBuilder.create();
 		   
@@ -47,24 +47,30 @@ public class QuestionDeserializing implements JsonDeserializer<Question> {
 		Date converted= new Date();
 		try {
 			converted = formatter.parse(date);
-			//System.out.println(date);
-			//System.out.println(formatter.format(date));
 	 
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		/*
-	    Type listOfTestObject = new TypeToken<ArrayList<Answer>>(){}.getType();
-		ArrayList <Answer> answerList2= gson2.fromJson(jsonQuestion.get("answerList"),listOfTestObject);
-		AnswerList deserialized2= new AnswerList();
-		deserialized2.setAnswerList(answerList2);
-		*/
-		
 	
+		//gsonBuilder.registerTypeAdapter(AnswerList.class, new AnswerListDeserialization());
+		
+		JsonElement jsonAnswerList= jsonQuestion.get("answerList");
+		//JsonArray jsonArray= jsonAnswerList.getAsJsonArray();
+		//gsonBuilder.registerTypeAdapter(AnswerList.class, new AnswerListDeserialization());
+
+		//AnswerList deserial_answers= new AnswerList();
+		//Type listType2 = new TypeToken<ArrayList<Answer>>() {}.getType();
+	    //ArrayList<Answer> replyList2= new Gson().fromJson(jsonArray, listType2);
+	    //deserial_answers.setAnswerList(replyList2);
+	    AnswerList answerList= context.deserialize(jsonAnswerList, AnswerList.class);
 	    
-		gsonBuilder.registerTypeAdapter(AnswerList.class, new AnswerListDeserialization());
-		AnswerList deserialized2= gson2.fromJson(jsonQuestion.get("answerList"), AnswerList.class);
+		//AnswerList deserialized2= gson2.fromJson(jsonAnswerList, AnswerList.class);
+		//Type collectionType = new TypeToken<AnswerList>(){}.getType();
+		//AnswerList lcs = (AnswerList) new Gson().fromJson(jsonAnswerList, collectionType);
+		
+		//AnswerList deserialized2= new AnswerList();
+		//deserialized2.setAnswerList(lcs);
 		
 		Question deserialized= new Question("Name","Author");
 		deserialized.setQuestion(question_content);
@@ -75,8 +81,7 @@ public class QuestionDeserializing implements JsonDeserializer<Question> {
 		deserialized.setPicture(new_picture);
 		deserialized.setIsFav(isFavorite);
 		deserialized.setIsInReadingList(inReadingList);
-		deserialized.setAnswerList(deserialized2);
-		
+		deserialized.setAnswerList(answerList);
 		return deserialized;
 	}
 

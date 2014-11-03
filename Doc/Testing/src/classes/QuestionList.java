@@ -17,6 +17,7 @@ public class QuestionList {
 		questionList= new ArrayList<Question>();
 		this.online=false;
 	}
+
 	
 	public boolean getOnline() {
 		return this.online;
@@ -47,6 +48,9 @@ public class QuestionList {
 	}
 	public ArrayList <Question> getQuestionList() {
 		return questionList;
+	}
+	public void setQuestionList(ArrayList <Question> newQuestions) {
+		this.questionList=newQuestions;
 	}
 	
 	public int size() {
