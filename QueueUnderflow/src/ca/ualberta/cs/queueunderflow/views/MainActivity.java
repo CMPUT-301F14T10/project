@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.widget.ListView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 /* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
@@ -90,22 +90,20 @@ public class MainActivity extends Activity {
         }
         
         
-        //Load data from phone memory
         
-        //Load Username
-        LoadSave lSave = new LoadSave();
-        String loadedUsername = lSave.loadUsername();
-        if(loadedUsername.length() != 0)
+        //----- Load data from phone memory (move this into a controller somewhere, maybe)
+
+        if(!LoadSave.loaded) //Make sure this only loads once!
         {
-        	User user= ListHandler.getUser();
-        	try
-        	{
-        		user.setUserName(loadedUsername);
-        	} catch (IllegalArgumentException e){
-        		//This should never happen. Any username saved will be able to pass through without triggering this.
-        	}
+        LoadSave lSave = new LoadSave();
+        lSave.loadUsername();
+        Log.d("test", "loading favorites...");
+        lSave.loadFavorites();
+        
+        LoadSave.loaded = true;
         }
-        //Done loading data from phone memory
+
+        //----- Done loading data from phone memory
     }
 
 

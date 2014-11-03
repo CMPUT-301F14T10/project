@@ -33,7 +33,8 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 		jsonQuestion.addProperty("hasPicture",question.hasPicture());
 
 		//The picture property will have to change when picture changes
-		int size=question.getPicture().getSize();
+		//int size=question.getPicture().getSize();
+		int size = 0;
 		jsonQuestion.addProperty("picture",size);
 		
 	    //May need a date serializer b/c date might end up being parsed wrong

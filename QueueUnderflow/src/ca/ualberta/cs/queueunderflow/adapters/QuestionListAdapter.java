@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.R.id;
@@ -138,6 +139,10 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				}
 				
 				questionArray.get(position).setIsFav(isChecked);
+				
+				//Save new favorite list.
+				LoadSave saver = new LoadSave();
+				saver.SaveFavorites();
 			}
 		});
 		
@@ -169,7 +174,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					ListHandler.getReadingList().remove(question);
 				}
 				
-				questionArray.get(position).setIsInReadingList(isChecked);
 			}
 		});
 		return view;

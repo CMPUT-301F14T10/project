@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -202,17 +203,19 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				if (isChecked == true) {
 					if (!ListHandler.getFavsList().getQuestionList().contains(question)) {
 						ListHandler.getFavsList().add(question);
+						Log.d("test", "Added to favorites...");
 					}
 				}
 				else if (isChecked == false) {
 					ListHandler.getFavsList().remove(question);
+					Log.d("test", "Removed from favorites...");
 				}
+				
+				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
 				
 				//Save new favorite list.
 				LoadSave saver = new LoadSave();
 				saver.SaveFavorites();
-				
-				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
 			}
 		});
 		
