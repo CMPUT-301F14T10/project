@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,10 +83,23 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {
+                                        boolean isInFavorites = false;
+                                        if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
+				    
 					user.addUpvotedQuestion(questionArray.get(position));
 					questionArray.get(position).upvoteQuestion();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
+					
+	                                //Save favorites if applicable
+                                        if (isInFavorites)
+                                        {
+                                            Log.d("test", "Item is in favorites.");
+                                            LoadSave sl = new LoadSave();
+                                            sl.SaveFavorites();
+                                        }else{
+                                            Log.d("testitem", "Item is NOT in favorites.");
+                                        }
 				}
 
 				

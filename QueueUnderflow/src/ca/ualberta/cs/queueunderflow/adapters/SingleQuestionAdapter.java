@@ -142,10 +142,25 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 					Toast.makeText(activity.getApplicationContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();			// This should be in the model?
 				}
 				else {
+				        boolean isInFavorites = false;
+				        if(ListHandler.getFavsList().getQuestionList().contains(singleQuestionArray.get(groupPosition))) isInFavorites = true;
+				    
 					user.addUpvotedQuestion(singleQuestionArray.get(groupPosition));
 					singleQuestionArray.get(groupPosition).upvoteQuestion();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
+					
+					
+					
+					//Save favorites if applicable
+					if (isInFavorites)
+					{
+					    Log.d("test", "Item is in favorites.");
+					    LoadSave sl = new LoadSave();
+					    sl.SaveFavorites();
+					}else{
+					    Log.d("testitem", "Item is NOT in favorites.");
+					}
 				}
             	/*
                 TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
@@ -203,12 +218,12 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				if (isChecked == true) {
 					if (!ListHandler.getFavsList().getQuestionList().contains(question)) {
 						ListHandler.getFavsList().add(question);
-						Log.d("test", "Added to favorites...");
+						//Log.d("test", "Added to favorites...");
 					}
 				}
 				else if (isChecked == false) {
 					ListHandler.getFavsList().remove(question);
-					Log.d("test", "Removed from favorites...");
+					//Log.d("test", "Removed from favorites...");
 				}
 				
 				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
