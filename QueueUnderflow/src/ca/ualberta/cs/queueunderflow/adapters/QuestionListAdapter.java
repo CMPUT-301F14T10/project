@@ -36,8 +36,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 	private int layoutID;
 	private ArrayList<Question> questionArray;
 	private Activity activity;
+	private int fromFragment;
 	
-	public QuestionListAdapter(Activity activity, int layoutID, ArrayList<Question> questionArray) {
+	public QuestionListAdapter(Activity activity, int layoutID, ArrayList<Question> questionArray, int fromFragment) {
 		super(activity, layoutID, questionArray);
 		
 		// this line is taken from http://www.survivingwithandroid.com/2012/10/android-listview-custom-adapter-and.html
@@ -46,6 +47,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		this.activity = activity;
 		this.layoutID = layoutID;
 		this.questionArray = questionArray;
+		this.fromFragment = fromFragment;
 	}
 
 	@Override
@@ -189,6 +191,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					ListHandler.getReadingList().remove(question);
 				}
 				
+				questionArray.get(position).setIsInReadingList(isChecked);
 			}
 		});
 		return view;

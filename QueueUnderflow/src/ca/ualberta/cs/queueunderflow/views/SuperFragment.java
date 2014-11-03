@@ -60,7 +60,7 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 		// Set up list adapter to display the questions
 		ListView listView = (ListView) view.findViewById(R.id.homeListView);
-		adapter = new QuestionListAdapter(getActivity(), R.layout.list_item_question, screenQList.getQuestionList());
+		adapter = new QuestionListAdapter(getActivity(), R.layout.list_item_question, screenQList.getQuestionList(), fromFragment);
 		listView.setAdapter(adapter);
 		
 		return view;
