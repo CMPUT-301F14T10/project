@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -30,6 +31,10 @@ public class AskAnswerController {
 			
 			QuestionList myQuestionsList = ListHandler.getMyQsList();
 			myQuestionsList.add(newQuestion);
+			
+			//myQList has changed. Save to file.
+			LoadSave lSave = new LoadSave();
+			lSave.saveMyQuestions();
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {

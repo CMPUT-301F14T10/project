@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
         lSave.loadUsername();
         Log.d("test", "loading favorites...");
         lSave.loadFavorites();
+        lSave.loadMyQuestions();
         
         LoadSave.loaded = true;
         }
