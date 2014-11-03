@@ -33,4 +33,9 @@ protected ArrayList <Answer> answerList;
 	public ArrayList <Answer> getAnswerList() {
 		return answerList;
 	}
+
+	public void setAnswerList(ArrayList<Answer> newAnswers) {
+		this.answerList=newAnswers;
+		
+	}
 }

@@ -127,6 +127,21 @@ public class Question {
 	public void setIsInReadingList(boolean isChecked) {
 		this.isInReadingList = isChecked;
 	}
+
+	public void setQuestion(String newQuestion) {
+		this.questionName=newQuestion;
+		
+	}
+
+	public void setReplyList(ArrayList<Reply> replyList) {
+		this.questionReplies= replyList;
+		
+	}
+
+	public void setAnswerList(AnswerList newAnswerList) {
+		this.answerList=newAnswerList;
+		
+	}
 	
 	
 }

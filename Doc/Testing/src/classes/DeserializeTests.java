@@ -240,6 +240,8 @@ public class DeserializeTests {
 		QuestionList deserialized2= new QuestionList();
 		deserialized2.setQuestionList(questionList2);
 		System.out.println(deserialized2.getQuestionList().get(0).getAuthor());
-		
+		System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getReplies().get(0).getReply());
+		System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getAnswer());
+
 	  }
 }

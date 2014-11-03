@@ -1,0 +1,1 @@
+This Java project was created solely to test out the serialization and deserialization classes using GSON by serializing and deserializing objects and looking at their results (ie: the JSON strings produced and obtaining properties of deserialized objects).

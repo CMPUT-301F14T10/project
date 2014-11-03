@@ -147,4 +147,9 @@ public class QuestionList extends TModel<TView>{
 	public void remove(Question question) {
 		questionList.remove(question);
 	}
+
+	public void setQuestionList(ArrayList<Question> newQuestions) {
+		this.questionList=newQuestions;
+		
+	}
 }
