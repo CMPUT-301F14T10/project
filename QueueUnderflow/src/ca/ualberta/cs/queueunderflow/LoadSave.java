@@ -19,6 +19,7 @@ public class LoadSave {
 	public static Context context;
 	final String saveFile = "queueUnderflowData";
 	final String favsKey = "favlist";
+	final String myQKey = "myquestions";
 	final String usernameKey = "username";
 	public static boolean loaded = false;
 	
@@ -36,6 +37,37 @@ public class LoadSave {
 		String lData = settings.getString(key, "");
 		return lData;
 	}
+	
+	public void loadMyQuestions()
+	{
+	    String gsonString = loadData(myQKey);
+            GsonBuilder gsonbuild = new GsonBuilder();
+            gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
+            Gson gson = gsonbuild.create();
+            
+            Type qlType = new TypeToken<QuestionList>() {}.getType();
+            QuestionList qList = gson.fromJson(gsonString, qlType);
+            
+            if(qList != null)
+            {
+                for(int i=0; i<qList.size(); i++)
+                {
+                    ListHandler.getMyQsList().add(qList.get(i));
+                }
+            }
+	}
+	
+        public void saveMyQuestions ()
+        {
+                GsonBuilder gsonbuild = new GsonBuilder();
+                gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListSerializer());
+                Gson gson = gsonbuild.create();
+                String gsonString = gson.toJson(ListHandler.getMyQsList());
+                
+                //Log.d("test", "printing string now...");
+                //Log.d("test", gsonString);
+                this.saveData(myQKey, gsonString);
+        }
 	
 	public void loadFavorites()
 	{
@@ -55,6 +87,7 @@ public class LoadSave {
 				ListHandler.getFavsList().add(qList.get(i));
 				ListHandler.getMasterQList().add(qList.get(i));
 			}
+			ListHandler.getFavsList().sortBy("most recent");
 		}
 			
 		
