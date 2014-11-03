@@ -120,6 +120,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
+				intent.putExtra("fromFragment", fromFragment);
 				intent.putExtra("question_position",position);
 				activity.startActivity(intent);
 			}
