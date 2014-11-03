@@ -56,6 +56,14 @@ public class UseCase1 extends ActivityInstrumentationTestCase2<MainActivity>
 		int question_index2= questionList.questionIndex(sameQuestion);
 		Question sameQuestion2= questionList.get(question_index2);
 		assertTrue("The answers this question received=3", sameQuestion2.getAnswerListSize()==3);
+		
+		//testing exception 1 when there is no network connection
+		String exception="";
+		assertTrue("internet connection not available", questionList.getOnline()==false);
+		if (questionList.getOnline()==false){
+			exception="internet connection not available";
+		}
+		assertEquals("internet connection not available", exception);
 	}
 	
 	public void testViewBrowseQuestions() {
