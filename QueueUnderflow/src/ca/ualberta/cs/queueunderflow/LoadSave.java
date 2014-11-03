@@ -3,7 +3,6 @@ package ca.ualberta.cs.queueunderflow;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
 
@@ -11,30 +10,41 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class LoadSave {
-
-	Context context;
-	final String favsfile = "favList";
+	
+	public static Context context;
+	final String saveFile = "queueUnderflowData";
 	final String favsKey = "favlist";
+	final String usernameKey = "username";
 	
 	private void saveData(String key, String value)
 	{
-		SharedPreferences settings = context.getSharedPreferences(favsfile, Context.MODE_PRIVATE);
+		SharedPreferences settings = LoadSave.context.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
 		Editor editor = settings.edit();
-		editor.putString(favsKey, value);
+		editor.putString(key, value);
 		editor.commit();
 	}
 	
 	private String loadData(String key)
 	{
-		SharedPreferences settings = context.getSharedPreferences(favsfile, Context.MODE_PRIVATE);
-		String lData = settings.getString(favsKey, "");
+		SharedPreferences settings = LoadSave.context.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
+		String lData = settings.getString(key, "");
 		return lData;
 	}
 	
-	public void LoadFavorites()
+	public void loadFavorites()
 	{
 		String gsonString = loadData(favsKey);
 		//Use deserializer here...
+	}
+	
+	public void saveUsername(String username)
+	{
+		saveData(usernameKey, username);
+	}
+	
+	public String loadUsername()
+	{
+		return loadData(usernameKey);
 	}
 	
 	public void SaveFavorites()

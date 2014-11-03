@@ -1,13 +1,5 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.R.drawable;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.R.menu;
-import ca.ualberta.cs.queueunderflow.R.string;
-import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -20,7 +12,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 /* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
 public class MainActivity extends Activity {
@@ -47,6 +43,9 @@ public class MainActivity extends Activity {
         
         drawerTitle = "QueueUnderflow";
         title = getTitle();
+
+        //Set variable required for Load/Save
+        LoadSave.context = this;
         
         // Lets us use an icon in the menu bar to access the nav drawer too
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,12 +82,30 @@ public class MainActivity extends Activity {
         	fragmentPosition = returnFragment - 1;
         	selectItem(returnFragment-1);
         }
+        
         // This automatically shows the HomeScreen after the app is first launched and a user hasn't selected a tab yet.
         else if (savedInstanceState == null) {
         	fragmentPosition = 0;
         	selectItem(0);
         }
         
+        
+        //Load data from phone memory
+        
+        //Load Username
+        LoadSave lSave = new LoadSave();
+        String loadedUsername = lSave.loadUsername();
+        if(loadedUsername.length() != 0)
+        {
+        	User user= ListHandler.getUser();
+        	try
+        	{
+        		user.setUserName(loadedUsername);
+        	} catch (IllegalArgumentException e){
+        		//This should never happen. Any username saved will be able to pass through without triggering this.
+        	}
+        }
+        //Done loading data from phone memory
     }
 
 

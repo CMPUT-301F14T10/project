@@ -1,10 +1,5 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
 
 public class SetUsernameFragment extends Fragment {
 	
@@ -51,6 +50,10 @@ public class SetUsernameFragment extends Fragment {
 				}
 				
 				if (flag == 0){
+					//Save username to phone
+					LoadSave lSave = new LoadSave();
+					lSave.saveUsername(User.getUserName());
+					//Done saving username to phone
 					currentUsername.setText(User.getUserName());
 					Toast.makeText(getActivity(), "Username successfully set to " + user.getUserName(), Toast.LENGTH_SHORT).show();
 				}
