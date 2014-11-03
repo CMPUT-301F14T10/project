@@ -39,19 +39,21 @@ public class SetUsernameFragment extends Fragment {
 				String username = newUsername.getText().toString();
 				//User user = new User();
 				User user= ListHandler.getUser();
+				LoadSave lSave = new LoadSave();
 				
 				int flag = 0;
 				try {
 					user.setUserName(username);
 				} catch (IllegalArgumentException e){
 					currentUsername.setText(User.getUserName());
+					lSave.saveUsername(User.getUserName());
 					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					flag = 1;
 				}
 				
 				if (flag == 0){
 					//Save username to phone
-					LoadSave lSave = new LoadSave();
+					
 					lSave.saveUsername(User.getUserName());
 					//Done saving username to phone
 					currentUsername.setText(User.getUserName());
