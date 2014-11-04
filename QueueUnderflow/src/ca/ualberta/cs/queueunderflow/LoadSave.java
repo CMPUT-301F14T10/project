@@ -53,6 +53,7 @@ public class LoadSave {
                 for(int i=0; i<qList.size(); i++)
                 {
                     ListHandler.getMyQsList().add(qList.get(i));
+                    ListHandler.getMasterQList().add(qList.get(i));
                 }
             }
 	}
@@ -85,7 +86,6 @@ public class LoadSave {
 			for(int i=0; i<qList.size(); i++)
 			{
 				ListHandler.getFavsList().add(qList.get(i));
-				ListHandler.getMasterQList().add(qList.get(i));
 			}
 			ListHandler.getFavsList().sortBy("most recent");
 		}

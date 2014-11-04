@@ -98,8 +98,8 @@ public class MainActivity extends Activity {
         LoadSave lSave = new LoadSave();
         lSave.loadUsername();
         Log.d("test", "loading favorites...");
-        lSave.loadFavorites();
         lSave.loadMyQuestions();
+        lSave.loadFavorites();
         
         LoadSave.loaded = true;
         }
