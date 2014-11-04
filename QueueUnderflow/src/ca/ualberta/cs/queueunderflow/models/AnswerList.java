@@ -36,6 +36,25 @@ protected ArrayList <Answer> answerList;
 
 	public void setAnswerList(ArrayList<Answer> newAnswers) {
 		this.answerList=newAnswers;
-		
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		AnswerList aList = (AnswerList) o;
+		
+		if (aList.size() != answerList.size()) {
+			return false;
+		}
+		
+		for (int i = 0; i < answerList.size(); i++) {
+			if (!aList.getAnswer(i).equals(answerList.get(i))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	
 }

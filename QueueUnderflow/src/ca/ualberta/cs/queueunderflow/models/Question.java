@@ -3,6 +3,8 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.text.format.DateFormat;
+
 import ca.ualberta.cs.queueunderflow.Picture;
 
 
@@ -146,6 +148,29 @@ public class Question {
 	public void setHasPicture(boolean hasPicture) {
 		this.hasPicture = hasPicture;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		Question question = (Question) o;
+		
+		if (!question.getQuestion().equals(this.questionName) || !question.getAuthor().equals(this.author)) {
+			return false;
+		}
+		else if (!DateFormat.format("MMM dd, yyyy", question.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
+			return false;
+		}
+		else if (question.getUpvotes() != this.upvote || question.hasPicture() != this.hasPicture) {
+			return false;
+		}
+		else if (question.getIsFav() != this.isFav || question.getIsInReadingList() != this.isInReadingList) {
+			return false;
+		}
+		else if (!question.getAnswerList().equals(this.answerList) || !question.getReplies().equals(this.questionReplies)) {
+			return false;
+		}
+		return true;
+	}
+	
 	
 	
 }

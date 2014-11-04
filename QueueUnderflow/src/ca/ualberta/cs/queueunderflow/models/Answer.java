@@ -3,6 +3,8 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.text.format.DateFormat;
+
 import ca.ualberta.cs.queueunderflow.Picture;
 
 /* This is the class to set Answers.
@@ -115,6 +117,30 @@ public class Answer {
 		this.answerReplies=newReplies;
 	}
 	
+	
+	@Override
+	public boolean equals(Object o) {
+		Answer answer = (Answer) o;
+		System.out.println(DateFormat.format("MMM dd, yyyy", answer.getDate()));
+		System.out.println(DateFormat.format("MMM dd, yyyy", this.date));
+		
+		if (!answer.getAnswer().equals(this.answerName) || !answer.getAuthor().equals(this.author)) {
+			return false;
+		}
+		else if (!DateFormat.format("MMM dd, yyyy", answer.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
+			return false;
+		}
+		else if (answer.getUpvotes() != this.upvote || answer.hasPicture() != this.hasPicture) {
+			return false;
+		}
+//		else if (answer.getIsFav() != this.isFav || answer.getIsInReadingList() != this.isInReadingList) {
+//			return false;
+//		}
+		else if (!answer.getReplies().equals(this.answerReplies)) {
+			return false;
+		}
+		return true;
+	}
 	
 
 	

@@ -29,4 +29,17 @@ public class Reply {
 	public String getReply() {
 		return this.reply;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		Reply reply = (Reply) o;
+		
+		if (reply.getReply() != this.reply || reply.getAuthor() != this.author) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
 }

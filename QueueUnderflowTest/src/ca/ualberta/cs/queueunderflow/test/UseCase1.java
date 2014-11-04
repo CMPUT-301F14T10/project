@@ -66,7 +66,7 @@ public class UseCase1 extends ActivityInstrumentationTestCase2<MainActivity>
 		assertEquals("internet connection not available", exception);
 	}
 	
-	public void testViewBrowseQuestions() {
+	public void testBrowseQuestionsDisplay() {
 		Question question1 = new Question("First Q", "me");
 		Question question2 = new Question("Second Q", "you");
 		Question question3 = new Question("Third Q", "him");

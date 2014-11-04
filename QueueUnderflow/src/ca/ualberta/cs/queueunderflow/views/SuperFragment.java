@@ -29,6 +29,7 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 	public static final int FAVORITES_FRAGMENT = 2;
 	public static final int MY_QUESTIONS_FRAGMENT = 3;
 	public static final int READING_LIST_FRAGMENT = 4;
+	public static final int SET_USERNAME_FRAGMENT = 5;
 	
 	private QuestionListAdapter adapter;
 	protected int fromFragment;
