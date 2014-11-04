@@ -1,14 +1,16 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
+import android.app.Activity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
-import android.app.Activity;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class AskAnswerController {
 
@@ -18,23 +20,29 @@ public class AskAnswerController {
 	public static final int READING_LIST_FRAGMENT = 4;
 	
 	private Activity activity;	// This is so we can make Toast messages
+	private String imagePath;
 	
 	public AskAnswerController(Activity activity) {
 		this.activity = activity;
 	}
 
-	public void askQuestion(EditText questionInput) {
+	public void askQuestion() {
+		EditText questionInput = (EditText) activity.findViewById(R.id.questionInput);
+		ImageButton imagePreviewBtn = (ImageButton) activity.findViewById(R.id.imagePreviewBtn);
+		
 		try {
 			Question newQuestion = new Question(questionInput.getText().toString(), User.getUserName());
+			
+			if (imagePreviewBtn.getVisibility() == View.VISIBLE) {
+				newQuestion.setHasPicture(true);
+				// TODO add the picture to the question here
+			}
+			
 			QuestionList homeScreenList = ListHandler.getMasterQList();
 			homeScreenList.add(newQuestion);
 			
 			QuestionList myQuestionsList = ListHandler.getMyQsList();
 			myQuestionsList.add(newQuestion);
-			
-			//myQList has changed. Save to file.
-			LoadSave lSave = new LoadSave();
-			lSave.saveMyQuestions();
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
@@ -70,4 +78,7 @@ public class AskAnswerController {
 		}
     }
 
+    public void setImagePath(String path) {
+    	this.imagePath = path;
+    }
 }

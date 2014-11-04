@@ -142,6 +142,10 @@ public class Question {
 		this.answerList=newAnswerList;
 		
 	}
+
+	public void setHasPicture(boolean hasPicture) {
+		this.hasPicture = hasPicture;
+	}
 	
 	
 }

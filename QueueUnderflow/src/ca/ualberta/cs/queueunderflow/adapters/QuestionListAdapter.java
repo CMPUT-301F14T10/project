@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -118,6 +119,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
 			hasPictureIcon.setVisibility(View.VISIBLE);
+			
+			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
+			// TODO set imagePreview to the photo
 		}
 		
 		ImageButton answerBtn = (ImageButton) view.findViewById(R.id.answerBtn);

@@ -111,7 +111,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         final View view;
         if (singleQuestionArray.get(groupPosition).hasPicture()) {
             view = inflater.inflate(R.layout.list_item_question_picture, parent, false);
-            ImageView imageView = (ImageView) view.findViewById(R.id.imageView1);
+            ImageView imageView = (ImageView) view.findViewById(R.id.imagePreview);
             imageView.setVisibility(View.VISIBLE);
         }
         else {
@@ -172,6 +172,9 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         if (singleQuestionArray.get(groupPosition).hasPicture() == true) {
             ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
             hasPictureIcon.setVisibility(0);
+            
+            ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
+            // TODO set imagePreview to the photo
         }
         
         ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);
