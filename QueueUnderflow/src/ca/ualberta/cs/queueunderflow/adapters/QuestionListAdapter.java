@@ -11,10 +11,13 @@ import ca.ualberta.cs.queueunderflow.R.id;
 import ca.ualberta.cs.queueunderflow.R.layout;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
+import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +34,8 @@ import android.widget.Toast;
 
 // Controller?
 public class QuestionListAdapter extends ArrayAdapter<Question> {
+	
+	private static int TYPE_QUESTION = 0;
 	
 	private LayoutInflater inflater;
 	private int layoutID;
@@ -125,6 +130,26 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				intent.putExtra("fromFragment", fromFragment);
 				intent.putExtra("question_position",position);
 				activity.startActivity(intent);
+			}
+		});
+		
+        ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);
+        replyBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				// Passing info about which questionList it's from, questionPosition & questionAnswer & the type (we're replying to an Answer) so we know where to add the reply to
+				Bundle args = new Bundle();
+				args.putInt("fromFragment", fromFragment);
+				args.putInt("questionPosition", position);
+				args.putInt("type", TYPE_QUESTION);
+				
+				// Create & display reply dialog + attach arguments
+				DialogFragment replyDialog = new WriteReplyDialogFragment();
+				replyDialog.setArguments(args);
+				replyDialog.show(activity.getFragmentManager(), null);
+				
 			}
 		});
 		
