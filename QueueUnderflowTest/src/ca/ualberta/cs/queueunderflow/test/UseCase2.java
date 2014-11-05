@@ -14,16 +14,17 @@ import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.views.QAViewActivity;
 
-public class UseCase2 extends ActivityInstrumentationTestCase2<QAViewActivity>
-{
-	
+public class UseCase2 extends ActivityInstrumentationTestCase2<QAViewActivity> {
+
 	public UseCase2() {
 		super(QAViewActivity.class);
 	}
 
 	//Use CASE 2 (incorporates user stories 2, 14 and 22)
 	public void testQuestionAndAnswersDisplay() {
-		Question question = new Question("First Question", "Me");
+		ListHandler.getMasterQList().getQuestionList().clear();
+		
+		Question question = new Question("Another Question", "Me");
 		Answer answer1 = new Answer("Answer #1", "You");
 		Answer answer2 = new Answer("Answer #2", "Him");
 		question.addAnswer(answer1);
