@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -64,6 +65,9 @@ public class AskAnswerController {
 			QuestionList myQuestionsList = ListHandler.getMyQsList();
 			myQuestionsList.add(newQuestion);
 			
+			//Mark as unsaved data.
+			LoadSave.unsavedChanges = true;
+			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
@@ -107,6 +111,7 @@ public void addAnswer(int fromFragment, int position, EditText answerInput) {
 			Question question = questionList.get(position);
 			question.addAnswer(newAnswer);
 			questionList.set(position, question);
+			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

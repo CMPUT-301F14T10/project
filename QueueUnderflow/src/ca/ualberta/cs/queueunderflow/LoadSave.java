@@ -23,6 +23,9 @@ public class LoadSave {
 	/** The context. */
 	public static Context context;
 	
+	/** Indicates unsaved changes */
+	public static boolean unsavedChanges = false;
+	
 	/** The save file. */
 	final String saveFile = "queueUnderflowData";
 	
@@ -34,6 +37,9 @@ public class LoadSave {
 	
 	/** The username key. */
 	final String usernameKey = "username";
+	
+	/** The reading list key. */
+	final String readingListKey = "readinglist";
 	
 	/** The loaded. */
 	public static boolean loaded = false;
@@ -65,25 +71,57 @@ public class LoadSave {
 		return lData;
 	}
 	
+    public void SaveReadingList ()
+    {
+            GsonBuilder gsonbuild = new GsonBuilder();
+            gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListSerializer());
+            Gson gson = gsonbuild.create();
+            String gsonString = gson.toJson(ListHandler.getReadingList());
+            
+            //Log.d("test", "printing string now...");
+            //Log.d("test", gsonString);
+            this.saveData(readingListKey, gsonString);
+    }
+	
+	public void LoadReadingList()
+	{
+		String gsonString = loadData(readingListKey);
+        GsonBuilder gsonbuild = new GsonBuilder();
+        gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
+        Gson gson = gsonbuild.create();
+        
+        Type qlType = new TypeToken<QuestionList>() {}.getType();
+        QuestionList qList = gson.fromJson(gsonString, qlType);
+        
+        if(qList != null)
+        {
+            for(int i=0; i<qList.size(); i++)
+            {
+                ListHandler.getReadingList().add(qList.get(i));
+                //ListHandler.getMasterQList().add(qList.get(i));
+            }
+        }
+	}
+	
 	/**
 	 * Load my questions.
 	 */
 	public void loadMyQuestions()
 	{
-	    String gsonString = loadData(myQKey);
-            GsonBuilder gsonbuild = new GsonBuilder();
-            gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
-            Gson gson = gsonbuild.create();
+		String gsonString = loadData(myQKey);
+        GsonBuilder gsonbuild = new GsonBuilder();
+        gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
+        Gson gson = gsonbuild.create();
             
-            Type qlType = new TypeToken<QuestionList>() {}.getType();
-            QuestionList qList = gson.fromJson(gsonString, qlType);
+        Type qlType = new TypeToken<QuestionList>() {}.getType();
+        QuestionList qList = gson.fromJson(gsonString, qlType);
             
             if(qList != null)
             {
                 for(int i=0; i<qList.size(); i++)
                 {
                     ListHandler.getMyQsList().add(qList.get(i));
-                    ListHandler.getMasterQList().add(qList.get(i));
+                    //ListHandler.getMasterQList().add(qList.get(i));
                 }
             }
 	}

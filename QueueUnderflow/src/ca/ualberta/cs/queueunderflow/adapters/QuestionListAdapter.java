@@ -128,8 +128,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                                         if (isInFavorites)
                                         {
                                             Log.d("test", "Item is in favorites.");
-                                            LoadSave sl = new LoadSave();
-                                            sl.SaveFavorites();
+                                            //Mark as unsaved changes.
+                                            LoadSave.unsavedChanges = true;
                                         }else{
                                             Log.d("testitem", "Item is NOT in favorites.");
                                         }
@@ -211,9 +211,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				
 				questionArray.get(position).setIsFav(isChecked);
 				
-				//Save new favorite list.
-				LoadSave saver = new LoadSave();
-				saver.SaveFavorites();
+				//Mark as unsaved changes,
+				LoadSave.unsavedChanges = true;
 			}
 		});
 		
@@ -246,6 +245,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				}
 				
 				questionArray.get(position).setIsInReadingList(isChecked);
+				
+				//Mark as unsaved changes.
+				LoadSave.unsavedChanges = true;
 			}
 		});
 		return view;

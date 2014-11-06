@@ -204,8 +204,8 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 					if (isInFavorites)
 					{
 					    Log.d("test", "Item is in favorites.");
-					    LoadSave sl = new LoadSave();
-					    sl.SaveFavorites();
+					    //Mark as unsaved data.
+					    LoadSave.unsavedChanges = true;
 					}else{
 					    Log.d("testitem", "Item is NOT in favorites.");
 					}
@@ -279,9 +279,8 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				
 				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
 				
-				//Save new favorite list.
-				LoadSave saver = new LoadSave();
-				saver.SaveFavorites();
+				//Mark as unsaved changes.
+				LoadSave.unsavedChanges = true;
 			}
 		});
 		
@@ -304,6 +303,8 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				}
 				
 				singleQuestionArray.get(groupPosition).setIsInReadingList(isChecked);
+				//Mark as unsaved changes.
+				LoadSave.unsavedChanges = true;
 			}
 		});
         return view;
