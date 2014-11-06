@@ -27,21 +27,39 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
 /* This class is used for Adding Answers. It extends the activity class and 
 grabs the question from the position you grab.
 */
 
+/**
+ * The Class AddAnAnswerActivity.
+ */
 public class AddAnAnswerActivity extends Activity
 {
+	
+	/** The Constant HOME_SCREEN_FRAGMENT. */
 	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
 	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
 	
+	/** The single q adapter. */
 	SingleQuestionAdapter singleQAdapter;
+	
+	/** The adapter. */
 	AnswerListAdapter adapter;
 
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -178,6 +196,9 @@ public class AddAnAnswerActivity extends Activity
 //		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

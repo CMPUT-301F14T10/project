@@ -22,22 +22,46 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+// TODO: Auto-generated Javadoc
 // This SuperFragment is used for handling/displaying the HomeScreen, FavoritesScreen, ReadingListScreen, & MyQuestionsScreen
+/**
+ * The Class SuperFragment.
+ */
 public class SuperFragment extends Fragment implements TView<QuestionList>{
 	
+	/** The Constant HOME_SCREEN_FRAGMENT. */
 	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
 	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
+	
+	/** The Constant SET_USERNAME_FRAGMENT. */
 	public static final int SET_USERNAME_FRAGMENT = 5;
 	
+	/** The adapter. */
 	private QuestionListAdapter adapter;
+	
+	/** The from fragment. */
 	protected int fromFragment;
 	
+	/**
+	 * Instantiates a new super fragment.
+	 *
+	 * @param fromFragment the from fragment
+	 */
 	public SuperFragment (int fromFragment) {
 		this.fromFragment = fromFragment;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,6 +91,9 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		return view;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -100,11 +127,19 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.queueunderflow.TView#update(java.lang.Object)
+	 */
 	@Override
 	public void update(QuestionList model) {
 		adapter.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Find question list.
+	 *
+	 * @return the question list
+	 */
 	private QuestionList findQuestionList() {
 		switch (fromFragment) {
 		case (HOME_SCREEN_FRAGMENT):

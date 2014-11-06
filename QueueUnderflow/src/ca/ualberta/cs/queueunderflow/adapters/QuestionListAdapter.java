@@ -33,17 +33,39 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
 // Controller?
+/**
+ * The Class QuestionListAdapter.
+ */
 public class QuestionListAdapter extends ArrayAdapter<Question> {
 	
+	/** The type question. */
 	private static int TYPE_QUESTION = 0;
 	
+	/** The inflater. */
 	private LayoutInflater inflater;
+	
+	/** The layout id. */
 	private int layoutID;
+	
+	/** The question array. */
 	private ArrayList<Question> questionArray;
+	
+	/** The activity. */
 	private Activity activity;
+	
+	/** The from fragment. */
 	private int fromFragment;
 	
+	/**
+	 * Instantiates a new question list adapter.
+	 *
+	 * @param activity the activity
+	 * @param layoutID the layout id
+	 * @param questionArray the question array
+	 * @param fromFragment the from fragment
+	 */
 	public QuestionListAdapter(Activity activity, int layoutID, ArrayList<Question> questionArray, int fromFragment) {
 		super(activity, layoutID, questionArray);
 		
@@ -56,6 +78,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		this.fromFragment = fromFragment;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		final View view;

@@ -10,8 +10,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReplyDeserializer.
+ */
 public class ReplyDeserializer implements JsonDeserializer<Reply> {
 
+	/* (non-Javadoc)
+	 * @see com.google.gson.JsonDeserializer#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext)
+	 */
 	@Override
 	public Reply deserialize(JsonElement jsonReply, Type arg1,
 			JsonDeserializationContext arg2) throws JsonParseException {

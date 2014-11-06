@@ -14,9 +14,16 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AnswerSerializer.
+ */
 public class AnswerSerializer implements JsonSerializer<Answer>
 {
 
+	/* (non-Javadoc)
+	 * @see com.google.gson.JsonSerializer#serialize(java.lang.Object, java.lang.reflect.Type, com.google.gson.JsonSerializationContext)
+	 */
 	@Override
 	public JsonElement serialize(Answer answer, Type arg1,
 			JsonSerializationContext serialization_context)

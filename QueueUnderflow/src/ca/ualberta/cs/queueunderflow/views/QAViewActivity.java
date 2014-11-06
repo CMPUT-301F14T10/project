@@ -19,19 +19,39 @@ import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class QAViewActivity.
+ */
 public class QAViewActivity extends Activity implements TView<QuestionList>{
 
+	/** The Constant HOME_SCREEN_FRAGMENT. */
 	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
 	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
 
+	/** The single q adapter. */
 	SingleQuestionAdapter singleQAdapter;
+	
+	/** The adapter. */
 	AnswerListAdapter adapter;
 
+	/** The from fragment. */
 	private int fromFragment;
+	
+	/** The question. */
 	private Question question;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,6 +135,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 
 
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -122,6 +145,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -141,6 +167,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	}
 
 	// Not complete yet
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.queueunderflow.TView#update(java.lang.Object)
+	 */
 	@Override
 	public void update(QuestionList model) {
 		singleQAdapter.notifyDataSetChanged();

@@ -15,14 +15,24 @@ import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetUsernameFragment.
+ */
 public class SetUsernameFragment extends Fragment {
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		getActivity().getActionBar().setTitle("Home");
 		return inflater.inflate(R.layout.fragment_set_username, container, false);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		

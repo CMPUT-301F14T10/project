@@ -13,24 +13,52 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WriteReplyController.
+ */
 public class WriteReplyController {
 
+	/** The Constant HOME_SCREEN_FRAGMENT. */
 	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 3;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
 	public static final int MY_QUESTIONS_FRAGMENT = 4;
 	
+	/** The type question. */
 	private static int TYPE_QUESTION = 0;
+	
+	/** The type answer. */
 	private static int TYPE_ANSWER = 1;
 	
+	/** The activity. */
 	private Activity activity;
+	
+	/** The view. */
 	private View view;
 	
+	/**
+	 * Instantiates a new write reply controller.
+	 *
+	 * @param activity the activity
+	 * @param view the view
+	 */
 	public WriteReplyController(Activity activity, View view) {
 		this.activity = activity;
 		this.view = view;
 	}
 	
+	/**
+	 * Adds the reply.
+	 *
+	 * @param arguments the arguments
+	 */
 	public void addReply(Bundle arguments) {
 		
 		// Retrieves info
@@ -66,7 +94,13 @@ public class WriteReplyController {
 
 	
 	// Retrieves the question from the fragment where it was selected from
-    private QuestionList findQuestionList(int fromFragment) {
+    /**
+	 * Find question list.
+	 *
+	 * @param fromFragment the from fragment
+	 * @return the question list
+	 */
+	private QuestionList findQuestionList(int fromFragment) {
 		switch (fromFragment) {
 		case (HOME_SCREEN_FRAGMENT):
 			return ListHandler.getMasterQList();

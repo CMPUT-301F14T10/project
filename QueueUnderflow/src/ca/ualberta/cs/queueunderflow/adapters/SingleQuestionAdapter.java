@@ -30,17 +30,41 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SingleQuestionAdapter.
+ */
 public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 	
+	/** The type question. */
 	private static int TYPE_QUESTION = 0;
 	
+    /** The activity. */
     private Activity activity;
+    
+    /** The group layout id. */
     private int groupLayoutID;
+    
+    /** The child layout id. */
     private int childLayoutID;
+    
+    /** The single question array. */
     private ArrayList<Question> singleQuestionArray;
+    
+    /** The from fragment. */
     private int fromFragment;
+    
+    /** The question position. */
     private int questionPosition;
     
+    /**
+     * Instantiates a new single question adapter.
+     *
+     * @param activity the activity
+     * @param questionArray the question array
+     * @param fromFragment the from fragment
+     * @param questionPosition the question position
+     */
     public SingleQuestionAdapter(Activity activity, ArrayList<Question> questionArray, int fromFragment, int questionPosition) {
         super();
         this.activity = activity;
@@ -53,18 +77,27 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
     }
 
     //grabs the reply from the child of the group.
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getChild(int, int)
+     */
     @Override
     public Reply getChild(int groupPosition, int childPosition) {
         return singleQuestionArray.get(groupPosition).getReplyAt(childPosition);
     }
  
     //grabs ChildID. Still needs to be done.
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getChildId(int, int)
+     */
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub
         return 0;
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean, android.view.View, android.view.ViewGroup)
+     */
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -84,26 +117,41 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         return view;
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getChildrenCount(int)
+     */
     @Override
     public int getChildrenCount(int groupPosition) {
         return singleQuestionArray.get(groupPosition).getSizeReplies();
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getGroup(int)
+     */
     @Override
     public Question getGroup(int groupPosition) {
         return singleQuestionArray.get(groupPosition);
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getGroupCount()
+     */
     @Override
     public int getGroupCount() {
         return singleQuestionArray.size();
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getGroupId(int)
+     */
     @Override
     public long getGroupId(int groupPosition) {
         return 0;
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#getGroupView(int, boolean, android.view.View, android.view.ViewGroup)
+     */
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded,
             View convertView, ViewGroup parent) {
@@ -261,12 +309,18 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         return view;
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#hasStableIds()
+     */
     @Override
     public boolean hasStableIds() {
         // TODO Auto-generated method stub
         return false;
     }
  
+    /* (non-Javadoc)
+     * @see android.widget.ExpandableListAdapter#isChildSelectable(int, int)
+     */
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub

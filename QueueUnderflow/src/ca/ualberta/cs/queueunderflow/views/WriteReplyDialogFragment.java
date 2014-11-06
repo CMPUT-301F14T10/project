@@ -19,8 +19,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WriteReplyDialogFragment.
+ */
 public class WriteReplyDialogFragment extends DialogFragment {
 	
+    /* (non-Javadoc)
+     * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

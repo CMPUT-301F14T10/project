@@ -22,12 +22,24 @@ import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AskAQuestionActivity.
+ */
 public class AskAQuestionActivity extends Activity{
 
+	/** The Constant CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE. */
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	
+	/** The image uri file. */
 	private Uri imageUriFile;
+	
+	/** The controller. */
 	private AskAnswerController controller;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,6 +98,9 @@ public class AskAQuestionActivity extends Activity{
 	
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if ((requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) && (resultCode == RESULT_OK)) {
@@ -96,6 +111,9 @@ public class AskAQuestionActivity extends Activity{
 		}
 	}
 		
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -103,6 +121,9 @@ public class AskAQuestionActivity extends Activity{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

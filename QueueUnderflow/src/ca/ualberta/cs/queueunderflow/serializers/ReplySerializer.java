@@ -10,6 +10,10 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReplySerializer.
+ */
 public class ReplySerializer implements JsonSerializer<Reply>{
 	//This will create a jsonObject for the reply class that other serializers (like question and answer) will 
 	//may end up using 
@@ -17,6 +21,9 @@ public class ReplySerializer implements JsonSerializer<Reply>{
 	//Source code link for serializing and deserializing: http://java-creed-examples.googlecode.com/svn/gson/Gson%20Serialiser%20Example/src/main/java/com/javacreed/examples/gson/part1/
 	// Link for serializing:http://www.javacreed.com/gson-serialiser-example/
 	
+	/* (non-Javadoc)
+	 * @see com.google.gson.JsonSerializer#serialize(java.lang.Object, java.lang.reflect.Type, com.google.gson.JsonSerializationContext)
+	 */
 	@Override
 	public JsonElement serialize(Reply reply,Type arg1,
 			JsonSerializationContext arg2){

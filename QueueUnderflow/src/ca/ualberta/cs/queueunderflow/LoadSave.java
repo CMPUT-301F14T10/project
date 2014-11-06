@@ -14,15 +14,36 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoadSave.
+ */
 public class LoadSave {
 	
+	/** The context. */
 	public static Context context;
+	
+	/** The save file. */
 	final String saveFile = "queueUnderflowData";
+	
+	/** The favs key. */
 	final String favsKey = "favlist";
+	
+	/** The my q key. */
 	final String myQKey = "myquestions";
+	
+	/** The username key. */
 	final String usernameKey = "username";
+	
+	/** The loaded. */
 	public static boolean loaded = false;
 	
+	/**
+	 * Save data.
+	 *
+	 * @param key the key
+	 * @param value the value
+	 */
 	private void saveData(String key, String value)
 	{
 		SharedPreferences settings = LoadSave.context.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
@@ -31,6 +52,12 @@ public class LoadSave {
 		editor.commit();
 	}
 	
+	/**
+	 * Load data.
+	 *
+	 * @param key the key
+	 * @return the string
+	 */
 	private String loadData(String key)
 	{
 		SharedPreferences settings = LoadSave.context.getSharedPreferences(saveFile, Context.MODE_PRIVATE);
@@ -38,6 +65,9 @@ public class LoadSave {
 		return lData;
 	}
 	
+	/**
+	 * Load my questions.
+	 */
 	public void loadMyQuestions()
 	{
 	    String gsonString = loadData(myQKey);
@@ -58,6 +88,9 @@ public class LoadSave {
             }
 	}
 	
+        /**
+         * Save my questions.
+         */
         public void saveMyQuestions ()
         {
                 GsonBuilder gsonbuild = new GsonBuilder();
@@ -70,6 +103,9 @@ public class LoadSave {
                 this.saveData(myQKey, gsonString);
         }
 	
+	/**
+	 * Load favorites.
+	 */
 	public void loadFavorites()
 	{
 		String gsonString = loadData(favsKey);
@@ -94,11 +130,21 @@ public class LoadSave {
 		//ListHandler.setFavsList(qList);
 	}
 	
+	/**
+	 * Save username.
+	 *
+	 * @param username the username
+	 */
 	public void saveUsername(String username)
 	{
 		saveData(usernameKey, username);
 	}
 	
+	/**
+	 * Load username.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean loadUsername()
 	{
 		String loadedUsername = loadData(usernameKey);
@@ -116,6 +162,9 @@ public class LoadSave {
         return true;
 	}
 	
+	/**
+	 * Save favorites.
+	 */
 	public void SaveFavorites()
 	{
 		GsonBuilder gsonbuild = new GsonBuilder();

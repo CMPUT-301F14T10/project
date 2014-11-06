@@ -18,25 +18,55 @@ import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
+// TODO: Auto-generated Javadoc
 /* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends Activity {
 
+	/** The Constant HOME_SCREEN_FRAGMENT. */
 	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
 	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
+	
+	/** The Constant SET_USERNAME_FRAGMENT. */
 	public static final int SET_USERNAME_FRAGMENT = 5;
 	
+	/** The drawer layout. */
 	private DrawerLayout drawerLayout;
+	
+	/** The drawer toggle. */
 	protected ActionBarDrawerToggle drawerToggle;
+	
+	/** The drawer title. */
 	private CharSequence drawerTitle;
+	
+	/** The title. */
 	private CharSequence title;
+	
+	/** The drawer list. */
 	private ListView drawerList;
+	
+	/** The nav drawer titles. */
 	private String[] navDrawerTitles;
 	
+	/** The fragment position. */
 	private int fragmentPosition;	// For sorting
+	
+	/** The question list. */
 	private QuestionList questionList; 	// For sorting
 	
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +139,9 @@ public class MainActivity extends Activity {
     }
 
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,6 +149,9 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -149,6 +185,9 @@ public class MainActivity extends Activity {
     }
     
     // This is called when we call invalidateOptionsMenu()
+    /* (non-Javadoc)
+     * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
     	
@@ -162,20 +201,40 @@ public class MainActivity extends Activity {
     	return super.onPrepareOptionsMenu(menu);
     }
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#onPostCreate(android.os.Bundle)
+     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
     	super.onPostCreate(savedInstanceState);
     	drawerToggle.syncState();
     }
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#onConfigurationChanged(android.content.res.Configuration)
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
     	super.onConfigurationChanged(newConfig);
     	drawerToggle.onConfigurationChanged(newConfig);
     }
     
+    /**
+     * The listener interface for receiving drawerItemClick events.
+     * The class that is interested in processing a drawerItemClick
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addDrawerItemClickListener<code> method. When
+     * the drawerItemClick event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see DrawerItemClickEvent
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
+		/* (non-Javadoc)
+		 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+		 */
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			fragmentPosition = position;
@@ -184,6 +243,11 @@ public class MainActivity extends Activity {
     }
     
     // Sets the view to the fragment of the user selection from the nav drawer
+    /**
+     * Select item.
+     *
+     * @param position the position
+     */
     private void selectItem(int position) {
     	Fragment fragment;
     	
@@ -221,6 +285,9 @@ public class MainActivity extends Activity {
     	System.out.println(navDrawerTitles[position]);
     }
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#setTitle(java.lang.CharSequence)
+     */
     @Override
     public void setTitle(CharSequence newTitle) {
     	title = newTitle;
