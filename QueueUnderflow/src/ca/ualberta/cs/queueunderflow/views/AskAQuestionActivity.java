@@ -42,13 +42,14 @@ public class AskAQuestionActivity extends Activity{
 		authorUsername.setText(User.getUserName());
 		
 		final EditText questionInput = (EditText) findViewById(R.id.questionInput);
+		final ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 		
 		Button askBtn = (Button) findViewById(R.id.askBtn);
 		askBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				controller.askQuestion();
+				controller.askQuestion(questionInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());
 			}
 		});
 		
