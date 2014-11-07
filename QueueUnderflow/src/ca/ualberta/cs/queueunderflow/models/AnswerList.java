@@ -1,6 +1,8 @@
 package ca.ualberta.cs.queueunderflow.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 // TODO: Auto-generated Javadoc
 /*
@@ -93,6 +95,50 @@ protected ArrayList <Answer> answerList;
 		return true;
 	}
 	
+	
+	/**
+	 * Sort by.
+	 *
+	 * @param method the method
+	 */
+	public void sortBy(String method) {
+		
+		// Sort by date
+		Comparator<Answer> leastRecentComparator = new Comparator<Answer>() {
+
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				return (lhs.getDate().compareTo(rhs.getDate()));
+			
+			}
+		};
+		
+		Comparator<Answer> mostRecentComparator = new Comparator<Answer>() {
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				return (lhs.getDate().compareTo(rhs.getDate())) * -1;	
+				
+				}
+		};
+		
+		// Sort by upvote
+		Comparator <Answer> mostUpvotesComparator = new Comparator<Answer>() {
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
+			}
+		};
+		
+		if (method.equals("most recent")) {
+			Collections.sort(answerList, mostRecentComparator);
+		}
+		else if (method.equals("least recent")) {
+			Collections.sort(answerList, leastRecentComparator);
+		}
+		else if (method == "most upvotes") {
+			Collections.sort(answerList, mostUpvotesComparator);
+		}
+	}
 	
 	
 }

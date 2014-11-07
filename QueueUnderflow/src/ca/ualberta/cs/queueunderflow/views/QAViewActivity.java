@@ -163,6 +163,21 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			NavUtils.navigateUpTo(this, intent);
 			return true;
 		}
+		
+        switch(id) {
+        case R.id.mostRecentMenu:
+        	question.getAnswerList().sortBy("most recent");
+        	adapter.notifyDataSetChanged();
+        	return true;
+        case R.id.leastRecentMenu:
+        	question.getAnswerList().sortBy("least recent");
+        	adapter.notifyDataSetChanged();
+        	return true;
+        case R.id.mostUpvotesMenu:
+        	question.getAnswerList().sortBy("most upvotes");
+        	adapter.notifyDataSetChanged();
+        	return true;
+        }
 		return super.onOptionsItemSelected(item);
 	}
 
