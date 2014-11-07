@@ -2,7 +2,7 @@ package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
 // TODO: Auto-generated Javadoc
-//Unknown purpose
+// Store users in an arraylist to keep track of upvote, questions asked etc.
 /**
  * The Class UserList.
  */
@@ -24,7 +24,7 @@ protected ArrayList <User> userList;
 	 * @param user the user
 	 */
 	public void add (User user) {
-		// Add at position 0, so that freshest A is always first
+		// Add at end of the list
 		userList.add(user);	
 	}
 	
