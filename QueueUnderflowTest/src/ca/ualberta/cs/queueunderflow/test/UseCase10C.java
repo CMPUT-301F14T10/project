@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-//Use CASE 10 (incorporates user stories 10) - Testing sort by LEAST RECENT display
+//Use CASE 10 (incorporates user stories 10) - Testing sort by LEAST RECENT QUESTIONS display
 public class UseCase10C extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	Question question1;
