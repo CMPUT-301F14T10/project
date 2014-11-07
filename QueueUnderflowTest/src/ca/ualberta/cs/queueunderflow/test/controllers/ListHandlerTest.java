@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.test;
+package ca.ualberta.cs.queueunderflow.test.controllers;
 
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.models.Question;
