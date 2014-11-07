@@ -253,7 +253,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("question_position", groupPosition);
+				intent.putExtra("question_position", questionPosition);
 				activity.startActivity(intent);
 			}
 		});
