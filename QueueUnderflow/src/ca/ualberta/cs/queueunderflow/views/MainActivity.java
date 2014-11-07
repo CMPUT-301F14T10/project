@@ -108,9 +108,7 @@ public class MainActivity extends Activity {
         drawerLayout.setDrawerListener(drawerToggle);
         
         int returnFragment = getIntent().getIntExtra("returnFragment", -1);
-        System.out.println("return fragment -->" + returnFragment);
         if (returnFragment != -1) {
-        	System.out.println("selecting Item (returnFragment - 1) : " + (returnFragment-1));
         	fragmentPosition = returnFragment - 1;
         	selectItem(returnFragment-1);
         }
@@ -202,21 +200,17 @@ public class MainActivity extends Activity {
         	return true;
         }
 		
-		System.out.println("menu item clicked");
         switch(id) {
         case R.id.mostRecentMenu:
         	questionList.sortBy("most recent");
-//        	Toast.makeText(getApplicationContext(), "click most recent", Toast.LENGTH_SHORT).show();
         	selectItem(fragmentPosition);
         	return true;
         case R.id.leastRecentMenu:
         	questionList.sortBy("least recent");
-//        	Toast.makeText(getApplicationContext(), "click least recent", Toast.LENGTH_SHORT).show();
         	selectItem(fragmentPosition);
         	return true;
         case R.id.mostUpvotesMenu:
         	questionList.sortBy("most upvotes");
-//        	Toast.makeText(getApplicationContext(), "click upvotes", Toast.LENGTH_SHORT).show();
         	selectItem(fragmentPosition);
         	return true;
         }

@@ -2,4 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ca.ualberta.cs.queueunderflow.views.QAViewActivity" >
 
+    <item android:id="@+id/sortByMenu"
+        android:title="@string/sortBy"
+        android:showAsAction="always">
+        <menu>
+            <item android:id="@+id/mostRecentMenu" android:title="@string/mostRecent"/>
+            <item android:id="@+id/leastRecentMenu" android:title="@string/leastRecent"/>
+            <item android:id="@+id/mostUpvotesMenu" android:title="@string/mostUpvotes"/>
+            <item android:id="@+id/hasPictureMenu" android:title="@string/hasPicture"/>
+            <item android:id="@+id/noPictureMenu" android:title="@string/noPicture"/>
+        </menu>
+    </item>
+    
 </menu>
