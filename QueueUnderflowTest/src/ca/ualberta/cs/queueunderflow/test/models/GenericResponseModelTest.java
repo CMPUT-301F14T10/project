@@ -6,7 +6,6 @@ import java.util.Date;
 
 import ca.ualberta.cs.queueunderflow.Picture;
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
-import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import junit.framework.TestCase;
 
