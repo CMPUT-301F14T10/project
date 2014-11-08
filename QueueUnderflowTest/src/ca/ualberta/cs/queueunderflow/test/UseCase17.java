@@ -20,7 +20,7 @@ public class UseCase17 extends TestCase {
 		//Adding replies to question
 		Reply question_reply= new Reply("Whats going on",me.getUserName());
 		
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		QuestionList questionList= new QuestionList();
 		questionList.add(questionTest);
 		

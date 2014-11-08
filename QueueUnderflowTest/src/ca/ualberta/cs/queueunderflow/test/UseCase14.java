@@ -107,7 +107,7 @@ public class UseCase14 extends ActivityInstrumentationTestCase2<MainActivity> {
 		String reply_author= "I dunno";
 		Reply question_reply= new Reply("Whats going on",reply_author);
 	
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		questionTest.setUpvotes(2);
 
 		QuestionList questionList= new QuestionList();
@@ -147,12 +147,12 @@ public class UseCase14 extends ActivityInstrumentationTestCase2<MainActivity> {
 		Question before= questionList.get(0);
 		Question after= deserialized2.get(0);
 
-		String before_answer= before.getAnswerList().getAnswer(0).getAnswer();
-		String after_answer= after.getAnswerList().getAnswer(0).getAnswer();
+		String before_answer= before.getAnswerList().getAnswer(0).getName();
+		String after_answer= after.getAnswerList().getAnswer(0).getName();
 		String before_reply=before.getReplies().get(0).getReply();
 		String after_reply= after.getReplies().get(0).getReply();
 		
-		assertTrue("Both questions are the same",before.getQuestion().equals(after.getQuestion()));
+		assertTrue("Both questions are the same",before.getName().equals(after.getName()));
 		assertTrue("Both answers are the same",before_answer.equals(after_answer));
 		assertTrue("Both replies are the same", before_reply.equals(after_reply));
 		

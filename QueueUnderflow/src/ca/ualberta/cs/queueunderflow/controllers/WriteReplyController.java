@@ -81,7 +81,7 @@ public class WriteReplyController {
 		
 		// Adding the reply to the proper Question or Answer
 		if (type == TYPE_QUESTION) {
-			question.addQuestionReply(newReply);
+			question.addReply(newReply);
 			questionList.set(questionPosition, question);
 		}
 		else if (type == TYPE_ANSWER) {

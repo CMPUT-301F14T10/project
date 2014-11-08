@@ -143,7 +143,7 @@ public class QuestionList extends TModel<TView>{
 		Question q=questionList.get(0);
 		for (int i=0; i<questionList.size(); i++) {
 			q=questionList.get(i);
-			String q_name=q.getQuestion();
+			String q_name=q.getName();
 			if (q_name.equals(question)) {
 				test=true;
 				break;
