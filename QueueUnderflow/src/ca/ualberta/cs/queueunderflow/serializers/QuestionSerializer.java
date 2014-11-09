@@ -24,7 +24,7 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 	public JsonElement serialize(Question question, Type arg1,
 			JsonSerializationContext serialization_context) {
 		JsonObject jsonQuestion= new JsonObject();
-		jsonQuestion.addProperty("questionName",question.getQuestion());
+		jsonQuestion.addProperty("questionName",question.getName());
 		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    //final Gson gson2 = gsonBuilder2.create();

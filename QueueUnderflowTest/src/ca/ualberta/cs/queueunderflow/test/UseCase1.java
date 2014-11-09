@@ -88,19 +88,19 @@ public class UseCase1 extends ActivityInstrumentationTestCase2<MainActivity>
 		View view1 = adapter.getView(0, null, null);
 		TextView questionText1 = (TextView) view1.findViewById(R.id.questionTextView);
 		TextView authorUsername1 = (TextView) view1.findViewById(R.id.authorTextView);
-		assertEquals(question3.getQuestion(), questionText1.getText().toString());
+		assertEquals(question3.getName(), questionText1.getText().toString());
 		assertEquals(question3.getAuthor(), authorUsername1.getText().toString());
 		
 		View view2 = adapter.getView(1, null, null);
 		TextView questionText2 = (TextView) view2.findViewById(R.id.questionTextView);
 		TextView authorUsername2 = (TextView) view2.findViewById(R.id.authorTextView);
-		assertEquals(question2.getQuestion(), questionText2.getText().toString());
+		assertEquals(question2.getName(), questionText2.getText().toString());
 		assertEquals(question2.getAuthor(), authorUsername2.getText().toString());
 		
 		View view3 = adapter.getView(2, null, null);
 		TextView questionText3 = (TextView) view3.findViewById(R.id.questionTextView);
 		TextView authorUsername3 = (TextView) view3.findViewById(R.id.authorTextView);
-		assertEquals(question1.getQuestion(), questionText3.getText().toString());
+		assertEquals(question1.getName(), questionText3.getText().toString());
 		assertEquals(question1.getAuthor(), authorUsername3.getText().toString());
 
 	}

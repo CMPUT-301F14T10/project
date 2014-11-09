@@ -12,10 +12,10 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 public class Buffer {
 
 	/** The fav buffer. */
-	private static ArrayList<Integer> favBuffer;
+	public static ArrayList<Integer> favBuffer;
 	
 	/** The reading list buffer. */
-	private static ArrayList<Integer> readingListBuffer;
+	public static ArrayList<Integer> readingListBuffer;
 	
 	/**
 	 * Instantiates a new buffer.

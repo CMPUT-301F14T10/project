@@ -17,7 +17,7 @@ public class UseCase11 extends TestCase {
 		
 		//Add question_replies
 		Question questionTest= new Question(questionName, author);
-		questionTest.upvoteQuestion();
+		questionTest.upvoteResponse();
 		user.addUpvotedQuestion(questionTest);
 		assertTrue("Question upvoted by 1", questionTest.getUpvotes()==1);
 		
@@ -28,7 +28,7 @@ public class UseCase11 extends TestCase {
 
 		
 		Answer testAnswer= new Answer(answerName,author2);
-		testAnswer.upvoteAnswer();
+		testAnswer.upvoteResponse();
 		user.addUpvotedAnswer(testAnswer);
 		assertTrue("Answer upvoted by 1", testAnswer.getUpvotes()==1);
 		

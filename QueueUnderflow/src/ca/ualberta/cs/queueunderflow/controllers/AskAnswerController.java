@@ -74,6 +74,28 @@ public class AskAnswerController {
 		}
 	}
 	
+//	public void askQuestion() {
+//		EditText questionInput = (EditText) activity.findViewById(R.id.questionInput);
+//		ImageButton imagePreviewBtn = (ImageButton) activity.findViewById(R.id.imagePreviewBtn);
+//		
+//		try {
+//			Question newQuestion = new Question(questionInput.getText().toString(), User.getUserName());
+//			if (imagePreviewBtn.getVisibility() == View.VISIBLE) {
+//				newQuestion.setHasPicture(true);
+//				// TODO add the picture to the question here
+//			}
+//			
+//			QuestionList homeScreenList = ListHandler.getMasterQList();
+//			homeScreenList.add(newQuestion);
+//			
+//			QuestionList myQuestionsList = ListHandler.getMyQsList();
+//			myQuestionsList.add(newQuestion);
+//			
+//			activity.finish();
+//		} catch (IllegalArgumentException e) {
+//			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
+//		}
+//	}
 
 	/**
  * Adds the answer.

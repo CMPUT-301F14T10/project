@@ -92,7 +92,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		}
 		
 		TextView questionDisplay = (TextView) view.findViewById(R.id.questionTextView);
-		questionDisplay.setText(questionArray.get(position).getQuestion());
+		questionDisplay.setText(questionArray.get(position).getName());
 		
 		TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
 		authorDisplay.setText(questionArray.get(position).getAuthor());
@@ -120,7 +120,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                                         if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
 				    
 					user.addUpvotedQuestion(questionArray.get(position));
-					questionArray.get(position).upvoteQuestion();
+					questionArray.get(position).upvoteResponse();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 					
