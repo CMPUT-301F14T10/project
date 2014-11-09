@@ -10,6 +10,7 @@ public class ListHandlerTest extends TestCase {
 
 	public void testListHandler() {
 		//master question list test
+		ListHandler.getMasterQList().getQuestionList().clear();
 		ListHandler.getMasterQList();
 		assertTrue("contorller initilized the list", ListHandler.getMasterQList().size() == 0);
 		Question question1 = new Question("1", "a");
@@ -19,7 +20,9 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getMasterQList().add(question2);
 		ListHandler.getMasterQList().remove(question2);
 		assertTrue("contorller got the same list1", ListHandler.getMasterQList().size() == 1);
+		
 		//favourites list test
+		ListHandler.getFavsList().getQuestionList().clear();
 		ListHandler.getFavsList();
 		assertTrue("contorller initilized the list", ListHandler.getFavsList().size() == 0);
 		ListHandler.getFavsList().add(question1);
@@ -27,7 +30,9 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getFavsList().add(question2);
 		ListHandler.getFavsList().remove(question2);
 		assertTrue("contorller got the same list2", ListHandler.getFavsList().size() == 1);
+		
 		//Reading list test
+		ListHandler.getReadingList().getQuestionList().clear();
 		ListHandler.getReadingList();
 		assertTrue("contorller initilized the list", ListHandler.getReadingList().size() == 0);
 		ListHandler.getReadingList().add(question1);
@@ -35,7 +40,9 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getReadingList().add(question2);
 		ListHandler.getReadingList().remove(question2);
 		assertTrue("contorller got the same list3", ListHandler.getReadingList().size() == 1);
+		
 		//my question list test
+		ListHandler.getMyQsList().getQuestionList().clear();
 		ListHandler.getMyQsList();
 		assertTrue("contorller initilized the list", ListHandler.getMyQsList().size() == 0);
 		ListHandler.getMyQsList().add(question1);
@@ -43,6 +50,7 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getMyQsList().add(question2);
 		ListHandler.getMyQsList().remove(question2);
 		assertTrue("contorller got the same list3", ListHandler.getMyQsList().size() == 1);
+		
 		//User test
 		ListHandler.getUser().setUserName("person");
 		assertTrue("contorller got the same user", ListHandler.getUser().getUserName()=="person");
