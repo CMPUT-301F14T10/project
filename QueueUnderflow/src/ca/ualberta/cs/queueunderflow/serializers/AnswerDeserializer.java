@@ -67,11 +67,11 @@ public class AnswerDeserializer implements JsonDeserializer<Answer> {
 		}
 	
 	    Answer deserialized_answer= new Answer(content, author);
-	    deserialized_answer.setReplyList(replyList);
+	    deserialized_answer.setReplyArray(replyList);
 	    deserialized_answer.setUpvotes(upvote);
 	    deserialized_answer.setPicture(new_picture);
 	    deserialized_answer.setDate(converted);
-	    deserialized_answer.setHasPicture(hasPicture);
+	    deserialized_answer.sethasPicture(hasPicture);
 	    return deserialized_answer;
 	}
 

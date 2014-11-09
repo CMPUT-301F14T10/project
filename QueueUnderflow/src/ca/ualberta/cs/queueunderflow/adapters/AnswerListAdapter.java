@@ -167,7 +167,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         }
          
         TextView answerDisplay = (TextView) view.findViewById(R.id.answerTextView);
-        answerDisplay.setText(answerArray.get(groupPosition).getName());
+        answerDisplay.setText(answerArray.get(groupPosition).getAnswer());
          
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(answerArray.get(groupPosition).getAuthor());
@@ -191,7 +191,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 				}
 				else {
 					user.addUpvotedAnswer(answerArray.get(groupPosition));
-					answerArray.get(groupPosition).upvoteResponse();
+					answerArray.get(groupPosition).upvoteAnswer();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
 				}

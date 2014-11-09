@@ -57,24 +57,6 @@ public class AskAQuestionActivity extends Activity{
 		final ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 		
 		Button askBtn = (Button) findViewById(R.id.askBtn);
-		
-		
-		//For AddAnAnswer activity testing only, should never go here in normal circumstances
-		Intent intent = getIntent();
-		int question = intent.getIntExtra("Question", -1); // -1 is the default value if nothing was retrieved
-		String test_question=null;
-		if (question!=-1){
-			test_question="This is a question";
-		}
-		if (test_question!=null) {
-			controller.askQuestion(test_question,"test user",imagePreviewBtn.getVisibility());
-		}
-
-		///////////////////////////////////////////////////
-		
-		
-		
-		
 		askBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override

@@ -91,7 +91,7 @@ public class UseCase10C extends ActivityInstrumentationTestCase2<MainActivity> {
 				TextView authorUsername1 = (TextView) view1.findViewById(R.id.authorTextView);
 				TextView dateDisplay1 = (TextView) view1.findViewById(R.id.dateTextView);
 				
-				assertEquals(question1.getName(), questionText1.getText().toString());
+				assertEquals(question1.getQuestion(), questionText1.getText().toString());
 				assertEquals(question1.getAuthor(), authorUsername1.getText().toString());
 				assertEquals(DateFormat.format("MMM dd, yyyy", question1.getDate()), dateDisplay1.getText().toString());
 				
@@ -102,7 +102,7 @@ public class UseCase10C extends ActivityInstrumentationTestCase2<MainActivity> {
 				TextView authorUsername2 = (TextView) view2.findViewById(R.id.authorTextView);
 				TextView dateDisplay2 = (TextView) view2.findViewById(R.id.dateTextView);
 				
-				assertEquals(question2.getName(), questionText2.getText().toString());
+				assertEquals(question2.getQuestion(), questionText2.getText().toString());
 				assertEquals(question2.getAuthor(), authorUsername2.getText().toString());
 				assertEquals(DateFormat.format("MMM dd, yyyy", question2.getDate()), dateDisplay2.getText().toString());
 				
@@ -113,7 +113,7 @@ public class UseCase10C extends ActivityInstrumentationTestCase2<MainActivity> {
 				TextView authorUsername3 = (TextView) view3.findViewById(R.id.authorTextView);
 				TextView dateDisplay3 = (TextView) view3.findViewById(R.id.dateTextView);
 				
-				assertEquals(question3.getName(), questionText3.getText().toString());
+				assertEquals(question3.getQuestion(), questionText3.getText().toString());
 				assertEquals(question3.getAuthor(), authorUsername3.getText().toString());
 				assertEquals(DateFormat.format("MMM dd, yyyy", question3.getDate()), dateDisplay3.getText().toString());
 			}

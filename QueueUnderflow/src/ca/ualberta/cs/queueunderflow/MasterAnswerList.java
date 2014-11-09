@@ -40,7 +40,7 @@ public class MasterAnswerList {
 		Answer a=masterAnswerList.get(0);
 		for (int i=0; i<masterAnswerList.size(); i++) {
 			a=masterAnswerList.get(i);
-			String a_name=a.getName();
+			String a_name=a.getAnswer();
 			if (a_name.equals(answer)) {
 				test=true;
 				break;

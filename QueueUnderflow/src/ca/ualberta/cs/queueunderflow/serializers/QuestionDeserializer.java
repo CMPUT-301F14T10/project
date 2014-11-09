@@ -71,7 +71,7 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 
 		
 		Question deserialized= new Question("Name","Author");
-		deserialized.setName(question_content);
+		deserialized.setQuestion(question_content);
 		deserialized.setAuthor(author);
 		deserialized.setReplyList(replyList);
 		deserialized.setDate(converted);

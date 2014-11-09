@@ -28,7 +28,7 @@ public class UseCase6 extends TestCase
 		int flag = 0; // indicates if the whitespace exception is caught & handled
 		try {
 			Reply reply1 = new Reply(emptyReply, me.getUserName());
-			questionTest.addReply(reply1);
+			questionTest.addQuestionReply(reply1);
 		} catch (IllegalArgumentException e) {
 			flag = 1;
 		}
@@ -37,7 +37,7 @@ public class UseCase6 extends TestCase
 		
 		// Add a valid reply to a question
 		Reply question_reply=new Reply("What are you talking about", me.getUserName());
-		questionTest.addReply(question_reply);
+		questionTest.addQuestionReply(question_reply);
 		assertTrue("Reply list isnt empty", questionTest.getSizeReplies()==1);
 		
 		//Add a answer and reply to the answer

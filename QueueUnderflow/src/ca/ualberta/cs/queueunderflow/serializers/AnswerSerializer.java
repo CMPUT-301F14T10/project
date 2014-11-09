@@ -29,7 +29,7 @@ public class AnswerSerializer implements JsonSerializer<Answer>
 			JsonSerializationContext serialization_context)
 	{
 		final JsonObject answerObject= new JsonObject();
-		answerObject.addProperty("answerName", answer.getName());
+		answerObject.addProperty("answerName", answer.getAnswer());
 		
 		answerObject.addProperty("author",answer.getAuthor());
 		answerObject.addProperty("upvote", answer.getUpvotes());

@@ -47,7 +47,7 @@ public class UseCase2 extends ActivityInstrumentationTestCase2<QAViewActivity> {
 		SingleQuestionAdapter singleQAdapter = (SingleQuestionAdapter) qListView.getExpandableListAdapter();
 		assertTrue(1 == singleQAdapter.getGroupCount());
 		TextView questionDisplay = (TextView) qListView.getChildAt(0).findViewById(R.id.questionTextView);
-		assertEquals(question.getName(), questionDisplay.getText().toString());
+		assertEquals(question.getQuestion(), questionDisplay.getText().toString());
 		
 		// Check that the answers to the question is shown correctly
 		ExpandableListView aListView = (ExpandableListView) activity.findViewById(R.id.answersExpListView);
@@ -57,13 +57,13 @@ public class UseCase2 extends ActivityInstrumentationTestCase2<QAViewActivity> {
 		View view1 = aAdapter.getGroupView(0, false, null, null);
 		TextView answerText1 = (TextView) view1.findViewById(R.id.answerTextView);
 		TextView authorUsername1 = (TextView) view1.findViewById(R.id.authorTextView);
-		assertEquals(answer2.getName(), answerText1.getText().toString());
+		assertEquals(answer2.getAnswer(), answerText1.getText().toString());
 		assertEquals(answer2.getAuthor(), authorUsername1.getText().toString());
 		
 		View view2 = aAdapter.getGroupView(1, false, null, null);
 		TextView answerText2 = (TextView) view2.findViewById(R.id.answerTextView);
 		TextView authorUsername2 = (TextView) view2.findViewById(R.id.authorTextView);
-		assertEquals(answer1.getName(), answerText2.getText().toString());
+		assertEquals(answer1.getAnswer(), answerText2.getText().toString());
 		assertEquals(answer1.getAuthor(), authorUsername2.getText().toString());
 		
 		activity.finish();
