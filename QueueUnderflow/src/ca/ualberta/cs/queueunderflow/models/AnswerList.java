@@ -26,7 +26,7 @@ protected ArrayList <Answer> answerList;
 	}
 	
 	/**
-	 * Adds the.
+	 * Adds the answer to the beginning of the list
 	 *
 	 * @param answer the answer
 	 */
@@ -39,7 +39,7 @@ protected ArrayList <Answer> answerList;
 	/**
 	 * Size.
 	 *
-	 * @return the int
+	 * @return the number of answers in the list
 	 */
 	public int size() {
 		return answerList.size();
@@ -47,10 +47,10 @@ protected ArrayList <Answer> answerList;
 	
 	//grabs the answer
 	/**
-	 * Gets the answer.
+	 * Gets the answer at the specified location in the list
 	 *
-	 * @param i the i
-	 * @return the answer
+	 * @param i the index of the answer to return
+	 * @return the answer at the specified index
 	 */
 	public Answer getAnswer(int i) {
 		return answerList.get(i);

@@ -25,6 +25,8 @@ import android.widget.TextView;
  */
 public class WriteReplyDialogFragment extends DialogFragment {
 	
+	WriteReplyController controller;
+	
     /* (non-Javadoc)
      * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
      */
@@ -36,6 +38,8 @@ public class WriteReplyDialogFragment extends DialogFragment {
         final View view = inflater.inflate(R.layout.write_reply_dialog_fragment, null);
         builder.setView(view);
        
+        controller = new WriteReplyController(getActivity(), view);
+        
         TextView authorText= (TextView) view.findViewById(R.id.authorText);
         authorText.setText(User.getUserName());
         
@@ -43,7 +47,6 @@ public class WriteReplyDialogFragment extends DialogFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				WriteReplyController controller = new WriteReplyController(getActivity(), view);
 				controller.addReply(getArguments());
 			}
 		});

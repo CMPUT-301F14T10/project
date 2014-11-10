@@ -23,10 +23,10 @@ public class GenericResponse {
 	/** The author. */
 	protected String author;
 	
-	/** The upvote. */
+	/** The upvote count. */
 	protected int upvote;
 	
-	/** The has picture. */
+	/** The has picture indicator. */
 	protected boolean hasPicture;
 	
 	/** The image. */
@@ -35,10 +35,10 @@ public class GenericResponse {
 	/** The date. */
 	protected Date date;
 
-	/** The is fav. */
+	/** The is favorited indicator. */
 	protected boolean isFav;
 	
-	/** The is in reading list. */
+	/** The is in reading list indicator. */
 	protected boolean isInReadingList;
 	
 	public GenericResponse (String name, String author) {
@@ -78,9 +78,9 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the response.
+	 * Gets the response name.
 	 *
-	 * @return the response
+	 * @return the response name
 	 */
 	public String getName() {
 		return this.name;
@@ -88,26 +88,26 @@ public class GenericResponse {
 	
 	
     /**
-     * Gets the reply at.
+     * Gets the reply at the specified location in this array
      *
-     * @param position the position
-     * @return the reply at
+     * @param position the position of the element to return
+     * @return the reply at the specified position
      */
     public Reply getReplyAt(int position) {
         return replies.get(position);
     }
     
 	/**
-	 * Adds the reply.
+	 * Adds the specified reply to to the beginning of the array
 	 *
-	 * @param reply the reply
+	 * @param reply the reply to add
 	 */
 	public void addReply(Reply reply) {
 		replies.add(0, reply);
 	}
 	
 	/**
-	 * Gets the replies.
+	 * Gets the list of replies
 	 *
 	 * @return the replies
 	 */
@@ -117,9 +117,9 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the size replies.
+	 * Gets the number of replies
 	 *
-	 * @return the size replies
+	 * @return the number of replies
 	 */
 	public int getSizeReplies() {
 		return replies.size();
@@ -134,18 +134,18 @@ public class GenericResponse {
 	
 	
 	/**
-	 * Sets the upvotes.
+	 * Sets the upvote count.
 	 *
-	 * @param number the new upvotes
+	 * @param number the new upvote count
 	 */
 	public void setUpvotes(int number) {
 		this.upvote=number;
 	}
 	
 	/**
-	 * Gets the upvotes.
+	 * Gets the upvote count.
 	 *
-	 * @return the upvotes
+	 * @return the upvote count
 	 */
 	public int getUpvotes() {
 		return upvote;
@@ -154,7 +154,7 @@ public class GenericResponse {
 	/**
 	 * Checks for picture.
 	 *
-	 * @return true, if successful
+	 * @return true, if the response has a picture
 	 */
 	public boolean hasPicture() {
 		return this.hasPicture;
@@ -198,16 +198,16 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the checks if is fav.
+	 * Gets the checks if the response is favorited
 	 *
-	 * @return the checks if is fav
+	 * @return true if the response is favorited, false otherwise
 	 */
 	public boolean getIsFav() {
 		return this.isFav;
 	}
 	
 	/**
-	 * Sets the checks if is fav.
+	 * Sets the checks about whether the response is is favorited
 	 *
 	 * @param isChecked the new checks if is fav
 	 */
@@ -216,16 +216,16 @@ public class GenericResponse {
 	}
 
 	/**
-	 * Gets the checks if is in reading list.
+	 * Gets the checks if the response is in reading list.
 	 *
-	 * @return the checks if is in reading list
+	 * @returntrue if the response is in the reading list, false otherwise
 	 */
 	public boolean getIsInReadingList() {
 		return this.isInReadingList;
 	}
 
 	/**
-	 * Sets the checks if is in reading list.
+	 * Sets the checks about whether the response is in reading list.
 	 *
 	 * @param isChecked the new checks if is in reading list
 	 */
@@ -234,9 +234,9 @@ public class GenericResponse {
 	}
 
 	/**
-	 * Sets the response.
+	 * Sets the response name.
 	 *
-	 * @param newReponse the new response
+	 * @param newReponse the new response name
 	 */
 	public void setName(String newName) {
 		this.name=newName;

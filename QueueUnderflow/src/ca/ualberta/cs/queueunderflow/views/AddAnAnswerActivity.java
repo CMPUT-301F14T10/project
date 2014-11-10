@@ -56,6 +56,8 @@ public class AddAnAnswerActivity extends Activity
 	/** The adapter. */
 	AnswerListAdapter adapter;
 
+	/** The controller. */
+	private AskAnswerController controller;
 
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -67,8 +69,10 @@ public class AddAnAnswerActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_an_answer);
 		
+		controller = new AskAnswerController(AddAnAnswerActivity.this);
+		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		final EditText answerText = (EditText) findViewById(R.id.AddAnswerEditText);
+		final EditText answerInput = (EditText) findViewById(R.id.AddAnswerEditText);
 		Button addBtn = (Button) findViewById(R.id.AddAnAnswerButton);
 		
 		Intent intent = getIntent();
@@ -112,7 +116,7 @@ public class AddAnAnswerActivity extends Activity
         
         
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), 1, position);
+        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position);
         answersExpListView.setAdapter(adapter);
         
         // This hides that expand arrow on the answer item
@@ -123,8 +127,7 @@ public class AddAnAnswerActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				AskAnswerController controller = new AskAnswerController(AddAnAnswerActivity.this);
-				controller.addAnswer(fromFragment, position, answerText);
+				controller.addAnswer(fromFragment, position, answerInput.getText().toString());
 				
 			}
 		});

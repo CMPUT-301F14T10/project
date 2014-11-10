@@ -35,7 +35,7 @@ public class AskAnswerController {
 	private Activity activity;	// This is so we can make Toast messages
 	
 	/** The image path. */
-	private String imagePath;
+	private String imagePath; // Not used yet
 	
 	/**
 	 * Instantiates a new ask answer controller.
@@ -49,13 +49,13 @@ public class AskAnswerController {
 	/**
 	 * Ask question.
 	 *
-	 * @param question the question
+	 * @param question the question name
 	 * @param username the username
 	 * @param hasPicture the has picture
 	 */
-	public void askQuestion(String question, String username, int hasPicture) {
+	public void askQuestion(String questionName, String username, int hasPicture) {
 		try {
-			Question newQuestion = new Question(question, username);
+			Question newQuestion = new Question(questionName, username);
 			if (hasPicture == View.VISIBLE) {
 				newQuestion.setHasPicture(true);
 			}
@@ -104,9 +104,9 @@ public class AskAnswerController {
  * @param position the position
  * @param answerInput the answer input
  */
-public void addAnswer(int fromFragment, int position, EditText answerInput) {
+public void addAnswer(int fromFragment, int position, String answerName) {
 		try {
-			Answer newAnswer = new Answer(answerInput.getText().toString(), User.getUserName());
+			Answer newAnswer = new Answer(answerName, User.getUserName());
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
 			question.addAnswer(newAnswer);

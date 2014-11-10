@@ -35,16 +35,16 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Gets the online.
+	 * Gets the online indicator.
 	 *
-	 * @return the online
+	 * @return true if the questionlist is online, false otherwise
 	 */
 	public boolean getOnline() {
 		return this.online;
 	}
 	
 	/**
-	 * Sets the online.
+	 * Toggles the online indicator
 	 */
 	public void setOnline() {
 		if (this.online==false) {
@@ -70,9 +70,9 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Adds the.
+	 * Adds the specified question to the beginning of the list
 	 *
-	 * @param question the question
+	 * @param question the question to add
 	 */
 	public void add (Question question) {
 		// Add at position 0, so that freshest Q is always first
@@ -93,27 +93,27 @@ public class QuestionList extends TModel<TView>{
 	/**
 	 * Size.
 	 *
-	 * @return the int
+	 * @return the number of questions in the list
 	 */
 	public int size() {
 		return questionList.size();
 	}
 	
 	/**
-	 * Question index.
+	 * Question index. Searches the list for the specified question and returns the index of the first occurrence
 	 *
 	 * @param question the question
-	 * @return the int
+	 * @return the index of the first occurrence
 	 */
 	public int questionIndex(Question question) {
 		return questionList.indexOf(question);
 	}
 	
 	/**
-	 * Gets the.
+	 * Gets the question at the specified location in the list
 	 *
-	 * @param index the index
-	 * @return the question
+	 * @param index the index of the question to return
+	 * @return the question at the specified location
 	 */
 	public Question get(int index){
 		return questionList.get(index);
@@ -122,10 +122,10 @@ public class QuestionList extends TModel<TView>{
 	// Everytime we update anything within a questionlist (ie add an answer to a question, add a reply to a question, add a reply to an answer), we use SET
 	// Although b/c of references in java, it isn't necessary. this is the only way that the list knows to call the notify views method to refresh the view/screen right now
 	/**
-	 * Sets the.
+	 * Sets the question at the specified location with the specified question
 	 *
-	 * @param index the index
-	 * @param question the question
+	 * @param index the index to put the specified question
+	 * @param question the question to add
 	 */
 	public void set(int index, Question question) {
 		questionList.set(index, question);
@@ -221,9 +221,9 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Removes the.
+	 * Removes the first occurrence of the specified question in the list
 	 *
-	 * @param question the question
+	 * @param question the question to remove
 	 */
 	public void remove(Question question) {
 		questionList.remove(question);

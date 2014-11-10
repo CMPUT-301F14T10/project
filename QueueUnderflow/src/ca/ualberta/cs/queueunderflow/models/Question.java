@@ -66,12 +66,7 @@ public class Question extends GenericResponse {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) System.out.println("object is null");
 		Question response = (Question) o;
-		if (response.getName() == null) System.out.println("response name is null");
-		if (response.getAuthor() == null) System.out.println("response author is null");
-		if (this.name == null) System.out.println("this.name is null");
-		if (this.author == null) System.out.println("this.author is null");
 		if (!DateFormat.format("MMM dd, yyyy", response.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
 			return false;
 		}
