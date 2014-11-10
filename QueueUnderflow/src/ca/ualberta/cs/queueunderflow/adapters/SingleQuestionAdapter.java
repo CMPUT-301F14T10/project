@@ -167,7 +167,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         }
          
         TextView questionDisplay = (TextView) view.findViewById(R.id.questionTextView);
-        questionDisplay.setText(singleQuestionArray.get(groupPosition).getQuestion());
+        questionDisplay.setText(singleQuestionArray.get(groupPosition).getName());
          
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(singleQuestionArray.get(groupPosition).getAuthor());
@@ -194,7 +194,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				        if(ListHandler.getFavsList().getQuestionList().contains(singleQuestionArray.get(groupPosition))) isInFavorites = true;
 				    
 					user.addUpvotedQuestion(singleQuestionArray.get(groupPosition));
-					singleQuestionArray.get(groupPosition).upvoteQuestion();
+					singleQuestionArray.get(groupPosition).upvoteResponse();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
 					
@@ -253,7 +253,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("question_position", groupPosition);
+				intent.putExtra("question_position", questionPosition);
 				activity.startActivity(intent);
 			}
 		});

@@ -25,11 +25,11 @@ public class WriteReplyController {
 	/** The Constant FAVORITES_FRAGMENT. */
 	public static final int FAVORITES_FRAGMENT = 2;
 	
-	/** The Constant READING_LIST_FRAGMENT. */
-	public static final int READING_LIST_FRAGMENT = 3;
-	
 	/** The Constant MY_QUESTIONS_FRAGMENT. */
-	public static final int MY_QUESTIONS_FRAGMENT = 4;
+	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
+	public static final int READING_LIST_FRAGMENT = 4;
 	
 	/** The type question. */
 	private static int TYPE_QUESTION = 0;
@@ -81,7 +81,7 @@ public class WriteReplyController {
 		
 		// Adding the reply to the proper Question or Answer
 		if (type == TYPE_QUESTION) {
-			question.addQuestionReply(newReply);
+			question.addReply(newReply);
 			questionList.set(questionPosition, question);
 		}
 		else if (type == TYPE_ANSWER) {

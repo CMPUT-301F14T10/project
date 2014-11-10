@@ -33,7 +33,7 @@ public class UseCase3 extends ActivityInstrumentationTestCase2<QAViewActivity> {
 		Reply aReply = new Reply("Answer Reply", "Her");
 		Reply qReply = new Reply("Question Reply", "Them");
 		answer1.addReply(aReply);
-		question.addQuestionReply(qReply);
+		question.addReply(qReply);
 		question.addAnswer(answer1);
 		question.addAnswer(answer2);
 		ListHandler.getMasterQList().add(question);
@@ -88,7 +88,7 @@ public class UseCase3 extends ActivityInstrumentationTestCase2<QAViewActivity> {
 		String reply_author= "I dunno";
 		Reply question_reply= new Reply("Whats going on",reply_author);
 	
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		QuestionList questionList= new QuestionList();
 		questionList.add(questionTest);
 		
