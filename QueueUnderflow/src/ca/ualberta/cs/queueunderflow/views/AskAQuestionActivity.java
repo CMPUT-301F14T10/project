@@ -4,6 +4,7 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
@@ -31,6 +33,10 @@ public class AskAQuestionActivity extends Activity{
 	/** The Constant CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE. */
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
+	/** The Constant SELECT_PICTURE CODE. */
+	private static final int SELECT_PICTURE= 1;
+    private String selectedImagePath;
+    
 	/** The image uri file. */
 	private Uri imageUriFile;
 	
@@ -111,7 +117,22 @@ public class AskAQuestionActivity extends Activity{
 				}
 			}
 		});
-	
+		
+		//SOURCE: http://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
+		//Still need to set up the adapters(think its the adapters anyway) to display the actual image
+		Button addFromGalleryBtn= (Button) findViewById(R.id.fromGallery);
+		addFromGalleryBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent= new Intent();
+				//Set the type of intent to be for images and start intent to go into default android gallery
+				intent.setType("image/*");	
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(Intent.createChooser(intent, "Select from gallery"),SELECT_PICTURE);
+			}
+			
+		});
 	}
 	
 	
@@ -121,14 +142,27 @@ public class AskAQuestionActivity extends Activity{
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//If clicked on add from camera button, end up here
 		if ((requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) && (resultCode == RESULT_OK)) {
 			ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 			imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imageUriFile.getPath()));
 			imagePreviewBtn.setVisibility(View.VISIBLE);
 			controller.setImagePath(imageUriFile.getPath());
 		}
+		else {
+			//If clicked on the add from gallery button, end up here
+			// SOURCE: http://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
+			imageUriFile= data.getData();
+			ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
+			imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imageUriFile.getPath()));
+			imagePreviewBtn.setVisibility(View.VISIBLE);
+			controller.setImagePath(imageUriFile.getPath());
+		}
 	}
-		
+	
+
+
+
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
