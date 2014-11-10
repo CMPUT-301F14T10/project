@@ -7,6 +7,7 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Favorites.
+ * Not used yet - May not use
  */
 public class Favorites {
 	

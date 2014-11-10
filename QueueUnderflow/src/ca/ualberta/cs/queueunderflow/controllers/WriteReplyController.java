@@ -16,6 +16,7 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WriteReplyController.
+ * The controller that handles adding replies to questions and answers.
  */
 public class WriteReplyController {
 

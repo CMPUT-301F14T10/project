@@ -7,6 +7,7 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReadingList.
+ * Not used yet - May not use
  */
 public class ReadingList {
 	
@@ -21,7 +22,7 @@ public class ReadingList {
 	}
 	
 	/**
-	 * Adds the.
+	 * Adds the specified question
 	 *
 	 * @param question the question
 	 */
@@ -32,7 +33,7 @@ public class ReadingList {
 	/**
 	 * Gets the question.
 	 *
-	 * @param i the i
+	 * @param i the index of the question
 	 * @return the question
 	 */
 	public Question getQuestion(int i) {
@@ -42,7 +43,7 @@ public class ReadingList {
 	/**
 	 * Size.
 	 *
-	 * @return the int
+	 * @return the size of the list
 	 */
 	public int size() {
 		return readingList.size();

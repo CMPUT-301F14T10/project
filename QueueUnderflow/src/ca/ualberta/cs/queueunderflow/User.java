@@ -22,9 +22,6 @@ public class User {
 	/** The upvoted answers. */
 	protected ArrayList <Answer> upvotedAnswers;
 	
-	/** The upvoted replies. */
-	protected ArrayList<Reply> upvotedReplies;
-	
 	/**
 	 * Instantiates a new user.
 	 */

@@ -33,6 +33,9 @@ import android.widget.Toast;
  */
 /**
  * The Class AnswerListAdapter.
+ * Connects a list of answers to the QAView. 
+ * Handles favoriting & adding to the reading list - Not yet implemented. 
+ * Handles calling the WriteReplyDialogFragment to be displayed
  */
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  

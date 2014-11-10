@@ -6,6 +6,8 @@ import android.text.format.DateFormat;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Question.
+ * A model that will hold all of the information pertinent to a question (via inheritance from GenericResponse) and
+ * Contains an AnswerList to add & get answers to the question.
  */
 public class Question extends GenericResponse {
 	
@@ -33,7 +35,7 @@ public class Question extends GenericResponse {
 	}
 	
 	/**
-	 * Adds the answer.
+	 * Adds the specified answer.
 	 *
 	 * @param answer the answer
 	 */

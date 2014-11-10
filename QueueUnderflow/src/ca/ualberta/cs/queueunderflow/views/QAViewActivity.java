@@ -165,6 +165,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			return true;
 		}
 		
+		// Put in controller?
         switch(id) {
         case R.id.mostRecentMenu:
         	question.getAnswerList().sortBy("most recent");

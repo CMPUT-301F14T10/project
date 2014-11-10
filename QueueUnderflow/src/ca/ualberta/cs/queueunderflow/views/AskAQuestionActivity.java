@@ -27,6 +27,7 @@ import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AskAQuestionActivity.
+ * Allows the user to input a question and attach a photo.
  */
 public class AskAQuestionActivity extends Activity{
 

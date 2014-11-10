@@ -10,6 +10,9 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  * The Class Buffer.
  * Singleton. This class handles when a question is favorited & unfavorited while the Favorites fragment is active, 
  * or when a questions marked or unmarked as added to the reading list while the ReadingList fragment is active.
+ *  (b/c we can't remove(unfavorite) a question from a list that's currently being displayed on the current screen via an adapter)
+ *  This is in case the user unfavorites then favorites the same question again while in the Favorites fragment (in this case the
+ *  buffer does not remove the question from the list), analogous for the reading list.
  */
 public class Buffer {
 	
@@ -33,6 +36,11 @@ public class Buffer {
 		}
 	}
 	
+	/**
+	 * Gets the instance
+	 *
+	 * @return instance The singleton instance of Buffer
+	 */
 	public static Buffer getInstance() {
 		if (instance == null) {
 			instance = new Buffer();
@@ -80,18 +88,18 @@ public class Buffer {
 	
 	// Checks if buffer is empty
 	/**
-	 * Checks if is fav buffer empty.
+	 * Checks if the favorites buffer empty.
 	 *
-	 * @return true, if is fav buffer empty
+	 * @return true, if the favorites buffer is empty
 	 */
 	public boolean isFavBufferEmpty() {
 		return favBuffer.isEmpty();
 	}
 	
 	/**
-	 * Checks if is reading list buffer empty.
+	 * Checks if the reading list buffer empty.
 	 *
-	 * @return true, if is reading list buffer empty
+	 * @return true, if the reading list buffer is empty
 	 */
 	public boolean isReadingListBufferEmpty() {
 		return readingListBuffer.isEmpty();
@@ -99,7 +107,7 @@ public class Buffer {
 
 	// Flushes the buffer - sets each question in the corresponding list to null then removes all nulls
 	/**
-	 * Flush fav.
+	 * Flush favorites buffer - removes all questions in the positions given in the buffer from the favorites list
 	 */
 	public void flushFav() {
 		QuestionList questionList = ListHandler.getFavsList();
@@ -115,7 +123,7 @@ public class Buffer {
 	}
 
 	/**
-	 * Flush reading list.
+	 * Flush reading list buffer - removes all questions in the positions given in the buffer from the reading list
 	 */
 	public void flushReadingList() {
 		QuestionList questionList = ListHandler.getReadingList();

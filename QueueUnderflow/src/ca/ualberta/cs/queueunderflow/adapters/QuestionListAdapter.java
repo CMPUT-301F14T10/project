@@ -37,6 +37,9 @@ import android.widget.Toast;
 // Controller?
 /**
  * The Class QuestionListAdapter.
+ * Connects a list of questions to the SuperFragment
+ * Handles favoriting & adding to the reading list
+ * Handles switching to the AddAAnswerActivity & calling the WriteReplyDialogFragment to be displayed
  */
 public class QuestionListAdapter extends ArrayAdapter<Question> {
 	

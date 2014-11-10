@@ -34,6 +34,7 @@ grabs the question from the position you grab.
 
 /**
  * The Class AddAnAnswerActivity.
+ * Allows the user to input an answer to add and optionally attach a photo 
  */
 public class AddAnAnswerActivity extends Activity
 {

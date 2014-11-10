@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.models;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Reply.
+ * Models a reply with the reply content and the author.
  */
 public class Reply {
 	
