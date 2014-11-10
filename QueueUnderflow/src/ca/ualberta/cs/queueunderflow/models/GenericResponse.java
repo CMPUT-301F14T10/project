@@ -11,6 +11,8 @@ import ca.ualberta.cs.queueunderflow.Picture;
 /**
 * The Class GenericResponse.
 * Holds all the basic attributes of a response
+* @author group 10
+ * @version 0.5
 */
 public class GenericResponse {
 

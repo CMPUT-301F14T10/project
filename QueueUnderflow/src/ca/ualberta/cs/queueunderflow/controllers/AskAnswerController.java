@@ -17,6 +17,9 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 /**
  * The Class AskAnswerController.
  * The controller that handles adding questions and answers.
+ * @author group 10
+ * @version 0.5
+ * 
  */
 public class AskAnswerController {
 

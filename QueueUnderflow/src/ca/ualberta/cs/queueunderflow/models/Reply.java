@@ -4,6 +4,8 @@ package ca.ualberta.cs.queueunderflow.models;
 /**
  * The Class Reply.
  * Models a reply with the reply content and the author.
+ * @author group 10
+ * @version 0.5
  */
 public class Reply {
 	

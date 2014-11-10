@@ -25,6 +25,8 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 /**
  * The Class QAViewActivity.
  * Displays a single question with it's replies, answers, it's replies.
+ * @author group 10
+ * @version 0.5
  */
 public class QAViewActivity extends Activity implements TView<QuestionList>{
 

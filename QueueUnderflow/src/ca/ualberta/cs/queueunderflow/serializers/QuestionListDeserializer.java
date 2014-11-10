@@ -18,6 +18,8 @@ import com.google.gson.reflect.TypeToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class QuestionListDeserializer.
+ * @author group 10
+ * @version 0.5
  */
 public class QuestionListDeserializer implements JsonDeserializer<QuestionList>{
 

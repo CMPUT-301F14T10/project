@@ -2,10 +2,13 @@ package ca.ualberta.cs.queueunderflow;
 
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ListHandler.
  * Singleton.  Main access point of the various lists for each fragment. Also holds the user.
+ @author group 10
+ * @version 0.5
+ * 
  */
 public class ListHandler {
 

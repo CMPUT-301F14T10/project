@@ -26,6 +26,8 @@ import android.widget.AdapterView.OnItemClickListener;
 /**
  * The Class SuperFragment.
  * Handles displaying the Home screen / main screen, Favorites screen, ReadingList screen, & MyQuestions screen
+ *@author group 10
+ * @version 0.5
  */
 public class SuperFragment extends Fragment implements TView<QuestionList>{
 	

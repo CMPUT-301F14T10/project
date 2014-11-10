@@ -7,6 +7,8 @@ import ca.ualberta.cs.queueunderflow.models.Answer;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MasterAnswerList.
+ * @author group 10
+ * @version 0.5
  */
 public class MasterAnswerList {
 	

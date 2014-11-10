@@ -13,6 +13,8 @@ import com.google.gson.JsonSerializer;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReplySerializer.
+ * @author group 10
+ * @version 0.5
  */
 public class ReplySerializer implements JsonSerializer<Reply>{
 	//This will create a jsonObject for the reply class that other serializers (like question and answer) will 

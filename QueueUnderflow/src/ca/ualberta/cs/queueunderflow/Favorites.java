@@ -8,6 +8,8 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 /**
  * The Class Favorites.
  * Not used yet - May not use
+ * @author group 10
+ * @version 0.5
  */
 public class Favorites {
 	

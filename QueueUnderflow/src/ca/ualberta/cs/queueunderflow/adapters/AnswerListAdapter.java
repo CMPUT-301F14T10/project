@@ -36,6 +36,8 @@ import android.widget.Toast;
  * Connects a list of answers to the QAView. 
  * Handles favoriting & adding to the reading list - Not yet implemented. 
  * Handles calling the WriteReplyDialogFragment to be displayed
+ * @author group 10
+ * @version 0.5
  */
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  
