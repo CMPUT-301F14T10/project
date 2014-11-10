@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.test;
+package ca.ualberta.cs.queueunderflow.test.usecases;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

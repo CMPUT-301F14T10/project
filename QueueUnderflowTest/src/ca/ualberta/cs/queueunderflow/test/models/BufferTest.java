@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.test;
+package ca.ualberta.cs.queueunderflow.test.models;
 
 import java.util.ArrayList;
 

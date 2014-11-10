@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.test;
+package ca.ualberta.cs.queueunderflow.test.usecases;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
