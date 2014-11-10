@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Buffer.
  * Singleton. This class handles when a question is favorited & unfavorited while the Favorites fragment is active, 
@@ -13,6 +13,8 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  *  (b/c we can't remove(unfavorite) a question from a list that's currently being displayed on the current screen via an adapter)
  *  This is in case the user unfavorites then favorites the same question again while in the Favorites fragment (in this case the
  *  buffer does not remove the question from the list), analogous for the reading list.
+ *@author Group 10
+ *@version 0.5
  */
 public class Buffer {
 	

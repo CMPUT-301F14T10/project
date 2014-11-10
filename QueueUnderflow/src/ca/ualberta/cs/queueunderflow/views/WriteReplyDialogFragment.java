@@ -23,6 +23,8 @@ import android.widget.TextView;
 /**
  * The Class WriteReplyDialogFragment.
  * Handles getting user input to add a reply
+ * @author group 10
+ * @version 0.5
  */
 public class WriteReplyDialogFragment extends DialogFragment {
 	

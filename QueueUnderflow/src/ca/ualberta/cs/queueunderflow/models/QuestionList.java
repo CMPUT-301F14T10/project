@@ -11,6 +11,8 @@ import ca.ualberta.cs.queueunderflow.TView;
 /**
  * The Class QuestionList.
  * Holds a collection of questions
+ * @author group 10
+ * @version 0.5
  */
 public class QuestionList extends TModel<TView>{
 	

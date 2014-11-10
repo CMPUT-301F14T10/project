@@ -40,6 +40,8 @@ import android.widget.Toast;
  * Connects a list of questions to the SuperFragment
  * Handles favoriting & adding to the reading list
  * Handles switching to the AddAAnswerActivity & calling the WriteReplyDialogFragment to be displayed
+ *@author group 10
+ * @version 0.5
  */
 public class QuestionListAdapter extends ArrayAdapter<Question> {
 	

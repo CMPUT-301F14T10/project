@@ -13,6 +13,8 @@ import com.google.gson.JsonParseException;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReplyDeserializer.
+ * @author group 10
+ * @version 0.5
  */
 public class ReplyDeserializer implements JsonDeserializer<Reply> {
 

@@ -12,6 +12,8 @@ import java.util.Comparator;
 /**
  * The Class AnswerList.
  * Holds a collection of answers
+ * @author group 10
+ * @version 0.5
  */
 public class AnswerList {
 

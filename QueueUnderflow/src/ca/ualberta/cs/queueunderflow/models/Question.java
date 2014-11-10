@@ -8,6 +8,8 @@ import android.text.format.DateFormat;
  * The Class Question.
  * A model that will hold all of the information pertinent to a question (via inheritance from GenericResponse) and
  * Contains an AnswerList to add & get answers to the question.
+ * @author group 10
+ * @version 0.5
  */
 public class Question extends GenericResponse {
 	

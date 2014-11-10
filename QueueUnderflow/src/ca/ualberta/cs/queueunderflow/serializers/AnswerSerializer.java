@@ -17,6 +17,8 @@ import com.google.gson.JsonSerializer;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AnswerSerializer.
+ * @author group 10
+ * @version 0.5
  */
 public class AnswerSerializer implements JsonSerializer<Answer>
 {

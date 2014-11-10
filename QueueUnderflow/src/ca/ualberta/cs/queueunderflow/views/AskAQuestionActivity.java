@@ -28,6 +28,8 @@ import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 /**
  * The Class AskAQuestionActivity.
  * Allows the user to input a question and attach a photo.
+ * @author group 10
+ * @version 0.5
  */
 public class AskAQuestionActivity extends Activity{
 

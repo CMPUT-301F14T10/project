@@ -17,6 +17,8 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 /**
  * The Class WriteReplyController.
  * The controller that handles adding replies to questions and answers.
+ * @author group 10
+ * @version 0.5
  */
 public class WriteReplyController {
 

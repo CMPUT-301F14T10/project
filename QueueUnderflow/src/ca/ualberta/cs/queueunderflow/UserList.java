@@ -5,6 +5,8 @@ import java.util.ArrayList;
 // Store users in an arraylist to keep track of upvote, questions asked etc.
 /**
  * The Class UserList.
+ * @author group 10
+ * @version 0.5
  */
 public class UserList {
 

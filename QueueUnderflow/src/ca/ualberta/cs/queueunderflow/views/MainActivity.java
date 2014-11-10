@@ -24,6 +24,8 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  * The Class MainActivity.
  * Handles clicks & swipes relating to switching between fragments via the navigation drawer.
  * Also handles calling the load/save functions.
+ * @author group 10
+ * @version 0.5
  */
 public class MainActivity extends Activity {
 

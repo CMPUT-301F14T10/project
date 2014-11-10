@@ -4,6 +4,8 @@ package ca.ualberta.cs.queueunderflow;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Picture. Suppose to hold an image.
+ * @author group 10
+ * @version 0.5
  */
 public class Picture
 {

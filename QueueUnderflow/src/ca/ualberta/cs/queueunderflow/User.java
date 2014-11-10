@@ -9,6 +9,8 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
+ * @author group 10
+ * @version 0.5
  */
 public class User {
 
