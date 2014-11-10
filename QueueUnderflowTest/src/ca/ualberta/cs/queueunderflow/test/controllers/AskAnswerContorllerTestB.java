@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.test;
+package ca.ualberta.cs.queueunderflow.test.controllers;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
