@@ -277,9 +277,9 @@ public class MainActivity extends Activity {
     
     // Sets the view to the fragment of the user selection from the nav drawer
     /**
-     * Select item.
+     * Switches to the specified fragment & inflates it
      *
-     * @param position the position
+     * @param position the position of the fragment to switch to
      */
     private void selectItem(int position) {
     	Fragment fragment;
