@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
@@ -104,6 +106,17 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		singleQAdapter = new SingleQuestionAdapter(this, questionList.getQuestionList() , fromFragment, position);
 		singleQuestionExpListView.setAdapter(singleQAdapter);
 		
+		// Display a "no replies" toast if question is clicked on but has no replies
+		singleQuestionExpListView.setOnGroupExpandListener(new OnGroupExpandListener() {
+			
+			@Override
+			public void onGroupExpand(int groupPosition) {
+				if (question.getSizeReplies() == 0) {
+					Toast.makeText(getApplicationContext(), "This question has no replies", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		
         // This hides that expand arrow on the question item
         singleQuestionExpListView.setGroupIndicator(null);
         
@@ -129,6 +142,17 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
         adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position);
         answersExpListView.setAdapter(adapter);
+        
+     // Display a "no replies" toast if answer is clicked on but has no replies
+        answersExpListView.setOnGroupExpandListener(new OnGroupExpandListener() {
+			
+			@Override
+			public void onGroupExpand(int groupPosition) {
+				if (question.getAnswerList().getAnswer(groupPosition).getSizeReplies() == 0) {
+					Toast.makeText(getApplicationContext(), "This answer has no replies", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
         
         // This hides that expand arrow on the answer item
         answersExpListView.setGroupIndicator(null);
