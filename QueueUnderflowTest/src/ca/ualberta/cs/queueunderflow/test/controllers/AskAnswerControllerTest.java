@@ -30,6 +30,23 @@ public class AskAnswerControllerTest extends ActivityInstrumentationTestCase2<As
 		acc.askQuestion(question, name, hasPicture);
 		assertTrue("quesiton not added", ListHandler.getMasterQList().size() == 1);
 		assertEquals("question not the same", ListHandler.getMasterQList().get(0).getAuthor(), name );
+		
 	}
+	
+	//test for adding an answer to a quesiton
+	public void testAddAnswer(){
+		//start activity
+		AskAQuestionActivity activity = (AskAQuestionActivity) getActivity();	
+		//clear list
+		ListHandler.getMasterQList().getQuestionList().clear();
+		assertTrue("list cleared", ListHandler.getMasterQList().getQuestionList().size()==0);
+		//add a new question to the list
+		Question question = new Question("A question", "Me");
+		AskAnswerController acc = new AskAnswerController(activity);
+		ListHandler.getMasterQList().add(question);
+		assertTrue("question added", ListHandler.getMasterQList().getQuestionList().size()==1);
+		//adding an answer to the quesiton using a controller
+		acc.addAnswer(1, 0, "an answer");
+		assertTrue("anaswer not added", ListHandler.getMasterQList().get(0).getAnswerListSize()==1);
 }
-
+}
