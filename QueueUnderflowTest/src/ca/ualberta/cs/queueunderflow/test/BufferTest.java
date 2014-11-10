@@ -11,7 +11,7 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 
 public class BufferTest extends TestCase
 {
-	Buffer testBuffer = new Buffer();
+	Buffer testBuffer = Buffer.getInstance();
 	ArrayList<Integer> testfavBuffer = testBuffer.favBuffer;
 	ArrayList<Integer> testreadingListBuffer = testBuffer.readingListBuffer;
 	public void testBuffer(){

@@ -191,7 +191,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Question question = questionArray.get(position);
 				
 				if (questionArray == ListHandler.getFavsList().getQuestionList()) {
-					Buffer buffer = new Buffer();	// Buffer hold list of questions to be REMOVED from the ListHandler.getFavsList()
+					Buffer buffer = Buffer.getInstance();	// Buffer hold list of questions to be REMOVED from the ListHandler.getFavsList()
 					if (isChecked == false) {	// unfavorited a question from the FavFragment
 						buffer.addToFavBuffer(position);
 					}
@@ -226,7 +226,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Question question = questionArray.get(position);
 				
 				if (questionArray == ListHandler.getReadingList().getQuestionList()) {
-					Buffer buffer = new Buffer();	// Buffer hold list of questions to be REMOVED from the ListHandler.getReadingList()
+					Buffer buffer = Buffer.getInstance();	// Buffer hold list of questions to be REMOVED from the ListHandler.getReadingList()
 					if (isChecked == false) {	// un-marking a question from the ReadingListFragment
 						buffer.addToReadingListBuffer(position);
 					}

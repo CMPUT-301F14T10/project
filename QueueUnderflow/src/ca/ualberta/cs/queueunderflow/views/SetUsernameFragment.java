@@ -18,6 +18,7 @@ import ca.ualberta.cs.queueunderflow.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SetUsernameFragment.
+ * Allows user to change their username.
  */
 public class SetUsernameFragment extends Fragment {
 	
@@ -49,7 +50,7 @@ public class SetUsernameFragment extends Fragment {
 				String username = newUsername.getText().toString();
 				//User user = new User();
 				User user= ListHandler.getUser();
-				LoadSave lSave = new LoadSave();
+				LoadSave lSave = LoadSave.getInstance();
 				
 				int flag = 0;
 				try {

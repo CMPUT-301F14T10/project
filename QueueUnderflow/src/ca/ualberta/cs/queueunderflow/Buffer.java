@@ -8,8 +8,12 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Buffer.
+ * Singleton. This class handles when a question is favorited & unfavorited while the Favorites fragment is active, 
+ * or when a questions marked or unmarked as added to the reading list while the ReadingList fragment is active.
  */
 public class Buffer {
+	
+	private static Buffer instance = null;
 
 	/** The fav buffer. */
 	public static ArrayList<Integer> favBuffer;
@@ -20,13 +24,20 @@ public class Buffer {
 	/**
 	 * Instantiates a new buffer.
 	 */
-	public Buffer() {
+	private Buffer() {
 		if (favBuffer == null) {
 			favBuffer = new ArrayList<Integer>();
 		}
 		if (readingListBuffer == null) {
 			readingListBuffer = new ArrayList<Integer>();
 		}
+	}
+	
+	public static Buffer getInstance() {
+		if (instance == null) {
+			instance = new Buffer();
+		}
+		return instance;
 	}
 	
 	// FavBuffer Methods

@@ -17,8 +17,11 @@ import com.google.gson.reflect.TypeToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LoadSave.
+ * Singleton. Handles loading & saving.
  */
 public class LoadSave {
+	
+	private static LoadSave instance = null;
 	
 	/** The context. */
 	public static Context context;
@@ -43,6 +46,18 @@ public class LoadSave {
 	
 	/** The loaded. */
 	public static boolean loaded = false;
+	
+	
+	protected LoadSave() {
+		
+	}
+	
+	public static LoadSave getInstance() {
+		if (instance == null) {
+			instance = new LoadSave();
+		}
+		return instance;
+	}
 	
 	/**
 	 * Save data.

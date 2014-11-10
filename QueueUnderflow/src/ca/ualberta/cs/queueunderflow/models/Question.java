@@ -3,7 +3,6 @@ package ca.ualberta.cs.queueunderflow.models;
 import android.text.format.DateFormat;
 
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Question.

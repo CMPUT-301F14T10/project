@@ -22,6 +22,8 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 /* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
 /**
  * The Class MainActivity.
+ * Handles clicks & swipes relating to switching between fragments via the navigation drawer.
+ * Also handles calling the load/save functions.
  */
 public class MainActivity extends Activity {
 
@@ -125,7 +127,7 @@ public class MainActivity extends Activity {
 
         if(!LoadSave.loaded) //Make sure this only loads once!
         {
-        LoadSave lSave = new LoadSave();
+        LoadSave lSave = LoadSave.getInstance();
         lSave.loadUsername();
         Log.d("test", "loading favorites...");
         lSave.loadMyQuestions();
@@ -163,7 +165,7 @@ public class MainActivity extends Activity {
     	
     	//This code does not yet work though, so for now the application will save whenever you return to the main activity.
     	
-    	LoadSave ls = new LoadSave();
+    	LoadSave ls = LoadSave.getInstance();
     	ls.SaveFavorites();
     	ls.saveMyQuestions();
     	ls.SaveReadingList();

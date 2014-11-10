@@ -22,6 +22,7 @@ import android.widget.TextView;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WriteReplyDialogFragment.
+ * Handles getting user input to add a reply
  */
 public class WriteReplyDialogFragment extends DialogFragment {
 	

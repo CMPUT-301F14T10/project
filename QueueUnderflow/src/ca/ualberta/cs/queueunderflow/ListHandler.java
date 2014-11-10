@@ -5,26 +5,42 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListHandler.
+ * Singleton.  Main access point of the various lists for each fragment.
  */
 public class ListHandler {
 
-	// Need to change this to a singleton pattern instead of static QuestionLists
-
+	private static ListHandler instance = null;
+	
 	/** The q list. */
 	private static QuestionList qList;
-	
-	/** The reading list. */
-	private static QuestionList readingList;
 	
 	/** The fav q list. */
 	private static QuestionList favQList;
 	
 	/** The my q list. */
-	private static QuestionList myQList;
+	private static QuestionList myQList;	
+	
+	/** The reading list. */
+	private static QuestionList readingList;
 	
 	/** The user. */
 	private static User user;
 	//private static UserList myUList;
+	
+	private ListHandler() {
+		qList = new QuestionList();
+		favQList = new QuestionList();
+		myQList = new QuestionList();
+		readingList = new QuestionList();
+		user = new User();
+	}
+	
+	public ListHandler getInstance() {
+		if (instance == null) {
+			instance = new ListHandler();
+		}
+		return instance;
+	}
 	
 	/**
 	 * Gets the master q list.

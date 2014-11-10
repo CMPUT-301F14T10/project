@@ -23,9 +23,9 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 // TODO: Auto-generated Javadoc
-// This SuperFragment is used for handling/displaying the HomeScreen, FavoritesScreen, ReadingListScreen, & MyQuestionsScreen
 /**
  * The Class SuperFragment.
+ * Handles displaying the Home screen / main screen, Favorites screen, ReadingList screen, & MyQuestions screen
  */
 public class SuperFragment extends Fragment implements TView<QuestionList>{
 	
@@ -68,7 +68,7 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 		
 		// Put in controller - This must be done first before inflating the view & adding the view to the model else it may crash
-		Buffer buffer = new Buffer();
+		Buffer buffer = Buffer.getInstance();
 		if (buffer.isFavBufferEmpty() == false) {
 			buffer.flushFav();
 		}

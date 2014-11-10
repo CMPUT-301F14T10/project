@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 /**
  * The Class AnswerList.
+ * Holds a collection of answers
  */
 public class AnswerList {
 
@@ -97,9 +98,9 @@ protected ArrayList <Answer> answerList;
 	
 	
 	/**
-	 * Sort by.
+	 * Sorts the list of answers by the specified method
 	 *
-	 * @param method the method
+	 * @param method the method to sort by
 	 */
 	public void sortBy(String method) {
 		

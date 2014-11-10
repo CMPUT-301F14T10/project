@@ -9,7 +9,7 @@ package ca.ualberta.cs.queueunderflow;
 public interface TView<M> {
 
 	/**
-	 * Update.
+	 * Calls all listeners to update themselves.
 	 *
 	 * @param model the model
 	 */

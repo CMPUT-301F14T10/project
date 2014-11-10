@@ -41,7 +41,7 @@ public abstract class TModel<V extends TView> {
 	}
 	
 	/**
-	 * Notify views.
+	 * Notify views to update
 	 */
 	public void notifyViews() {
 		for (V view : views) {

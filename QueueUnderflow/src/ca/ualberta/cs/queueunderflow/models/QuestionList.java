@@ -10,6 +10,7 @@ import ca.ualberta.cs.queueunderflow.TView;
 // TODO: Auto-generated Javadoc
 /**
  * The Class QuestionList.
+ * Holds a collection of questions
  */
 public class QuestionList extends TModel<TView>{
 	
@@ -177,9 +178,9 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Sort by.
+	 * Sorts the list of questions by the specified method
 	 *
-	 * @param method the method
+	 * @param method the method to sort by
 	 */
 	public void sortBy(String method) {
 		
