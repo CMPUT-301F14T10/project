@@ -132,6 +132,37 @@ protected ArrayList <Answer> answerList;
 			}
 		};
 		
+		// Sort by has pictures - answers with pictures appear at the top followed by answers with no pictures
+		Comparator<Answer> hasPicturesComparator = new Comparator<Answer>() {
+
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				if (lhs.hasPicture() && !rhs.hasPicture()) {
+					return -1;
+				}
+				else if (!lhs.hasPicture() && rhs.hasPicture()) {
+					return 1;
+				}
+				return 0;
+			}
+			
+		};
+		
+		// Sort by no pictures - answers with no pictures appear at the top followed by answers with no pictures
+		Comparator<Answer> noPicturesComparator = new Comparator<Answer>() {
+
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				if (lhs.hasPicture() && !rhs.hasPicture()) {
+					return 1;
+				}
+				else if (!lhs.hasPicture() && rhs.hasPicture()) {
+					return -1;
+				}
+				return 0;
+			}
+		};
+		
 		if (method.equals("most recent")) {
 			Collections.sort(answerList, mostRecentComparator);
 		}
@@ -140,6 +171,12 @@ protected ArrayList <Answer> answerList;
 		}
 		else if (method == "most upvotes") {
 			Collections.sort(answerList, mostUpvotesComparator);
+		}
+		else if (method.equals("has pictures")) {
+			Collections.sort(answerList, hasPicturesComparator);
+		}
+		else if (method.equals("no pictures")) {
+			Collections.sort(answerList, noPicturesComparator);
 		}
 	}
 	
