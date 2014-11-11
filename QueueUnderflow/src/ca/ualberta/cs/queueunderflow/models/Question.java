@@ -1,5 +1,6 @@
 package ca.ualberta.cs.queueunderflow.models;
 
+import android.net.Uri;
 import android.text.format.DateFormat;
 
 
@@ -13,6 +14,10 @@ import android.text.format.DateFormat;
  */
 public class Question extends GenericResponse {
 	
+	//The image path (where the image is)
+	private String imagePath;
+
+	
 	/** The answer list. */
 	protected AnswerList answerList;
 	
@@ -25,6 +30,7 @@ public class Question extends GenericResponse {
 	public Question(String questionName, String author) {
 		super(questionName, author);
 		this.answerList = new AnswerList();
+		this.imagePath=null;
 	}
 	
 	/**
@@ -83,6 +89,13 @@ public class Question extends GenericResponse {
 			return false;
 		}
 		return true;
+	}
+	
+	public void setImagePath(String path) {
+		this.imagePath=path;
+	}
+	public String getImagePath() {
+		return this.imagePath;
 	}
 	
 	

@@ -62,6 +62,8 @@ public class AskAnswerController {
 			Question newQuestion = new Question(questionName, username);
 			if (hasPicture == View.VISIBLE) {
 				newQuestion.setHasPicture(true);
+				//New here
+				newQuestion.setImagePath(imagePath);
 			}
 			QuestionList homeScreenList = ListHandler.getMasterQList();
 			homeScreenList.add(newQuestion);

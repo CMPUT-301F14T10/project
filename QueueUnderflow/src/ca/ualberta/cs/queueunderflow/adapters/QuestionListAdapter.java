@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -152,6 +153,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			
 			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
 			// TODO set imagePreview to the photo
+			String imagePath= questionArray.get(position).getImagePath();
+			imagePreview.setImageURI(Uri.parse(imagePath));
 		}
 		
 		ImageButton answerBtn = (ImageButton) view.findViewById(R.id.answerBtn);
