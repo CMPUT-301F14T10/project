@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -228,6 +229,8 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
             
             ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
             // TODO set imagePreview to the photo
+			String imagePath= singleQuestionArray.get(groupPosition).getImagePath();
+			imagePreview.setImageURI(Uri.parse(imagePath));
         }
         
         ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);

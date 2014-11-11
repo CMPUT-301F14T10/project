@@ -14,6 +14,7 @@ import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -164,7 +165,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         final View view;
         if (answerArray.get(groupPosition).hasPicture()) {
             view = inflater.inflate(R.layout.list_item_answer_picture, parent, false);
-            ImageView imageView = (ImageView) view.findViewById(R.id.imageView1);
+            ImageView imageView = (ImageView) view.findViewById(R.id.imagePreview);
             imageView.setVisibility(View.VISIBLE);
         }
         else {
@@ -210,8 +211,14 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         if (answerArray.get(groupPosition).hasPicture() == true) {
             ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
             hasPictureIcon.setVisibility(0);
+            
+			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
+			// TODO set imagePreview to the photo
+			String imagePath= answerArray.get(groupPosition).getImagePath();
+			imagePreview.setImageURI(Uri.parse(imagePath));
         }
-        
+		
+		
         ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);
         replyBtn.setOnClickListener(new OnClickListener() {
 			

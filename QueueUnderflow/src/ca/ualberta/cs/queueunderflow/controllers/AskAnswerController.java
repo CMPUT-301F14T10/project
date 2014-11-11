@@ -76,32 +76,9 @@ public class AskAnswerController {
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-//	public void askQuestion() {
-//		EditText questionInput = (EditText) activity.findViewById(R.id.questionInput);
-//		ImageButton imagePreviewBtn = (ImageButton) activity.findViewById(R.id.imagePreviewBtn);
-//		
-//		try {
-//			Question newQuestion = new Question(questionInput.getText().toString(), User.getUserName());
-//			if (imagePreviewBtn.getVisibility() == View.VISIBLE) {
-//				newQuestion.setHasPicture(true);
-//				// TODO add the picture to the question here
-//			}
-//			
-//			QuestionList homeScreenList = ListHandler.getMasterQList();
-//			homeScreenList.add(newQuestion);
-//			
-//			QuestionList myQuestionsList = ListHandler.getMyQsList();
-//			myQuestionsList.add(newQuestion);
-//			
-//			activity.finish();
-//		} catch (IllegalArgumentException e) {
-//			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
-//		}
-//	}
 
 	/**
  * Adds the answer.
@@ -110,9 +87,14 @@ public class AskAnswerController {
  * @param position the position
  * @param answerInput the answer input
  */
-public void addAnswer(int fromFragment, int position, String answerName) {
+public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
+			if (hasPicture == View.VISIBLE) {
+				newAnswer.setHasPicture(true);
+				//New here
+				newAnswer.setImagePath(imagePath);
+			}
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
 			question.addAnswer(newAnswer);
@@ -120,7 +102,7 @@ public void addAnswer(int fromFragment, int position, String answerName) {
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

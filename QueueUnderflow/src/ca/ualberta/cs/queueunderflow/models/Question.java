@@ -13,9 +13,6 @@ import android.text.format.DateFormat;
  * @version 0.5
  */
 public class Question extends GenericResponse {
-	
-	//The image path (where the image is)
-	private String imagePath;
 
 	
 	/** The answer list. */
@@ -30,7 +27,6 @@ public class Question extends GenericResponse {
 	public Question(String questionName, String author) {
 		super(questionName, author);
 		this.answerList = new AnswerList();
-		this.imagePath=null;
 	}
 	
 	/**
@@ -89,13 +85,6 @@ public class Question extends GenericResponse {
 			return false;
 		}
 		return true;
-	}
-	
-	public void setImagePath(String path) {
-		this.imagePath=path;
-	}
-	public String getImagePath() {
-		return this.imagePath;
 	}
 	
 	

@@ -44,6 +44,11 @@ public class GenericResponse {
 	/** The is in reading list indicator. */
 	protected boolean isInReadingList;
 	
+	
+	//The image path (where the image is)
+	private String imagePath;
+	
+	
 	public GenericResponse (String name, String author) {
 		name = name.trim();
 		if (name.length() == 0) {
@@ -56,6 +61,7 @@ public class GenericResponse {
 		this.hasPicture=false;
 		this.image=null;
 		this.date = new Date();
+		this.imagePath=null;
 		
 		this.isFav = false;
 		this.isInReadingList = false;
@@ -288,5 +294,12 @@ public class GenericResponse {
 			return false;
 		}
 		return true;
+	}
+	
+	public void setImagePath(String path) {
+		this.imagePath=path;
+	}
+	public String getImagePath() {
+		return this.imagePath;
 	}
 }

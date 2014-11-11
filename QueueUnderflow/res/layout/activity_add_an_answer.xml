@@ -2,79 +2,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAnAnswerActivity" >
-
-    <EditText
-        android:id="@+id/AddAnswerEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/AddAnAnswerButton"
-        android:layout_toLeftOf="@+id/AddAnAnswerButton"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/AddAnAnswerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Add" />
-
-    
-	<LinearLayout
-    	android:id="@+id/questionLayout"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal" >
-
-        <ExpandableListView
-            android:id="@+id/questionExpListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-		</ExpandableListView>
-		
-    </LinearLayout>
+    tools:context="ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity" >
     
     <LinearLayout
-        android:id="@+id/answerConstantLayout"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/questionLayout"
-        android:paddingBottom="5dp"
-        android:paddingTop="8dp" >
-
-        <TextView
-            android:id="@+id/answersCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="19sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Answers :"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="19sp" />
-        
-    </LinearLayout>
-
-    <ExpandableListView
-        android:id="@+id/answersExpListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/addAnAnswerBtn"
-        android:layout_below="@+id/answerConstantLayout"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" >
 
-    </ExpandableListView>
-    
+        <Button
+            android:id="@+id/addABtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ask">
+        </Button>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/answerInput"
+        android:layout_marginTop="21dp"
+        android:paddingLeft="10dp"
+        android:text="Add a picture:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="19sp" />
+
+        <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/fromGallery"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From Gallery" />
+
+        <Button
+            android:id="@+id/fromCamera"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From Camera" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imagePreviewBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout2"
+        android:src="@drawable/user_pic"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/authorBox"
+        android:layout_alignBottom="@+id/authorBox"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="Author :"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/authorBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10"
+        android:text="Author Username"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/darker_gray" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/answerInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/authorBox"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Enter question here"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="18sp" />
+
 </RelativeLayout>
