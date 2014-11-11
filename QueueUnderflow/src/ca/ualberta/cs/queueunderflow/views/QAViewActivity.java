@@ -205,6 +205,14 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         	question.getAnswerList().sortBy("most upvotes");
         	adapter.notifyDataSetChanged();
         	return true;
+        case R.id.hasPictureMenu:
+        	question.getAnswerList().sortBy("has pictures");
+        	adapter.notifyDataSetChanged();
+        	return true;
+        case R.id.noPictureMenu:
+        	question.getAnswerList().sortBy("no pictures");
+        	adapter.notifyDataSetChanged();
+        	return true;
         }
 		return super.onOptionsItemSelected(item);
 	}

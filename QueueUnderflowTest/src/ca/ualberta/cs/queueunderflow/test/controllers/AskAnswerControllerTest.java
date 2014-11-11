@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
@@ -46,7 +47,8 @@ public class AskAnswerControllerTest extends ActivityInstrumentationTestCase2<As
 		ListHandler.getMasterQList().add(question);
 		assertTrue("question added", ListHandler.getMasterQList().getQuestionList().size()==1);
 		//adding an answer to the quesiton using a controller
-		acc.addAnswer(1, 0, "an answer");
+		int hasPicture = 0;
+		acc.addAnswer(1, 0, "an answer", User.getUserName(), hasPicture);
 		assertTrue("anaswer not added", ListHandler.getMasterQList().get(0).getAnswerListSize()==1);
 }
 }

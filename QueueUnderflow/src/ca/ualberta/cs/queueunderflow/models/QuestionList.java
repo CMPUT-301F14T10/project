@@ -212,6 +212,37 @@ public class QuestionList extends TModel<TView>{
 			}
 		};
 		
+		// Sort by has pictures - questions with pictures appear at the top followed by questions with no pictures
+		Comparator<Question> hasPicturesComparator = new Comparator<Question>() {
+
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				if (lhs.hasPicture() && !rhs.hasPicture()) {
+					return -1;
+				}
+				else if (!lhs.hasPicture() && rhs.hasPicture()) {
+					return 1;
+				}
+				return 0;
+			}
+			
+		};
+		
+		// Sort by no pictures - questions with no pictures appear at the top followed by questions with no pictures
+		Comparator<Question> noPicturesComparator = new Comparator<Question>() {
+
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				if (lhs.hasPicture() && !rhs.hasPicture()) {
+					return 1;
+				}
+				else if (!lhs.hasPicture() && rhs.hasPicture()) {
+					return -1;
+				}
+				return 0;
+			}
+		};
+		
 		if (method.equals("most recent")) {
 			Collections.sort(questionList, mostRecentComparator);
 		}
@@ -220,6 +251,12 @@ public class QuestionList extends TModel<TView>{
 		}
 		else if (method == "most upvotes") {
 			Collections.sort(questionList, mostUpvotesComparator);
+		}
+		else if (method.equals("has pictures")) {
+			Collections.sort(questionList, hasPicturesComparator);
+		}
+		else if (method.equals("no pictures")) {
+			Collections.sort(questionList, noPicturesComparator);
 		}
 	}
 	

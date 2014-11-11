@@ -217,6 +217,14 @@ public class MainActivity extends Activity {
         	questionList.sortBy("most upvotes");
         	selectItem(fragmentPosition);
         	return true;
+        case R.id.hasPictureMenu:
+        	questionList.sortBy("has pictures");
+        	selectItem(fragmentPosition);
+        	return true;
+        case R.id.noPictureMenu:
+        	questionList.sortBy("no pictures");
+        	selectItem(fragmentPosition);
+        	return true;
         }
         return super.onOptionsItemSelected(item);
     }
