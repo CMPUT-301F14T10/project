@@ -154,12 +154,25 @@ public class AskAQuestionActivity extends Activity{
 		}
 		else {
 			//If clicked on the add from gallery button, end up here
-			// SOURCE: http://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
-			imageUriFile= data.getData();
-			ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
-			imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imageUriFile.getPath()));
-			imagePreviewBtn.setVisibility(View.VISIBLE);
-			controller.setImagePath(imageUriFile.getPath());
+			//SOURCES: http://stackoverflow.com/questions/5309190/android-pick-images-from-gallery
+			// http://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
+		    if(requestCode == SELECT_PICTURE && resultCode==RESULT_OK) {
+		        imageUriFile= data.getData();
+
+		        //Get the image that the user selected with cursor
+		        Cursor cursor = getContentResolver().query(imageUriFile, new String[] { android.provider.MediaStore.Images.ImageColumns.DATA }, null, null, null);
+		        cursor.moveToFirst();
+
+		        //Get the image path and close the cursor to prevent possible errors
+		        String imagePath = cursor.getString(0);
+		        cursor.close();
+		        
+		        ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
+				imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imagePath));
+				imagePreviewBtn.setVisibility(View.VISIBLE);
+				controller.setImagePath(imagePath);
+			
+		    }
 		}
 	}
 	
