@@ -2,6 +2,7 @@ package ca.ualberta.cs.queueunderflow.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import android.text.format.DateFormat;
 
@@ -44,10 +45,11 @@ public class GenericResponse {
 	/** The is in reading list indicator. */
 	protected boolean isInReadingList;
 	
+	/** The unique ID */
+	protected UUID uniqueID;
 	
 	//The image path (where the image is)
 	private String imagePath;
-	
 	
 	public GenericResponse (String name, String author) {
 		name = name.trim();
@@ -65,7 +67,11 @@ public class GenericResponse {
 		
 		this.isFav = false;
 		this.isInReadingList = false;
+		
+		//Set unique ID.
+		uniqueID = UUID.randomUUID();
 	}
+	
 	
 	
 	/**
@@ -74,7 +80,11 @@ public class GenericResponse {
 	 * @param author the new author
 	 */
 	public void setAuthor(String author) {
-		this.author=author;
+	    this.author=author;
+	}
+	
+	public void setID(UUID uid) {
+	    this.uniqueID = uid;
 	}
 	
 	/**
