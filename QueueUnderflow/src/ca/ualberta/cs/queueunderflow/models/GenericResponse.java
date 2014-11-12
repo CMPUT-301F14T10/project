@@ -83,8 +83,22 @@ public class GenericResponse {
 	    this.author=author;
 	}
 	
+	/**
+	 * Sets the ID
+	 * 
+	 * @param uid
+	 */
 	public void setID(UUID uid) {
 	    this.uniqueID = uid;
+	}
+	
+	/**
+	 * Returns the unique ID
+	 * 
+	 * @return the unique ID
+	 */
+	public UUID getID() {
+	    return this.uniqueID;
 	}
 	
 	/**

@@ -25,26 +25,29 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 	@Override
 	public JsonElement serialize(Question question, Type arg1,
 			JsonSerializationContext serialization_context) {
-		JsonObject jsonQuestion= new JsonObject();
-		jsonQuestion.addProperty("questionName",question.getName());
+	    JsonObject jsonQuestion= new JsonObject();
+	    jsonQuestion.addProperty("questionName",question.getName());
 		
-		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+	    //Add UID to json string --Peter
+	    jsonQuestion.addProperty("id",question.getID().toString());
+		
+	    final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    //final Gson gson2 = gsonBuilder2.create();
 
 	    JsonElement answers= serialization_context.serialize(question.getAnswerList());
-		jsonQuestion.add("answerList",answers);
+	    jsonQuestion.add("answerList",answers);
 
-        JsonElement replies=serialization_context.serialize(question.getReplies());
+	    JsonElement replies=serialization_context.serialize(question.getReplies());
 	    jsonQuestion.add("questionReplies",replies);
 	   
-		jsonQuestion.addProperty("author", question.getAuthor());
-		jsonQuestion.addProperty("upvote", question.getUpvotes());
-		jsonQuestion.addProperty("hasPicture",question.hasPicture());
+	    jsonQuestion.addProperty("author", question.getAuthor());
+	    jsonQuestion.addProperty("upvote", question.getUpvotes());
+	    jsonQuestion.addProperty("hasPicture",question.hasPicture());
 
-		//The picture property will have to change when picture changes
-		//int size=question.getPicture().getSize();
-		int size = 0;
-		jsonQuestion.addProperty("picture",size);
+	    //The picture property will have to change when picture changes
+	    //int size=question.getPicture().getSize();
+	    int size = 0;
+	    jsonQuestion.addProperty("picture",size);
 		
 	    //May need a date serializer b/c date might end up being parsed wrong
 	    gsonBuilder2.setDateFormat("M/d/yy hh:mm a");

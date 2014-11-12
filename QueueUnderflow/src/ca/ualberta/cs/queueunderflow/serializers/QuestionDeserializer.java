@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.Picture;
 import ca.ualberta.cs.queueunderflow.models.AnswerList;
@@ -34,9 +35,9 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	@Override
 	public Question deserialize(JsonElement jsonObject, Type arg1,
 			JsonDeserializationContext context) throws JsonParseException {
-		final JsonObject jsonQuestion= jsonObject.getAsJsonObject();
+	    final JsonObject jsonQuestion= jsonObject.getAsJsonObject();
 		
-		final JsonElement jsonContent= jsonQuestion.get("questionName");
+	    final JsonElement jsonContent= jsonQuestion.get("questionName");
 	    final String question_content = jsonContent.getAsString();
 	    
 	    final String author= jsonQuestion.get("author").getAsString();
@@ -44,6 +45,9 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	  //  final boolean hasPicture= jsonQuestion.get("hasPicture").getAsBoolean();
 	    final boolean inReadingList= jsonQuestion.get("IsInReadingList").getAsBoolean();
 	    final boolean isFavorite= jsonQuestion.get("isFav").getAsBoolean();
+	    //get ID, convert to UUID
+	    final UUID uniqueID = UUID.fromString(jsonQuestion.get("id").getAsString());
+	    
 	    
 	    final int picture= jsonQuestion.get("picture").getAsInt();
 	    Picture new_picture=new Picture(picture);
@@ -82,6 +86,7 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 		deserialized.setIsFav(isFavorite);
 		deserialized.setIsInReadingList(inReadingList);
 		deserialized.setAnswerList(answerList);
+		deserialized.setID(uniqueID);
 		return deserialized;
 	}
 

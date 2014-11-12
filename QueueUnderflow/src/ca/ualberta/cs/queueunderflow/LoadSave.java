@@ -95,8 +95,8 @@ public class LoadSave {
             Gson gson = gsonbuild.create();
             String gsonString = gson.toJson(ListHandler.getReadingList());
             
-            //Log.d("test", "printing string now...");
-            //Log.d("test", gsonString);
+            Log.d("test", "printing string now...");
+            Log.d("test", gsonString);
             this.saveData(readingListKey, gsonString);
     }
 	
