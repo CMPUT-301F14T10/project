@@ -41,6 +41,9 @@ public class AskAnswerController {
 	/** The image path. */
 	private String imagePath; // Not used yet
 	
+	/** The image encoded in base64. */
+	private String encodedImage;
+	
 	/**
 	 * Instantiates a new ask answer controller.
 	 *
@@ -63,7 +66,8 @@ public class AskAnswerController {
 			if (hasPicture == View.VISIBLE) {
 				newQuestion.setHasPicture(true);
 				//New here
-				newQuestion.setImagePath(imagePath);
+				//newQuestion.setImagePath(imagePath);
+				newQuestion.setEncodedImage(encodedImage);
 			}
 			QuestionList homeScreenList = ListHandler.getMasterQList();
 			homeScreenList.add(newQuestion);
@@ -134,5 +138,8 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
      */
     public void setImagePath(String path) {
     	this.imagePath = path;
+    }
+    public void setEncodedImage(String encoded) {
+    	this.encodedImage=encoded;
     }
 }

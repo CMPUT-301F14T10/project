@@ -51,6 +51,8 @@ public class GenericResponse {
 	//The image path (where the image is)
 	private String imagePath;
 	
+	private String encodedImage;
+	
 	public GenericResponse (String name, String author) {
 		name = name.trim();
 		if (name.length() == 0) {
@@ -64,6 +66,7 @@ public class GenericResponse {
 		this.image=null;
 		this.date = new Date();
 		this.imagePath=null;
+		this.encodedImage=null;
 		
 		this.isFav = false;
 		this.isInReadingList = false;
@@ -325,5 +328,13 @@ public class GenericResponse {
 	}
 	public String getImagePath() {
 		return this.imagePath;
+	}
+	
+	public void setEncodedImage(String encoded) {
+		this.encodedImage=encoded;
+	}
+	
+	public String getEncodedImage() {
+		return this.encodedImage;
 	}
 }

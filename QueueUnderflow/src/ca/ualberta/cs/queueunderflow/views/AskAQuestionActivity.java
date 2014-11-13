@@ -1,16 +1,20 @@
 package ca.ualberta.cs.queueunderflow.views;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -150,7 +154,19 @@ public class AskAQuestionActivity extends Activity{
 			ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 			imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imageUriFile.getPath()));
 			imagePreviewBtn.setVisibility(View.VISIBLE);
-			controller.setImagePath(imageUriFile.getPath());
+			
+			String imagePath= imageUriFile.getPath();
+			//controller.setImagePath(imageUriFile.getPath());
+			
+	        //Convert the image to a bitmap and compress it to 30% of its original quality as well
+	        Bitmap bitmap= BitmapFactory.decodeFile(imagePath);
+	        ByteArrayOutputStream byteArray= new ByteArrayOutputStream();
+	        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, byteArray);
+	        byte [] bytes= byteArray.toByteArray();
+	        
+	        //Convert the image to a base64 encoded string in order to serialize it later
+	        String encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
+	        controller.setEncodedImage(encoded);
 		}
 		else {
 			//If clicked on the add from gallery button, end up here
@@ -167,11 +183,20 @@ public class AskAQuestionActivity extends Activity{
 		        String imagePath = cursor.getString(0);
 		        cursor.close();
 		        
+		        //Convert the image to a bitmap and compress it to 30% of its original quality as well
+		        Bitmap bitmap= BitmapFactory.decodeFile(imagePath);
+		        ByteArrayOutputStream byteArray= new ByteArrayOutputStream();
+		        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, byteArray);
+		        byte [] bytes= byteArray.toByteArray();
+		        
+		        //Convert the image to a base64 encoded string in order to serialize it later
+		        String encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
+		        
 		        ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 				imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imagePath));
 				imagePreviewBtn.setVisibility(View.VISIBLE);
-				controller.setImagePath(imagePath);
-			
+				//controller.setImagePath(imagePath);
+				controller.setEncodedImage(encoded);
 		    }
 		}
 	}

@@ -17,9 +17,11 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -153,8 +155,11 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			
 			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
 			// TODO set imagePreview to the photo
-			String imagePath= questionArray.get(position).getImagePath();
-			imagePreview.setImageURI(Uri.parse(imagePath));
+			//String imagePath= questionArray.get(position).getImagePath();
+			//imagePreview.setImageURI(Uri.parse(imagePath));
+			String encodedImage= questionArray.get(position).getEncodedImage();
+			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
+			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
 		}
 		
 		ImageButton answerBtn = (ImageButton) view.findViewById(R.id.answerBtn);
