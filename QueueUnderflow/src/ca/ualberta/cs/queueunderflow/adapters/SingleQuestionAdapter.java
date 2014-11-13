@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -229,8 +231,13 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
             
             ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
             // TODO set imagePreview to the photo
-			String imagePath= singleQuestionArray.get(groupPosition).getImagePath();
-			imagePreview.setImageURI(Uri.parse(imagePath));
+			//String imagePath= singleQuestionArray.get(groupPosition).getImagePath();
+			//imagePreview.setImageURI(Uri.parse(imagePath));
+			
+            //Changed this because using setting the image to be displayed as bitmap, not by uri 
+			String encodedImage= singleQuestionArray.get(groupPosition).getEncodedImage();
+			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
+			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
         }
         
         ImageButton replyBtn = (ImageButton) view.findViewById(R.id.replyBtn);

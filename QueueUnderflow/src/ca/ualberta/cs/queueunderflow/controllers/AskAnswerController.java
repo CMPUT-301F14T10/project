@@ -97,7 +97,8 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			if (hasPicture == View.VISIBLE) {
 				newAnswer.setHasPicture(true);
 				//New here
-				newAnswer.setImagePath(imagePath);
+				//newAnswer.setImagePath(imagePath);
+				newAnswer.setEncodedImage(encodedImage);
 			}
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);

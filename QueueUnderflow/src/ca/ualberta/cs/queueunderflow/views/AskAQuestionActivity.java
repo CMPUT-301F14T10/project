@@ -42,7 +42,7 @@ public class AskAQuestionActivity extends Activity{
 	
 	/** The Constant SELECT_PICTURE CODE. */
 	private static final int SELECT_PICTURE= 1;
-    private String selectedImagePath;
+   // private String selectedImagePath;
     
 	/** The image uri file. */
 	private Uri imageUriFile;

@@ -14,9 +14,11 @@ import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -209,13 +211,23 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         });
          
         if (answerArray.get(groupPosition).hasPicture() == true) {
-            ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
-            hasPictureIcon.setVisibility(0);
+            //ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
+           // hasPictureIcon.setVisibility(0);
             
+			//ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
+			// TODO set imagePreview to the photo
+			//String imagePath= answerArray.get(groupPosition).getImagePath();
+			//imagePreview.setImageURI(Uri.parse(imagePath));
+        	
+			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
+			hasPictureIcon.setVisibility(0);
 			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
 			// TODO set imagePreview to the photo
-			String imagePath= answerArray.get(groupPosition).getImagePath();
-			imagePreview.setImageURI(Uri.parse(imagePath));
+
+            //Changed this because using setting the image to be displayed as bitmap, not by uri 
+			String encodedImage= answerArray.get(groupPosition).getEncodedImage();
+			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
+			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
         }
 		
 		
