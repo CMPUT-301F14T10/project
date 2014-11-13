@@ -177,7 +177,9 @@ public class AddAnAnswerActivity extends Activity
 			imagePreviewBtn.setVisibility(View.VISIBLE);
 			
 			String imagePath= imageUriFile.getPath();
-			//controller.setImagePath(imageUriFile.getPath());
+			
+			//Set image path to check image size>64kb
+			controller.setImagePath(imageUriFile.getPath());
 			
 	        //Convert the image to a bitmap and compress it to 30% of its original quality as well
 	        Bitmap bitmap= BitmapFactory.decodeFile(imagePath);
@@ -216,7 +218,9 @@ public class AddAnAnswerActivity extends Activity
 		        ImageButton imagePreviewBtn = (ImageButton) findViewById(R.id.imagePreviewBtn);
 				imagePreviewBtn.setImageDrawable(Drawable.createFromPath(imagePath));
 				imagePreviewBtn.setVisibility(View.VISIBLE);
-				//controller.setImagePath(imagePath);
+				
+				//Set image path to check image size>64kb
+				controller.setImagePath(imagePath);
 				controller.setEncodedImage(encoded);
 			
 		    }

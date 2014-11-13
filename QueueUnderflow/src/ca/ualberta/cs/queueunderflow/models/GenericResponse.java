@@ -1,5 +1,6 @@
 package ca.ualberta.cs.queueunderflow.models;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -324,7 +325,20 @@ public class GenericResponse {
 	}
 	
 	public void setImagePath(String path) {
+		//Using this to check if pictures >64kb
+		
+		//this.imagePath=path;
+		
+		File imageFile = new File(path);
+		//Get size of the file in bytes, 1024 bytes in a kilobyte
+		long size = imageFile.length();
+		//Get size of file in kilobytes
+		size=size/1024;		
+		if (size>64) {
+			throw new IllegalArgumentException("Image is over 64kb, choose a smaller image");
+		}
 		this.imagePath=path;
+
 	}
 	public String getImagePath() {
 		return this.imagePath;

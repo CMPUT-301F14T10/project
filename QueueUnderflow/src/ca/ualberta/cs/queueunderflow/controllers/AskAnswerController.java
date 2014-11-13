@@ -64,6 +64,13 @@ public class AskAnswerController {
 		try {
 			Question newQuestion = new Question(questionName, username);
 			if (hasPicture == View.VISIBLE) {
+				try {
+					newQuestion.setImagePath(imagePath);
+				} catch (IllegalArgumentException e){
+					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
 				newQuestion.setHasPicture(true);
 				//New here
 				//newQuestion.setImagePath(imagePath);
@@ -95,6 +102,15 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
 			if (hasPicture == View.VISIBLE) {
+				//Exception check: check if image >64kb
+				try {
+					newAnswer.setImagePath(imagePath);
+				} catch (IllegalArgumentException e){
+					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				
 				newAnswer.setHasPicture(true);
 				//New here
 				//newAnswer.setImagePath(imagePath);
