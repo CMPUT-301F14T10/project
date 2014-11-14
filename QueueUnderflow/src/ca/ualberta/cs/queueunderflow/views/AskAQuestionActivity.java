@@ -126,17 +126,23 @@ public class AskAQuestionActivity extends Activity{
 		});
 		
 		//SOURCE: http://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
-		//Still need to set up the adapters(think its the adapters anyway) to display the actual image
 		Button addFromGalleryBtn= (Button) findViewById(R.id.fromGallery);
 		addFromGalleryBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent= new Intent();
+				
+				//Intent intent= new Intent();
 				//Set the type of intent to be for images and start intent to go into default android gallery
-				intent.setType("image/*");	
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(Intent.createChooser(intent, "Select from gallery"),SELECT_PICTURE);
+				//intent.setType("image/*");	
+				//intent.setAction(Intent.ACTION_GET_CONTENT);
+				//startActivityForResult(Intent.createChooser(intent, "Select from gallery"),SELECT_PICTURE);
+				
+				//Added this to make this part compatible with API 19 for testing on device
+				//Works on API 17 as well
+
+				Intent intent= new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				startActivityForResult(intent, SELECT_PICTURE);
 			}
 			
 		});
