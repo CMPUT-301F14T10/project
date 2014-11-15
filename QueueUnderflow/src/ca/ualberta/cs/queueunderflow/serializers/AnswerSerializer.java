@@ -14,7 +14,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnswerSerializer.
  * @author group 10

@@ -6,7 +6,7 @@ import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class User.
  * @author group 10
@@ -14,7 +14,6 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
  */
 public class User {
 
-	//Changing all these fields to static too
 	/** The username. */
 	protected static String username;
 	
@@ -88,7 +87,7 @@ public class User {
 	 * @return true, if successful
 	 */
 	public boolean alreadyUpvotedQuestion(Question question){
-		//return this.upvotedQuestions.contains(question);
+		
 		return this.upvotedQuestions.contains(question);
 	}
 	
@@ -99,7 +98,7 @@ public class User {
 	 * @return true, if successful
 	 */
 	public boolean alreadyUpvotedAnswer(Answer answer){
-		//return this.upvotedAnswers.contains(answer);
+	
 		return this.upvotedAnswers.contains(answer);
 
 	}

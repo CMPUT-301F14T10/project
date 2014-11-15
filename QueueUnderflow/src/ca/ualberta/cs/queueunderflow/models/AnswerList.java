@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-// TODO: Auto-generated Javadoc
-/*
- Sets the Answerlist so we can have answers to questions.
- */
 
 /**
  * The Class AnswerList.

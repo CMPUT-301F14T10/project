@@ -18,8 +18,7 @@ import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-// TODO: Auto-generated Javadoc
-/* A lot of the navigation drawer stuff is modified from http://developer.android.com/training/implementing-navigation/nav-drawer.html 10-18-2014*/
+
 /**
  * The Class MainActivity.
  * Handles clicks & swipes relating to switching between fragments via the navigation drawer.

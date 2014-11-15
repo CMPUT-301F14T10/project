@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.text.format.DateFormat;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Question.
  * A model that will hold all of the information pertinent to a question (via inheritance from GenericResponse) and

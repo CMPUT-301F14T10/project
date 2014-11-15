@@ -7,7 +7,6 @@ import java.util.Comparator;
 import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class QuestionList.
  * Holds a collection of questions

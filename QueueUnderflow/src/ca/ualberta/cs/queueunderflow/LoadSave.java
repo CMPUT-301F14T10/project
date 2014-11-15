@@ -115,7 +115,7 @@ public class LoadSave {
             for(int i=0; i<qList.size(); i++)
             {
                 ListHandler.getReadingList().add(qList.get(i));
-                //ListHandler.getMasterQList().add(qList.get(i));
+               
             }
         }
 	}
@@ -138,7 +138,7 @@ public class LoadSave {
                 for(int i=0; i<qList.size(); i++)
                 {
                     ListHandler.getMyQsList().add(qList.get(i));
-                    //ListHandler.getMasterQList().add(qList.get(i));
+                   
                 }
             }
 	}
@@ -153,8 +153,7 @@ public class LoadSave {
                 Gson gson = gsonbuild.create();
                 String gsonString = gson.toJson(ListHandler.getMyQsList());
                 
-                //Log.d("test", "printing string now...");
-                //Log.d("test", gsonString);
+                
                 this.saveData(myQKey, gsonString);
         }
 	
@@ -164,7 +163,7 @@ public class LoadSave {
 	public void loadFavorites()
 	{
 		String gsonString = loadData(favsKey);
-		//Turn this into a questionList.
+	
 		GsonBuilder gsonbuild = new GsonBuilder();
 		gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
 		Gson gson = gsonbuild.create();
@@ -182,7 +181,7 @@ public class LoadSave {
 		}
 			
 		
-		//ListHandler.setFavsList(qList);
+	
 	}
 	
 	/**
@@ -210,7 +209,7 @@ public class LoadSave {
         	{
         		user.setUserName(loadedUsername);
         	} catch (IllegalArgumentException e){
-        		//This should never happen. Any username saved will be able to pass through without triggering this.
+        		
         		return false;
         	}
         }

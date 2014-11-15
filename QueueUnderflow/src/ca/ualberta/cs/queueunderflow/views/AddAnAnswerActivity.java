@@ -38,11 +38,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO: Auto-generated Javadoc
-/* This class is used for Adding Answers. It extends the activity class and 
-grabs the question from the position you grab.
-*/
-
 /**
  * The Class AddAnAnswerActivity.
  * Allows the user to input an answer to add and optionally attach a photo 

@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WriteReplyDialogFragment.
  * Handles getting user input to add a reply
