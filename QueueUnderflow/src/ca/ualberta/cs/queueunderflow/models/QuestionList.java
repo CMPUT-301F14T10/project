@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
@@ -277,5 +278,16 @@ public class QuestionList extends TModel<TView>{
 	public void setQuestionList(ArrayList<Question> newQuestions) {
 		this.questionList=newQuestions;
 		
+	}
+	
+	// Returns -1 if not found
+	public int getIndexFromID(UUID id) {
+		for (int i = 0; i < questionList.size(); i++) {
+			if (questionList.get(i).getID() == id) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 }

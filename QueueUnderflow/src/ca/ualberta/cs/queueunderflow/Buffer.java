@@ -5,6 +5,8 @@ import java.util.Vector;
 
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
+// make a generic abstract buffer class interface then make this implement the buffer class 
+// interface with methods flushBuffer()
 
 /**
  * The Class Buffer.

@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -43,8 +45,13 @@ public class WriteReplyController {
 	/** The activity. */
 	private Activity activity;
 	
+	/** The online indicator */
+	private boolean isOnline;
+	
 	/** The view. */
 	private View view;
+	
+	private NetworkManager networkManager = NetworkManager.getInstance();
 	
 	/**
 	 * Instantiates a new write reply controller.
@@ -55,6 +62,7 @@ public class WriteReplyController {
 	public WriteReplyController(Activity activity, View view) {
 		this.activity = activity;
 		this.view = view;
+		this.isOnline = networkManager.isOnline(activity.getApplicationContext());
 	}
 	
 	/**
@@ -79,6 +87,23 @@ public class WriteReplyController {
 			newReply = new Reply(replyText.getText().toString(), User.getUserName());
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		
+		if ( !isOnline ) {
+			NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
+			
+			if (type == TYPE_QUESTION) {
+				networkBuffer.addQReply(question.getID(), newReply);
+			}
+			else if (type == TYPE_ANSWER) {
+				int answerPosition = arguments.getInt("answerPosition");
+				Answer answer = question.getAnswerList().getAnswer(answerPosition);
+				networkBuffer.addAReply(question.getID(), answer.getID(), newReply);
+			}
+			
+			Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Reply will be pushed online when connected,", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		

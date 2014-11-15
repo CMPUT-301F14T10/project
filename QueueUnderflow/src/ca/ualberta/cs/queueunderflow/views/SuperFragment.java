@@ -2,6 +2,7 @@ package ca.ualberta.cs.queueunderflow.views;
 
 import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.R.id;
@@ -78,6 +79,12 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 			buffer.flushReadingList();
 		}
 		//
+		
+    	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
+    	NetworkManager networkManager = NetworkManager.getInstance();
+		if (networkManager.isOnline(getActivity().getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
 		
 		View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
 		

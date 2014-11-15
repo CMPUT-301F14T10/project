@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.UUID;
 
 // TODO: Auto-generated Javadoc
 /*
@@ -178,6 +179,17 @@ protected ArrayList <Answer> answerList;
 		else if (method.equals("no pictures")) {
 			Collections.sort(answerList, noPicturesComparator);
 		}
+	}
+
+	// Returns -1 if not found
+	public int getIndexFromID(UUID id) {
+		for (int i = 0; i < answerList.size(); i++) {
+			if (answerList.get(i).getID() == id) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 	
 	

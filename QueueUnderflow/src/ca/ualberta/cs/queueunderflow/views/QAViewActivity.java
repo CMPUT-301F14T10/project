@@ -14,6 +14,7 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
@@ -216,8 +217,22 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         }
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 
-	// Not complete yet
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+    	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
+    	NetworkManager networkManager = NetworkManager.getInstance();
+		if (networkManager.isOnline(getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
+	}
+
+
+
 	/* (non-Javadoc)
 	 * @see ca.ualberta.cs.queueunderflow.TView#update(java.lang.Object)
 	 */

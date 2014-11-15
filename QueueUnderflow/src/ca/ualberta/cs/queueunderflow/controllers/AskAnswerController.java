@@ -2,12 +2,11 @@ package ca.ualberta.cs.queueunderflow.controllers;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
-import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -38,11 +37,16 @@ public class AskAnswerController {
 	/** The activity. */
 	private Activity activity;	// This is so we can make Toast messages
 	
+	/** The online indicator */
+	private boolean isOnline;
+	
 	/** The image path. */
 	private String imagePath; // Not used yet
 	
 	/** The image encoded in base64. */
 	private String encodedImage;
+	
+	private NetworkManager networkManager = NetworkManager.getInstance();
 	
 	/**
 	 * Instantiates a new ask answer controller.
@@ -51,6 +55,7 @@ public class AskAnswerController {
 	 */
 	public AskAnswerController(Activity activity) {
 		this.activity = activity;
+		this.isOnline = networkManager.isOnline(activity.getApplicationContext());
 	}
 
 	/**
@@ -76,6 +81,15 @@ public class AskAnswerController {
 				//newQuestion.setImagePath(imagePath);
 				newQuestion.setEncodedImage(encodedImage);
 			}
+			
+			if ( !isOnline ) {
+				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
+				networkBuffer.addQuestion(newQuestion);
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will be pushed online when connected,", Toast.LENGTH_SHORT).show();
+				activity.finish();
+				return;
+			}
+			
 			QuestionList homeScreenList = ListHandler.getMasterQList();
 			homeScreenList.add(newQuestion);
 			
@@ -87,7 +101,7 @@ public class AskAnswerController {
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -116,14 +130,24 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 				//newAnswer.setImagePath(imagePath);
 				newAnswer.setEncodedImage(encodedImage);
 			}
+			
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
+			
+			if ( !isOnline ) {
+				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
+				networkBuffer.addAnswer(question.getID(), newAnswer);
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will be pushed online when connected,", Toast.LENGTH_SHORT).show();
+				activity.finish();
+				return;
+			}
+			
 			question.addAnswer(newAnswer);
 			questionList.set(position, question);
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

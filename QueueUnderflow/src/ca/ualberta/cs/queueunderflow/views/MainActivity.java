@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
@@ -181,6 +182,12 @@ public class MainActivity extends Activity {
     		LoadSave.unsavedChanges = false;
     	}
     	*/
+    	
+    	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
+    	NetworkManager networkManager = NetworkManager.getInstance();
+    	if (networkManager.isOnline(getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
     }
         
     @Override
