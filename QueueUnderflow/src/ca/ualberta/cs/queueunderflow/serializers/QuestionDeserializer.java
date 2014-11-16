@@ -79,9 +79,14 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 		deserialized.setIsInReadingList(inReadingList);
 		deserialized.setAnswerList(answerList);
 		deserialized.setID(uniqueID);
-		deserialized.setEncodedImage(encodedImage);
-		deserialized.setImagePath(imagePath);
 		
+		if (!imagePath.equals("none")) {
+			deserialized.setImagePath(imagePath);
+
+		}
+		if (!encodedImage.equals("none")) {
+			deserialized.setEncodedImage(encodedImage);
+		}
 		return deserialized;
 
 	}

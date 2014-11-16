@@ -42,8 +42,8 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 
 	    questionObject.add("date",date);
 	    
-	    questionObject.addProperty("imagePath", question.getImagePath());
-	    questionObject.addProperty("encodedImage",question.getEncodedImage());
+	    //questionObject.addProperty("imagePath", question.getImagePath());
+	    //questionObject.addProperty("encodedImage",question.getEncodedImage());
 	    questionObject.addProperty("isFav",question.getIsFav());
 	    questionObject.addProperty("isInReadingList",question.getIsInReadingList());
 	    questionObject.addProperty("uniqueID",question.getID());
@@ -53,6 +53,20 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 
 	    JsonElement answers= serialization_context.serialize(question.getAnswerList());
 		questionObject.add("answerList",answers);
+		
+	    if (question.getEncodedImage()== null) {
+	    	questionObject.addProperty("encodedImage","none");
+	    }
+	    else {
+	    	questionObject.addProperty("encodedImage",question.getEncodedImage());
+	    }
+	    
+	    if (question.getImagePath()==null) {
+	    	questionObject.addProperty("imagePath","none");
+	    }
+	    else {
+	    	questionObject.addProperty("imagePath",question.getImagePath());
+	    }
 
 	    
 	    return questionObject;
