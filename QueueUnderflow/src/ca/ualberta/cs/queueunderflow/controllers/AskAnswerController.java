@@ -82,13 +82,19 @@ public class AskAnswerController {
 				newQuestion.setEncodedImage(encodedImage);
 			}
 			
-			if ( !isOnline ) {
+			//if ( !isOnline ) {
+			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
+			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 				networkBuffer.addQuestion(newQuestion);
-				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will be pushed online when connected,", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
 				activity.finish();
 				return;
 			}
+			
+			// New
+			Thread thread = new AddThread(newQuestion);
+			thread.start();
 			
 			QuestionList homeScreenList = ListHandler.getMasterQList();
 			homeScreenList.add(newQuestion);
@@ -134,10 +140,12 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
 			
-			if ( !isOnline ) {
+			//if ( !isOnline ) {
+			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
+			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 				networkBuffer.addAnswer(question.getID(), newAnswer);
-				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will be pushed online when connected,", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
 				activity.finish();
 				return;
 			}
@@ -183,4 +191,30 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
     public void setEncodedImage(String encoded) {
     	this.encodedImage=encoded;
     }
+    
+    
+    
+	
+	class AddThread extends Thread {
+
+		private Question question;
+		
+		public AddThread(Question question) {
+			this.question = question;
+		}
+		
+		@Override
+		public void run() {
+			networkManager.addQuestion(question);
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }
+
+
