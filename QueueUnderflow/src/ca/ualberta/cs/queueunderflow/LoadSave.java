@@ -130,9 +130,10 @@ public class LoadSave {
         gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
         Gson gson = gsonbuild.create();
             
-        Type qlType = new TypeToken<QuestionList>() {}.getType();
-        QuestionList qList = gson.fromJson(gsonString, qlType);
-            
+        //Type qlType = new TypeToken<QuestionList>() {}.getType();
+        //QuestionList qList = gson.fromJson(gsonString, qlType);
+        QuestionList qList = gson.fromJson(gsonString, QuestionList.class);
+    
             if(qList != null)
             {
                 for(int i=0; i<qList.size(); i++)
@@ -169,9 +170,10 @@ public class LoadSave {
 		gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
 		Gson gson = gsonbuild.create();
 		
-		Type qlType = new TypeToken<QuestionList>() {}.getType();
-		QuestionList qList = gson.fromJson(gsonString, qlType);
-		
+		//Type qlType = new TypeToken<QuestionList>() {}.getType();
+		//QuestionList qList = gson.fromJson(gsonString, qlType);
+		QuestionList qList = gson.fromJson(gsonString, QuestionList.class);
+
 		if(qList != null)
 		{
 			for(int i=0; i<qList.size(); i++)

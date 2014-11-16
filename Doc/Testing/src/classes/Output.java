@@ -2,6 +2,12 @@ package classes;
 
 import java.io.IOException;
 
+import model_classes.Answer;
+import model_classes.AnswerList;
+import model_classes.Question;
+import model_classes.QuestionList;
+import model_classes.Reply;
+
 
 
 
@@ -16,7 +22,7 @@ public class Output {
 		
 	    // Configure GSON
 	    final GsonBuilder gsonBuilder = new GsonBuilder();
-	    gsonBuilder.registerTypeAdapter(Reply.class, new ReplySerializing());
+	    //gsonBuilder.registerTypeAdapter(Reply.class, new ReplySerializing());
 	    
 	    //This makes printing nicer
 	    //gsonBuilder.setPrettyPrinting();
@@ -39,10 +45,7 @@ public class Output {
 		Answer testAnswer= new Answer(answerName,authorName);
 		Reply answer_reply= new Reply("Please clarify what you're asking", "Anonymous");
 		testAnswer.addReply(answer_reply);
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
-	
-		
+
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Answer.class, new AnswerSerializing());
 	    gsonBuilder2.setPrettyPrinting();
@@ -57,36 +60,31 @@ public class Output {
 		String answerName= "An answer";
 		String authorName= "You";
 		Answer testAnswer= new Answer(answerName,authorName);
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
 		AnswerList answerList= new AnswerList();
 		answerList.add(testAnswer);
 		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(AnswerList.class, new AnswerListSerializing());
-	    //gsonBuilder2.setPrettyPrinting();
+	    gsonBuilder2.setPrettyPrinting();
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(answerList);
 	    System.out.println(json2);
-		
 		*/
+		
 		
 		/*Question serialization test
 		
 		String questionName= "A question?";
 		Question questionTest= new Question(questionName,"Anonymous");
 		Reply question_reply= new Reply("Whats going on","Unknown");
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		questionTest.setUpvotes(2);
 		
 		String answerName= "An answer";
 		Answer testAnswer= new Answer(answerName,"dfaf");
 		Reply answer_reply= new Reply("dafasf","ABCDEFG");
 		testAnswer.addReply(answer_reply);
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
 		questionTest.addAnswer(testAnswer);
-		questionTest.setPicture(pic);
 		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Question.class, new QuestionSerializing());
@@ -94,8 +92,8 @@ public class Output {
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(questionTest);
 	    System.out.println(json2);
-		
 		*/
+		
 		
 		//QuestionList serializing
 		
@@ -107,7 +105,7 @@ public class Output {
 		String reply_author= "I dunno";
 		Reply question_reply= new Reply("Whats going on",reply_author);
 	
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		questionTest.setUpvotes(2);
 
 		QuestionList questionList= new QuestionList();
@@ -124,21 +122,18 @@ public class Output {
 		Reply answer_reply= new Reply("Go to stackoverflow",answer_reply_author);
 		testAnswer.addReply(answer_reply);
 		
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
 		questionTest.addAnswer(testAnswer);
-		questionTest.setPicture(pic);
 		
 		questionList.add(questionTest);
 		
 		// Supposedly faster serialization for question list and have the question as the index
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
-	    gsonBuilder2.registerTypeAdapter(QuestionList.class, new QuestionListSerializing());
-	    //gsonBuilder2.setPrettyPrinting();
+	    gsonBuilder2.registerTypeAdapter(QuestionList.class, new QuestionListSerializer());
+	    gsonBuilder2.setPrettyPrinting();
 	    final Gson gson2 = gsonBuilder2.create();
 	    final String json2=gson2.toJson(questionList);
 	    System.out.println(json2);
-	    //
+	    
 		
 		/* Slower serialization for question list, don't have question as the index"
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
@@ -149,4 +144,97 @@ public class Output {
 	    System.out.println(json2);
 		*/
 	  }
+	
+	
+	
+	
+	
+	
+/*	[
+	  {
+	    "questionName": "A question?",
+	    "questionReplies": [
+	      {
+	        "reply": "Whats going on",
+	        "author": "I dunno"
+	      }
+	    ],
+	    "author": "A author",
+	    "upvote": 2,
+	    "hasPicture": false,
+	    "date": "Nov 13, 2014 8:17:47 PM",
+	    "isFav": false,
+	    "isInReadingList": false,
+	    "uniqueID": "1b7a4b05-9ec6-4323-9b76-252c12b138c3",
+	    "answerList": {
+	      "answerList": [
+	        {
+	          "name": "An answer",
+	          "replies": [
+	            {
+	              "reply": "Go to stackoverflow",
+	              "author": "7-11"
+	            }
+	          ],
+	          "author": "Me",
+	          "upvote": 0,
+	          "hasPicture": false,
+	          "date": "Nov 13, 2014 8:17:47 PM",
+	          "isFav": false,
+	          "isInReadingList": false,
+	          "uniqueID": "53e7dccb-7497-40b7-abaf-040bf57234ca"
+	        }
+	      ]
+	    }
+	  }
+	];
+	
+	
+	
+	[
+	  {
+	    "answerList": {
+	      "answerList": [
+	        {
+	          "name": "An answer",
+	          "replies": [
+	            {
+	              "reply": "Go to stackoverflow",
+	              "author": "7-11"
+	            }
+	          ],
+	          "author": "Me",
+	          "upvote": 0,
+	          "hasPicture": false,
+	          "date": "Nov 13, 2014 8:19:17 PM",
+	          "isFav": false,
+	          "isInReadingList": false,
+	          "uniqueID": "8b62ebc9-247e-44f7-ae07-7aafd4265855"
+	        }
+	      ]
+	    },
+	    "name": "A question?",
+	    "replies": [
+	      {
+	        "reply": "Whats going on",
+	        "author": "I dunno"
+	      }
+	    ],
+	    "author": "A author",
+	    "upvote": 2,
+	    "hasPicture": false,
+	    "date": "Nov 13, 2014 8:19:17 PM",
+	    "isFav": false,
+	    "isInReadingList": false,
+	    "uniqueID": "81a13825-22b8-4158-9634-86b471446a6d"
+	  }
+	]*/
+	
+			
+			
+			
+			
+			
+	
+	
 }

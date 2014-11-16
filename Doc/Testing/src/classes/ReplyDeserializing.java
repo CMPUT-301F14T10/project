@@ -1,4 +1,4 @@
-package classes;
+/*package classes;
 
 import java.lang.reflect.Type;
 
@@ -25,4 +25,4 @@ public class ReplyDeserializing implements JsonDeserializer<Reply> {
 	    return deserialized_reply;
 	}
 
-}
+}*/

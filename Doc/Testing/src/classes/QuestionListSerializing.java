@@ -1,4 +1,4 @@
-package classes;
+/*package classes;
 
 import java.io.IOException;
 
@@ -37,4 +37,4 @@ public class QuestionListSerializing extends TypeAdapter<QuestionList> {
 		
 	}
 
-}
+}*/
