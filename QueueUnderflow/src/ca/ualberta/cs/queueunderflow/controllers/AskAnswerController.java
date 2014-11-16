@@ -1,14 +1,12 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
-import java.util.UUID;
-
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ESManager;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -47,8 +45,7 @@ public class AskAnswerController {
 	private String encodedImage;
 	
 	private NetworkManager networkManager = NetworkManager.getInstance();
-	private ESManager esManager;
-	
+
 	/**
 	 * Instantiates a new ask answer controller.
 	 *
@@ -56,7 +53,6 @@ public class AskAnswerController {
 	 */
 	public AskAnswerController(Activity activity) {
 		this.activity = activity;
-		this.esManager = new ESManager();
 	}
 
 	/**
@@ -94,14 +90,8 @@ public class AskAnswerController {
 			}
 			
 			// New - If it get's here, it's connected
-			Thread thread = new AddQThread(newQuestion);
-			thread.start();
-			
-			QuestionList homeScreenList = ListHandler.getMasterQList();
-			homeScreenList.add(newQuestion);
-			
-			QuestionList myQuestionsList = ListHandler.getMyQsList();
-			myQuestionsList.add(newQuestion);
+			NetworkController networkController = new NetworkController();
+			networkController.addQuestion(newQuestion);
 			
 			//Mark as unsaved data.
 			LoadSave.unsavedChanges = true;
@@ -152,11 +142,8 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			}
 			
 			// New - If it get's here, it's connected
-			Thread thread = new AddAThread(question.getID(), newAnswer);
-			thread.start();
-			
-//			question.addAnswer(newAnswer);
-//			questionList.set(position, question);
+			NetworkController networkController = new NetworkController();
+			networkController.addAnswer(question.getID(), newAnswer);
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
@@ -196,54 +183,7 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
     public void setEncodedImage(String encoded) {
     	this.encodedImage=encoded;
     }
-    
-    
-    
-    // BELOW - Maybe move this somewhere else later
-	
-	class AddQThread extends Thread {
 
-		private Question question;
-		
-		public AddQThread(Question question) {
-			this.question = question;
-		}
-		
-		@Override
-		public void run() {
-			esManager.addQuestion(question);
-			
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
-	
-	class AddAThread extends Thread {
-
-		private UUID questionID;
-		private Answer answer;
-		
-		public AddAThread(UUID questionID, Answer answer) {
-			this.questionID = questionID;
-			this.answer = answer;
-		}
-		
-		@Override
-		public void run() {
-			esManager.addAnswer(questionID, answer);
-			
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
 }
 
 

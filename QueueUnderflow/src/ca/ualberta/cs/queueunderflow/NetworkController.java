@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
 // Implement an interface?
@@ -11,22 +12,32 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 // to ensure that there are no conflicts
 public class NetworkController {
 
+	private ESManager esManager;
+	
 	public NetworkController() {
+		esManager = new ESManager();
+	}
+	
+	public void addQuestion(Question newQuestion) {
+		Thread thread = new AddQThread(newQuestion);
+		thread.start();
 		
+		ListHandler.getMasterQList().add(newQuestion);
+		ListHandler.getMyQsList().add(newQuestion);
 	}
 	
-	public void addQuestion(Question question) {
-		ListHandler.getMasterQList().add(question);
-		ListHandler.getMyQsList().add(question);
-	}
-	
-	public void addAnswer(UUID questionID, Answer answer) {
+	public void addAnswer(UUID questionID, Answer newAnswer) {
+		Thread thread = new AddAThread(questionID, newAnswer);
+		thread.start();
+		
+		// So it updates the view b/c we use .set
 		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
 		Question question = ListHandler.getMasterQList().get(questionIndex);
-		question.addAnswer(answer);
+//		question.addAnswer(newAnswer);
 		ListHandler.getMasterQList().set(questionIndex, question);
 	}
 	
+	// Everything below here - still need to push to network
 	public void addQReply(UUID questionID, Reply reply) {
 		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
 		Question question = ListHandler.getMasterQList().get(questionIndex);
@@ -43,5 +54,55 @@ public class NetworkController {
 		
 		answer.addReply(reply);
 		ListHandler.getMasterQList().set(questionIndex, question);
+	}
+	
+	
+    
+    
+    
+    // BELOW - Maybe move this somewhere else later
+	// This is modified from https://github.com/dfserrano/AndroidElasticSearch 11-15-2014
+	class AddQThread extends Thread {
+
+		private Question question;
+		
+		public AddQThread(Question question) {
+			this.question = question;
+		}
+		
+		@Override
+		public void run() {
+			esManager.addQuestion(question);
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	class AddAThread extends Thread {
+
+		private UUID questionID;
+		private Answer answer;
+		
+		public AddAThread(UUID questionID, Answer answer) {
+			this.questionID = questionID;
+			this.answer = answer;
+		}
+		
+		@Override
+		public void run() {
+			esManager.addAnswer(questionID, answer);
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

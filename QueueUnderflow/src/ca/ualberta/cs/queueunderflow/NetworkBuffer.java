@@ -13,8 +13,10 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
 // implement generic buffer class?
+// This deals with all the actions that users do when they are offline
 public class NetworkBuffer {
 
+	// Add & handle upvotes, favorites, reading list indicator here later
 	ArrayList<Question> questionBuffer;
 	Map<UUID, Answer> answerBuffer;
 	Map<UUID, Reply> questionReplyBuffer;
@@ -34,7 +36,7 @@ public class NetworkBuffer {
 		Log.d("network", "adding question to buffer: " + question.getName());
 	}
 	
-	// Problem : What is you add more than one answer while offline - dictionaries don't work anymore
+	// Problem : What is you add more than one answer while offline - dictionaries don't work anymore - Need to fix later
 	public void addAnswer(UUID questionID, Answer answer) {
 		answerBuffer.put(questionID, answer);
 		Log.d("network", "adding answer to buffer: " + answer.getName());

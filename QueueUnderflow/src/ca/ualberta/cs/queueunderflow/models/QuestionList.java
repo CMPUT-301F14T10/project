@@ -259,6 +259,8 @@ public class QuestionList extends TModel<TView>{
 		else if (method.equals("no pictures")) {
 			Collections.sort(questionList, noPicturesComparator);
 		}
+		
+		notifyViews();
 	}
 	
 	/**

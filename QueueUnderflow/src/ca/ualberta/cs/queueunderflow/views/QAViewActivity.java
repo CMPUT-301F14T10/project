@@ -19,6 +19,7 @@ import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
+import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
@@ -104,6 +105,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		// Get the question selected
 		question = questionList.get(position);
 		
+		AnswerList answerList = question.getAnswerList();
+		
 		// Set up the display
 		ExpandableListView singleQuestionExpListView = (ExpandableListView) findViewById(R.id.questionExpListView);
 		singleQAdapter = new SingleQuestionAdapter(this, questionList.getQuestionList() , fromFragment, position);
@@ -143,7 +146,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         answersCount.setText(Integer.toString(question.getAnswerListSize()));
         
         ExpandableListView answersExpListView = (ExpandableListView) findViewById(R.id.answersExpListView);
-        adapter = new AnswerListAdapter(this, question.getAnswerList().getAnswerList(), fromFragment, position);
+        adapter = new AnswerListAdapter(this, answerList.getAnswerList(), fromFragment, position);
         answersExpListView.setAdapter(adapter);
         
      // Display a "no replies" toast if answer is clicked on but has no replies

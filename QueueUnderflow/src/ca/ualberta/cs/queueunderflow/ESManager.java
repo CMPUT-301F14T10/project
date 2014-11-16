@@ -95,7 +95,6 @@ public class ESManager {
 			String status = response.getStatusLine().toString();
 			System.out.println("ADDANSWER - HTTP STATUS ----- " + status);
 			
-			//ListHandler.getMasterQList().set(questionIndex, question);
 			
 		} catch (Exception e) {
 			System.out.println("ADD ANSWER FAILED");
