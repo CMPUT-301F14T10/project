@@ -1,29 +1,8 @@
 package ca.ualberta.cs.queueunderflow;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.UUID;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import ca.ualberta.cs.queueunderflow.models.Answer;
-import ca.ualberta.cs.queueunderflow.models.GenericResponse;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.serializers.AnswerSerializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
 
 public class NetworkManager {
 

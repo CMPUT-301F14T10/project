@@ -47,8 +47,8 @@ public class GenericResponse {
 	protected boolean isInReadingList;
 	
 	/** The unique ID */
-	//protected UUID uniqueID;
-	protected String uniqueID;
+	protected UUID uniqueID;
+	//protected String uniqueID;
 	
 	//The image path (where the image is)
 	private String imagePath;
@@ -74,8 +74,8 @@ public class GenericResponse {
 		this.isInReadingList = false;
 		
 		//Set unique ID and convert to string to store in JSON form
-		//uniqueID = UUID.randomUUID();
-		this.uniqueID = UUID.randomUUID().toString();
+		uniqueID = UUID.randomUUID();
+//		this.uniqueID = UUID.randomUUID().toString();
 
 	}
 	
@@ -96,12 +96,12 @@ public class GenericResponse {
 	 * @param uid
 	 */
 	
-/*	public void setID(UUID uid) {
+	public void setID(UUID uid) {
 	    this.uniqueID = uid;
-	}*/
+	}
 	
-	public void setID(String ID) {
-		this.uniqueID=ID;
+	public void setStringID(String ID) {
+		this.uniqueID=UUID.fromString(ID);
 	}
 	
 
@@ -111,12 +111,12 @@ public class GenericResponse {
 	 * @return the unique ID
 	 */
 	
-/*	public UUID getID() {
+	public UUID getID() {
 	    return this.uniqueID;
-	}*/
+	}
 	
-	public String getID() {
-	    return this.uniqueID;
+	public String getStringID() {
+	    return this.uniqueID.toString();
 	}
 	
 	

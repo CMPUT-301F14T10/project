@@ -46,7 +46,7 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 	    //questionObject.addProperty("encodedImage",question.getEncodedImage());
 	    questionObject.addProperty("isFav",question.getIsFav());
 	    questionObject.addProperty("isInReadingList",question.getIsInReadingList());
-	    questionObject.addProperty("uniqueID",question.getID());
+	    questionObject.addProperty("uniqueID",question.getStringID());
 		
 		//final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    //final Gson gson2 = gsonBuilder2.create();

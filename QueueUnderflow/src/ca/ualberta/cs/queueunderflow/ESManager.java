@@ -10,10 +10,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import ca.ualberta.cs.queueunderflow.legacy_code.AnswerSerializer;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.serializers.AnswerSerializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
 
 import com.google.gson.Gson;
