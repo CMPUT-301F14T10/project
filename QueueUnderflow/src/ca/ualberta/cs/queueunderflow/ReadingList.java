@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.queueunderflow.models.Question;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ReadingList.
  * Not used yet - May not use

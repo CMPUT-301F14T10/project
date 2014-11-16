@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class MasterAnswerList.
  * @author group 10

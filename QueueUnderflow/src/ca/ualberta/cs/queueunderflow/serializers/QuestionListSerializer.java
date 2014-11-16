@@ -17,7 +17,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class QuestionListSerializer.
  * @author group 10

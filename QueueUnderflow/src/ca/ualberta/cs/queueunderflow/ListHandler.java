@@ -28,7 +28,6 @@ public class ListHandler {
 	
 	/** The user. */
 	private static User user;
-	//private static UserList myUList;
 	
 	private ListHandler() {
 		qList = new QuestionList();

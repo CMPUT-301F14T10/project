@@ -9,7 +9,7 @@ import android.text.format.DateFormat;
 
 import ca.ualberta.cs.queueunderflow.Picture;
 
-//TODO: Auto-generated Javadoc
+
 /**
 * The Class GenericResponse.
 * Holds all the basic attributes of a response

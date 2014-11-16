@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Picture. Suppose to hold an image.
  * @author group 10
@@ -9,7 +9,6 @@ package ca.ualberta.cs.queueunderflow;
  */
 public class Picture
 {
-	//Need to fix later on
 	/** The picture. */
 	protected int picture;
 	

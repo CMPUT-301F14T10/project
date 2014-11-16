@@ -15,7 +15,6 @@ import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SetUsernameFragment.
  * Allows user to change their username.

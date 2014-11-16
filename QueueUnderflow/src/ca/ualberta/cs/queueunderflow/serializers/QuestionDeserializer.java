@@ -18,7 +18,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class QuestionDeserializer.
  * @author group 10
