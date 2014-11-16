@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.serializers;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import android.util.Log;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.AnswerList;
 
@@ -10,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
@@ -39,6 +39,7 @@ public class AnswerListSerializer implements JsonSerializer<AnswerList> {
 		    final JsonElement json2=gson2.toJsonTree(answer);
 		    jsonArray.add(json2);
 		}
+		Log.d("answer serializser", jsonArray.toString());
 		return jsonArray;
 	}
 

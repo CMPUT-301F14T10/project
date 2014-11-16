@@ -1,8 +1,11 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ESManager;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
@@ -37,9 +40,6 @@ public class AskAnswerController {
 	/** The activity. */
 	private Activity activity;	// This is so we can make Toast messages
 	
-	/** The online indicator */
-	private boolean isOnline;
-	
 	/** The image path. */
 	private String imagePath; // Not used yet
 	
@@ -47,6 +47,7 @@ public class AskAnswerController {
 	private String encodedImage;
 	
 	private NetworkManager networkManager = NetworkManager.getInstance();
+	private ESManager esManager;
 	
 	/**
 	 * Instantiates a new ask answer controller.
@@ -55,7 +56,7 @@ public class AskAnswerController {
 	 */
 	public AskAnswerController(Activity activity) {
 		this.activity = activity;
-		this.isOnline = networkManager.isOnline(activity.getApplicationContext());
+		this.esManager = new ESManager();
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class AskAnswerController {
 				newQuestion.setEncodedImage(encodedImage);
 			}
 			
-			//if ( !isOnline ) {
+			// If not online / not connected : add it to the Network Buffer to push online later when connected
 			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
 			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
@@ -92,8 +93,8 @@ public class AskAnswerController {
 				return;
 			}
 			
-			// New
-			Thread thread = new AddThread(newQuestion);
+			// New - If it get's here, it's connected
+			Thread thread = new AddQThread(newQuestion);
 			thread.start();
 			
 			QuestionList homeScreenList = ListHandler.getMasterQList();
@@ -140,7 +141,7 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
 			
-			//if ( !isOnline ) {
+			// If not online / not connected : add it to the Network Buffer to push online later when connected
 			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
 			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
@@ -150,8 +151,12 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 				return;
 			}
 			
-			question.addAnswer(newAnswer);
-			questionList.set(position, question);
+			// New - If it get's here, it's connected
+			Thread thread = new AddAThread(question.getID(), newAnswer);
+			thread.start();
+			
+//			question.addAnswer(newAnswer);
+//			questionList.set(position, question);
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
@@ -194,18 +199,42 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
     
     
     
+    // BELOW - Maybe move this somewhere else later
 	
-	class AddThread extends Thread {
+	class AddQThread extends Thread {
 
 		private Question question;
 		
-		public AddThread(Question question) {
+		public AddQThread(Question question) {
 			this.question = question;
 		}
 		
 		@Override
 		public void run() {
-			networkManager.addQuestion(question);
+			esManager.addQuestion(question);
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	class AddAThread extends Thread {
+
+		private UUID questionID;
+		private Answer answer;
+		
+		public AddAThread(UUID questionID, Answer answer) {
+			this.questionID = questionID;
+			this.answer = answer;
+		}
+		
+		@Override
+		public void run() {
+			esManager.addAnswer(questionID, answer);
 			
 			try {
 				Thread.sleep(500);
