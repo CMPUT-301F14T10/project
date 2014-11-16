@@ -33,7 +33,7 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SingleQuestionAdapter.
  * Connects a single question(& its replies) to the QAView

@@ -1,5 +1,10 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
+// TODO: Auto-generated Javadoc
+/* This is the class to set Answers.
+ It grabs the user and the list of answers from a question. It also is what is
+ used for grabbing upvotes for certain questions.
+ */
 /**
  * The Class Answer.
  * An answer to a question. Contains the title, author, rating, date, any replies, etc (via inheritance from GenericResponse)

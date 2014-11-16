@@ -1,5 +1,6 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Reply.
  * Models a reply with the reply content and the author.

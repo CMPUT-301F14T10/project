@@ -1,4 +1,4 @@
-package classes;
+/*package classes;
 
 import java.lang.reflect.Type;
 
@@ -18,4 +18,4 @@ public class ReplySerializing implements JsonSerializer<Reply>{
 		return replyObject;
 	}
 
-}
+}*/

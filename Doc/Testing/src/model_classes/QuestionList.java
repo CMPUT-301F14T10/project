@@ -1,20 +1,18 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.UUID;
 
-import ca.ualberta.cs.queueunderflow.TModel;
-import ca.ualberta.cs.queueunderflow.TView;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class QuestionList.
  * Holds a collection of questions
  * @author group 10
  * @version 0.5
  */
-public class QuestionList extends TModel<TView>{
+public class QuestionList {
 	
 	/** The question list. */
 	protected ArrayList <Question> questionList;
@@ -26,7 +24,7 @@ public class QuestionList extends TModel<TView>{
 	/** The question list3. */
 	protected ArrayList <Question> questionList3;
 	
-	/** The online. */
+	/** The online. Not really used except for use case testing in project part 2 */
 	protected boolean online;
 	
 	/**
@@ -80,7 +78,6 @@ public class QuestionList extends TModel<TView>{
 	public void add (Question question) {
 		// Add at position 0, so that freshest Q is always first
 		questionList.add(0, question);
-		notifyViews();
 		
 	}
 	
@@ -132,7 +129,6 @@ public class QuestionList extends TModel<TView>{
 	 */
 	public void set(int index, Question question) {
 		questionList.set(index, question);
-		notifyViews();
 	}
 	
 	/**
@@ -189,7 +185,6 @@ public class QuestionList extends TModel<TView>{
 		// Sort by date
 		Comparator<Question> leastRecentComparator = new Comparator<Question>() {
 
-			@Override
 			public int compare(Question lhs, Question rhs) {
 				return (lhs.getDate().compareTo(rhs.getDate()));
 			
@@ -197,7 +192,6 @@ public class QuestionList extends TModel<TView>{
 		};
 		
 		Comparator<Question> mostRecentComparator = new Comparator<Question>() {
-			@Override
 			public int compare(Question lhs, Question rhs) {
 				return (lhs.getDate().compareTo(rhs.getDate())) * -1;	
 				
@@ -206,7 +200,6 @@ public class QuestionList extends TModel<TView>{
 		
 		// Sort by upvote
 		Comparator <Question> mostUpvotesComparator = new Comparator<Question>() {
-			@Override
 			public int compare(Question lhs, Question rhs) {
 				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
 			}
@@ -215,7 +208,6 @@ public class QuestionList extends TModel<TView>{
 		// Sort by has pictures - questions with pictures appear at the top followed by questions with no pictures
 		Comparator<Question> hasPicturesComparator = new Comparator<Question>() {
 
-			@Override
 			public int compare(Question lhs, Question rhs) {
 				if (lhs.hasPicture() && !rhs.hasPicture()) {
 					return -1;
@@ -231,7 +223,6 @@ public class QuestionList extends TModel<TView>{
 		// Sort by no pictures - questions with no pictures appear at the top followed by questions with no pictures
 		Comparator<Question> noPicturesComparator = new Comparator<Question>() {
 
-			@Override
 			public int compare(Question lhs, Question rhs) {
 				if (lhs.hasPicture() && !rhs.hasPicture()) {
 					return 1;
@@ -258,8 +249,6 @@ public class QuestionList extends TModel<TView>{
 		else if (method.equals("no pictures")) {
 			Collections.sort(questionList, noPicturesComparator);
 		}
-		
-		notifyViews();
 	}
 	
 	/**
@@ -279,16 +268,5 @@ public class QuestionList extends TModel<TView>{
 	public void setQuestionList(ArrayList<Question> newQuestions) {
 		this.questionList=newQuestions;
 		
-	}
-	
-	// Returns -1 if not found
-	public int getIndexFromID(UUID id) {
-		for (int i = 0; i < questionList.size(); i++) {
-			if (questionList.get(i).getID() == id) {
-				return i;
-			}
-		}
-		
-		return -1;
 	}
 }

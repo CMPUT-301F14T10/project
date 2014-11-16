@@ -3,6 +3,9 @@ package classes;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import model_classes.Answer;
+import model_classes.AnswerList;
+
 
 
 import com.google.gson.Gson;

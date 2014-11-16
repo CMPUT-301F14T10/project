@@ -9,6 +9,11 @@ import java.util.Date;
 
 import javax.sound.midi.SysexMessage;
 
+import model_classes.Answer;
+import model_classes.Question;
+import model_classes.QuestionList;
+import model_classes.Reply;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -17,7 +22,9 @@ import com.google.gson.reflect.TypeToken;
 public class DeserializeTests {
 	public static void main(final String[] args) throws IOException {
 		
-		 //Reply deserialization testing
+		
+		
+		 /*Reply deserialization testing
 		
 		
 	    // Configure GSON
@@ -47,6 +54,7 @@ public class DeserializeTests {
 	    System.out.println(reply.getReply()+" "+reply.getAuthor());
 	    System.out.println(deserialized.getReply()+" "+deserialized.getAuthor());
 		
+		*/
 		
 		
 		/*Date deserialization test
@@ -167,17 +175,14 @@ public class DeserializeTests {
 		String questionName= "A question?";
 		Question questionTest= new Question(questionName,"Anonymous");
 		Reply question_reply= new Reply("Whats going on","Unknown");
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		questionTest.setUpvotes(2);
 		
 		String answerName= "An answer";
 		Answer testAnswer= new Answer(answerName,"dfaf");
 		Reply answer_reply= new Reply("dafasf","ABCDEFG");
 		testAnswer.addReply(answer_reply);
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
 		questionTest.addAnswer(testAnswer);
-		questionTest.setPicture(pic);
 		
 		final GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(Question.class, new QuestionSerializing());
@@ -191,7 +196,7 @@ public class DeserializeTests {
 	    Question deserialized2= gson2.fromJson(json2, Question.class);
 	    //gson2.f
 	    System.out.println(deserialized2.getAuthor());
-	    System.out.println(deserialized2.getAnswerList().getAnswer(0).getAnswer());
+	    System.out.println(deserialized2.getAnswerList().getAnswer(0).getName());
 
 	    */
 	    
@@ -204,7 +209,7 @@ public class DeserializeTests {
 		String reply_author= "I dunno";
 		Reply question_reply= new Reply("Whats going on",reply_author);
 	
-		questionTest.addQuestionReply(question_reply);
+		questionTest.addReply(question_reply);
 		questionTest.setUpvotes(2);
 
 		QuestionList questionList= new QuestionList();
@@ -221,27 +226,31 @@ public class DeserializeTests {
 		Reply answer_reply= new Reply("Go to stackoverflow",answer_reply_author);
 		testAnswer.addReply(answer_reply);
 		
-		Picture pic= new Picture(10);
-		testAnswer.setPicture(pic);
 		questionTest.addAnswer(testAnswer);
-		questionTest.setPicture(pic);
 		
 		questionList.add(questionTest);
 		
-		final GsonBuilder gsonBuilder2 = new GsonBuilder();
+		GsonBuilder gsonBuilder2 = new GsonBuilder();
 	    gsonBuilder2.registerTypeAdapter(QuestionList.class, new QuestionListSerializer());
 	    gsonBuilder2.setPrettyPrinting();
-	    final Gson gson2 = gsonBuilder2.create();
-	    final String json2=gson2.toJson(questionList);
+	    Gson gson2 = gsonBuilder2.create();
+	    String json2=gson2.toJson(questionList);
 	    System.out.println(json2);
 	    
-	    Type listOfTestObject = new TypeToken<ArrayList<Question>>(){}.getType();
-		ArrayList <Question> questionList2= gson2.fromJson(json2,listOfTestObject);
-		QuestionList deserialized2= new QuestionList();
-		deserialized2.setQuestionList(questionList2);
-		System.out.println(deserialized2.getQuestionList().get(0).getAuthor());
-		System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getReplies().get(0).getReply());
-		System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getAnswer());
-
+	    //Type listOfTestObject = new TypeToken<ArrayList<Question>>(){}.getType();
+		//ArrayList <Question> questionList2= gson2.fromJson(json2,listOfTestObject);
+	    gsonBuilder2.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
+	    gson2 = gsonBuilder2.create();
+	    QuestionList deserialized2= gson2.fromJson(json2, QuestionList.class);
+		//QuestionList deserialized2= new QuestionList();
+		//deserialized2.setQuestionList(questionList2);
+		//System.out.println(deserialized2.getQuestionList().get(0).getAuthor());
+		//System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getReplies().get(0).getReply());
+		//System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getName());
+		System.out.println(deserialized2.size());
+		System.out.println(deserialized2.getQuestionList().get(0).getName());
+		System.out.println(deserialized2.getQuestionList().get(0).getAnswerList().getAnswer(0).getName());
+		System.out.println(deserialized2.getQuestionList().get(0).hasPicture());
+		//
 	  }
 }

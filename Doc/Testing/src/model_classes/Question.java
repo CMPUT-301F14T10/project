@@ -1,10 +1,6 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
-import android.net.Uri;
-import android.text.format.DateFormat;
-
-
-
+// TODO: Auto-generated Javadoc
 /**
  * The Class Question.
  * A model that will hold all of the information pertinent to a question (via inheritance from GenericResponse) and
@@ -72,10 +68,8 @@ public class Question extends GenericResponse {
 	@Override
 	public boolean equals(Object o) {
 		Question response = (Question) o;
-		if (!DateFormat.format("MMM dd, yyyy", response.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
-			return false;
-		}
-		else if (response.getUpvotes() != this.upvote || response.hasPicture() != this.hasPicture) {
+
+		if (response.getUpvotes() != this.upvote || response.hasPicture() != this.hasPicture) {
 			return false;
 		}
 		else if (response.getIsFav() != this.isFav || response.getIsInReadingList() != this.isInReadingList) {
@@ -85,6 +79,11 @@ public class Question extends GenericResponse {
 			return false;
 		}
 		return true;
+	}
+
+	public void setID(String uniqueID) {
+		this.uniqueID=uniqueID;
+		
 	}
 	
 	

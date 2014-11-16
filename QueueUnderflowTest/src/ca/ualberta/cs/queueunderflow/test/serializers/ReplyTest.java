@@ -2,9 +2,9 @@ package ca.ualberta.cs.queueunderflow.test.serializers;
 
 
 
+import ca.ualberta.cs.queueunderflow.legacy_code.ReplyDeserializer;
+import ca.ualberta.cs.queueunderflow.legacy_code.ReplySerializer;
 import ca.ualberta.cs.queueunderflow.models.Reply;
-import ca.ualberta.cs.queueunderflow.serializers.ReplyDeserializer;
-import ca.ualberta.cs.queueunderflow.serializers.ReplySerializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

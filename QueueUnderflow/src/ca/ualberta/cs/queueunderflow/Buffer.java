@@ -52,7 +52,6 @@ public class Buffer {
 		return instance;
 	}
 	
-	// FavBuffer Methods
 	/**
 	 * Adds the to fav buffer.
 	 *
@@ -71,7 +70,6 @@ public class Buffer {
 		favBuffer.remove(position);
 	}
 	
-	// ReadingListBuffer Methods
 	/**
 	 * Adds the to reading list buffer.
 	 *
@@ -90,7 +88,6 @@ public class Buffer {
 		readingListBuffer.remove(position);
 	}
 	
-	// Checks if buffer is empty
 	/**
 	 * Checks if the favorites buffer empty.
 	 *
@@ -109,7 +106,6 @@ public class Buffer {
 		return readingListBuffer.isEmpty();
 	}
 
-	// Flushes the buffer - sets each question in the corresponding list to null then removes all nulls
 	/**
 	 * Flush favorites buffer - removes all questions in the positions given in the buffer from the favorites list
 	 */

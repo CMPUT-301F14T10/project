@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SuperFragment.
  * Handles displaying the Home screen / main screen, Favorites screen, ReadingList screen, & MyQuestions screen

@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.serializers;
+package ca.ualberta.cs.queueunderflow.legacy_code;
 
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -14,7 +14,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AnswerSerializer.
  * @author group 10

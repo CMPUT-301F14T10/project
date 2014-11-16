@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.serializers;
+package ca.ualberta.cs.queueunderflow.legacy_code;
 
 import java.lang.reflect.Type;
 
@@ -10,7 +10,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReplyDeserializer.
  * @author group 10

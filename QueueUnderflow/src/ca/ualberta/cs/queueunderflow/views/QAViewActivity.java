@@ -23,7 +23,6 @@ import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class QAViewActivity.
  * Displays a single question with it's replies, answers, it's replies.

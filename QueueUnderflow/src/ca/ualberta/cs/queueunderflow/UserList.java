@@ -1,8 +1,8 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
-// TODO: Auto-generated Javadoc
-// Store users in an arraylist to keep track of upvote, questions asked etc.
+
+
 /**
  * The Class UserList.
  * @author group 10
@@ -26,7 +26,6 @@ protected ArrayList <User> userList;
 	 * @param user the user
 	 */
 	public void add (User user) {
-		// Add at end of the list
 		userList.add(user);	
 	}
 	

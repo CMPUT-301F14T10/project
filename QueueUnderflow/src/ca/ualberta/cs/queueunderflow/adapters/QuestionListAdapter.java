@@ -36,8 +36,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO: Auto-generated Javadoc
-// Controller?
 /**
  * The Class QuestionListAdapter.
  * Connects a list of questions to the SuperFragment

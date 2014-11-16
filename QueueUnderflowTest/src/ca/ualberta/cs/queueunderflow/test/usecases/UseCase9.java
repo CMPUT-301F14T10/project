@@ -1,6 +1,6 @@
 package ca.ualberta.cs.queueunderflow.test.usecases;
 
-import ca.ualberta.cs.queueunderflow.Picture;
+import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import junit.framework.TestCase;
 

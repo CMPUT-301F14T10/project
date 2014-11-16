@@ -1,15 +1,13 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-import android.text.format.DateFormat;
-
-import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 
 
+//TODO: Auto-generated Javadoc
 /**
 * The Class GenericResponse.
 * Holds all the basic attributes of a response
@@ -34,8 +32,7 @@ public class GenericResponse {
 	/** The has picture indicator. */
 	protected boolean hasPicture;
 	
-	/** The image. */
-	protected Picture image;
+
 	
 	/** The date. */
 	protected Date date;
@@ -48,8 +45,8 @@ public class GenericResponse {
 	
 	/** The unique ID */
 	//protected UUID uniqueID;
-	protected String uniqueID;
 	
+	protected String uniqueID;
 	//The image path (where the image is)
 	private String imagePath;
 	
@@ -65,7 +62,6 @@ public class GenericResponse {
 		this.author=author;
 		this.upvote=0;
 		this.hasPicture=false;
-		this.image=null;
 		this.date = new Date();
 		this.imagePath=null;
 		this.encodedImage=null;
@@ -73,10 +69,8 @@ public class GenericResponse {
 		this.isFav = false;
 		this.isInReadingList = false;
 		
-		//Set unique ID and convert to string to store in JSON form
-		//uniqueID = UUID.randomUUID();
+		//Set unique ID.
 		this.uniqueID = UUID.randomUUID().toString();
-
 	}
 	
 	
@@ -95,30 +89,18 @@ public class GenericResponse {
 	 * 
 	 * @param uid
 	 */
-	
-/*	public void setID(UUID uid) {
+	/*public void setID(UUID uid) {
 	    this.uniqueID = uid;
 	}*/
 	
-	public void setID(String ID) {
-		this.uniqueID=ID;
-	}
-	
-
 	/**
 	 * Returns the unique ID
 	 * 
 	 * @return the unique ID
 	 */
-	
-/*	public UUID getID() {
-	    return this.uniqueID;
-	}*/
-	
 	public String getID() {
 	    return this.uniqueID;
 	}
-	
 	
 	/**
 	 * Gets the author.
@@ -210,25 +192,6 @@ public class GenericResponse {
 	 */
 	public boolean hasPicture() {
 		return this.hasPicture;
-	}
-	
-	/**
-	 * Sets the picture.
-	 *
-	 * @param pic the new picture
-	 */
-	public void setPicture (Picture pic) {
-		this.image= pic;
-		this.hasPicture=true;
-	}
-	
-	/**
-	 * Gets the picture.
-	 *
-	 * @return the picture
-	 */
-	public Picture getPicture() {
-		return this.image;
 	}
 	
 	/**
@@ -324,9 +287,7 @@ public class GenericResponse {
 		if (!response.getName().equals(this.name) || !response.getAuthor().equals(this.author)) {
 			return false;
 		}
-		else if (!DateFormat.format("MMM dd, yyyy", response.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
-			return false;
-		}
+
 		else if (response.getUpvotes() != this.upvote || response.hasPicture() != this.hasPicture) {
 			return false;
 		}

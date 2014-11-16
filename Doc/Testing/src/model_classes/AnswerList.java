@@ -1,10 +1,13 @@
-package ca.ualberta.cs.queueunderflow.models;
+package model_classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.UUID;
 
+// TODO: Auto-generated Javadoc
+/*
+ Sets the Answerlist so we can have answers to questions.
+ */
 
 /**
  * The Class AnswerList.
@@ -106,7 +109,6 @@ protected ArrayList <Answer> answerList;
 		// Sort by date
 		Comparator<Answer> leastRecentComparator = new Comparator<Answer>() {
 
-			@Override
 			public int compare(Answer lhs, Answer rhs) {
 				return (lhs.getDate().compareTo(rhs.getDate()));
 			
@@ -114,7 +116,6 @@ protected ArrayList <Answer> answerList;
 		};
 		
 		Comparator<Answer> mostRecentComparator = new Comparator<Answer>() {
-			@Override
 			public int compare(Answer lhs, Answer rhs) {
 				return (lhs.getDate().compareTo(rhs.getDate())) * -1;	
 				
@@ -123,7 +124,6 @@ protected ArrayList <Answer> answerList;
 		
 		// Sort by upvote
 		Comparator <Answer> mostUpvotesComparator = new Comparator<Answer>() {
-			@Override
 			public int compare(Answer lhs, Answer rhs) {
 				return (lhs.getUpvotes() - rhs.getUpvotes())*-1;
 			}
@@ -132,7 +132,6 @@ protected ArrayList <Answer> answerList;
 		// Sort by has pictures - answers with pictures appear at the top followed by answers with no pictures
 		Comparator<Answer> hasPicturesComparator = new Comparator<Answer>() {
 
-			@Override
 			public int compare(Answer lhs, Answer rhs) {
 				if (lhs.hasPicture() && !rhs.hasPicture()) {
 					return -1;
@@ -148,7 +147,6 @@ protected ArrayList <Answer> answerList;
 		// Sort by no pictures - answers with no pictures appear at the top followed by answers with no pictures
 		Comparator<Answer> noPicturesComparator = new Comparator<Answer>() {
 
-			@Override
 			public int compare(Answer lhs, Answer rhs) {
 				if (lhs.hasPicture() && !rhs.hasPicture()) {
 					return 1;
@@ -175,17 +173,6 @@ protected ArrayList <Answer> answerList;
 		else if (method.equals("no pictures")) {
 			Collections.sort(answerList, noPicturesComparator);
 		}
-	}
-
-	// Returns -1 if not found
-	public int getIndexFromID(UUID id) {
-		for (int i = 0; i < answerList.size(); i++) {
-			if (answerList.get(i).getID() == id) {
-				return i;
-			}
-		}
-		
-		return -1;
 	}
 	
 	
