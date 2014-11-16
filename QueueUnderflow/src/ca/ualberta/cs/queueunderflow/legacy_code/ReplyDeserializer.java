@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.serializers;
+package ca.ualberta.cs.queueunderflow.legacy_code;
 
 import java.lang.reflect.Type;
 

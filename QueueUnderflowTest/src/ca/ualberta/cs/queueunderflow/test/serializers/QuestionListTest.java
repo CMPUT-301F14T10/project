@@ -3,7 +3,7 @@ package ca.ualberta.cs.queueunderflow.test.serializers;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import ca.ualberta.cs.queueunderflow.Picture;
+import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;

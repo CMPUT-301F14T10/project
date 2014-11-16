@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.serializers;
+package ca.ualberta.cs.queueunderflow.legacy_code;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-import ca.ualberta.cs.queueunderflow.Picture;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 

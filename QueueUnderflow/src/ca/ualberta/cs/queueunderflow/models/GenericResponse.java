@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import android.text.format.DateFormat;
 
-import ca.ualberta.cs.queueunderflow.Picture;
+import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 
 
 /**
