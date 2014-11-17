@@ -45,6 +45,8 @@ public class NetworkController {
 		Thread thread = new UpvoteQuestionThread(questionID);
 		thread.start();
 		
+		finish(questionID);
+		
 	}
 	
 	public void upvoteAnswer(UUID questionID, UUID answerID) {

@@ -206,7 +206,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 					NetworkManager networkManager = NetworkManager.getInstance();
 					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						//networkBuffer.addQUpvote(question.getID());
+						networkBuffer.addQUpvote(question.getID());
 						
 						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 						upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()+1));

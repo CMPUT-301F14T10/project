@@ -41,10 +41,10 @@ public class GenericResponse {
 	protected Date date;
 
 	/** The is favorited indicator. */
-	protected boolean isFav;
+	transient protected boolean isFav;
 	
 	/** The is in reading list indicator. */
-	protected boolean isInReadingList;
+	transient protected boolean isInReadingList;
 	
 	/** The unique ID */
 	protected UUID uniqueID;
