@@ -1,11 +1,15 @@
 package ca.ualberta.cs.queueunderflow;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -16,6 +20,7 @@ import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
 
@@ -25,6 +30,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+
+
+//Adapted from elasticsearch in 301 labs
 
 public class ESManager {
 
@@ -39,6 +47,7 @@ public class ESManager {
 	
 	
 	//This is to push the questionList to the server, commented out for now though until decided whether needed or not
+	
 /*	public void addQuestionList(QuestionList questionList) {
 		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTIONLIST METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -62,6 +71,43 @@ public class ESManager {
 			e.printStackTrace();
 		}
 	}*/
+	
+	
+	
+	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
+	public String getEntityContent(HttpResponse response) throws IOException {
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		StringBuffer result = new StringBuffer();
+		String line = "";
+		while ((line = rd.readLine()) != null) {
+			result.append(line);
+		}
+		return result.toString();
+	}
+	
+	//Get the questionlist from the server, commented out until it is needed or not
+	
+	/*public QuestionList getQuestionList() {
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(RESOURCE_URL + "/_questionList");
+		HttpResponse response;
+		try {
+			response = httpClient.execute(httpGet);
+			String json = getEntityContent(response);
+
+			final GsonBuilder gsonBuilder= new GsonBuilder();
+			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListDeserializer());
+			Gson gson= gsonBuilder.create();
+			QuestionList deserialized= gson.fromJson(json,QuestionList.class);
+			return deserialized;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}*/
+	
 	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
