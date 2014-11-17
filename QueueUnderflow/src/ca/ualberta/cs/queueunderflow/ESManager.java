@@ -20,6 +20,7 @@ import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.serializers.QuestionDeserializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
@@ -73,7 +74,6 @@ public class ESManager {
 	}*/
 	
 	
-	
 	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
 	public String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -108,6 +108,29 @@ public class ESManager {
 		return null;
 	}*/
 	
+	/* This method is for potential future use; pulling questions from the server
+	public Question getQuestion(int questionID) {
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
+		
+		HttpResponse response;
+		try {
+			response = httpClient.execute(httpGet);
+			String json = getEntityContent(response);
+
+			final GsonBuilder gsonBuilder= new GsonBuilder();
+			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionDeserializer());
+			Gson gson= gsonBuilder.create();
+			Question deserialized= gson.fromJson(json,Question.class);
+			return deserialized;
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	*/
 	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
