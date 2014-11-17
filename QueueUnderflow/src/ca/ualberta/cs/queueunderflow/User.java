@@ -17,12 +17,6 @@ public class User {
 	/** The username. */
 	protected static String username;
 	
-	/** User's longitude */
-	protected static Double longitude;
-	
-	/** User's latitude */
-	protected static Double latitude;
-	
 	/** The upvoted questions. */
 	protected ArrayList <Question> upvotedQuestions;
 	
