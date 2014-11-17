@@ -30,34 +30,43 @@ public class NetworkController {
 		Thread thread = new AddAThread(questionID, newAnswer);
 		thread.start();
 		
+		finish(questionID);
+	}
+	
+	
+	public void addQReply(UUID questionID, Reply newReply) {
+		Thread thread = new AddQReplyThread(questionID, newReply);
+		thread.start();
+		
+		finish(questionID);
+	}
+	
+	public void upvoteQuestion(UUID questionID) {
+		Thread thread = new UpvoteQuestionThread(questionID);
+		thread.start();
+		
+	}
+	
+	public void upvoteAnswer(UUID questionID, UUID answerID) {
+		Thread thread = new UpvoteAnswerThread(questionID, answerID);
+		thread.start();
+
+		finish(questionID);
+	}
+
+	public void addAReply(UUID questionID, UUID answerID, Reply reply) {
+		Thread thread = new AddAReplyThread(questionID, answerID, reply);
+		thread.start();
+		
+		finish(questionID);
+	}
+    
+	private void finish(UUID questionID) {
 		// So it updates the view b/c we use .set
 		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
 		Question question = ListHandler.getMasterQList().get(questionIndex);
-//		question.addAnswer(newAnswer);
 		ListHandler.getMasterQList().set(questionIndex, question);
 	}
-	
-	// Everything below here - still need to push to network
-	public void addQReply(UUID questionID, Reply reply) {
-		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-		Question question = ListHandler.getMasterQList().get(questionIndex);
-		question.addReply(reply);
-		ListHandler.getMasterQList().set(questionIndex, question);
-	}
-	
-	public void addAReply(UUID questionID, UUID answerID, Reply reply) {
-		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-		Question question = ListHandler.getMasterQList().get(questionIndex);
-		
-		int answerIndex = question.getAnswerList().getIndexFromID(answerID);
-		Answer answer = question.getAnswerList().getAnswer(answerIndex);
-		
-		answer.addReply(reply);
-		ListHandler.getMasterQList().set(questionIndex, question);
-	}
-	
-	
-    
     
     
     // BELOW - Maybe move this somewhere else later
@@ -105,4 +114,96 @@ public class NetworkController {
 		}
 		
 	}
+
+	class AddQReplyThread extends Thread {
+		
+		private UUID questionID;
+		private Reply reply;
+		
+		public AddQReplyThread(UUID questionID, Reply reply) {
+			this.questionID = questionID;
+			this.reply = reply;
+		}
+
+		@Override
+		public void run() {
+			esManager.addQReply(questionID, reply);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	class AddAReplyThread extends Thread {
+		
+		private UUID questionID;
+		private UUID answerID;
+		private Reply reply;
+		
+		public AddAReplyThread(UUID questionID, UUID answerID, Reply reply) {
+			this.questionID = questionID;
+			this.answerID = answerID;
+			this.reply = reply;
+		}
+
+		@Override
+		public void run() {
+			esManager.addAReply(questionID, answerID, reply);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	class UpvoteQuestionThread extends Thread {
+		
+		private UUID questionID;
+		
+		public UpvoteQuestionThread(UUID questionID) {
+			this.questionID = questionID;
+		}
+
+		@Override
+		public void run() {
+			esManager.upvoteQuestion(questionID);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	class UpvoteAnswerThread extends Thread {
+		
+		private UUID questionID;
+		private UUID answerID;
+		
+		public UpvoteAnswerThread(UUID questionID, UUID answerID) {
+			this.questionID = questionID;
+			this.answerID = answerID;
+		}
+
+		@Override
+		public void run() {
+			esManager.upvoteAnswer(questionID, answerID);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
 }

@@ -2,20 +2,10 @@ package ca.ualberta.cs.queueunderflow.adapters;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.models.Answer;
-import ca.ualberta.cs.queueunderflow.models.Reply;
-import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -28,6 +18,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
  
 // TODO: Auto-generated Javadoc
 /*
@@ -44,6 +45,18 @@ import android.widget.Toast;
  */
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  
+	/** The Constant HOME_SCREEN_FRAGMENT. */
+	public static final int HOME_SCREEN_FRAGMENT = 1;
+	
+	/** The Constant FAVORITES_FRAGMENT. */
+	public static final int FAVORITES_FRAGMENT = 2;
+	
+	/** The Constant MY_QUESTIONS_FRAGMENT. */
+	public static final int MY_QUESTIONS_FRAGMENT = 3;
+	
+	/** The Constant READING_LIST_FRAGMENT. */
+	public static final int READING_LIST_FRAGMENT = 4;
+	
 	/** The type answer. */
 	private static int TYPE_ANSWER = 1;
 	
@@ -117,10 +130,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
          
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getAuthor());
-         
-        // Should Replies have a date displayed? Or is it not necessary?
-        //TextView dateDisplay = (TextView) view.findViewById(R.id.dateTextView);
-        //dateDisplay.setText(DateFormat.format("MMM dd, yyyy", answerArray.get(groupPosition).getReplyAt(childPosition).getDate()));
          
         return view;
     }
@@ -199,7 +208,24 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 				}
 				else {
 					user.addUpvotedAnswer(answerArray.get(groupPosition));
-					answerArray.get(groupPosition).upvoteResponse();
+					//answerArray.get(groupPosition).upvoteResponse();
+					
+					NetworkManager networkManager = NetworkManager.getInstance();
+					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
+						//networkBuffer.addAUpvote(answerArray.get(groupPosition).getID());
+						
+						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+						upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()+1));
+						
+						return;
+					}
+					
+					NetworkController  networkController = new NetworkController();
+					QuestionList questionList = findQuestionList();
+					Question question = questionList.get(questionPosition);
+					networkController.upvoteAnswer(question.getID(), answerArray.get(groupPosition).getID());
+					
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
 				}
@@ -272,5 +298,19 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         // TODO Auto-generated method stub
         return false;
     }
+    
+	private QuestionList findQuestionList() {
+		switch (fromFragment) {
+		case (HOME_SCREEN_FRAGMENT):
+			return ListHandler.getMasterQList();
+		case (FAVORITES_FRAGMENT):
+			return ListHandler.getFavsList();
+		case (READING_LIST_FRAGMENT):
+			return ListHandler.getReadingList();
+		case (MY_QUESTIONS_FRAGMENT):
+			return ListHandler.getMyQsList();
+		}
+		return null;
+	}
  
 }

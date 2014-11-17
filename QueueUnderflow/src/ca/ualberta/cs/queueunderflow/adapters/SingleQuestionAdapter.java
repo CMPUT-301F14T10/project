@@ -26,6 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -118,10 +121,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(singleQuestionArray.get(groupPosition).getReplyAt(childPosition).getAuthor());
          
-        // Should Replies have a date displayed? Or is it not necessary?
-        //TextView dateDisplay = (TextView) view.findViewById(R.id.dateTextView);
-        //dateDisplay.setText(DateFormat.format("MMM dd, yyyy", singleQuestionArray.get(groupPosition).getReplyAt(childPosition).getDate()));
-         
         return view;
     }
  
@@ -202,7 +201,22 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				        if(ListHandler.getFavsList().getQuestionList().contains(singleQuestionArray.get(groupPosition))) isInFavorites = true;
 				    
 					user.addUpvotedQuestion(singleQuestionArray.get(groupPosition));
-					singleQuestionArray.get(groupPosition).upvoteResponse();
+					//singleQuestionArray.get(groupPosition).upvoteResponse();
+					
+					NetworkManager networkManager = NetworkManager.getInstance();
+					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
+						//networkBuffer.addQUpvote(question.getID());
+						
+						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+						upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()+1));
+						
+						return;
+					}
+					
+					NetworkController  networkController = new NetworkController();
+					networkController.upvoteQuestion(singleQuestionArray.get(groupPosition).getID());
+					
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
 					

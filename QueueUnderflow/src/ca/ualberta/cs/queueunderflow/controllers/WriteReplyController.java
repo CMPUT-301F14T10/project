@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
@@ -45,9 +46,6 @@ public class WriteReplyController {
 	/** The activity. */
 	private Activity activity;
 	
-	/** The online indicator */
-	private boolean isOnline;
-	
 	/** The view. */
 	private View view;
 	
@@ -62,7 +60,6 @@ public class WriteReplyController {
 	public WriteReplyController(Activity activity, View view) {
 		this.activity = activity;
 		this.view = view;
-		this.isOnline = networkManager.isOnline(activity.getApplicationContext());
 	}
 	
 	/**
@@ -91,7 +88,7 @@ public class WriteReplyController {
 		}
 		
 		
-		if ( !isOnline ) {
+		if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 			NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 			
 			if (type == TYPE_QUESTION) {
@@ -108,15 +105,16 @@ public class WriteReplyController {
 		}
 		
 		// Adding the reply to the proper Question or Answer
+		NetworkController  networkController = new NetworkController();
 		if (type == TYPE_QUESTION) {
-			question.addReply(newReply);
-			questionList.set(questionPosition, question);
+			networkController.addQReply(question.getID(), newReply);
 		}
 		else if (type == TYPE_ANSWER) {
 			int answerPosition = arguments.getInt("answerPosition");
 			Answer answer = question.getAnswerList().getAnswer(answerPosition);
-			answer.addReply(newReply);
-			questionList.set(questionPosition, question);
+			networkController.addAReply(question.getID(), answer.getID(), newReply);
+//			answer.addReply(newReply);
+//			questionList.set(questionPosition, question);
 		}
 	}
 

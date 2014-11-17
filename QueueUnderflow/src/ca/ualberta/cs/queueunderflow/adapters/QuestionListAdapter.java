@@ -3,12 +3,17 @@ package ca.ualberta.cs.queueunderflow.adapters;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.queueunderflow.Buffer;
+import ca.ualberta.cs.queueunderflow.ESManager;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.R.id;
 import ca.ualberta.cs.queueunderflow.R.layout;
+import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
@@ -122,11 +127,26 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {
-                                        boolean isInFavorites = false;
-                                        if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
+					boolean isInFavorites = false;
+                    if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
 				    
 					user.addUpvotedQuestion(questionArray.get(position));
-					questionArray.get(position).upvoteResponse();
+					//questionArray.get(position).upvoteResponse();
+					
+					NetworkManager networkManager = NetworkManager.getInstance();
+					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
+						//networkBuffer.addQUpvote(question.getID());
+						
+						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+						upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()+1));
+						
+						return;
+					}
+					
+					NetworkController  networkController = new NetworkController();
+					networkController.upvoteQuestion(questionArray.get(position).getID());
+					
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 					
