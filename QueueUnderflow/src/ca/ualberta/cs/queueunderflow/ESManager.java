@@ -139,6 +139,12 @@ public class ESManager {
 		try {
 			HttpPost addRequest = new HttpPost(RESOURCE_URL + newQuestion.getID().toString());
 			
+			/* Can be used later or not
+			GsonBuilder gsonBuilder= new GsonBuilder();
+			gsonBuilder.registerTypeAdapter(Question.class, new QuestionSerializer());
+			gson= gsonBuilder.create();
+			*/
+			
 			StringEntity stringEntity = new StringEntity(gson.toJson(newQuestion));
 			addRequest.setEntity(stringEntity);
 			
