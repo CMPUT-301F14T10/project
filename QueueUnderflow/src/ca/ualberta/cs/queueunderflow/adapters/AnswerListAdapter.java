@@ -210,10 +210,13 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 					user.addUpvotedAnswer(answerArray.get(groupPosition));
 					//answerArray.get(groupPosition).upvoteResponse();
 					
+					QuestionList questionList = findQuestionList();
+					Question question = questionList.get(questionPosition);
+					
 					NetworkManager networkManager = NetworkManager.getInstance();
 					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						//networkBuffer.addAUpvote(answerArray.get(groupPosition).getID());
+						networkBuffer.addAUpvote(question.getID(), answerArray.get(groupPosition).getID());
 						
 						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 						upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()+1));
@@ -222,8 +225,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 					}
 					
 					NetworkController  networkController = new NetworkController();
-					QuestionList questionList = findQuestionList();
-					Question question = questionList.get(questionPosition);
 					networkController.upvoteAnswer(question.getID(), answerArray.get(groupPosition).getID());
 					
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);

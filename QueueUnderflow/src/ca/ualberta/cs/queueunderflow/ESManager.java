@@ -64,20 +64,11 @@ public class ESManager {
 	}*/
 	
 	public void addQuestion(Question newQuestion) {
-		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
+		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
 			HttpPost addRequest = new HttpPost(RESOURCE_URL + newQuestion.getID().toString());
-			
-			// Serialize the question
-//			final GsonBuilder gsonBuilder2 = new GsonBuilder();
-//			Type generictype = new TypeToken<GenericResponse>() { }.getType();
-//		    gsonBuilder2.registerTypeAdapter(generictype, new QuestionSerializer());
-//		    final Gson gson2 = gsonBuilder2.create();
-//		    final JsonElement json2 = gson2.toJsonTree(newQuestion);
-//			
-//			StringEntity stringEntity = new StringEntity(json2.toString());
 			
 			StringEntity stringEntity = new StringEntity(gson.toJson(newQuestion));
 			addRequest.setEntity(stringEntity);
@@ -124,7 +115,7 @@ public class ESManager {
 	}
 	
 	public void addQReply(UUID questionID, Reply newReply) {
-		System.out.print("INSIDE NETWORK MANAGER - ADDQREPLY METHOD");
+		System.out.println("INSIDE NETWORK MANAGER - ADDQREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
@@ -154,7 +145,7 @@ public class ESManager {
 	}
 	
 	public void addAReply(UUID questionID, UUID answerID, Reply newReply) {
-		System.out.print("INSIDE NETWORK MANAGER - ADDAREPLY METHOD");
+		System.out.println("INSIDE NETWORK MANAGER - ADDAREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {

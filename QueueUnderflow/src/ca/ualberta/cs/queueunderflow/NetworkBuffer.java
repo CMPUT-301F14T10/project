@@ -16,19 +16,22 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 // This deals with all the actions that users do when they are offline
 public class NetworkBuffer {
 
-	// Add & handle upvotes, favorites, reading list indicator here later
 	ArrayList<Question> questionBuffer;
 	Map<UUID, Answer> answerBuffer;
 	Map<UUID, Reply> questionReplyBuffer;
 	Map<UUID, UUID> qaIDBuffer;
 	Map<UUID, Reply> answerReplyBuffer;
+	ArrayList<UUID> upvoteQBuffer;
+	Map<UUID, UUID> upvoteABuffer;
 	
 	public NetworkBuffer() {
 		questionBuffer = new ArrayList<Question>();
 		answerBuffer = new Hashtable<UUID, Answer>();
 		questionReplyBuffer = new Hashtable<UUID, Reply>();
 		qaIDBuffer = new Hashtable<UUID, UUID>();
-		answerReplyBuffer = new HashMap<UUID, Reply>();
+		answerReplyBuffer = new Hashtable<UUID, Reply>();
+		upvoteQBuffer = new ArrayList<UUID>();
+		upvoteABuffer = new Hashtable<UUID, UUID>();
 	}
 	
 	public void addQuestion(Question question) {
@@ -51,12 +54,22 @@ public class NetworkBuffer {
 		answerReplyBuffer.put(answerID, reply);
 	}
 	
+	public void addQUpvote(UUID questionID) {
+		upvoteQBuffer.add(questionID);
+	}
+	
+	public void addAUpvote(UUID questionID, UUID answerID) {
+		upvoteABuffer.put(questionID, answerID);
+	}
+	
 	private void clearAll() {
 		questionBuffer.clear();
 		answerBuffer.clear();
 		questionReplyBuffer.clear();
 		qaIDBuffer.clear();
 		answerReplyBuffer.clear();
+		upvoteQBuffer.clear();
+		upvoteABuffer.clear();
 	}
 	
 	public void flushAll() {
@@ -92,7 +105,20 @@ public class NetworkBuffer {
 			networkController.addAReply(questionID, answerID, reply);
 		}
 		
+		// Push all question upvotes in buffer online
+		for( UUID id : upvoteQBuffer) {
+			networkController.upvoteQuestion(id);
+		}
+		
+		// Push all answer upvotes in buffer online
+		Set<UUID> upvoteABufferKeys = upvoteABuffer.keySet();
+		for (UUID questionID : upvoteABufferKeys) {
+			UUID answerID = upvoteABuffer.get(questionID);
+			networkController.upvoteAnswer(questionID, answerID);
+		}
+		
 		clearAll();
 	
 	}
+
 }

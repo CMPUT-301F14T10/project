@@ -136,7 +136,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					NetworkManager networkManager = NetworkManager.getInstance();
 					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						//networkBuffer.addQUpvote(question.getID());
+						networkBuffer.addQUpvote(question.getID());
 						
 						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 						upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()+1));
