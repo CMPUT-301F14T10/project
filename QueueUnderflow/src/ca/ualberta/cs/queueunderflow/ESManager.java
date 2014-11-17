@@ -14,7 +14,9 @@ import ca.ualberta.cs.queueunderflow.legacy_code.AnswerSerializer;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
 
 import com.google.gson.Gson;
@@ -34,6 +36,32 @@ public class ESManager {
 	public ESManager() {
 		gson = new Gson();
 	}
+	
+	
+	//This is to push the questionList to the server, commented out for now though until decided whether needed or not
+/*	public void addQuestionList(QuestionList questionList) {
+		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTIONLIST METHOD");
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		try {
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + "/_questionList");
+
+			final GsonBuilder gsonBuilder2= new GsonBuilder();
+			gsonBuilder2.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
+			StringEntity stringEntity = new StringEntity(gson.toJson(questionList));
+			addRequest.setEntity(stringEntity);
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			System.out.println("ADDQUESTIONLIST - HTTP STATUS ----- " + status);
+			
+			
+		} catch (Exception e) {
+			System.out.println("ADD QUESTION FAILED");
+			e.printStackTrace();
+		}
+	}*/
 	
 	public void addQuestion(Question newQuestion) {
 		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
