@@ -43,3 +43,12 @@
 22. As a user, by default, I should see the most fresh comments.
 
 23. As an author, I set my username.
+
+24. As an author, I want to be asked if my location should be attached to my post
+
+25. As a user I want to be able to query for posts (questions/answers/replies) that are near to me
+
+26. As an author, I want my geolocation to come from my GPS, or allow me to set to it.
+
+27. As a user, I want to know if the location or post is near city or town or country.
+
