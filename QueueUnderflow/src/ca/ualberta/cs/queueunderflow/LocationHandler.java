@@ -7,19 +7,19 @@ import java.util.Locale;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
 
-public class LocationHandler{
+public class LocationHandler implements LocationListener{
 
 	/* Use the LocationManager class to obtain GPS locations */
 	//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 	//LocationListener locListener = new MyLocationListener();
 	
 	LocationManager locManager;
-	LocationListener listener;
 	Context ctx;
 	
 	//Static variables.
@@ -110,49 +110,33 @@ public class LocationHandler{
 	 */
 	public void GPSUnlisten()
 	{
-		locManager.removeUpdates(listener);
+		locManager.removeUpdates(this);
 	}
 	
 	/**
 	 * Tell Location to listen for GPS update events. New data is stored in latitude/longitude.
 	 */
+	public void onLocationChanged(Location location)
+	{
+		Double latitude = location.getLatitude();
+		Double longitude = location.getLongitude();
+		
+		LocationHandler.latitude = latitude;
+		LocationHandler.longitude = longitude;
+		GPSUnlisten();
+	};
+	
+	/**
+	 * Listen for GPS updates (only updates ONCE)
+	 */
 	public void GPSListen()
 	{
-		listener = new LocationListener() {
-
-			@Override
-			public void onLocationChanged(android.location.Location location) {
-				// TODO Auto-generated method stub
-				Double latitude = location.getLatitude();
-				Double longitude = location.getLongitude();
-				
-				LocationHandler.latitude = latitude;
-				LocationHandler.longitude = longitude;
-				
-			}
-
-			@Override
-			public void onStatusChanged(String provider, int status,
-					Bundle extras) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onProviderEnabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onProviderDisabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minGPSUpdateTime, 0, listener);
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minGPSUpdateTime, 0, this);
 	}
+	
+	//Useless functions we don't need.
+	public void onProviderDisabled(String arg) {}
+	public void onProviderEnabled(String arg) {}
+	public void onStatusChanged(String arg, int arg2, Bundle arg3) {}
 	
 }
