@@ -3,9 +3,9 @@ package ca.ualberta.cs.queueunderflow.views;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import ca.ualberta.cs.queueunderflow.LocationHandler;
 import ca.ualberta.cs.queueunderflow.R;
 
 public class SetLocationFragment extends Fragment
@@ -17,6 +17,15 @@ public class SetLocationFragment extends Fragment
         return inflater.inflate(R.layout.activity_set_location_fragment, container, false);
     }
 
+    public void GPSButtonClicked(View view)
+    {
+    	//GPS Button is clicked.
+    	boolean error = false;
+    	
+    	LocationHandler loc = new LocationHandler(getActivity());
+    	
+    }
+    
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 

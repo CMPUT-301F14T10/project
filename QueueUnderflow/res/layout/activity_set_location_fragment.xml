@@ -62,7 +62,8 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/txtCountry"
 	    android:layout_centerVertical="true"
-	    android:text="Get Location From GPS" />
+	    android:text="Get Location From GPS"
+	    android:onClick="GPSButtonClicked" />
 
 	<Button
 	    android:id="@+id/buttonSubmit"

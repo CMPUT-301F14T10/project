@@ -12,7 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 
-public class Location{
+public class LocationHandler{
 
 	/* Use the LocationManager class to obtain GPS locations */
 	//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -28,9 +28,23 @@ public class Location{
 	
 	final long minGPSUpdateTime = 60000; //This is how often GPS will check for new position in milliseconds. Lower values drains battery apparently
 	
-	public Location(Context context)
+	public LocationHandler(Context context)
 	{
 		ctx = context;
+		locManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
+	}
+	
+	/**
+	 * Checks if GPS is enabled. Returns true if it is, false if it isn't.
+	 * @return Boolean that states if GPS is enabled.
+	 */
+	public boolean isGPSEnabled()
+	{
+		if(!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			//GPS is not enabled.
+			return false;
+		}
+		return true;
 	}
 	
 	/**
@@ -91,14 +105,19 @@ public class Location{
 		
 	}
 	
+	/**
+	 * Tell Location to stop listening for GPS update events.
+	 */
 	public void GPSUnlisten()
 	{
 		locManager.removeUpdates(listener);
 	}
 	
+	/**
+	 * Tell Location to listen for GPS update events. New data is stored in latitude/longitude.
+	 */
 	public void GPSListen()
 	{
-		locManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
 		listener = new LocationListener() {
 
 			@Override
@@ -107,8 +126,8 @@ public class Location{
 				Double latitude = location.getLatitude();
 				Double longitude = location.getLongitude();
 				
-				Location.latitude = latitude;
-				Location.longitude = longitude;
+				LocationHandler.latitude = latitude;
+				LocationHandler.longitude = longitude;
 				
 			}
 
