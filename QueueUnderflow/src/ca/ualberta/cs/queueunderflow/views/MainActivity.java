@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
@@ -142,6 +143,18 @@ public class MainActivity extends Activity {
         }
 
         //----- Done loading data from phone memory
+        
+        //This part here is to load questionlist from server into home screen/section-- test only, doesn't work yet
+        
+    	/*NetworkManager networkManager = NetworkManager.getInstance();
+    	boolean online= networkManager.isOnline(getApplicationContext());
+        if (online) {
+        	//If online, get questionlist from server and set the master question list as that questionlist
+        	NetworkController networkController = new NetworkController();
+			networkController.getQList();
+        }*/
+        
+        
     }
 
 
@@ -189,6 +202,11 @@ public class MainActivity extends Activity {
     	NetworkManager networkManager = NetworkManager.getInstance();
     	if (networkManager.isOnline(getApplicationContext())) {
     		networkManager.flushBuffer();
+    		
+        	//Add the master questionlist to the server, doesn't work yet
+        	//NetworkController networkController = new NetworkController();
+        	//networkController.addQuestionList(ListHandler.getMasterQList());
+    		
     	}
     }
         

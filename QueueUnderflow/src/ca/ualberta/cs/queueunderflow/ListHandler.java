@@ -44,6 +44,11 @@ public class ListHandler {
 		return instance;
 	}
 	
+	//Used to set master question list
+	static public void setMasterQList(QuestionList questionList) {
+		qList=questionList;
+	}
+	
 	/**
 	 * Gets the master q list.
 	 *

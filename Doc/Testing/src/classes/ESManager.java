@@ -1,11 +1,11 @@
-package ca.ualberta.cs.queueunderflow;
+package classes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.UUID;
+
+import model_classes.QuestionList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,32 +14,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import ca.ualberta.cs.queueunderflow.legacy_code.AnswerSerializer;
-import ca.ualberta.cs.queueunderflow.models.Answer;
-import ca.ualberta.cs.queueunderflow.models.GenericResponse;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.models.QuestionList;
-import ca.ualberta.cs.queueunderflow.models.Reply;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionDeserializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
 
-//Adapted from elasticsearch in 301 labs
-
-public class ESManager {
+public class ESManager
+{
 
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
-	private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST";
+	
 	private Gson gson;
 	
 	public ESManager() {
@@ -54,7 +39,7 @@ public class ESManager {
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPost addRequest = new HttpPost(QUESTIONLIST_URL);
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + "/_QUESTIONLIST");
 
 			final GsonBuilder gsonBuilder2= new GsonBuilder();
 			gsonBuilder2.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
@@ -89,7 +74,7 @@ public class ESManager {
 	
 	public QuestionList getQuestionList() {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(QUESTIONLIST_URL);
+		HttpGet httpGet = new HttpGet(RESOURCE_URL + "/_QUESTIONLIST");
 		HttpResponse response;
 		try {
 			response = httpClient.execute(httpGet);
@@ -314,5 +299,4 @@ public class ESManager {
 			e.printStackTrace();
 		}
 	}
-	
 }

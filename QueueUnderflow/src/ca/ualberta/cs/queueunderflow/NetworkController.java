@@ -14,10 +14,35 @@ public class NetworkController {
 
 	private ESManager esManager;
 	
+	private QuestionList result= null;
+	
 	public NetworkController() {
 		esManager = new ESManager();
 	}
 	
+	//Trial method to get QuestionList from server
+	public void getQList() {
+		Thread thread = new GetQuestionListThread();
+		thread.start();
+		
+		boolean proceed=false;
+		//if there is more stuff on the server, pull that stuff from the server
+		if (result.size()> ListHandler.getMasterQList().size()) {
+			proceed=true;
+		}
+		
+		if (proceed) {
+			ListHandler.setMasterQList(result);
+		}
+	}
+	
+	//Trial Method to add QuestionList to server
+	public void addQuestionList(QuestionList newQuestions) {
+		Thread thread= new AddQuestionListThread(newQuestions);
+		thread.start();
+		
+	}
+		
 	public void addQuestion(Question newQuestion) {
 		Thread thread = new AddQThread(newQuestion);
 		thread.start();
@@ -199,6 +224,45 @@ public class NetworkController {
 		public void run() {
 			esManager.upvoteAnswer(questionID, answerID);
 
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	//Trail thread to get questionlist from server
+	class GetQuestionListThread extends Thread {
+				
+		public GetQuestionListThread() {
+		}
+		
+		@Override
+		public void run() {
+			result= esManager.getQuestionList();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		}
+		
+	}
+	
+	//Trail thread to add questionlist to server
+	class AddQuestionListThread extends Thread {
+		
+		private QuestionList questionList;
+		public AddQuestionListThread(QuestionList newQuestions) {
+			this.questionList=newQuestions;
+		}
+
+		@Override
+		public void run() {
+			esManager.addQuestionList(questionList);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {

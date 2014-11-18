@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.TModel;
@@ -26,6 +27,9 @@ public class QuestionList extends TModel<TView>{
 	/** The question list3. */
 	protected ArrayList <Question> questionList3;
 	
+	/** The date of the questionlist*/
+	protected Date date;
+	
 	/** The online. */
 	protected boolean online;
 	
@@ -35,6 +39,7 @@ public class QuestionList extends TModel<TView>{
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
 		this.online=false;
+		this.date= new Date();
 	}
 	
 	/**
@@ -290,5 +295,13 @@ public class QuestionList extends TModel<TView>{
 		}
 		
 		return -1;
+	}
+	
+	public Date getDate() {
+		return this.date;
+	}
+	
+	public void setDate(Date newDate) {
+		this.date=newDate;
 	}
 }
