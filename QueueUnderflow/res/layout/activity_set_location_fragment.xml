@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:text="\n" />
+
+	<CheckBox
+	    android:id="@+id/use_location_data"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="25dp"
+	    android:text="Allow location data to be visible." />
+
+	<EditText
+	    android:id="@+id/txtCity"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/textView1"
+	    android:layout_alignBottom="@+id/textView1"
+	    android:layout_alignRight="@+id/use_location_data"
+	    android:ems="10" />
+
+	<TextView
+	    android:id="@+id/textView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/use_location_data"
+	    android:layout_below="@+id/use_location_data"
+	    android:layout_marginTop="66dp"
+	    android:text="City:" />
+
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignRight="@+id/textView1"
+	    android:layout_below="@+id/txtCity"
+	    android:layout_marginTop="30dp"
+	    android:text="Country:" />
+
+	<EditText
+	    android:id="@+id/txtCountry"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/textView2"
+	    android:layout_alignBottom="@+id/textView2"
+	    android:layout_alignLeft="@+id/txtCity"
+	    android:ems="10" >
+
+	    <requestFocus />
+	</EditText>
+
+	<Button
+	    android:id="@+id/buttonGetLocation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/txtCountry"
+	    android:layout_centerVertical="true"
+	    android:text="Get Location From GPS" />
+
+	<Button
+	    android:id="@+id/buttonSubmit"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textView1"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignRight="@+id/buttonGetLocation"
+	    android:layout_marginBottom="18dp"
+	    android:text="Submit" />
+
+</RelativeLayout>
