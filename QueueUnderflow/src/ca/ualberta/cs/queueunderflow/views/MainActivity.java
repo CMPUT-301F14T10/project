@@ -44,6 +44,9 @@ public class MainActivity extends Activity {
 	/** The Constant SET_USERNAME_FRAGMENT. */
 	public static final int SET_USERNAME_FRAGMENT = 5;
 	
+	/** The Constant SET_LOCATION_FRAGMENT. */
+	public static final int SET_LOCATION_FRAGMENT = 6;
+	
 	/** The drawer layout. */
 	private DrawerLayout drawerLayout;
 	
@@ -87,7 +90,7 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         
-        navDrawerTitles = new String[] {"Home", "My Favorites", "My Questions", "Reading List", "Set Username"};
+        navDrawerTitles = new String[] {"Home", "My Favorites", "My Questions", "Reading List", "Set Username", "Set Location"};
         drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item_drawer, navDrawerTitles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -322,6 +325,9 @@ public class MainActivity extends Activity {
     	case 4:
     		fragment = new SetUsernameFragment();
     		break;
+    	case 5:
+    	        fragment = new SetLocationFragment();
+    	        break;
     	default:
     		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
     		questionList = ListHandler.getMasterQList();
