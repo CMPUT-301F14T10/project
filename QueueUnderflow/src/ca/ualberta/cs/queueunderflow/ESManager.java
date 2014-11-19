@@ -40,7 +40,8 @@ public class ESManager {
 
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
-	private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST/1";
+	//private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST/1";
+	private static final String QUESTION_IDS= "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questionIDS/1";
 	private Gson gson;
 	
 	public ESManager() {
@@ -114,8 +115,8 @@ public class ESManager {
 		return null;
 	}*/
 	
-	// This method is for pulling questions from the server
-	public Question getQuestion(int questionID) {
+	// This method is for pulling questions from the server by ID
+	public Question getQuestion(String questionID) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
@@ -154,7 +155,62 @@ public class ESManager {
 		return null;
 	}
 	
+///------------THREE METHODS BELOW are to push list of question IDS in string to the server--------------------
+//Doesn't affect anything at the moment
 	
+	public void addQuestionIDS(ArrayList <String> QuestionIDS) {
+		HttpClient httpClient= new DefaultHttpClient();
+		try {
+			HttpPut addRequest = new HttpPut(QUESTION_IDS);
+			
+			StringEntity stringEntity = new StringEntity(gson.toJson(QuestionIDS));
+			addRequest.setEntity(stringEntity);
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			System.out.println("ADDQUESTIONIDS - HTTP STATUS ----- " + status);
+			
+			
+		} catch (Exception e) {
+			System.out.println("ADD QUESTIONIDS FAILED");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private SearchHit <ArrayList<String>> parseQuestionIDHit(HttpResponse response) {
+		try {
+			String json = getEntityContent(response);
+			Type searchHitType = new TypeToken<SearchHit<ArrayList<String>>>() {}.getType();
+			SearchHit<ArrayList<String>> sr = gson.fromJson(json, searchHitType);
+			return sr;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<String> getQuestionIDS() {
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(QUESTION_IDS);
+		
+		HttpResponse response;
+		try {
+			response = httpClient.execute(httpGet);
+			SearchHit<ArrayList<String>> sr = parseQuestionIDHit(response);
+			return sr.getSource();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ArrayList <String> empty= new ArrayList<String> ();
+		return empty ;
+	}
+	
+///-------------------------------------------------------------------------------	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();

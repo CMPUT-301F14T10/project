@@ -1,5 +1,6 @@
 package ca.ualberta.cs.queueunderflow;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -39,10 +40,15 @@ public class NetworkController {
 	
 	//Trial Method to add QuestionList to server
 	
-	public void addQuestionList(QuestionList newQuestions) {
+/*	public void addQuestionList(QuestionList newQuestions) {
 		Thread thread= new AddQuestionListThread(newQuestions);
 		thread.start();
 		
+	}*/
+	
+	public void addQuestionIDList(ArrayList <String> strings) {
+		Thread thread= new AddQuestionIDListThread(strings);
+		thread.start();
 	}
 		
 	public void addQuestion(Question newQuestion) {
@@ -254,8 +260,8 @@ public class NetworkController {
 		
 	}*/
 	
-	//Trail thread to add questionlist to server
-	class AddQuestionListThread extends Thread {
+	//Trial thread to add questionlist to server
+/*	class AddQuestionListThread extends Thread {
 		
 		private QuestionList questionList;
 		public AddQuestionListThread(QuestionList newQuestions) {
@@ -268,6 +274,25 @@ public class NetworkController {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		}*/
+	
+	//Thread to get question ids from the server
+	class AddQuestionIDListThread extends Thread {
+		private ArrayList <String> QuestionIDS;
+		public AddQuestionIDListThread(ArrayList<String> strings) {
+			this.QuestionIDS=strings;
+		}
+		
+		@Override
+		public void run() {
+			esManager.addQuestionIDS(QuestionIDS);
+			try {
+				Thread.sleep(500);
+			}
+			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

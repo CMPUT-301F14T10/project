@@ -1,5 +1,7 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
@@ -94,11 +96,18 @@ public class AskAnswerController {
 			NetworkController networkController = new NetworkController();
 			networkController.addQuestion(newQuestion);
 			
+			
 			//Push questionList to the server
            	//ESManager esManager= new ESManager();
         	//QuestionList questionList= ListHandler.getMasterQList();
         	//networkController.addQuestionList(questionList);
 			
+			//Add questionIDS to server, doesn't work yet as far as I know
+           	ESManager esManager= new ESManager();
+        	ArrayList<String> questionIDS= esManager.getQuestionIDS();
+        	questionIDS.add(newQuestion.getStringID());
+        	networkController.addQuestionIDList(questionIDS);
+
 			
 			//Mark as unsaved data.
 			LoadSave.unsavedChanges = true;

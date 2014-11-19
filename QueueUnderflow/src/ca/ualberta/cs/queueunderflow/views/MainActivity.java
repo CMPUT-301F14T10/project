@@ -1,5 +1,7 @@
 package ca.ualberta.cs.queueunderflow.views;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -19,6 +21,7 @@ import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 
@@ -154,6 +157,20 @@ public class MainActivity extends Activity {
         	QuestionList questionList= esManager.getQuestionList();
         	ListHandler.setMasterQList(questionList);
         }*/
+        
+        NetworkManager networkManager= NetworkManager.getInstance();
+        boolean online= networkManager.isOnline(getApplicationContext());
+        if (online) {
+        	ESManager esManager= new ESManager();
+        	ArrayList<String> questionIDS= esManager.getQuestionIDS();
+        	QuestionList allQuestions= new QuestionList();
+        	for (int i=0; i<questionIDS.size();i++) {
+        		Question question= esManager.getQuestion(questionIDS.get(i));
+        		allQuestions.add(question);
+        	}
+        	ListHandler.setMasterQList(allQuestions);
+        }
+        
         
         
     }
