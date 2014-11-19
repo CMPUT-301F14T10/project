@@ -96,8 +96,8 @@ public class AskAnswerController {
 			
 			//Push questionList to the server
            	//ESManager esManager= new ESManager();
-        	QuestionList questionList= ListHandler.getMasterQList();
-        	networkController.addQuestionList(questionList);
+        	//QuestionList questionList= ListHandler.getMasterQList();
+        	//networkController.addQuestionList(questionList);
 			
 			
 			//Mark as unsaved data.
@@ -155,8 +155,8 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			
 			//Push questionList to the server
            	//ESManager esManager= new ESManager();
-        	QuestionList questionList2= ListHandler.getMasterQList();
-        	networkController.addQuestionList(questionList2);
+        	//QuestionList questionList2= ListHandler.getMasterQList();
+        	//networkController.addQuestionList(questionList2);
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {

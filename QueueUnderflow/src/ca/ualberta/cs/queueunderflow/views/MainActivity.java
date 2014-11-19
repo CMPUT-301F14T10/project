@@ -147,13 +147,13 @@ public class MainActivity extends Activity {
         
         //This part here is to load questionlist from server into home screen/section-- test only
         //Kind of works (app doesn't crash at least) Can add to server but not pull from it yet
-        NetworkManager networkManager= NetworkManager.getInstance();
+/*        NetworkManager networkManager= NetworkManager.getInstance();
         boolean online= networkManager.isOnline(getApplicationContext());
         if (online) {
         	ESManager esManager= new ESManager();
         	QuestionList questionList= esManager.getQuestionList();
         	ListHandler.setMasterQList(questionList);
-        }
+        }*/
         
         
     }

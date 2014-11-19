@@ -11,6 +11,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -39,7 +40,7 @@ public class ESManager {
 
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
-	private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST";
+	private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST/1";
 	private Gson gson;
 	
 	public ESManager() {
@@ -49,12 +50,12 @@ public class ESManager {
 	
 	//This is to push a questionList to the server
 	
-	public void addQuestionList(QuestionList questionList) {
+/*	public void addQuestionList(QuestionList questionList) {
 		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTIONLIST METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPost addRequest = new HttpPost(QUESTIONLIST_URL);
+			HttpPut addRequest = new HttpPut(QUESTIONLIST_URL);
 
 			final GsonBuilder gsonBuilder= new GsonBuilder();
 			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
@@ -73,7 +74,7 @@ public class ESManager {
 			System.out.println("ADD QUESTION FAILED");
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
@@ -89,18 +90,21 @@ public class ESManager {
 	
 	//Get the questionlist from the server
 	
-	public QuestionList getQuestionList() {
+/*	public QuestionList getQuestionList() {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(QUESTIONLIST_URL);
 		HttpResponse response;
 		try {
+			
 			response = httpClient.execute(httpGet);
 			String json = getEntityContent(response);
 
+			 
 			final GsonBuilder gsonBuilder= new GsonBuilder();
 			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListDeserializer());
 			Gson gson= gsonBuilder.create();
 			QuestionList deserialized= gson.fromJson(json,QuestionList.class);
+			
 			return deserialized;
 			
 			
@@ -108,9 +112,9 @@ public class ESManager {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 	
-	/* This method is for potential future use; pulling questions from the server
+	// This method is for pulling questions from the server
 	public Question getQuestion(int questionID) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -119,20 +123,37 @@ public class ESManager {
 		HttpResponse response;
 		try {
 			response = httpClient.execute(httpGet);
-			String json = getEntityContent(response);
+			//String json = getEntityContent(response);
 
-			final GsonBuilder gsonBuilder= new GsonBuilder();
+/*			final GsonBuilder gsonBuilder= new GsonBuilder();
 			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionDeserializer());
 			Gson gson= gsonBuilder.create();
 			Question deserialized= gson.fromJson(json,Question.class);
-			return deserialized;
-				
+			return deserialized;*/
+			
+			SearchHit<Question> sr = parseQuestionHit(response);
+			return sr.getSource();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	*/
+	
+	
+	private SearchHit<Question> parseQuestionHit(HttpResponse response) {
+		try {
+			String json = getEntityContent(response);
+			Type searchHitType = new TypeToken<SearchHit<Question>>() {}.getType();
+			SearchHit<Question> sr = gson.fromJson(json, searchHitType);
+			return sr;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
