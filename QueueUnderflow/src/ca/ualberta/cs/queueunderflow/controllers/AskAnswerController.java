@@ -3,6 +3,7 @@ package ca.ualberta.cs.queueunderflow.controllers;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.ESManager;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
@@ -93,6 +94,12 @@ public class AskAnswerController {
 			NetworkController networkController = new NetworkController();
 			networkController.addQuestion(newQuestion);
 			
+			//Push questionList to the server
+           	//ESManager esManager= new ESManager();
+        	QuestionList questionList= ListHandler.getMasterQList();
+        	networkController.addQuestionList(questionList);
+			
+			
 			//Mark as unsaved data.
 			LoadSave.unsavedChanges = true;
 			
@@ -144,6 +151,12 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
 			// New - If it get's here, it's connected
 			NetworkController networkController = new NetworkController();
 			networkController.addAnswer(question.getID(), newAnswer);
+			
+			
+			//Push questionList to the server
+           	//ESManager esManager= new ESManager();
+        	QuestionList questionList2= ListHandler.getMasterQList();
+        	networkController.addQuestionList(questionList2);
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {

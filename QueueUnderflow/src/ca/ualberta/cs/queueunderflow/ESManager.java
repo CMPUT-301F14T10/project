@@ -56,8 +56,10 @@ public class ESManager {
 		try {
 			HttpPost addRequest = new HttpPost(QUESTIONLIST_URL);
 
-			final GsonBuilder gsonBuilder2= new GsonBuilder();
-			gsonBuilder2.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
+			final GsonBuilder gsonBuilder= new GsonBuilder();
+			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
+			Gson gson= gsonBuilder.create();
+
 			StringEntity stringEntity = new StringEntity(gson.toJson(questionList));
 			addRequest.setEntity(stringEntity);
 			

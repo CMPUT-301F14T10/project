@@ -14,14 +14,15 @@ public class NetworkController {
 
 	private ESManager esManager;
 	
-	private QuestionList result= null;
+	//private QuestionList result= null;
 	
 	public NetworkController() {
 		esManager = new ESManager();
 	}
 	
-	//Trial method to get QuestionList from server
-	public void getQList() {
+	//Trial method to get QuestionList from server, commenting out, trying without threads
+	
+/*	public void getQList() {
 		Thread thread = new GetQuestionListThread();
 		thread.start();
 		
@@ -34,9 +35,10 @@ public class NetworkController {
 		if (proceed) {
 			ListHandler.setMasterQList(result);
 		}
-	}
+	}*/
 	
 	//Trial Method to add QuestionList to server
+	
 	public void addQuestionList(QuestionList newQuestions) {
 		Thread thread= new AddQuestionListThread(newQuestions);
 		thread.start();
@@ -234,7 +236,7 @@ public class NetworkController {
 	
 	
 	//Trail thread to get questionlist from server
-	class GetQuestionListThread extends Thread {
+/*	class GetQuestionListThread extends Thread {
 				
 		public GetQuestionListThread() {
 		}
@@ -250,7 +252,7 @@ public class NetworkController {
 		
 		}
 		
-	}
+	}*/
 	
 	//Trail thread to add questionlist to server
 	class AddQuestionListThread extends Thread {
