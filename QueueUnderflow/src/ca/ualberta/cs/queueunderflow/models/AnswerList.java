@@ -187,6 +187,16 @@ protected ArrayList <Answer> answerList;
 		
 		return -1;
 	}
+
+	public Answer getAnswerFromID(String answerID) {
+		for (Answer a : answerList) {
+			if (a.getStringID().equals(answerID)) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
 	
 	
 }

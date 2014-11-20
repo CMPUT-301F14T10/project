@@ -88,34 +88,48 @@ public class WriteReplyController {
 		}
 		
 		
+		
+		// To mimic
+		if (type == TYPE_QUESTION) {
+			question.addReply(newReply);
+			questionList.set(questionPosition, question);
+		}
+		else if (type == TYPE_ANSWER) {
+			int answerPosition = arguments.getInt("answerPosition");
+			Answer answer = question.getAnswerList().getAnswer(answerPosition);
+			answer.addReply(newReply);
+			questionList.set(questionPosition, question);
+		}
+		
+		
 		if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 			NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 			
 			if (type == TYPE_QUESTION) {
-				networkBuffer.addQReply(question.getID(), newReply);
+				networkBuffer.addQReply(question.getStringID(), newReply);
 			}
 			else if (type == TYPE_ANSWER) {
 				int answerPosition = arguments.getInt("answerPosition");
 				Answer answer = question.getAnswerList().getAnswer(answerPosition);
-				networkBuffer.addAReply(question.getID(), answer.getID(), newReply);
+				networkBuffer.addAReply(question.getStringID(), answer.getStringID(), newReply);
 			}
 			
 			Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Reply will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		else { // if online
+			// Adding the reply to the proper Question or Answer
+			NetworkController  networkController = new NetworkController();
+			if (type == TYPE_QUESTION) {
+				networkController.addQReply(question.getStringID(), newReply);
+			}
+			else if (type == TYPE_ANSWER) {
+				int answerPosition = arguments.getInt("answerPosition");
+				Answer answer = question.getAnswerList().getAnswer(answerPosition);
+				networkController.addAReply(question.getStringID(), answer.getStringID(), newReply);
+			}
+		}
 		
-		// Adding the reply to the proper Question or Answer
-		NetworkController  networkController = new NetworkController();
-		if (type == TYPE_QUESTION) {
-			networkController.addQReply(question.getID(), newReply);
-		}
-		else if (type == TYPE_ANSWER) {
-			int answerPosition = arguments.getInt("answerPosition");
-			Answer answer = question.getAnswerList().getAnswer(answerPosition);
-			networkController.addAReply(question.getID(), answer.getID(), newReply);
-//			answer.addReply(newReply);
-//			questionList.set(questionPosition, question);
-		}
 	}
 
 	

@@ -1,23 +1,15 @@
 package ca.ualberta.cs.queueunderflow;
 
-//From 301 elasticsearch lab
-
-
 public class SearchHit<T> {
+
 	private String _index;
-	
 	private String _type;
-	
 	private String _id;
-	
 	private String _version;
-	
 	private boolean found;
-	
 	private T _source;
 	
 	public SearchHit() {
-		
 	}
 	
 	public String get_index() {
@@ -70,8 +62,7 @@ public class SearchHit<T> {
 	
 	@Override
 	public String toString() {
-		return "SimpleElasticSearchResponse [_index=" + _index + ", _type="
-				+ _type + ", _id=" + _id + ", _version=" + _version
-				+ ", found=" + found + ", _source=" + _source + "]";
+		return "SimpleElasticSearchResponse [_index=" + _index + ", _type=" + _type + ", _id=" + _id + ", _version=" + _version + ", found=" + found + ", _source=" + _source + "]";
 	}
+	
 }

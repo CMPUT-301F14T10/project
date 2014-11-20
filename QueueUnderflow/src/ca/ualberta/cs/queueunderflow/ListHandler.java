@@ -1,5 +1,10 @@
 package ca.ualberta.cs.queueunderflow;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 
@@ -29,12 +34,21 @@ public class ListHandler {
 	/** The user. */
 	private static User user;
 	
+	private static ArrayList<String> favIDs;
+	private static ArrayList<String> readingListIDs;
+	private static ArrayList<String> myQIDs;
+	
 	private ListHandler() {
 		qList = new QuestionList();
 		favQList = new QuestionList();
 		myQList = new QuestionList();
 		readingList = new QuestionList();
 		user = new User();
+		
+		favIDs = new ArrayList<String>();
+		readingListIDs = new ArrayList<String>();
+		myQIDs = new ArrayList<String>();
+		
 	}
 	
 	public ListHandler getInstance() {
@@ -42,11 +56,6 @@ public class ListHandler {
 			instance = new ListHandler();
 		}
 		return instance;
-	}
-	
-	//Used to set master question list
-	static public void setMasterQList(QuestionList questionList) {
-		qList=questionList;
 	}
 	
 	/**
@@ -69,6 +78,7 @@ public class ListHandler {
 	static public QuestionList getMyQsList() {
 		if (myQList == null) {
 			myQList = new QuestionList();
+			myQIDs = new ArrayList<String>();
 		}
 		return myQList;
 	}
@@ -81,6 +91,7 @@ public class ListHandler {
 	static public QuestionList getFavsList() {
 		if (favQList == null) {
 			favQList = new QuestionList();
+			favIDs = new ArrayList<String>();
 		}
 		return favQList;
 	}
@@ -93,6 +104,7 @@ public class ListHandler {
 	static public QuestionList getReadingList() {
 		if (readingList == null) {
 			readingList = new QuestionList();
+			readingListIDs = new ArrayList<String>();
 		}
 		return readingList;
 	}
@@ -103,11 +115,41 @@ public class ListHandler {
 	 *
 	 * @return the user
 	 */
-	static public User getUser(){
+	static public User getUser() {
 		if (user == null) {
 			user = new User();
 		}
 		return user; 
+	}
+
+	public static boolean isInFavs(String questionID) {
+		favIDs = new ArrayList<String>();
+		for (Question q : getFavsList().getQuestionList()) {
+			favIDs.add(q.getStringID());
+		}
+		System.out.println("checking for --> " + questionID);
+		System.out.println(favIDs);
+		if (favIDs != null && favIDs.contains(questionID)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean isInReadingList(String questionID) {
+		readingListIDs = new ArrayList<String>();
+		for (Question q : getReadingList().getQuestionList()) {
+			readingListIDs.add(q.getStringID());
+		}
+		System.out.println("checking for --> " + questionID);
+		System.out.println(readingListIDs);
+		if (readingListIDs != null && readingListIDs.contains(questionID)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }

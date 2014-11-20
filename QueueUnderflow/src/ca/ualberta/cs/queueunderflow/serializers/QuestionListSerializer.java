@@ -2,7 +2,6 @@ package ca.ualberta.cs.queueunderflow.serializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -44,14 +43,6 @@ public class QuestionListSerializer implements JsonSerializer<QuestionList>{
 		}
 		int size= questions.size();
 		jsonObject.addProperty("size", size);
-		
-		//Add date to questionlist to compare what questionlist is newer (the one from the server or one on the phone)
-		Date qListDate= questionList.getDate();
-	    JsonElement date= context.serialize(qListDate);
-	    jsonObject.add("date",date);
-
-
-		
 		return jsonObject;
 	}
 

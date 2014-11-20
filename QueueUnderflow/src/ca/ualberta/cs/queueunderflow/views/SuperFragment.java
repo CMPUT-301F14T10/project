@@ -1,27 +1,25 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import ca.ualberta.cs.queueunderflow.Buffer;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.TView;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
-import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import ca.ualberta.cs.queueunderflow.Buffer;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.TView;
+import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
+import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 
 /**
@@ -67,11 +65,11 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-		
 		
 		// Put in controller - This must be done first before inflating the view & adding the view to the model else it may crash
 		Buffer buffer = Buffer.getInstance();
+		System.out.println("FAV BUFFER FLUSHING : "  + buffer.favBuffer);
+		System.out.println("READINGLIST BUFFER FLUSHING : " + buffer.readingListBuffer);
 		if (buffer.isFavBufferEmpty() == false) {
 			buffer.flushFav();
 		}
@@ -80,14 +78,22 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		}
 		//
 		
-    	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
+	   	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
     	NetworkManager networkManager = NetworkManager.getInstance();
 		if (networkManager.isOnline(getActivity().getApplicationContext())) {
     		networkManager.flushBuffer();
     	}
 		
-		View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+		// Refresh the masterlist - if in HomeScreenFragment
+		if (networkManager.isOnline(getActivity().getApplicationContext()) && fromFragment == HOME_SCREEN_FRAGMENT) {
+    		System.out.println("Starting populateMasterList");
+    		NetworkController networkController = new NetworkController();
+    		networkController.populateMasterList();
+    		System.out.println("Finished populateMasterList");
+		}
 		
+		View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+
 		// Add view to the model
 		QuestionList screenQList = findQuestionList();
 		screenQList.addView(this);
@@ -95,6 +101,7 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		// Set up list adapter to display the questions
 		ListView listView = (ListView) view.findViewById(R.id.homeListView);
 		adapter = new QuestionListAdapter(getActivity(), R.layout.list_item_question, screenQList.getQuestionList(), fromFragment);
+		
 		listView.setAdapter(adapter);
 		
 		return view;
@@ -123,17 +130,24 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Go to QAViewActivity to see the Q & A
 				Intent intent = new Intent(getActivity(), QAViewActivity.class);
-				
 				// Pass position of question selected & the fragment so we can retrieve the question & inflate it in QAView
 				intent.putExtra("position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				
+				intent.putExtra("questionID", findQuestionList().get(position).getStringID());
 				startActivity(intent);
 			}
 			
 		});
 		
 		
+	}
+
+	
+	
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		findQuestionList().deleteView(this);
 	}
 
 	/* (non-Javadoc)

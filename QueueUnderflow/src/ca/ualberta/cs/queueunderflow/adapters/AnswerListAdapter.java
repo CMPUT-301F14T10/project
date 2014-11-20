@@ -84,8 +84,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
      *
      * @param activity the activity
      * @param answerArray the answer array
-     * @param fromFragment the from fragment
-     * @param questionPosition the question position
      */
     public AnswerListAdapter(Activity activity, ArrayList<Answer> answerArray, int fromFragment, int questionPosition) {
         super();
@@ -194,41 +192,39 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
          
         TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
         upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
-         
+        
         ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
         upvoteBtn.setOnClickListener(new OnClickListener() {
              
             @Override
             public void onClick(View v) {
             	User user= ListHandler.getUser();
-                //answerArray.get(groupPosition).upvoteAnswer();
             	Answer answer= answerArray.get(groupPosition);
     			if (user.alreadyUpvotedAnswer(answer)) {
 					Toast.makeText(activity.getApplicationContext(), "Answer was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {
 					user.addUpvotedAnswer(answerArray.get(groupPosition));
-					//answerArray.get(groupPosition).upvoteResponse();
+					
+					// To mimic
+					answerArray.get(groupPosition).upvoteResponse();
+					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+					upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
 					
 					QuestionList questionList = findQuestionList();
 					Question question = questionList.get(questionPosition);
 					
 					NetworkManager networkManager = NetworkManager.getInstance();
-					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+					if (!networkManager.isOnline(activity.getApplicationContext()) ) {
 						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						networkBuffer.addAUpvote(question.getID(), answerArray.get(groupPosition).getID());
-						
-						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-						upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()+1));
-						
+						networkBuffer.addAUpvote(question.getStringID(), answerArray.get(groupPosition).getStringID());
 						return;
 					}
 					
 					NetworkController  networkController = new NetworkController();
-					networkController.upvoteAnswer(question.getID(), answerArray.get(groupPosition).getID());
+					networkController.upvoteAnswer(question.getStringID(), answerArray.get(groupPosition).getStringID());
 					
-					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-					upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
+
 				}
             	/*
                 TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
@@ -236,7 +232,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
                 */
             }
         });
-         
+		
         if (answerArray.get(groupPosition).hasPicture() == true) {
             //ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
            // hasPictureIcon.setVisibility(0);
@@ -262,13 +258,14 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         replyBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				
+			public void onClick(View v) {				
 				// Passing info about which questionList it's from, questionPosition & questionAnswer & the type (we're replying to an Answer) so we know where to add the reply to
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", questionPosition);
 				args.putInt("answerPosition", groupPosition);
+				//args.putString("questionID", findQuestionList().get(questionPosition).getStringID());
+				//args.putString("answerID", answerArray.get(groupPosition).getStringID());
 				args.putInt("type", TYPE_ANSWER);
 				
 				// Create & display reply dialog + attach arguments

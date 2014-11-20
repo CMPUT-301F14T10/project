@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.List;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -14,97 +14,119 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 public class NetworkController {
 
 	private ESManager esManager;
+	private List<Question> tempList;
+	private Boolean populateThreadFinished = false;
 	
-	//private QuestionList result= null;
+	private Question tempQuestion;
+	private Boolean getQuestionThreadFinished = false;
 	
 	public NetworkController() {
 		esManager = new ESManager();
+		tempList = new ArrayList<Question>();
 	}
 	
-	//Trial method to get QuestionList from server, commenting out, trying without threads
-	
-/*	public void getQList() {
-		Thread thread = new GetQuestionListThread();
-		thread.start();
-		
-		boolean proceed=false;
-		//if there is more stuff on the server, pull that stuff from the server
-		if (result.size()> ListHandler.getMasterQList().size()) {
-			proceed=true;
-		}
-		
-		if (proceed) {
-			ListHandler.setMasterQList(result);
-		}
-	}*/
-	
-	//Trial Method to add QuestionList to server
-	
-/*	public void addQuestionList(QuestionList newQuestions) {
-		Thread thread= new AddQuestionListThread(newQuestions);
-		thread.start();
-		
-	}*/
-	
-	public void addQuestionIDList(ArrayList <String> strings) {
-		Thread thread= new AddQuestionIDListThread(strings);
-		thread.start();
-	}
-		
 	public void addQuestion(Question newQuestion) {
 		Thread thread = new AddQThread(newQuestion);
 		thread.start();
 		
-		ListHandler.getMasterQList().add(newQuestion);
-		ListHandler.getMyQsList().add(newQuestion);
-	}
-	
-	public void addAnswer(UUID questionID, Answer newAnswer) {
-		Thread thread = new AddAThread(questionID, newAnswer);
-		thread.start();
-		
-		finish(questionID);
-	}
-	
-	
-	public void addQReply(UUID questionID, Reply newReply) {
-		Thread thread = new AddQReplyThread(questionID, newReply);
-		thread.start();
-		
-		finish(questionID);
-	}
-	
-	public void upvoteQuestion(UUID questionID) {
-		Thread thread = new UpvoteQuestionThread(questionID);
-		thread.start();
-		
-		finish(questionID);
-		
-	}
-	
-	public void upvoteAnswer(UUID questionID, UUID answerID) {
-		Thread thread = new UpvoteAnswerThread(questionID, answerID);
-		thread.start();
-
-		finish(questionID);
+//		ListHandler.getMasterQList().add(newQuestion);
+//		ListHandler.getMyQsList().add(newQuestion);
 	}
 
-	public void addAReply(UUID questionID, UUID answerID, Reply reply) {
-		Thread thread = new AddAReplyThread(questionID, answerID, reply);
+	public Question getQuestion(String questionID) {
+		Thread thread = new GetQuestionThread(questionID);
 		thread.start();
 		
-		finish(questionID);
+    	// Make sure populateThread is done and we retrived the results from network before we continue
+    	while (getQuestionThreadFinished != true) {
+    	}
+    	
+    	getQuestionThreadFinished = false;
+    	
+    	
+		return tempQuestion;
+	}
+	
+	class GetQuestionThread extends Thread {
+		private String search = "";
+		private String questionID;
+		
+		public GetQuestionThread(String questionID) {
+			this.questionID = questionID;
+		}
+
+		@Override
+		public void run() {
+			//QuestionList masterList = ListHandler.getMasterQList();
+			tempQuestion = esManager.getQuestion(questionID);
+			
+			// PRINTING FOR ME
+			if (tempQuestion != null) {
+				System.out.println("getQuestionThread : questionName ---> " + tempQuestion.getName());
+			}
+			getQuestionThreadFinished = true;
+		}
+
+	}
+	
+	public void populateMasterList() {
+		Thread thread = new PopulateMasterQThread();
+		thread.start();
+		fillMasterList();
 	}
     
-	private void finish(UUID questionID) {
-		// So it updates the view b/c we use .set
-		int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-		Question question = ListHandler.getMasterQList().get(questionIndex);
-		ListHandler.getMasterQList().set(questionIndex, question);
+    
+    private void fillMasterList() {
+    	System.out.println("INSIDE fillMasterList");
+    	
+    	// Make sure populateThread is done and we retrived the results from network before we continue
+    	while (populateThreadFinished != true) {
+    	}
+    	
+    	populateThreadFinished = false;
+    	
+		// PRINTING FOR ME
+		System.out.println("tempList size --> " + tempList.size());
+		for (Question q : tempList) {
+			System.out.println("-- Question --> " + q.getName());
+		}
+		
+    	if (tempList.size() == 0) {
+    		return;
+    	}
+    	
+    	QuestionList questionList = ListHandler.getMasterQList();
+		ArrayList<Question> list = questionList.getQuestionList();
+		list.clear();
+		
+		for (Question q : tempList) {
+			if (ListHandler.isInFavs(q.getStringID())) {
+				q.setIsFav(true);
+			}
+			else {
+				q.setIsFav(false);
+			}
+			if (ListHandler.isInReadingList(q.getStringID())) {
+				q.setIsInReadingList(true);
+			}
+			else {
+				q.setIsInReadingList(false);
+			}
+			list.add(q);
+		}
+		
+		// PRINTINT FOR GEM
+		for (int i = 0 ; i < questionList.size(); i++) {
+			System.out.println("QuestionName : " + questionList.get(i).getName());
+		}
+		
+		System.out.println("DONE fillMasterList");
+		
+		questionList.notifyViews();
 	}
-    
-    
-    // BELOW - Maybe move this somewhere else later
+
+
+	// BELOW - Maybe move this somewhere else later
 	// This is modified from https://github.com/dfserrano/AndroidElasticSearch 11-15-2014
 	class AddQThread extends Thread {
 
@@ -127,12 +149,55 @@ public class NetworkController {
 		
 	}
 	
+//	class SearchThread extends Thread {
+//		private String search;
+//	
+//		public SearchThread(String s) {
+//			search = s;
+//		}
+//
+//		@Override
+//		public void run() {
+//			QuestionList masterList = ListHandler.getSearchResultsList();
+//			addAll(masterList, esManager.searchQuestions(search, null));
+//		}
+//
+//	}
+	
+	class PopulateMasterQThread extends Thread {
+		private String search = "";
+	
+		public PopulateMasterQThread() {
+		}
+
+		@Override
+		public void run() {
+			//QuestionList masterList = ListHandler.getMasterQList();
+			tempList = esManager.searchQuestions(search, null);
+			
+			// PRINTING FOR ME
+			System.out.println("tempList size --> " + tempList.size());
+			for (Question q : tempList) {
+				System.out.println("-- Question --> " + q.getName());
+			}
+			
+			populateThreadFinished = true;
+		}
+
+	}
+	
+	public void addAnswer(String questionID, Answer newAnswer) {
+		System.out.println("in NetworkController - addAnswer - questionID --> " + questionID);
+		Thread thread = new AddAThread(questionID, newAnswer);
+		thread.start();
+	}
+
 	class AddAThread extends Thread {
 
-		private UUID questionID;
+		private String questionID;
 		private Answer answer;
 		
-		public AddAThread(UUID questionID, Answer answer) {
+		public AddAThread(String questionID, Answer answer) {
 			this.questionID = questionID;
 			this.answer = answer;
 		}
@@ -149,13 +214,74 @@ public class NetworkController {
 		}
 		
 	}
+	
+	
+	public void upvoteQuestion(String questionID) {
+		Thread thread = new UpvoteQuestionThread(questionID);
+		thread.start();
+		
+	}
+	
+	class UpvoteQuestionThread extends Thread {
+		
+		private String questionID;
+		
+		public UpvoteQuestionThread(String questionID) {
+			this.questionID = questionID;
+		}
 
+		@Override
+		public void run() {
+			esManager.upvoteQuestion(questionID);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// UPVOTE ANSWER
+	public void upvoteAnswer(String questionID, String answerID) {
+		Thread thread = new UpvoteAnswerThread(questionID, answerID);
+		thread.start();
+	}
+	
+	class UpvoteAnswerThread extends Thread {
+		
+		private String questionID;
+		private String answerID;
+		
+		public UpvoteAnswerThread(String questionID, String answerID) {
+			this.questionID = questionID;
+			this.answerID = answerID;
+		}
+
+		@Override
+		public void run() {
+			esManager.upvoteAnswer(questionID, answerID);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// ADD QUESTION REPLY
+	public void addQReply(String questionID, Reply newReply) {
+		Thread thread = new AddQReplyThread(questionID, newReply);
+		thread.start();
+	}
+	
 	class AddQReplyThread extends Thread {
 		
-		private UUID questionID;
+		private String questionID;
 		private Reply reply;
 		
-		public AddQReplyThread(UUID questionID, Reply reply) {
+		public AddQReplyThread(String questionID, Reply reply) {
 			this.questionID = questionID;
 			this.reply = reply;
 		}
@@ -173,13 +299,19 @@ public class NetworkController {
 		
 	}
 	
+	// ADD ANSWER REPLY
+	public void addAReply(String questionID, String answerID, Reply reply) {
+		Thread thread = new AddAReplyThread(questionID, answerID, reply);
+		thread.start();
+	}
+    
 	class AddAReplyThread extends Thread {
 		
-		private UUID questionID;
-		private UUID answerID;
+		private String questionID;
+		private String answerID;
 		private Reply reply;
 		
-		public AddAReplyThread(UUID questionID, UUID answerID, Reply reply) {
+		public AddAReplyThread(String questionID, String answerID, Reply reply) {
 			this.questionID = questionID;
 			this.answerID = answerID;
 			this.reply = reply;
@@ -197,106 +329,5 @@ public class NetworkController {
 		}
 		
 	}
-	
-	class UpvoteQuestionThread extends Thread {
-		
-		private UUID questionID;
-		
-		public UpvoteQuestionThread(UUID questionID) {
-			this.questionID = questionID;
-		}
-
-		@Override
-		public void run() {
-			esManager.upvoteQuestion(questionID);
-
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	class UpvoteAnswerThread extends Thread {
-		
-		private UUID questionID;
-		private UUID answerID;
-		
-		public UpvoteAnswerThread(UUID questionID, UUID answerID) {
-			this.questionID = questionID;
-			this.answerID = answerID;
-		}
-
-		@Override
-		public void run() {
-			esManager.upvoteAnswer(questionID, answerID);
-
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-	//Trail thread to get questionlist from server
-/*	class GetQuestionListThread extends Thread {
-				
-		public GetQuestionListThread() {
-		}
-		
-		@Override
-		public void run() {
-			result= esManager.getQuestionList();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		}
-		
-	}*/
-	
-	//Trial thread to add questionlist to server
-/*	class AddQuestionListThread extends Thread {
-		
-		private QuestionList questionList;
-		public AddQuestionListThread(QuestionList newQuestions) {
-			this.questionList=newQuestions;
-		}
-
-		@Override
-		public void run() {
-			esManager.addQuestionList(questionList);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		}*/
-	
-	//Thread to get question ids from the server
-	class AddQuestionIDListThread extends Thread {
-		private ArrayList <String> QuestionIDS;
-		public AddQuestionIDListThread(ArrayList<String> strings) {
-			this.QuestionIDS=strings;
-		}
-		
-		@Override
-		public void run() {
-			esManager.addQuestionIDS(QuestionIDS);
-			try {
-				Thread.sleep(500);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 
 }

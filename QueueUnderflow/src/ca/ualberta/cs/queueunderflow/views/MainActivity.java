@@ -1,7 +1,5 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -15,13 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import ca.ualberta.cs.queueunderflow.ESManager;
+import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 
@@ -73,6 +70,7 @@ public class MainActivity extends Activity {
 	/** The fragment position. */
 	private int fragmentPosition;	// For sorting
 	
+	
 	/** The question list. */
 	private QuestionList questionList; 	// For sorting
 	
@@ -118,20 +116,10 @@ public class MainActivity extends Activity {
         };
         
         drawerLayout.setDrawerListener(drawerToggle);
-        
-        int returnFragment = getIntent().getIntExtra("returnFragment", -1);
-        if (returnFragment != -1) {
-        	fragmentPosition = returnFragment - 1;
-        	selectItem(returnFragment-1);
-        }
-        
-        // This automatically shows the HomeScreen after the app is first launched and a user hasn't selected a tab yet.
-        else if (savedInstanceState == null) {
-        	fragmentPosition = 0;
+
+        if (savedInstanceState == null) {
         	selectItem(0);
         }
-        
-        
         
         //----- Load data from phone memory (move this into a controller somewhere, maybe)
 
@@ -147,35 +135,8 @@ public class MainActivity extends Activity {
         }
 
         //----- Done loading data from phone memory
-        
-        //This part here is to load questionlist from server into home screen/section-- test only
-        //Kind of works (app doesn't crash at least) Can add to server but not pull from it yet
-/*        NetworkManager networkManager= NetworkManager.getInstance();
-        boolean online= networkManager.isOnline(getApplicationContext());
-        if (online) {
-        	ESManager esManager= new ESManager();
-        	QuestionList questionList= esManager.getQuestionList();
-        	ListHandler.setMasterQList(questionList);
-        }*/
-        
-        NetworkManager networkManager= NetworkManager.getInstance();
-        boolean online= networkManager.isOnline(getApplicationContext());
-        if (online) {
-        	ESManager esManager= new ESManager();
-        	ArrayList<String> questionIDS= esManager.getQuestionIDS();
-        	QuestionList allQuestions= new QuestionList();
-        	for (int i=0; i<questionIDS.size();i++) {
-        		Question question= esManager.getQuestion(questionIDS.get(i));
-        		allQuestions.add(question);
-        	}
-        	ListHandler.setMasterQList(allQuestions);
-        }
-        
-        
-        
     }
-
-
+    
     /* (non-Javadoc)
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
@@ -220,17 +181,11 @@ public class MainActivity extends Activity {
     	NetworkManager networkManager = NetworkManager.getInstance();
     	if (networkManager.isOnline(getApplicationContext())) {
     		networkManager.flushBuffer();
-    		
-        	//Add the master questionlist to the server, doesn't work yet
-        	//NetworkController networkController = new NetworkController();
-        	//networkController.addQuestionList(ListHandler.getMasterQList());
-    		
-    		//Push the questionlist to the server
-           	//ESManager esManager= new ESManager();
-        	//QuestionList questionList= ListHandler.getMasterQList();
-        	//esManager.addQuestionList(questionList);
     	}
+    	
+    	
     }
+
         
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -256,27 +211,23 @@ public class MainActivity extends Activity {
         switch(id) {
         case R.id.mostRecentMenu:
         	questionList.sortBy("most recent");
-        	selectItem(fragmentPosition);
         	return true;
         case R.id.leastRecentMenu:
         	questionList.sortBy("least recent");
-        	selectItem(fragmentPosition);
         	return true;
         case R.id.mostUpvotesMenu:
         	questionList.sortBy("most upvotes");
-        	selectItem(fragmentPosition);
         	return true;
         case R.id.hasPictureMenu:
         	questionList.sortBy("has pictures");
-        	selectItem(fragmentPosition);
         	return true;
         case R.id.noPictureMenu:
         	questionList.sortBy("no pictures");
-        	selectItem(fragmentPosition);
         	return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     
     // This is called when we call invalidateOptionsMenu()
     /* (non-Javadoc)
@@ -331,7 +282,6 @@ public class MainActivity extends Activity {
 		 */
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			fragmentPosition = position;
 			selectItem(position);
 		}
     }
@@ -348,6 +298,27 @@ public class MainActivity extends Activity {
     	switch(position) {
     	case 0:
     		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
+        	
+//    		// Put in controller - This must be done first before populating list else it still has old favs marked - might move this later
+//    		Buffer buffer = Buffer.getInstance();
+//    		System.out.println("FAV BUFFER FLUSHING : "  + buffer.favBuffer);
+//    		System.out.println("READINGLIST BUFFER FLUSHING : " + buffer.readingListBuffer);
+//    		if (buffer.isFavBufferEmpty() == false) {
+//    			buffer.flushFav();
+//    		}
+//    		if (buffer.isReadingListBufferEmpty() == false) {
+//    			buffer.flushReadingList();
+//    		}
+//    		//
+//    		
+//    		if (NetworkManager.getInstance().isOnline(getApplicationContext())) {
+//        		// Refresh the masterlist
+//        		System.out.println("Starting populateMasterList");
+//        		NetworkController networkController = new NetworkController();
+//        		networkController.populateMasterList();
+//        		System.out.println("Finished populateMasterList");
+//    		}
+    		
     		questionList = ListHandler.getMasterQList();
     		break;
     	case 1:
@@ -366,8 +337,8 @@ public class MainActivity extends Activity {
     		fragment = new SetUsernameFragment();
     		break;
     	case 5:
-    	        fragment = new SetLocationFragment();
-    	        break;
+    		fragment = new SetLocationFragment();
+    		break;
     	default:
     		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
     		questionList = ListHandler.getMasterQList();

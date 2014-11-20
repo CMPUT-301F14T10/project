@@ -14,6 +14,7 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
@@ -55,6 +56,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	/** The question. */
 	private Question question;
 	
+	private String questionID;
+	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -66,19 +69,14 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		// Display the up caret to go back to the MainActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		
 		// Retrieve the position of the question selected & the fragment where it was selected from
 		// The fragment where it was selected from informs us of which list to use from the ListHandler to inflate the view
 		
 		Intent intent = getIntent();
 		final int position = intent.getIntExtra("position", -1); 				// -1 is the default value if nothing was retrieved
 		fromFragment = intent.getIntExtra("fromFragment", -1);
-		
-		// If position or fragment was not successfully retrieved, finish & go back
-		if ((position == -1) || (fromFragment == -1)) {
-			finish();
-		}
-		
-		// Put some of this in a controller - BELOW
+		questionID = intent.getStringExtra("questionID");
 		
 		// Determine which fragment we came from / where the question was selected
 		QuestionList questionList = null;
@@ -101,14 +99,25 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			break;
 		}
 		
-		// Get the question selected
 		question = questionList.get(position);
+		Boolean isFav = question.getIsFav();
+		Boolean isReadingList = question.getIsInReadingList();
+		if (NetworkManager.getInstance().isOnline(getApplicationContext())) {
+			NetworkController networkController = new NetworkController();
+			question = networkController.getQuestion(questionID);
+			question.setIsFav(isFav);
+			question.setIsInReadingList(isReadingList);
+			questionList.set(position, question);
+		}
+		// NEED TO HANDLE WHEN IF NOT ONLINE / CONNECTED 
+		
+		// Put some of this in a controller - BELOW
 		
 		AnswerList answerList = question.getAnswerList();
 		
 		// Set up the display
 		ExpandableListView singleQuestionExpListView = (ExpandableListView) findViewById(R.id.questionExpListView);
-		singleQAdapter = new SingleQuestionAdapter(this, questionList.getQuestionList() , fromFragment, position);
+		singleQAdapter = new SingleQuestionAdapter(this, question, fromFragment, position);
 		singleQuestionExpListView.setAdapter(singleQAdapter);
 		
 		// Display a "no replies" toast if question is clicked on but has no replies
@@ -125,21 +134,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         // This hides that expand arrow on the question item
         singleQuestionExpListView.setGroupIndicator(null);
         
-        
-        Button addAnswer = (Button) findViewById(R.id.addAnAnswerBtn);
-        addAnswer.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
-				//Pass the position of the question to the new activity
-				intent.putExtra("question_position", position);
-				intent.putExtra("fromFragment", fromFragment);
-				
-				startActivity(intent);
-
-			}
-		});
         
         TextView answersCount = (TextView) findViewById(R.id.answersCount);
         answersCount.setText(Integer.toString(question.getAnswerListSize()));
@@ -161,6 +155,23 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         
         // This hides that expand arrow on the answer item
         answersExpListView.setGroupIndicator(null);
+        
+        
+        
+        Button addAnswer = (Button) findViewById(R.id.addAnAnswerBtn);
+        addAnswer.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
+				//Pass the position of the question to the new activity
+				intent.putExtra("question_position", position);
+				intent.putExtra("fromFragment", fromFragment);
+				intent.putExtra("questionID", questionID);
+				startActivity(intent);
+				update(null);
+			}
+		});
 	}
 
 
@@ -187,10 +198,10 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		// Go back to MainActivity when the up caret is clicked
 		if (id == android.R.id.home) {
-			Intent intent = NavUtils.getParentActivityIntent(this);
-			// This is so we go back to the proper fragment that we came from in the main activity
-			intent.putExtra("returnFragment", fromFragment);
-			NavUtils.navigateUpTo(this, intent);
+//			Intent intent = NavUtils.getParentActivityIntent(this);
+//			// This is so we go back to the proper fragment that we came from in the main activity
+//			intent.putExtra("returnFragment", fromFragment);
+//			//NavUtils.navigateUpTo(this, intent);
 			return true;
 		}
 		
@@ -219,20 +230,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         }
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-    	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
-    	NetworkManager networkManager = NetworkManager.getInstance();
-		if (networkManager.isOnline(getApplicationContext())) {
-    		networkManager.flushBuffer();
-    	}
-	}
-
 
 
 	/* (non-Javadoc)
@@ -240,10 +237,14 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	 */
 	@Override
 	public void update(QuestionList model) {
-		singleQAdapter.notifyDataSetChanged();
-		adapter.notifyDataSetChanged();
-		
+		System.out.println("UPDATEING QAVIEW");
+		if (singleQAdapter != null && adapter != null) {
+			singleQAdapter.notifyDataSetChanged();
+			adapter.notifyDataSetChanged();
+		}
         TextView answersCount = (TextView) findViewById(R.id.answersCount);
         answersCount.setText(Integer.toString(question.getAnswerListSize()));
 	}
+	
+
 }

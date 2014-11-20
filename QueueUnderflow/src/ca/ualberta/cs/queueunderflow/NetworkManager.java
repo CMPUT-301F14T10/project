@@ -7,9 +7,8 @@ import android.net.NetworkInfo;
 public class NetworkManager {
 
 	private static NetworkManager instance = null;
-	private NetworkBuffer networkBuffer;
 	private ConnectivityManager connectManager;
-
+	private NetworkBuffer networkBuffer;
 	
 	private NetworkManager() {
 		networkBuffer = new NetworkBuffer();
@@ -22,10 +21,6 @@ public class NetworkManager {
 		return instance;
 	}
 	
-	public NetworkBuffer getNetworkBuffer() {
-		return networkBuffer;
-	}
-	
 	// should we call this hasConnection instead of isOnline? - This returns true if we're connected and false otherwise - Note this only checks for 3g network and not wifi I think
 	public boolean isOnline(Context context) {
 		connectManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -36,10 +31,13 @@ public class NetworkManager {
 		return false;
 	}
 	
+	public NetworkBuffer getNetworkBuffer() {
+		return networkBuffer;
+	}
+	
 	public void flushBuffer() {
 		networkBuffer.flushAll();
 	}
-
 }
 
 

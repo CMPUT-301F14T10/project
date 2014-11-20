@@ -1,33 +1,16 @@
 package ca.ualberta.cs.queueunderflow.adapters;
 
 import java.util.ArrayList;
-
-import ca.ualberta.cs.queueunderflow.Buffer;
-import ca.ualberta.cs.queueunderflow.ESManager;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.LoadSave;
-import ca.ualberta.cs.queueunderflow.NetworkBuffer;
-import ca.ualberta.cs.queueunderflow.NetworkController;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.R.id;
-import ca.ualberta.cs.queueunderflow.R.layout;
-import ca.ualberta.cs.queueunderflow.models.Answer;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
-import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,11 +18,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.Buffer;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.LoadSave;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
+import ca.ualberta.cs.queueunderflow.views.MainActivity;
+import ca.ualberta.cs.queueunderflow.views.QAViewActivity;
+import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
 
 /**
  * The Class QuestionListAdapter.
@@ -130,42 +126,29 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					boolean isInFavorites = false;
                     if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
 				    
+                    // FIX THIS TO ADD ONLY THE QUESTION ID INSTEAD OF THE ENTIRE QUESTION
 					user.addUpvotedQuestion(questionArray.get(position));
-					//questionArray.get(position).upvoteResponse();
+					
+					// To mimic fake view updates
+					questionArray.get(position).upvoteResponse();
+					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
+					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 					
 					NetworkManager networkManager = NetworkManager.getInstance();
 					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						networkBuffer.addQUpvote(question.getID());
-						
-						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-						upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()+1));
-						
+						networkBuffer.addQUpvote(question.getStringID());				
 						return;
 					}
+					else { // if online
+						NetworkController  networkController = new NetworkController();
+						networkController.upvoteQuestion(questionArray.get(position).getStringID());
+					}
 					
-					NetworkController  networkController = new NetworkController();
-					networkController.upvoteQuestion(questionArray.get(position).getID());
-					
-					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-					upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
-					
-	                                //Save favorites if applicable
-                                        if (isInFavorites)
-                                        {
-                                            Log.d("test", "Item is in favorites.");
-                                            //Mark as unsaved changes.
-                                            LoadSave.unsavedChanges = true;
-                                        }else{
-                                            Log.d("testitem", "Item is NOT in favorites.");
-                                        }
 				}
 
-				
-				//upvoteBtn.setEnabled(false);
-				}	
-			}
-		);		
+			}	
+		});		
 		
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
@@ -187,9 +170,11 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
+				intent.putExtra("question_position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("question_position",position);
+				intent.putExtra("questionID", questionArray.get(position).getStringID());
 				activity.startActivity(intent);
+				//update(null);
 			}
 		});
 		
@@ -203,6 +188,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", position);
+				args.putString("questionID", questionArray.get(position).getStringID());
 				args.putInt("type", TYPE_QUESTION);
 				
 				// Create & display reply dialog + attach arguments
@@ -220,28 +206,58 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = questionArray.get(position);
-				
-				if (questionArray == ListHandler.getFavsList().getQuestionList()) {
-					Buffer buffer = Buffer.getInstance();	// Buffer hold list of questions to be REMOVED from the ListHandler.getFavsList()
-					if (isChecked == false) {	// unfavorited a question from the FavFragment
-						buffer.addToFavBuffer(position);
+				question.setIsFav(isChecked);
+
+				if (fromFragment == MainActivity.FAVORITES_FRAGMENT) {
+					Buffer buffer = Buffer.getInstance();
+					if (isChecked == false) {
+						System.out.println("unfavoriting from fav buffer");
+						buffer.addToFavBuffer(question.getStringID());
+						
+						//
+						System.out.println("FAVLISTBUFFER CONTENT");
+						System.out.println(buffer.favBuffer);
+						//
 					}
-					else {	// re-favorited a question after unfavoriting from the FavFragment
-						buffer.removeFromFavBuffer(position);
+					else {
+						System.out.println("favoriting from fav buffer");
+						buffer.removeFromFavBuffer(question.getStringID());
+						
+						//
+						System.out.println("FAVLISTBUFFER CONTENT");
+						System.out.println(buffer.favBuffer);
+						//
 					}
 				}
 				
-				else if (isChecked == true) {
-					if (!ListHandler.getFavsList().getQuestionList().contains(question)) {
+				else {
+					if (isChecked == true) {
+						System.out.println("favoriting normal");
 						ListHandler.getFavsList().add(question);
+						
+						//
+						System.out.println("FAVLIST CONTENT");
+						ArrayList<String> favIDs = new ArrayList<String>();
+						for (Question q : ListHandler.getFavsList().getQuestionList()) {
+							favIDs.add(q.getStringID());
+						}
+						System.out.println(favIDs);
+						//
+					}
+					else if (isChecked == false) {
+						System.out.println("unfavoriting normal");
+						ListHandler.getFavsList().remove(question);
+						
+						//
+						System.out.println("FAVLIST CONTENT");
+						ArrayList<String> favIDs = new ArrayList<String>();
+						for (Question q : ListHandler.getFavsList().getQuestionList()) {
+							favIDs.add(q.getStringID());
+						}
+						System.out.println(favIDs);
+						//
 					}
 				}
-				else if (isChecked == false) {
-					ListHandler.getFavsList().remove(question);
-				}
-				
-				questionArray.get(position).setIsFav(isChecked);
-				
 				//Mark as unsaved changes,
 				LoadSave.unsavedChanges = true;
 			}
@@ -251,31 +267,29 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		CheckBox readingListBtn = (CheckBox) view.findViewById(R.id.offlineBtn);
 		readingListBtn.setChecked(questionArray.get(position).getIsInReadingList());
 		readingListBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = questionArray.get(position);
+				question.setIsInReadingList(isChecked);
 				
-				if (questionArray == ListHandler.getReadingList().getQuestionList()) {
-					Buffer buffer = Buffer.getInstance();	// Buffer hold list of questions to be REMOVED from the ListHandler.getReadingList()
-					if (isChecked == false) {	// un-marking a question from the ReadingListFragment
-						buffer.addToReadingListBuffer(position);
+				if (fromFragment == MainActivity.READING_LIST_FRAGMENT) {
+					Buffer buffer = Buffer.getInstance();
+					if (isChecked == false) {
+						buffer.addToReadingListBuffer(question.getStringID());
 					}
-					else {	// re-marking for offline reading after un-marking it from the ReadingListFragment
-						buffer.removeFromReadingListBuffer(position);
+					else {
+						buffer.removeFromReadingListBuffer(question.getStringID());
 					}
 				}
 				
-				else if (isChecked == true) {
-					if (!ListHandler.getReadingList().getQuestionList().contains(question)) {
+				else {
+					if (isChecked == true) {
 						ListHandler.getReadingList().add(question);
 					}
+					else if (isChecked == false) {
+						ListHandler.getReadingList().remove(question);
+					}
 				}
-				else if (isChecked == false) {
-					ListHandler.getReadingList().remove(question);
-				}
-				
-				questionArray.get(position).setIsInReadingList(isChecked);
 				
 				//Mark as unsaved changes.
 				LoadSave.unsavedChanges = true;

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 
@@ -51,23 +50,17 @@ public class SetUsernameFragment extends Fragment {
 				String username = newUsername.getText().toString();
 				//User user = new User();
 				User user= ListHandler.getUser();
-				LoadSave lSave = LoadSave.getInstance();
 				
 				int flag = 0;
 				try {
 					user.setUserName(username);
 				} catch (IllegalArgumentException e){
 					currentUsername.setText(User.getUserName());
-					lSave.saveUsername(User.getUserName());
 					Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					flag = 1;
 				}
 				
 				if (flag == 0){
-					//Save username to phone
-					
-					lSave.saveUsername(User.getUserName());
-					//Done saving username to phone
 					currentUsername.setText(User.getUserName());
 					Toast.makeText(getActivity(), "Username successfully set to " + user.getUserName(), Toast.LENGTH_SHORT).show();
 				}

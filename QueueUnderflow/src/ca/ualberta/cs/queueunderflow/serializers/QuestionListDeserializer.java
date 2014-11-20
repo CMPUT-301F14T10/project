@@ -2,7 +2,6 @@ package ca.ualberta.cs.queueunderflow.serializers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -49,10 +48,6 @@ public class QuestionListDeserializer implements JsonDeserializer<QuestionList>{
 			
 		}
 		
-		JsonElement date= jsonObject.get("date");
-		Date converted= context.deserialize(date, Date.class);
-		
-		deserialized.setDate(converted);
 		return deserialized;
 	}
 

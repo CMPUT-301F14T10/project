@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 import android.util.Log;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -17,21 +16,21 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 public class NetworkBuffer {
 
 	ArrayList<Question> questionBuffer;
-	Map<UUID, Answer> answerBuffer;
-	Map<UUID, Reply> questionReplyBuffer;
-	Map<UUID, UUID> qaIDBuffer;
-	Map<UUID, Reply> answerReplyBuffer;
-	ArrayList<UUID> upvoteQBuffer;
-	Map<UUID, UUID> upvoteABuffer;
+	Map<String, Answer> answerBuffer;
+	Map<String, Reply> questionReplyBuffer;
+	Map<String, String> qaIDBuffer;
+	Map<String, Reply> answerReplyBuffer;
+	ArrayList<String> upvoteQBuffer;
+	Map<String, String> upvoteABuffer;
 	
 	public NetworkBuffer() {
 		questionBuffer = new ArrayList<Question>();
-		answerBuffer = new Hashtable<UUID, Answer>();
-		questionReplyBuffer = new Hashtable<UUID, Reply>();
-		qaIDBuffer = new Hashtable<UUID, UUID>();
-		answerReplyBuffer = new Hashtable<UUID, Reply>();
-		upvoteQBuffer = new ArrayList<UUID>();
-		upvoteABuffer = new Hashtable<UUID, UUID>();
+		answerBuffer = new Hashtable<String, Answer>();
+		questionReplyBuffer = new Hashtable<String, Reply>();
+		qaIDBuffer = new Hashtable<String, String>();
+		answerReplyBuffer = new Hashtable<String, Reply>();
+		upvoteQBuffer = new ArrayList<String>();
+		upvoteABuffer = new Hashtable<String, String>();
 	}
 	
 	public void addQuestion(Question question) {
@@ -40,25 +39,25 @@ public class NetworkBuffer {
 	}
 	
 	// Problem : What is you add more than one answer while offline - dictionaries don't work anymore - Need to fix later
-	public void addAnswer(UUID questionID, Answer answer) {
+	public void addAnswer(String questionID, Answer answer) {
 		answerBuffer.put(questionID, answer);
 		Log.d("network", "adding answer to buffer: " + answer.getName());
 	}
 	
-	public void addQReply(UUID questionID, Reply reply) {
+	public void addQReply(String questionID, Reply reply) {
 		questionReplyBuffer.put(questionID, reply);
 	}
 	
-	public void addAReply(UUID questionID, UUID answerID, Reply reply) {
+	public void addAReply(String questionID, String answerID, Reply reply) {
 		qaIDBuffer.put(questionID, answerID);
 		answerReplyBuffer.put(answerID, reply);
 	}
 	
-	public void addQUpvote(UUID questionID) {
+	public void addQUpvote(String questionID) {
 		upvoteQBuffer.add(questionID);
 	}
 	
-	public void addAUpvote(UUID questionID, UUID answerID) {
+	public void addAUpvote(String questionID, String answerID) {
 		upvoteABuffer.put(questionID, answerID);
 	}
 	
@@ -83,37 +82,37 @@ public class NetworkBuffer {
 		}
 		
 		// Push all answers to question in buffer online
-		Set<UUID> answerBufferKeys = answerBuffer.keySet();
-		for(UUID id : answerBufferKeys) {
+		Set<String> answerBufferKeys = answerBuffer.keySet();
+		for(String id : answerBufferKeys) {
 			Answer answer = answerBuffer.get(id);
 			networkController.addAnswer(id, answer);
 			Log.d("flush buffer", answer.getName());
 		}
 		
 		// Push all replies to a question in buffer online
-		Set<UUID> questionReplyBufferKeys = questionReplyBuffer.keySet();
-		for(UUID id : questionReplyBufferKeys) {
+		Set<String> questionReplyBufferKeys = questionReplyBuffer.keySet();
+		for(String id : questionReplyBufferKeys) {
 			Reply reply = questionReplyBuffer.get(id);
 			networkController.addQReply(id, reply);
 		}
 		
 		// Push all replies to an answer in buffer online
-		Set<UUID> qaIDBufferKeys = qaIDBuffer.keySet();
-		for(UUID questionID : qaIDBufferKeys) {
-			UUID answerID = qaIDBuffer.get(questionID);
+		Set<String> qaIDBufferKeys = qaIDBuffer.keySet();
+		for(String questionID : qaIDBufferKeys) {
+			String answerID = qaIDBuffer.get(questionID);
 			Reply reply = answerReplyBuffer.get(answerID);
 			networkController.addAReply(questionID, answerID, reply);
 		}
 		
 		// Push all question upvotes in buffer online
-		for( UUID id : upvoteQBuffer) {
+		for( String id : upvoteQBuffer) {
 			networkController.upvoteQuestion(id);
 		}
 		
 		// Push all answer upvotes in buffer online
-		Set<UUID> upvoteABufferKeys = upvoteABuffer.keySet();
-		for (UUID questionID : upvoteABufferKeys) {
-			UUID answerID = upvoteABuffer.get(questionID);
+		Set<String> upvoteABufferKeys = upvoteABuffer.keySet();
+		for (String questionID : upvoteABufferKeys) {
+			String answerID = upvoteABuffer.get(questionID);
 			networkController.upvoteAnswer(questionID, answerID);
 		}
 		

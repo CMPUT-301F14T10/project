@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class TModel<V extends TView> {
 
 	/** The views. */
-	private ArrayList<V> views;
+	transient private ArrayList<V> views;
 	
 	/**
 	 * Instantiates a new t model.

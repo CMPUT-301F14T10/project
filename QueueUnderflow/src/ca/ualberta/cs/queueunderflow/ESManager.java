@@ -3,34 +3,29 @@ package ca.ualberta.cs.queueunderflow;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import ca.ualberta.cs.queueunderflow.legacy_code.AnswerSerializer;
+import android.util.Log;
 import ca.ualberta.cs.queueunderflow.models.Answer;
-import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionDeserializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
-import ca.ualberta.cs.queueunderflow.serializers.QuestionSerializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -38,10 +33,9 @@ import com.google.gson.reflect.TypeToken;
 
 public class ESManager {
 
-	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
-	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
-	//private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST/1";
-	private static final String QUESTION_IDS= "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questionIDS/1";
+	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/_search";
+	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/";
+	
 	private Gson gson;
 	
 	public ESManager() {
@@ -49,19 +43,17 @@ public class ESManager {
 	}
 	
 	
-	//This is to push a questionList to the server
+	//This is to push the questionList to the server, commented out for now though until decided whether needed or not
 	
 /*	public void addQuestionList(QuestionList questionList) {
 		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTIONLIST METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPut addRequest = new HttpPut(QUESTIONLIST_URL);
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + "/_questionList");
 
-			final GsonBuilder gsonBuilder= new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
-			Gson gson= gsonBuilder.create();
-
+			final GsonBuilder gsonBuilder2= new GsonBuilder();
+			gsonBuilder2.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
 			StringEntity stringEntity = new StringEntity(gson.toJson(questionList));
 			addRequest.setEntity(stringEntity);
 			
@@ -89,23 +81,20 @@ public class ESManager {
 		return result.toString();
 	}
 	
-	//Get the questionlist from the server
+	//Get the questionlist from the server, commented out until it is needed or not
 	
-/*	public QuestionList getQuestionList() {
+	/*public QuestionList getQuestionList() {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(QUESTIONLIST_URL);
+		HttpGet httpGet = new HttpGet(RESOURCE_URL + "/_questionList");
 		HttpResponse response;
 		try {
-			
 			response = httpClient.execute(httpGet);
 			String json = getEntityContent(response);
 
-			 
 			final GsonBuilder gsonBuilder= new GsonBuilder();
 			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListDeserializer());
 			Gson gson= gsonBuilder.create();
 			QuestionList deserialized= gson.fromJson(json,QuestionList.class);
-			
 			return deserialized;
 			
 			
@@ -115,8 +104,8 @@ public class ESManager {
 		return null;
 	}*/
 	
-	// This method is for pulling questions from the server by ID
-	public Question getQuestion(String questionID) {
+	/* This method is for potential future use; pulling questions from the server
+	public Question getQuestion(int questionID) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
@@ -124,93 +113,21 @@ public class ESManager {
 		HttpResponse response;
 		try {
 			response = httpClient.execute(httpGet);
-			//String json = getEntityContent(response);
+			String json = getEntityContent(response);
 
-/*			final GsonBuilder gsonBuilder= new GsonBuilder();
+			final GsonBuilder gsonBuilder= new GsonBuilder();
 			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionDeserializer());
 			Gson gson= gsonBuilder.create();
 			Question deserialized= gson.fromJson(json,Question.class);
-			return deserialized;*/
-			
-			SearchHit<Question> sr = parseQuestionHit(response);
-			return sr.getSource();
-			
+			return deserialized;
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	*/
 	
-	
-	private SearchHit<Question> parseQuestionHit(HttpResponse response) {
-		try {
-			String json = getEntityContent(response);
-			Type searchHitType = new TypeToken<SearchHit<Question>>() {}.getType();
-			SearchHit<Question> sr = gson.fromJson(json, searchHitType);
-			return sr;
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-///------------THREE METHODS BELOW are to push list of question IDS in string to the server--------------------
-//Doesn't affect anything at the moment
-	
-	public void addQuestionIDS(ArrayList <String> QuestionIDS) {
-		HttpClient httpClient= new DefaultHttpClient();
-		try {
-			HttpPut addRequest = new HttpPut(QUESTION_IDS);
-			
-			StringEntity stringEntity = new StringEntity(gson.toJson(QuestionIDS));
-			addRequest.setEntity(stringEntity);
-			
-			// Execute the request
-			HttpResponse response = httpClient.execute(addRequest);
-			String status = response.getStatusLine().toString();
-			System.out.println("ADDQUESTIONIDS - HTTP STATUS ----- " + status);
-			
-			
-		} catch (Exception e) {
-			System.out.println("ADD QUESTIONIDS FAILED");
-			e.printStackTrace();
-		}
-		
-	}
-	
-	private SearchHit <ArrayList<String>> parseQuestionIDHit(HttpResponse response) {
-		try {
-			String json = getEntityContent(response);
-			Type searchHitType = new TypeToken<SearchHit<ArrayList<String>>>() {}.getType();
-			SearchHit<ArrayList<String>> sr = gson.fromJson(json, searchHitType);
-			return sr;
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public ArrayList<String> getQuestionIDS() {
-		
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(QUESTION_IDS);
-		
-		HttpResponse response;
-		try {
-			response = httpClient.execute(httpGet);
-			SearchHit<ArrayList<String>> sr = parseQuestionIDHit(response);
-			return sr.getSource();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		ArrayList <String> empty= new ArrayList<String> ();
-		return empty ;
-	}
-	
-///-------------------------------------------------------------------------------	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -239,17 +156,16 @@ public class ESManager {
 		}
 	}
 
-	public void addAnswer(UUID questionID, Answer newAnswer) {
+	public void addAnswer(String questionID, Answer newAnswer) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDANSWER METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
 			// Just update the answerList of the question
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID.toString() + "/_update");
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID + "/_update");
 			
 			// get the question & add the answer
-			int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-			Question question = ListHandler.getMasterQList().get(questionIndex);
+			Question question = getQuestion(questionID);
 			question.addAnswer(newAnswer);
 	
 			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
@@ -268,17 +184,90 @@ public class ESManager {
 		}
 	}
 	
-	public void addQReply(UUID questionID, Reply newReply) {
+	public void upvoteQuestion(String questionID) {
+		System.out.println("INSIDE NETWORK MANAGER -UPVOTEQUESTION METHOD");
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		try {
+			// Just update the answerList of the question
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID + "/_update");
+			
+			// get the question
+			Question question = getQuestion(questionID);
+			question.upvoteResponse();
+			
+			// For Testing Checks
+			System.out.println("WANTED ID : " + questionID);
+			for(Question q : ListHandler.getMasterQList().getQuestionList()) {
+				System.out.println("-- New Question --");
+				System.out.println("ID : " + q.getStringID());
+				System.out.println("Name : " + q.getName());
+				System.out.println("Author : " + q.getAuthor());
+				System.out.println("Upvotes : " + q.getUpvotes());
+				System.out.println("    ANSWERS");
+				for (Answer a : q.getAnswerList().getAnswerList()) {
+					System.out.println("New Answer -- > " + a.getName());
+				}
+				System.out.println();
+			}
+			
+			System.out.println("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}");
+			StringEntity stringEntity = new StringEntity("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}}");
+			addRequest.setEntity(stringEntity);
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			System.out.println("UPVOTEQUESTION - HTTP STATUS ----- " + status);
+			
+			
+		} catch (Exception e) {
+			System.out.println("UPVOTE QUESTION FAILED");
+			e.printStackTrace();
+		}
+	}
+	
+
+	public void upvoteAnswer(String questionID, String answerID) {
+		System.out.println("INSIDE NETWORK MANAGER - UPVOTE ANSWER METHOD");
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		try {
+			// Just update the answerList of the question
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID + "/_update");
+			
+			// get the question & add the answer
+			Question question = getQuestion(questionID);	
+			Answer answer = question.getAnswerList().getAnswerFromID(answerID);
+
+			answer.upvoteResponse();
+			
+			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
+			StringEntity stringEntity = new StringEntity("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}}");
+			addRequest.setEntity(stringEntity);
+			
+			// Execute the request
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			System.out.println("UPVOTEANSWER - HTTP STATUS ----- " + status);
+			
+			
+		} catch (Exception e) {
+			System.out.println("UPVOTE ANSWER FAILED");
+			e.printStackTrace();
+		}
+	}
+	
+	public void addQReply(String questionID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
 			// Just update the answerList of the question
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID.toString() + "/_update");
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID + "/_update");
 			
-			// get the question & add the answer
-			int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-			Question question = ListHandler.getMasterQList().get(questionIndex);
+			// get the question
+			Question question = getQuestion(questionID);
 			question.addReply(newReply);
 			
 			// serialize the replies with the newly added reply
@@ -298,21 +287,18 @@ public class ESManager {
 		}
 	}
 	
-	public void addAReply(UUID questionID, UUID answerID, Reply newReply) {
+	public void addAReply(String questionID, String answerID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDAREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
 			// Just update the answerList of the question
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID.toString() + "/_update");
+			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID + "/_update");
 			
-			// get the question & add the answer
-			int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-			Question question = ListHandler.getMasterQList().get(questionIndex);
-			
-			int answerIndex = question.getAnswerList().getIndexFromID(answerID);
-			Answer answer = question.getAnswerList().getAnswer(answerIndex);
-	
+			// get the question & the answer & add the reply
+			Question question = getQuestion(questionID);	
+			Answer answer = question.getAnswerList().getAnswerFromID(answerID);
+
 			answer.addReply(newReply);
 			
 			// serialize the entire answerList again
@@ -332,66 +318,126 @@ public class ESManager {
 		}
 	}
 
-	public void upvoteQuestion(UUID questionID) {
-		System.out.println("INSIDE NETWORK MANAGER -UPVOTEQUESTION METHOD");
+
+	
+	// Below is from the AndroidElasticSearch Lab
+	/**
+	 * Get Questions with the specified search string. If the search does not
+	 * specify fields, it searches on all the fields.
+	 */
+	public List<Question> searchQuestions(String searchString, String field) {
+		List<Question> result = new ArrayList<Question>();
+
+		// TODO: Implement search Questions using ElasticSearch
+		if (searchString == null || "".equals(searchString)) {
+			searchString = "*"; // wildcard - search for everything
+		}
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			// Just update the answerList of the question
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID.toString() + "/_update");
+			HttpPost searchRequest = createSearchRequest(searchString, field);
+			HttpResponse response = httpClient.execute(searchRequest);
 			
-			// get the question
-			int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-			Question question = ListHandler.getMasterQList().get(questionIndex);
-			question.upvoteResponse();
-			
-			System.out.println("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}");
-			StringEntity stringEntity = new StringEntity("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}}");
-			addRequest.setEntity(stringEntity);
-			
-			// Execute the request
-			HttpResponse response = httpClient.execute(addRequest);
 			String status = response.getStatusLine().toString();
-			System.out.println("UPVOTEQUESTION - HTTP STATUS ----- " + status);
+			Log.i("Search", status);
 			
+			SearchResponse<Question> esResponse = parseSearchResponse(response);
+			Hits<Question> hits = esResponse.getHits();
 			
-		} catch (Exception e) {
-			System.out.println("UPVOTE QUESTION FAILED");
+			if (hits != null) {
+				if(hits.getHits() != null) {
+					for (SearchHit<Question> sesr : hits.getHits()) {
+						result.add(sesr.getSource());
+					}
+				}
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		return result;
+	}
+	
+	
+	/**
+	 * Creates a search request from a search string and a field
+	 */
+	private HttpPost createSearchRequest(String searchString, String field)	throws UnsupportedEncodingException {
+		
+		HttpPost searchRequest = new HttpPost(SEARCH_URL);
+
+		String[] fields = null;
+		if (field != null) {
+			fields = new String[1];
+			fields[0] = field;
+		}
+		
+		SimpleSearchCommand command = new SimpleSearchCommand(searchString,	fields);
+		
+		String query = command.getJsonCommand();
+		Log.i("Search", "Json command: " + query);
+
+		StringEntity stringEntity;
+		stringEntity = new StringEntity(query);
+
+		searchRequest.setHeader("Accept", "application/json");
+		searchRequest.setEntity(stringEntity);
+
+		return searchRequest;
+	}
+	
+	/**
+	 * Parses the response of a search
+	 */
+	private SearchResponse<Question> parseSearchResponse(HttpResponse response) throws IOException {
+		String json;
+		json = getEntityContent(response);
+
+		Type searchResponseType = new TypeToken<SearchResponse<Question>>() {
+		}.getType();
+		
+		SearchResponse<Question> esResponse = gson.fromJson(json, searchResponseType);
+
+		return esResponse;
 	}
 
-	public void upvoteAnswer(UUID questionID, UUID answerID) {
-		System.out.println("INSIDE NETWORK MANAGER - UPVOTE ANSWER METHOD");
+
+	public Question getQuestion(String questionID) {
 		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
 		
+		HttpResponse response;
 		try {
-			// Just update the answerList of the question
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + questionID.toString() + "/_update");
-			
-			// get the question & add the answer
-			int questionIndex = ListHandler.getMasterQList().getIndexFromID(questionID);
-			Question question = ListHandler.getMasterQList().get(questionIndex);
-			
-			int answerIndex = question.getAnswerList().getIndexFromID(answerID);
-			Answer answer = question.getAnswerList().getAnswer(answerIndex);
-	
-			answer.upvoteResponse();
-			
-			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
-			StringEntity stringEntity = new StringEntity("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}}");
-			addRequest.setEntity(stringEntity);
-			
-			// Execute the request
-			HttpResponse response = httpClient.execute(addRequest);
-			String status = response.getStatusLine().toString();
-			System.out.println("UPVOTEANSWER - HTTP STATUS ----- " + status);
-			
-			
+			response = httpClient.execute(httpGet);
+			SearchHit<Question> sr = parseQuestionHit(response);
+			return sr.getSource();
+
 		} catch (Exception e) {
-			System.out.println("UPVOTE ANSWER FAILED");
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
+	private SearchHit<Question> parseQuestionHit(HttpResponse response) {
+		
+		try {
+			String json = getEntityContent(response);
+			Type searchHitType = new TypeToken<SearchHit<Question>>() {}.getType();
+			
+			SearchHit<Question> sr = gson.fromJson(json, searchHitType);
+			return sr;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 }

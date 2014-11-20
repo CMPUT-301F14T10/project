@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.Vector;
 
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
@@ -23,20 +24,20 @@ public class Buffer {
 	private static Buffer instance = null;
 
 	/** The fav buffer. */
-	public static ArrayList<Integer> favBuffer;
+	public static ArrayList<String> favBuffer;
 	
 	/** The reading list buffer. */
-	public static ArrayList<Integer> readingListBuffer;
+	public static ArrayList<String> readingListBuffer;
 	
 	/**
 	 * Instantiates a new buffer.
 	 */
 	private Buffer() {
 		if (favBuffer == null) {
-			favBuffer = new ArrayList<Integer>();
+			favBuffer = new ArrayList<String>();
 		}
 		if (readingListBuffer == null) {
-			readingListBuffer = new ArrayList<Integer>();
+			readingListBuffer = new ArrayList<String>();
 		}
 	}
 	
@@ -57,7 +58,7 @@ public class Buffer {
 	 *
 	 * @param position the position
 	 */
-	public void addToFavBuffer(int position) {
+	public void addToFavBuffer(String position) {
 		favBuffer.add(position);
 	}
 	
@@ -66,7 +67,7 @@ public class Buffer {
 	 *
 	 * @param position the position
 	 */
-	public void removeFromFavBuffer(int position) {
+	public void removeFromFavBuffer(String position) {
 		favBuffer.remove(position);
 	}
 	
@@ -75,7 +76,7 @@ public class Buffer {
 	 *
 	 * @param position the position
 	 */
-	public void addToReadingListBuffer(int position) {
+	public void addToReadingListBuffer(String position) {
 		readingListBuffer.add(position);
 	}
 	
@@ -84,7 +85,7 @@ public class Buffer {
 	 *
 	 * @param position the position
 	 */
-	public void removeFromReadingListBuffer(int position) {
+	public void removeFromReadingListBuffer(String position) {
 		readingListBuffer.remove(position);
 	}
 	
@@ -112,8 +113,11 @@ public class Buffer {
 	public void flushFav() {
 		QuestionList questionList = ListHandler.getFavsList();
 		for(int i = 0; i < favBuffer.size(); i++) {
-			int index = favBuffer.get(i);
-			questionList.set(index, null);
+			String id = favBuffer.get(i);
+			int index = ListHandler.getFavsList().getIndexFromID(UUID.fromString(id));
+			if (index != -1) {
+				questionList.set(index, null);
+			}
 		}
 		
 		Vector<String> v = new Vector<String>(1);
@@ -128,7 +132,8 @@ public class Buffer {
 	public void flushReadingList() {
 		QuestionList questionList = ListHandler.getReadingList();
 		for(int i = 0; i < readingListBuffer.size(); i++) {
-			int index = readingListBuffer.get(i);
+			String id =  readingListBuffer.get(i);
+			int index = ListHandler.getReadingList().getIndexFromID(UUID.fromString(id));
 			questionList.set(index, null);
 		}
 		

@@ -1,13 +1,9 @@
 package ca.ualberta.cs.queueunderflow.controllers;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ESManager;
 import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
 import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
@@ -82,6 +78,11 @@ public class AskAnswerController {
 				newQuestion.setEncodedImage(encodedImage);
 			}
 			
+			
+			// For mimicking fake view
+			ListHandler.getMasterQList().add(newQuestion);
+			ListHandler.getMyQsList().add(newQuestion);
+			
 			// If not online / not connected : add it to the Network Buffer to push online later when connected
 			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
 			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
@@ -89,87 +90,19 @@ public class AskAnswerController {
 				networkBuffer.addQuestion(newQuestion);
 				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
 				activity.finish();
-				return;
+				return; // add to buffer
+			}
+			else {
+				// New - If it get's here, it's connected
+				NetworkController networkController = new NetworkController();
+				networkController.addQuestion(newQuestion);
 			}
 			
-			// New - If it get's here, it's connected
-			NetworkController networkController = new NetworkController();
-			networkController.addQuestion(newQuestion);
-			
-			
-			//Push questionList to the server
-           	//ESManager esManager= new ESManager();
-        	//QuestionList questionList= ListHandler.getMasterQList();
-        	//networkController.addQuestionList(questionList);
-			
-			//Add questionIDS to server, doesn't work yet as far as I know
-           	ESManager esManager= new ESManager();
-        	ArrayList<String> questionIDS= esManager.getQuestionIDS();
-        	questionIDS.add(newQuestion.getStringID());
-        	networkController.addQuestionIDList(questionIDS);
 
-			
-			//Mark as unsaved data.
-			LoadSave.unsavedChanges = true;
 			
 			activity.finish();
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), "Invalid question. Please re-enter a question.", Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	/**
- * Adds the answer.
- *
- * @param fromFragment the from fragment
- * @param position the position
- * @param answerInput the answer input
- */
-public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
-		try {
-			Answer newAnswer = new Answer(answerName, User.getUserName());
-			if (hasPicture == View.VISIBLE) {
-				//Exception check: check if image >64kb
-				try {
-					newAnswer.setImagePath(imagePath);
-				} catch (IllegalArgumentException e){
-					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-					return;
-				}
-				
-				
-				newAnswer.setHasPicture(true);
-				//New here
-				//newAnswer.setImagePath(imagePath);
-				newAnswer.setEncodedImage(encodedImage);
-			}
-			
-			QuestionList questionList = findQuestionList(fromFragment);
-			Question question = questionList.get(position);
-			
-			// If not online / not connected : add it to the Network Buffer to push online later when connected
-			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
-			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
-				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
-				networkBuffer.addAnswer(question.getID(), newAnswer);
-				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
-				activity.finish();
-				return;
-			}
-			
-			// New - If it get's here, it's connected
-			NetworkController networkController = new NetworkController();
-			networkController.addAnswer(question.getID(), newAnswer);
-			
-			
-			//Push questionList to the server
-           	//ESManager esManager= new ESManager();
-        	//QuestionList questionList2= ListHandler.getMasterQList();
-        	//networkController.addQuestionList(questionList2);
-			
-			activity.finish();
-		} catch (IllegalArgumentException e) {
-			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -205,6 +138,53 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
     public void setEncodedImage(String encoded) {
     	this.encodedImage=encoded;
     }
+
+	public void addAnswer(int fromFragment, int position, String questionID, String answerName, String username, int hasPicture) {
+		try {
+			Answer newAnswer = new Answer(answerName, User.getUserName());
+			if (hasPicture == View.VISIBLE) {
+				//Exception check: check if image >64kb
+				try {
+					newAnswer.setImagePath(imagePath);
+				} catch (IllegalArgumentException e){
+					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				
+				newAnswer.setHasPicture(true);
+				//New here
+				//newAnswer.setImagePath(imagePath);
+				newAnswer.setEncodedImage(encodedImage);
+			}
+			
+			// For mimicking fake view
+			QuestionList questionList = findQuestionList(fromFragment);
+			Question question = questionList.get(position);
+			question.addAnswer(newAnswer);
+			System.out.println("AddAnAnswerActivity ; fromFragment = " + fromFragment + " | position = " + position + " | questionID = " + questionID);
+			questionList.set(position, question);
+			
+			// If not online / not connected : add it to the Network Buffer to push online later when connected
+			System.out.println("NETWORK CONNECTION --- " + Boolean.toString(networkManager.isOnline(activity.getApplicationContext())));
+			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
+				networkBuffer.addAnswer(question.getStringID(), newAnswer);
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
+				activity.finish();
+				return;
+			}
+			else {
+				// New - If it get's here, it's connected
+				NetworkController networkController = new NetworkController();
+				networkController.addAnswer(questionID, newAnswer);
+			}
+			
+			activity.finish();
+		} catch (IllegalArgumentException e) {
+			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
+		}
+	}
 
 }
 

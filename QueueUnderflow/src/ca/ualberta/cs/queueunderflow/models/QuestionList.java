@@ -3,7 +3,6 @@ package ca.ualberta.cs.queueunderflow.models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.TModel;
@@ -27,9 +26,6 @@ public class QuestionList extends TModel<TView>{
 	/** The question list3. */
 	protected ArrayList <Question> questionList3;
 	
-	/** The date of the questionlist*/
-	protected Date date;
-	
 	/** The online. */
 	protected boolean online;
 	
@@ -39,7 +35,6 @@ public class QuestionList extends TModel<TView>{
 	public QuestionList () {
 		questionList= new ArrayList<Question>();
 		this.online=false;
-		this.date= new Date();
 	}
 	
 	/**
@@ -288,8 +283,12 @@ public class QuestionList extends TModel<TView>{
 	
 	// Returns -1 if not found
 	public int getIndexFromID(UUID id) {
+		System.out.println("WANTED ID : " + id.toString());
 		for (int i = 0; i < questionList.size(); i++) {
-			if (questionList.get(i).getID() == id) {
+			System.out.println(i + " " + questionList.get(i).getID() + "  EQUALS " + Boolean.toString(questionList.get(i).getID() == id) + " VS " + Boolean.toString(questionList.get(i).getStringID().equals(id.toString())));
+			//if (questionList.get(i).getID() == id) {
+			if (questionList.get(i).getStringID().equals(id.toString())) {
+				System.out.println("QuestionList getIndexFromID --> returning index : " + i);
 				return i;
 			}
 		}
@@ -297,11 +296,16 @@ public class QuestionList extends TModel<TView>{
 		return -1;
 	}
 	
-	public Date getDate() {
-		return this.date;
-	}
-	
-	public void setDate(Date newDate) {
-		this.date=newDate;
+	public Question getFromStringID(String id) {
+		System.out.println("WANTED ID : " + id.toString());
+		for (Question q : questionList) {
+			System.out.println( q.getStringID() + "  EQUALS " + Boolean.toString(q.getStringID().equals(id)));
+			if (q.getStringID().equals(id)) {
+				System.out.println("getFromStringID returning --> " + q.getStringID() + " | " + q.getName());
+				return q;
+			}
+		}
+		
+		return null;
 	}
 }

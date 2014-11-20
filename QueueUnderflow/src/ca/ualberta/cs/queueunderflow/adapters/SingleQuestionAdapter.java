@@ -7,7 +7,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -24,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
@@ -34,8 +34,8 @@ import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.views.AddAnAnswerActivity;
+import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
-
 
 /**
  * The Class SingleQuestionAdapter.
@@ -73,18 +73,16 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
      *
      * @param activity the activity
      * @param questionArray the question array
-     * @param fromFragment the from fragment
-     * @param questionPosition the question position
      */
-    public SingleQuestionAdapter(Activity activity, ArrayList<Question> questionArray, int fromFragment, int questionPosition) {
+    public SingleQuestionAdapter(Activity activity, Question question, int fromFragment, int position) {
         super();
         this.activity = activity;
         this.groupLayoutID = R.layout.list_item_question;
         this.childLayoutID = R.layout.exp_list_item_reply;
 		singleQuestionArray = new ArrayList<Question>(1);
-		singleQuestionArray.add(questionArray.get(questionPosition));
-        this.fromFragment = fromFragment;
-        this.questionPosition = questionPosition;
+		singleQuestionArray.add(question);
+		this.fromFragment = fromFragment;
+		this.questionPosition = position;
     }
 
     //grabs the reply from the child of the group.
@@ -191,7 +189,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
             	User user= ListHandler.getUser();
-                //singleQuestionArray.get(groupPosition).upvotequestion();
             	Question question= singleQuestionArray.get(groupPosition);
     			if (user.alreadyUpvotedQuestion(question)) {
 					Toast.makeText(activity.getApplicationContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();			// This should be in the model?
@@ -201,36 +198,25 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				        if(ListHandler.getFavsList().getQuestionList().contains(singleQuestionArray.get(groupPosition))) isInFavorites = true;
 				    
 					user.addUpvotedQuestion(singleQuestionArray.get(groupPosition));
-					//singleQuestionArray.get(groupPosition).upvoteResponse();
 					
-					NetworkManager networkManager = NetworkManager.getInstance();
-					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
-						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
-						networkBuffer.addQUpvote(question.getID());
-						
-						TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-						upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()+1));
-						
-						return;
-					}
-					
-					NetworkController  networkController = new NetworkController();
-					networkController.upvoteQuestion(singleQuestionArray.get(groupPosition).getID());
-					
+					// To mimic fake view updates
+					question.upvoteResponse();
 					TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 					upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
 					
 					
-					
-					//Save favorites if applicable
-					if (isInFavorites)
-					{
-					    Log.d("test", "Item is in favorites.");
-					    //Mark as unsaved data.
-					    LoadSave.unsavedChanges = true;
-					}else{
-					    Log.d("testitem", "Item is NOT in favorites.");
+					NetworkManager networkManager = NetworkManager.getInstance();
+					if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
+						NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();			
+						networkBuffer.addQUpvote(question.getStringID());				
+						return;
 					}
+					else {
+						NetworkController  networkController = new NetworkController();
+						networkController.upvoteQuestion(singleQuestionArray.get(groupPosition).getStringID());
+					}
+
+
 				}
             	/*
                 TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
@@ -264,6 +250,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", questionPosition);
+				//args.putString("questionID", singleQuestionArray.get(groupPosition).getStringID());
 				args.putInt("type", TYPE_QUESTION);
 				
 				// Create & display reply dialog + attach arguments
@@ -281,9 +268,11 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), AddAnAnswerActivity.class);
 				//Pass the position of the question to the new activity
-				intent.putExtra("fromFragment", fromFragment);
 				intent.putExtra("question_position", questionPosition);
+				intent.putExtra("fromFragment", fromFragment);
+				intent.putExtra("questionID", singleQuestionArray.get(groupPosition).getStringID());
 				activity.startActivity(intent);
+				//update(null);
 			}
 		});
 
@@ -294,19 +283,17 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = singleQuestionArray.get(groupPosition);
-
+				question.setIsFav(isChecked);
+				
 				if (isChecked == true) {
-					if (!ListHandler.getFavsList().getQuestionList().contains(question)) {
-						ListHandler.getFavsList().add(question);
-						//Log.d("test", "Added to favorites...");
-					}
+					ListHandler.getFavsList().add(question);
+					Log.d("test", "Added to favorites...");
 				}
 				else if (isChecked == false) {
 					ListHandler.getFavsList().remove(question);
-					//Log.d("test", "Removed from favorites...");
+					Log.d("test", "Removed from favorites...");
 				}
 				
-				singleQuestionArray.get(groupPosition).setIsFav(isChecked);
 				
 				//Mark as unsaved changes.
 				LoadSave.unsavedChanges = true;
@@ -321,17 +308,16 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = singleQuestionArray.get(groupPosition);
+				question.setIsInReadingList(isChecked);
 				
 				if (isChecked == true) {
-					if (!ListHandler.getReadingList().getQuestionList().contains(question)) {
-						ListHandler.getReadingList().add(question);
-					}
+					ListHandler.getReadingList().add(question);
 				}
 				else if (isChecked == false) {
 					ListHandler.getReadingList().remove(question);
 				}
 				
-				singleQuestionArray.get(groupPosition).setIsInReadingList(isChecked);
+				
 				//Mark as unsaved changes.
 				LoadSave.unsavedChanges = true;
 			}

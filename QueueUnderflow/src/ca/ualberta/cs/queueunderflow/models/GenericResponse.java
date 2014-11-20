@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import android.text.format.DateFormat;
 
+import ca.ualberta.cs.queueunderflow.TModel;
+import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 
 
