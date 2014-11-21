@@ -198,6 +198,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		
 		// Go back to MainActivity when the up caret is clicked
 		if (id == android.R.id.home) {
+			finish();
 //			Intent intent = NavUtils.getParentActivityIntent(this);
 //			// This is so we go back to the proper fragment that we came from in the main activity
 //			intent.putExtra("returnFragment", fromFragment);

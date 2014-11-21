@@ -215,7 +215,9 @@ public class AskAQuestionActivity extends Activity{
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		
+		if (id == android.R.id.home) {
+			finish();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
