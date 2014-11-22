@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
+import android.view.ViewStub;
+
 import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
 
@@ -307,5 +309,10 @@ public class QuestionList extends TModel<TView>{
 		}
 		
 		return null;
+	}
+
+	public void clear() {
+		questionList.clear();
+		clearViews();
 	}
 }

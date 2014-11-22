@@ -24,5 +24,6 @@
     <string name="title_activity_qaview">QAViewActivity</string>
     <string name="title_activity_add_an_answer">AddAnAnswerActivity</string>
     <string name="title_activity_set_location_fragment">Set Location</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

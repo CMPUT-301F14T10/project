@@ -50,4 +50,11 @@ public abstract class TModel<V extends TView> {
 			view.update(this);
 		}
 	}
+	
+	/**
+	 * Clears all views
+	 */
+	public void clearViews() {
+		views.clear();
+	}
 }

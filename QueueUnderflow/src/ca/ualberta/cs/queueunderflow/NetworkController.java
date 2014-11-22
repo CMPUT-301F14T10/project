@@ -48,7 +48,6 @@ public class NetworkController {
 	}
 	
 	class GetQuestionThread extends Thread {
-		private String search = "";
 		private String questionID;
 		
 		public GetQuestionThread(String questionID) {
@@ -69,15 +68,26 @@ public class NetworkController {
 
 	}
 	
-	public void populateMasterList() {
-		Thread thread = new PopulateMasterQThread();
+//	public void populateMasterList() {
+//		Thread thread = new PopulateListThread("");
+//		thread.start();
+//		fillQuestionList(ListHandler.getMasterQList());
+//	}
+    
+//	public void populateSearchResultsList(QuestionList resultsList, String search) {
+//		Thread thread = new PopulateListThread(search);
+//		thread.start();
+//		fillQuestionList(resultsList);
+//	}
+	
+	public void populateList(QuestionList list, String search) {
+		Thread thread = new PopulateListThread(search);
 		thread.start();
-		fillMasterList();
+		fillQuestionList(list);
 	}
     
-    
-    private void fillMasterList() {
-    	System.out.println("INSIDE fillMasterList");
+    private void fillQuestionList(QuestionList questionList) {
+    	System.out.println("INSIDE fillQuestionList");
     	
     	// Make sure populateThread is done and we retrived the results from network before we continue
     	while (populateThreadFinished != true) {
@@ -95,7 +105,7 @@ public class NetworkController {
     		return;
     	}
     	
-    	QuestionList questionList = ListHandler.getMasterQList();
+    	//QuestionList questionList = ListHandler.getMasterQList();
 		ArrayList<Question> list = questionList.getQuestionList();
 		list.clear();
 		
@@ -120,7 +130,7 @@ public class NetworkController {
 			System.out.println("QuestionName : " + questionList.get(i).getName());
 		}
 		
-		System.out.println("DONE fillMasterList");
+		System.out.println("DONE fillQuestionList");
 		
 		questionList.notifyViews();
 	}
@@ -149,25 +159,11 @@ public class NetworkController {
 		
 	}
 	
-//	class SearchThread extends Thread {
-//		private String search;
-//	
-//		public SearchThread(String s) {
-//			search = s;
-//		}
-//
-//		@Override
-//		public void run() {
-//			QuestionList masterList = ListHandler.getSearchResultsList();
-//			addAll(masterList, esManager.searchQuestions(search, null));
-//		}
-//
-//	}
+	class PopulateListThread extends Thread {
+		private String search;
 	
-	class PopulateMasterQThread extends Thread {
-		private String search = "";
-	
-		public PopulateMasterQThread() {
+		public PopulateListThread(String s) {
+			search = s;
 		}
 
 		@Override
@@ -185,6 +181,21 @@ public class NetworkController {
 		}
 
 	}
+	
+//	class SearchThread extends Thread {
+//		private String search;
+//	
+//		public SearchThread(String s) {
+//			search = s;
+//		}
+//
+//		@Override
+//		public void run() {
+//			QuestionList searchResultsList = new QuestionList();
+//			
+//		}
+//
+//	}
 	
 	public void addAnswer(String questionID, Answer newAnswer) {
 		System.out.println("in NetworkController - addAnswer - questionID --> " + questionID);

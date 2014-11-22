@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.NetworkController;
@@ -88,7 +89,8 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		if (networkManager.isOnline(getActivity().getApplicationContext()) && fromFragment == HOME_SCREEN_FRAGMENT) {
     		System.out.println("Starting populateMasterList");
     		NetworkController networkController = new NetworkController();
-    		networkController.populateMasterList();
+    		//networkController.populateMasterList();
+    		networkController.populateList(ListHandler.getMasterQList(), "");
     		System.out.println("Finished populateMasterList");
 		}
 		
@@ -101,7 +103,6 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		// Set up list adapter to display the questions
 		ListView listView = (ListView) view.findViewById(R.id.homeListView);
 		adapter = new QuestionListAdapter(getActivity(), R.layout.list_item_question, screenQList.getQuestionList(), fromFragment);
-		
 		listView.setAdapter(adapter);
 		
 		return view;
@@ -112,7 +113,6 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-
 		Button askQuestion = (Button) view.findViewById(R.id.askQBtn);
 		askQuestion.setOnClickListener(new OnClickListener() {
 			
@@ -138,12 +138,18 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 			}
 			
 		});
-		
-		
+	
 	}
 
 	
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.notifyDataSetChanged();
+		
+	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

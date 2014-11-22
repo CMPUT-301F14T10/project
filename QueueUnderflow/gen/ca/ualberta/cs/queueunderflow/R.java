@@ -146,6 +146,7 @@ public final class R {
         public static final int title_activity_add_an_answer=0x7f050015;
         public static final int title_activity_ask_aquestion=0x7f050013;
         public static final int title_activity_qaview=0x7f050014;
+        public static final int title_activity_search=0x7f050017;
         public static final int title_activity_second=0x7f050012;
         public static final int title_activity_set_location_fragment=0x7f050016;
     }

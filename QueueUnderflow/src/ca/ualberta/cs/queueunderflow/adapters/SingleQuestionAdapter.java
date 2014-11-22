@@ -284,16 +284,42 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = singleQuestionArray.get(groupPosition);
 				question.setIsFav(isChecked);
+//				
+//				if (isChecked == true) {
+//					ListHandler.getFavsList().add(question);
+//					Log.d("test", "Added to favorites...");
+//				}
+//				else if (isChecked == false) {
+//					ListHandler.getFavsList().remove(question);
+//					Log.d("test", "Removed from favorites...");
+//				}
 				
 				if (isChecked == true) {
+					System.out.println("favoriting normal");
 					ListHandler.getFavsList().add(question);
-					Log.d("test", "Added to favorites...");
+					
+					//
+					System.out.println("FAVLIST CONTENT");
+					ArrayList<String> favIDs = new ArrayList<String>();
+					for (Question q : ListHandler.getFavsList().getQuestionList()) {
+						favIDs.add(q.getStringID());
+					}
+					System.out.println(favIDs);
+					//
 				}
 				else if (isChecked == false) {
+					System.out.println("unfavoriting normal");
 					ListHandler.getFavsList().remove(question);
-					Log.d("test", "Removed from favorites...");
+					
+					//
+					System.out.println("FAVLIST CONTENT");
+					ArrayList<String> favIDs = new ArrayList<String>();
+					for (Question q : ListHandler.getFavsList().getQuestionList()) {
+						favIDs.add(q.getStringID());
+					}
+					System.out.println(favIDs);
+					//
 				}
-				
 				
 				//Mark as unsaved changes.
 				LoadSave.unsavedChanges = true;

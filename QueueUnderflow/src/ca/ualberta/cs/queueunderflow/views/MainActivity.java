@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
@@ -149,6 +151,8 @@ public class MainActivity extends Activity {
 
     @Override
     public void onResume() {
+    	Toast.makeText(getApplicationContext(), "MainActivity onResume", Toast.LENGTH_SHORT).show();
+    	
     	//This executes whenever the main activity resumes.
     	//Examples: after adding a question, returning to the main screen after favoriting, etc
     	
@@ -197,7 +201,6 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
@@ -235,6 +238,7 @@ public class MainActivity extends Activity {
         case R.id.searchMenu:
         	SearchView searchView = (SearchView) item.getActionView();
         	selectSearchFragment(searchView);
+        	questionList = ListHandler.getResultsList();
         	return true;
         }
         return super.onOptionsItemSelected(item);
@@ -244,7 +248,6 @@ public class MainActivity extends Activity {
     private void selectSearchFragment(SearchView searchView) {
     	Fragment fragment = new SearchFragment(searchView);
     	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
-    	
 	}
 
 	// This is called when we call invalidateOptionsMenu()

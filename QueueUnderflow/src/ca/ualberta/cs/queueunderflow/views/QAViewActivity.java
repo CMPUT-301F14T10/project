@@ -43,6 +43,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	
 	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
+	
+	/** The Constant SEARCH_FRAGMENT. */
+	public static final int SEARCH_FRAGMENT = 7;
 
 	/** The single q adapter. */
 	SingleQuestionAdapter singleQAdapter;
@@ -97,6 +100,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			questionList = ListHandler.getMyQsList();
 			questionList.addView(this);
 			break;
+		case (SEARCH_FRAGMENT):
+			questionList = ListHandler.getResultsList();
+			questionList.addView(this);
 		}
 		
 		question = questionList.get(position);
@@ -246,6 +252,5 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         TextView answersCount = (TextView) findViewById(R.id.answersCount);
         answersCount.setText(Integer.toString(question.getAnswerListSize()));
 	}
-	
 
 }
