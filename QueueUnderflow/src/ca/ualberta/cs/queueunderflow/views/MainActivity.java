@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         
+        // Initializes nav drawer items
         navDrawerTitles = new String[] {"Home", "My Favorites", "My Questions", "Reading List", "Set Username", "Set Location"};
         drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerList.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item_drawer, navDrawerTitles));
@@ -135,16 +136,7 @@ public class MainActivity extends Activity {
         
         //----- Load data from phone memory (move this into a controller somewhere, maybe)
 
-        if(!LoadSave.loaded) //Make sure this only loads once!
-        {
-        LoadSave lSave = LoadSave.getInstance();
-        lSave.loadUsername();
-        Log.d("test", "loading favorites...");
-        lSave.loadMyQuestions();
-        lSave.loadFavorites();
-        
-        LoadSave.loaded = true;
-        }
+        loadOnce();
 
         //----- Done loading data from phone memory
         
@@ -174,6 +166,22 @@ public class MainActivity extends Activity {
         
         
     }
+
+
+	private void loadOnce()
+	{
+
+		if(!LoadSave.loaded) //Make sure this only loads once!
+        {
+        LoadSave lSave = LoadSave.getInstance();
+        lSave.loadUsername();
+        Log.d("test", "loading favorites...");
+        lSave.loadMyQuestions();
+        lSave.loadFavorites();
+        
+        LoadSave.loaded = true;
+        }
+	}
 
 
     /* (non-Javadoc)

@@ -26,7 +26,8 @@ public class LocationHandler implements LocationListener{
 	public static double longitude;
 	public static double latitude;
 	
-	final long minGPSUpdateTime = 60000; //This is how often GPS will check for new position in milliseconds. Lower values drains battery apparently
+	final long minGPSUpdateTime = 60000; //This is how often GPS will check for new position in milliseconds.
+										  //Lower values drains battery apparently
 	
 	public LocationHandler(Context context)
 	{
