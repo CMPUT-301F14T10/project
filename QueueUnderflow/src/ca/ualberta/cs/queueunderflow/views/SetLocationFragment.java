@@ -23,6 +23,16 @@ import ca.ualberta.cs.queueunderflow.User;
 public class SetLocationFragment extends Fragment implements OnClickListener{
 
 	LocationHandler lHandler;
+	private GetGPSBackground gpsThread;
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		//Stop thread from continuing before we leave the activity
+		if(gpsThread != null) gpsThread.cancel(true);
+		//Stop GPS from listening before we leave the activity.
+		if(lHandler != null) lHandler.GPSUnlisten();
+	}
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,10 +53,10 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	boolean error = false;
     	
     	//Create LocationHandler...
-    	LocationHandler loc = new LocationHandler(getActivity());
+    	lHandler = new LocationHandler(getActivity());
     	
     	//See if GPS is enabled.
-    	if(!loc.isGPSEnabled())
+    	if(!lHandler.isGPSEnabled())
     	{
     		error = true;
     		Toast.makeText(getActivity(), "GPS is disabled. Enable it and try again.", Toast.LENGTH_SHORT).show();
@@ -66,9 +76,9 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	if(!error)
     	{
     		
-    		LocationHandler ls = new LocationHandler(getActivity());
-    		ls.GetGPSLocation();
-    		new GetGPSBackground().execute();
+    		lHandler.GetGPSLocation();
+    		gpsThread = new GetGPSBackground();
+    		gpsThread.execute();
     		status.setText("Waiting for response from GPS...");
     	}
     	
@@ -119,7 +129,8 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	
     }
     
-    private class GetGPSBackground extends AsyncTask<String, String, String> {
+    //GPS thread.
+    public class GetGPSBackground extends AsyncTask<String, String, String> {
 
 		@Override
 		protected String doInBackground(String... params) {
