@@ -25,8 +25,10 @@ public class LocationHandler implements LocationListener{
 	//Static variables.
 	public static double longitude;
 	public static double latitude;
+	public static boolean listeningGPS = false;
 	
-	final long minGPSUpdateTime = 60000; //This is how often GPS will check for new position in milliseconds. Lower values drains battery apparently
+	final long minGPSUpdateTime = 0; //This is how often GPS will check for new position in milliseconds.
+										  //Lower values drains battery apparently
 	
 	public LocationHandler(Context context)
 	{
@@ -48,21 +50,18 @@ public class LocationHandler implements LocationListener{
 	}
 	
 	/**
-	 * Return a string indicating the location from GPS coordinates.
+	 * Return a string indicating the location from GPS coordinates
 	 * @param latitude
 	 * @param longitude
-	 * @return Address string. Returns 'unknown' if unable to find one.
+	 * @return Returns in format "City|Country". Returns null if unable to find one.
 	 */
 	public String getLocationFromCoordinates(double latitude, double longitude)
 	{
 		//This returns a string formated like "CITY, COUNTRY"
-		//eg. "Edmonton, Canada"
+		//eg. "Edmonton,Canada"
 		
 		//This REQUIRES an Internet connection to run.
 		
-		//Apparently geocoder is REALLY REALLY slow and is intended to run in the background.
-		//So if we use this it should be called in an AsyncTask background while the rest of the application runs.
-		//Mentioned in the link below.
 		
 		//Lots of this is taken from http://developer.android.com/training/location/display-address.html
 		Geocoder geocoder = new Geocoder(ctx, Locale.getDefault());
@@ -72,12 +71,12 @@ public class LocationHandler implements LocationListener{
 			addresses = geocoder.getFromLocation(latitude, longitude, 1);
 		} catch (IOException e1) {
 			// IOException. No idea when this will run.
-			e1.printStackTrace();
+			return null;
 		} catch (IllegalArgumentException e2) {
 			//Illegal arguments! Something wrong with the coordinates passed.
 			//Most likely longitude and latitude is unset with no values available.
 			//For now, let's just say the user is at "Unknown"
-			return "Unknown";
+			return null;
 		}
 		
 		if (addresses != null && addresses.size() > 0) {
@@ -87,7 +86,7 @@ public class LocationHandler implements LocationListener{
 			String addressString;
 			
 			Address address = addresses.get(0);
-			addressString = String.format("%s, %s", address.getLocality(), address.getCountryName());
+			addressString = String.format("%s|%s", address.getLocality(), address.getCountryName());
 			return addressString;
 			
 		} else {
@@ -99,7 +98,7 @@ public class LocationHandler implements LocationListener{
 			//In this situation what are we supposed to do?
 			//For now, return unknown. (maybe return coordinates later)?
 			
-			return "Unknown";
+			return null;
 			
 		}
 		
@@ -123,14 +122,17 @@ public class LocationHandler implements LocationListener{
 		
 		LocationHandler.latitude = latitude;
 		LocationHandler.longitude = longitude;
+		LocationHandler.listeningGPS = false;
 		GPSUnlisten();
-	};
+	}
 	
 	/**
 	 * Listen for GPS updates (only updates ONCE)
 	 */
-	public void GPSListen()
+	public void GetGPSLocation()
 	{
+		//ONLY USE THIS IN ANOTHER THREAD
+		LocationHandler.listeningGPS = true;
 		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minGPSUpdateTime, 0, this);
 	}
 	

@@ -57,22 +57,33 @@
 	</EditText>
 
 	<Button
-	    android:id="@+id/buttonGetLocation"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/txtCountry"
-	    android:layout_centerVertical="true"
-	    android:text="Get Location From GPS"
-	    android:onClick="GPSButtonClicked" />
-
-	<Button
 	    android:id="@+id/buttonSubmit"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/textView1"
 	    android:layout_alignParentBottom="true"
-	    android:layout_alignRight="@+id/buttonGetLocation"
+	    android:layout_alignRight="@+id/txtCountry"
 	    android:layout_marginBottom="18dp"
-	    android:text="Submit" />
+	    android:text="Save Changes" />
+
+	<TextView
+	    android:id="@+id/textViewStatus"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/buttonSubmit"
+	    android:layout_alignRight="@+id/buttonGetLocation"
+	    android:layout_below="@+id/buttonGetLocation"
+	    android:layout_marginTop="26dp"
+	    android:gravity="center" />
+
+	<Button
+	    android:id="@+id/buttonGetLocation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textView1"
+	    android:layout_alignRight="@+id/txtCountry"
+	    android:layout_centerVertical="true"
+	    android:onClick="GPSButtonClicked"
+	    android:text="Get Location From GPS" />
 
 </RelativeLayout>

@@ -53,10 +53,6 @@
             android:name="ca.ualberta.cs.queueunderflow.views.SetLocationFragment"
             android:label="@string/title_activity_set_location_fragment" >
         </activity>
-        <activity
-            android:name="ca.ualberta.cs.queueunderflow.views.SearchActivity"
-            android:label="@string/title_activity_search" >
-        </activity>
     </application>
 
 </manifest>
