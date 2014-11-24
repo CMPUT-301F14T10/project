@@ -34,16 +34,29 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 
+
 //Adapted from elasticsearch in 301 labs
 
+/**
+ * The Class ESManager.
+ */
 public class ESManager {
 
+	/** The Constant SEARCH_URL. */
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
+	
+	/** The Constant RESOURCE_URL. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
 	//private static final String QUESTIONLIST_URL="http://cmput301.softwareprocess.es:8080/cmput301f14t10/QUESTIONLIST/1";
+	/** The Constant QUESTION_IDS. */
 	private static final String QUESTION_IDS= "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questionIDS/1";
+	
+	/** The gson. */
 	private Gson gson;
 	
+	/**
+	 * Instantiates a new ES manager.
+	 */
 	public ESManager() {
 		gson = new Gson();
 	}
@@ -79,6 +92,13 @@ public class ESManager {
 	
 	
 	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
+	/**
+	 * Gets the entity content.
+	 *
+	 * @param response the response
+	 * @return the entity content
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 		StringBuffer result = new StringBuffer();
@@ -116,6 +136,12 @@ public class ESManager {
 	}*/
 	
 	// This method is for pulling questions from the server by ID
+	/**
+	 * Gets the question.
+	 *
+	 * @param questionID the question id
+	 * @return the question
+	 */
 	public Question getQuestion(String questionID) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -142,6 +168,12 @@ public class ESManager {
 	}
 	
 	
+	/**
+	 * Parses the question hit.
+	 *
+	 * @param response the response
+	 * @return the search hit
+	 */
 	private SearchHit<Question> parseQuestionHit(HttpResponse response) {
 		try {
 			String json = getEntityContent(response);
@@ -158,7 +190,12 @@ public class ESManager {
 ///------------THREE METHODS BELOW are to push list of question IDS in string to the server--------------------
 //Doesn't affect anything at the moment
 	
-	public void addQuestionIDS(ArrayList <String> QuestionIDS) {
+	/**
+ * Adds the question ids.
+ *
+ * @param QuestionIDS the question ids
+ */
+public void addQuestionIDS(ArrayList <String> QuestionIDS) {
 		HttpClient httpClient= new DefaultHttpClient();
 		try {
 			HttpPut addRequest = new HttpPut(QUESTION_IDS);
@@ -179,6 +216,12 @@ public class ESManager {
 		
 	}
 	
+	/**
+	 * Parses the question id hit.
+	 *
+	 * @param response the response
+	 * @return the search hit
+	 */
 	private SearchHit <ArrayList<String>> parseQuestionIDHit(HttpResponse response) {
 		try {
 			String json = getEntityContent(response);
@@ -192,6 +235,11 @@ public class ESManager {
 		return null;
 	}
 	
+	/**
+	 * Gets the question ids.
+	 *
+	 * @return the question ids
+	 */
 	public ArrayList<String> getQuestionIDS() {
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -211,7 +259,12 @@ public class ESManager {
 	}
 	
 ///-------------------------------------------------------------------------------	
-	public void addQuestion(Question newQuestion) {
+	/**
+ * Adds the question.
+ *
+ * @param newQuestion the new question
+ */
+public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
 		
@@ -239,6 +292,12 @@ public class ESManager {
 		}
 	}
 
+	/**
+	 * Adds the answer.
+	 *
+	 * @param questionID the question id
+	 * @param newAnswer the new answer
+	 */
 	public void addAnswer(UUID questionID, Answer newAnswer) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDANSWER METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -268,6 +327,12 @@ public class ESManager {
 		}
 	}
 	
+	/**
+	 * Adds the q reply.
+	 *
+	 * @param questionID the question id
+	 * @param newReply the new reply
+	 */
 	public void addQReply(UUID questionID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -298,6 +363,13 @@ public class ESManager {
 		}
 	}
 	
+	/**
+	 * Adds the a reply.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 * @param newReply the new reply
+	 */
 	public void addAReply(UUID questionID, UUID answerID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDAREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -332,6 +404,11 @@ public class ESManager {
 		}
 	}
 
+	/**
+	 * Upvote question.
+	 *
+	 * @param questionID the question id
+	 */
 	public void upvoteQuestion(UUID questionID) {
 		System.out.println("INSIDE NETWORK MANAGER -UPVOTEQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -361,6 +438,12 @@ public class ESManager {
 		}
 	}
 
+	/**
+	 * Upvote answer.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 */
 	public void upvoteAnswer(UUID questionID, UUID answerID) {
 		System.out.println("INSIDE NETWORK MANAGER - UPVOTE ANSWER METHOD");
 		HttpClient httpClient = new DefaultHttpClient();

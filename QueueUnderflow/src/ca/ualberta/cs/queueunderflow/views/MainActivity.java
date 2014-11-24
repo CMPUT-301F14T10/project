@@ -168,6 +168,9 @@ public class MainActivity extends Activity {
     }
 
 
+	/**
+	 * Load once.
+	 */
 	private void loadOnce()
 	{
 
@@ -242,6 +245,9 @@ public class MainActivity extends Activity {
     	}
     }
         
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -348,7 +354,7 @@ public class MainActivity extends Activity {
     
     // Sets the view to the fragment of the user selection from the nav drawer
     /**
-     * Switches to the specified fragment & inflates it
+     * Switches to the specified fragment & inflates it.
      *
      * @param position the position of the fragment to switch to
      */

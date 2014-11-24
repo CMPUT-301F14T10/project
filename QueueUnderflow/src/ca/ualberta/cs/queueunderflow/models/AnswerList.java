@@ -26,7 +26,7 @@ protected ArrayList <Answer> answerList;
 	}
 	
 	/**
-	 * Adds the answer to the beginning of the list
+	 * Adds the answer to the beginning of the list.
 	 *
 	 * @param answer the answer
 	 */
@@ -47,7 +47,7 @@ protected ArrayList <Answer> answerList;
 	
 	//grabs the answer
 	/**
-	 * Gets the answer at the specified location in the list
+	 * Gets the answer at the specified location in the list.
 	 *
 	 * @param i the index of the answer to return
 	 * @return the answer at the specified index
@@ -97,7 +97,7 @@ protected ArrayList <Answer> answerList;
 	
 	
 	/**
-	 * Sorts the list of answers by the specified method
+	 * Sorts the list of answers by the specified method.
 	 *
 	 * @param method the method to sort by
 	 */
@@ -178,6 +178,12 @@ protected ArrayList <Answer> answerList;
 	}
 
 	// Returns -1 if not found
+	/**
+	 * Gets the index from id.
+	 *
+	 * @param id the id
+	 * @return the index from id
+	 */
 	public int getIndexFromID(UUID id) {
 		for (int i = 0; i < answerList.size(); i++) {
 			if (answerList.get(i).getID() == id) {

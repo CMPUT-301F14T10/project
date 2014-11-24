@@ -27,7 +27,7 @@ public class QuestionList extends TModel<TView>{
 	/** The question list3. */
 	protected ArrayList <Question> questionList3;
 	
-	/** The date of the questionlist*/
+	/**  The date of the questionlist. */
 	protected Date date;
 	
 	/** The online. */
@@ -52,7 +52,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Toggles the online indicator
+	 * Toggles the online indicator.
 	 */
 	public void setOnline() {
 		if (this.online==false) {
@@ -78,7 +78,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Adds the specified question to the beginning of the list
+	 * Adds the specified question to the beginning of the list.
 	 *
 	 * @param question the question to add
 	 */
@@ -118,7 +118,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Gets the question at the specified location in the list
+	 * Gets the question at the specified location in the list.
 	 *
 	 * @param index the index of the question to return
 	 * @return the question at the specified location
@@ -130,7 +130,7 @@ public class QuestionList extends TModel<TView>{
 	// Everytime we update anything within a questionlist (ie add an answer to a question, add a reply to a question, add a reply to an answer), we use SET
 	// Although b/c of references in java, it isn't necessary. this is the only way that the list knows to call the notify views method to refresh the view/screen right now
 	/**
-	 * Sets the question at the specified location with the specified question
+	 * Sets the question at the specified location with the specified question.
 	 *
 	 * @param index the index to put the specified question
 	 * @param question the question to add
@@ -185,7 +185,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Sorts the list of questions by the specified method
+	 * Sorts the list of questions by the specified method.
 	 *
 	 * @param method the method to sort by
 	 */
@@ -268,7 +268,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Removes the first occurrence of the specified question in the list
+	 * Removes the first occurrence of the specified question in the list.
 	 *
 	 * @param question the question to remove
 	 */
@@ -287,6 +287,12 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	// Returns -1 if not found
+	/**
+	 * Gets the index from id.
+	 *
+	 * @param id the id
+	 * @return the index from id
+	 */
 	public int getIndexFromID(UUID id) {
 		for (int i = 0; i < questionList.size(); i++) {
 			if (questionList.get(i).getID() == id) {
@@ -297,10 +303,20 @@ public class QuestionList extends TModel<TView>{
 		return -1;
 	}
 	
+	/**
+	 * Gets the date.
+	 *
+	 * @return the date
+	 */
 	public Date getDate() {
 		return this.date;
 	}
 	
+	/**
+	 * Sets the date.
+	 *
+	 * @param newDate the new date
+	 */
 	public void setDate(Date newDate) {
 		this.date=newDate;
 	}

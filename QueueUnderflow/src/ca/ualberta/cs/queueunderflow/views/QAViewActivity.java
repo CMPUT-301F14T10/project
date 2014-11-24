@@ -222,6 +222,9 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	
 	
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();

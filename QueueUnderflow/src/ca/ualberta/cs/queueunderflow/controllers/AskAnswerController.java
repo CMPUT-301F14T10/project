@@ -47,6 +47,7 @@ public class AskAnswerController {
 	/** The image encoded in base64. */
 	private String encodedImage;
 	
+	/** The network manager. */
 	private NetworkManager networkManager = NetworkManager.getInstance();
 
 	/**
@@ -61,7 +62,7 @@ public class AskAnswerController {
 	/**
 	 * Ask question.
 	 *
-	 * @param question the question name
+	 * @param questionName the question name
 	 * @param username the username
 	 * @param hasPicture the has picture
 	 */
@@ -119,12 +120,14 @@ public class AskAnswerController {
 	}
 
 	/**
- * Adds the answer.
- *
- * @param fromFragment the from fragment
- * @param position the position
- * @param answerInput the answer input
- */
+	 * Adds the answer.
+	 *
+	 * @param fromFragment the from fragment
+	 * @param position the position
+	 * @param answerName the answer name
+	 * @param username the username
+	 * @param hasPicture the has picture
+	 */
 public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
@@ -202,6 +205,12 @@ public void addAnswer(int fromFragment, int position, String answerName, String 
     public void setImagePath(String path) {
     	this.imagePath = path;
     }
+    
+    /**
+     * Sets the encoded image.
+     *
+     * @param encoded the new encoded image
+     */
     public void setEncodedImage(String encoded) {
     	this.encodedImage=encoded;
     }

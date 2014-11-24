@@ -12,6 +12,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  */
 public class ListHandler {
 
+	/** The instance. */
 	private static ListHandler instance = null;
 	
 	/** The q list. */
@@ -29,6 +30,9 @@ public class ListHandler {
 	/** The user. */
 	private static User user;
 	
+	/**
+	 * Instantiates a new list handler.
+	 */
 	private ListHandler() {
 		qList = new QuestionList();
 		favQList = new QuestionList();
@@ -37,6 +41,11 @@ public class ListHandler {
 		user = new User();
 	}
 	
+	/**
+	 * Gets the single instance of ListHandler.
+	 *
+	 * @return single instance of ListHandler
+	 */
 	public ListHandler getInstance() {
 		if (instance == null) {
 			instance = new ListHandler();
@@ -45,6 +54,11 @@ public class ListHandler {
 	}
 	
 	//Used to set master question list
+	/**
+	 * Sets the master q list.
+	 *
+	 * @param questionList the new master q list
+	 */
 	static public void setMasterQList(QuestionList questionList) {
 		qList=questionList;
 	}

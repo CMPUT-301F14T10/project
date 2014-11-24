@@ -23,12 +23,13 @@ import com.google.gson.reflect.TypeToken;
  */
 public class LoadSave {
 	
+	/** The instance. */
 	private static LoadSave instance = null;
 	
 	/** The context. */
 	public static Context context;
 	
-	/** Indicates unsaved changes */
+	/**  Indicates unsaved changes. */
 	public static boolean unsavedChanges = false;
 	
 	/** The save file. */
@@ -43,13 +44,13 @@ public class LoadSave {
 	/** The username key. */
 	final String usernameKey = "username";
 	
-	/** The city key */
+	/**  The city key. */
 	final String cityKey = "city";
 	
-	/** The country key */
+	/**  The country key. */
 	final String countryKey = "country";
 	
-	/** The use location key */
+	/**  The use location key. */
 	final String useLocationKey = "useLocation";
 	
 	/** The reading list key. */
@@ -59,10 +60,18 @@ public class LoadSave {
 	public static boolean loaded = false;
 	
 	//Constructor
+	/**
+	 * Instantiates a new load save.
+	 */
 	protected LoadSave() {
 		
 	}
 	
+	/**
+	 * Gets the single instance of LoadSave.
+	 *
+	 * @return single instance of LoadSave
+	 */
 	public static LoadSave getInstance() {
 		if (instance == null) {
 			instance = new LoadSave();
@@ -97,6 +106,9 @@ public class LoadSave {
 		return lData;
 	}
 	
+    /**
+     * Save reading list.
+     */
     public void SaveReadingList ()
     {
             GsonBuilder gsonbuild = new GsonBuilder();
@@ -109,6 +121,9 @@ public class LoadSave {
             this.saveData(readingListKey, gsonString);
     }
 	
+	/**
+	 * Load reading list.
+	 */
 	public void LoadReadingList()
 	{
 		String gsonString = loadData(readingListKey);
@@ -195,8 +210,9 @@ public class LoadSave {
 	}
 
 	/**
-	 * Save city
-	 * @param city
+	 * Save city.
+	 *
+	 * @param city the city
 	 */
 	public void saveCity(String city)
 	{
@@ -204,8 +220,9 @@ public class LoadSave {
 	}
 	
 	/**
-	 * Save country
-	 * @param country
+	 * Save country.
+	 *
+	 * @param country the country
 	 */
 	public void saveCountry(String country)
 	{
@@ -213,8 +230,9 @@ public class LoadSave {
 	}
 	
 	/**
-	 * Save Use Location boolean
-	 * @param useLocation
+	 * Save Use Location boolean.
+	 *
+	 * @param useLocation the use location
 	 */
 	public void saveUseLocation(boolean useLocation)
 	{
@@ -225,6 +243,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load country.
+	 */
 	public void loadCountry() {
 		String loaded = loadData(countryKey);
 		if(loaded.length() != 0)
@@ -233,6 +254,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load city.
+	 */
 	public void loadCity() {
 		String loaded = loadData(cityKey);
 		if(loaded.length() != 0)
@@ -241,6 +265,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load use location.
+	 */
 	public void loadUseLocation() {
 		String loadedB = loadData(useLocationKey);
 		if(loadedB.equals("1"))

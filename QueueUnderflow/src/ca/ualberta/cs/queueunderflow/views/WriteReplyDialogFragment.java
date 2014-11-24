@@ -27,6 +27,7 @@ import android.widget.TextView;
  */
 public class WriteReplyDialogFragment extends DialogFragment {
 	
+	/** The controller. */
 	WriteReplyController controller;
 	
     /* (non-Javadoc)
