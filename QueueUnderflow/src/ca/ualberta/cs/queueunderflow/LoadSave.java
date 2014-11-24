@@ -43,13 +43,22 @@ public class LoadSave {
 	/** The username key. */
 	final String usernameKey = "username";
 	
+	/** The city key */
+	final String cityKey = "city";
+	
+	/** The country key */
+	final String countryKey = "country";
+	
+	/** The use location key */
+	final String useLocationKey = "useLocation";
+	
 	/** The reading list key. */
 	final String readingListKey = "readinglist";
 	
 	/** The loaded. */
 	public static boolean loaded = false;
 	
-	
+	//Constructor
 	protected LoadSave() {
 		
 	}
@@ -147,16 +156,15 @@ public class LoadSave {
         /**
          * Save my questions.
          */
-        public void saveMyQuestions ()
-        {
+	public void saveMyQuestions ()
+	{
                 GsonBuilder gsonbuild = new GsonBuilder();
                 gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListSerializer());
                 Gson gson = gsonbuild.create();
                 String gsonString = gson.toJson(ListHandler.getMyQsList());
                 
-                
                 this.saveData(myQKey, gsonString);
-        }
+	}
 	
 	/**
 	 * Load favorites.
@@ -184,6 +192,63 @@ public class LoadSave {
 			
 		
 	
+	}
+
+	/**
+	 * Save city
+	 * @param city
+	 */
+	public void saveCity(String city)
+	{
+		saveData(cityKey, city);
+	}
+	
+	/**
+	 * Save country
+	 * @param country
+	 */
+	public void saveCountry(String country)
+	{
+		saveData(countryKey, country);
+	}
+	
+	/**
+	 * Save Use Location boolean
+	 * @param useLocation
+	 */
+	public void saveUseLocation(boolean useLocation)
+	{
+		if(useLocation) {
+			saveData(useLocationKey, "1");
+		}else{
+			saveData(useLocationKey, "0");
+		}
+	}
+	
+	public void loadCountry() {
+		String loaded = loadData(countryKey);
+		if(loaded.length() != 0)
+		{
+			User.setCountry(loaded);
+		}
+	}
+	
+	public void loadCity() {
+		String loaded = loadData(cityKey);
+		if(loaded.length() != 0)
+		{
+			User.setCity(loaded);
+		}
+	}
+	
+	public void loadUseLocation() {
+		String loadedB = loadData(useLocationKey);
+		if(loadedB.equals("1"))
+		{
+			User.setUseLocation(true);
+		}else if(loadedB.equals("0")){
+			User.setUseLocation(false);
+		}
 	}
 	
 	/**

@@ -17,6 +17,15 @@ public class User {
 	/** The username. */
 	protected static String username;
 	
+	/** Should we use the user's location data */
+	protected static boolean use_location;
+	
+	/** User's city */
+	protected static String city;
+	
+	/** User's country */
+	protected static String country;
+	
 	/** The upvoted questions. */
 	protected ArrayList <Question> upvotedQuestions;
 	
@@ -48,6 +57,53 @@ public class User {
 		this.upvotedAnswers= new ArrayList<Answer>();
 	}
 	
+	/**
+	 * Set the user's city
+	 * @param sCity User's city
+	 */
+	public static void setCity(String sCity) {
+		User.city = sCity;
+	}
+	
+	/**
+	 * Set the user's country
+	 * @param sCountry User's country
+	 */
+	public static void setCountry(String sCountry) {
+		User.country = sCountry;
+	}
+	
+	/**
+	 * Get the user's country.
+	 * @return User's country
+	 */
+	public static String getCountry() {
+		return User.country;
+	}
+	
+	/**
+	 * Get the user's city
+	 * @return User's city
+	 */
+	public static String getCity() {
+		return User.city;
+	}
+	
+	/**
+	 * Get whether the user wants to use location data
+	 * @return true or false
+	 */
+	public static boolean getUseLocation() {
+		return User.use_location;
+	}
+	
+	/**
+	 * Set whether or not to use location data
+	 * @param value true or false
+	 */
+	public static void setUseLocation(boolean value) {
+		User.use_location = value;
+	}
 	
 	/**
 	 * Gets the user name.

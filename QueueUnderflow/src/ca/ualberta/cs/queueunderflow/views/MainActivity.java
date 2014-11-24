@@ -178,7 +178,9 @@ public class MainActivity extends Activity {
         Log.d("test", "loading favorites...");
         lSave.loadMyQuestions();
         lSave.loadFavorites();
-        
+        lSave.loadUseLocation();
+        lSave.loadCity();
+        lSave.loadCountry();
         LoadSave.loaded = true;
         }
 	}
