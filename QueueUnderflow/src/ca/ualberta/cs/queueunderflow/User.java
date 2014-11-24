@@ -17,13 +17,13 @@ public class User {
 	/** The username. */
 	protected static String username;
 	
-	/** Should we use the user's location data */
+	/**  Should we use the user's location data. */
 	protected static boolean use_location;
 	
-	/** User's city */
+	/**  User's city. */
 	protected static String city;
 	
-	/** User's country */
+	/**  User's country. */
 	protected static String country;
 	
 	/** The upvoted questions. */
@@ -58,7 +58,8 @@ public class User {
 	}
 	
 	/**
-	 * Set the user's city
+	 * Set the user's city.
+	 *
 	 * @param sCity User's city
 	 */
 	public static void setCity(String sCity) {
@@ -66,7 +67,8 @@ public class User {
 	}
 	
 	/**
-	 * Set the user's country
+	 * Set the user's country.
+	 *
 	 * @param sCountry User's country
 	 */
 	public static void setCountry(String sCountry) {
@@ -82,7 +84,8 @@ public class User {
 	}
 	
 	/**
-	 * Get the user's city
+	 * Get the user's city.
+	 *
 	 * @return User's city
 	 */
 	public static String getCity() {
@@ -90,7 +93,8 @@ public class User {
 	}
 	
 	/**
-	 * Get whether the user wants to use location data
+	 * Get whether the user wants to use location data.
+	 *
 	 * @return true or false
 	 */
 	public static boolean getUseLocation() {
@@ -98,7 +102,8 @@ public class User {
 	}
 	
 	/**
-	 * Set whether or not to use location data
+	 * Set whether or not to use location data.
+	 *
 	 * @param value true or false
 	 */
 	public static void setUseLocation(boolean value) {

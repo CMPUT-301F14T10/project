@@ -49,6 +49,7 @@ public class WriteReplyController {
 	/** The view. */
 	private View view;
 	
+	/** The network manager. */
 	private NetworkManager networkManager = NetworkManager.getInstance();
 	
 	/**

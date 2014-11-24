@@ -30,11 +30,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
  
-// TODO: Auto-generated Javadoc
-/*
- * AnswerListAdapter class which inherits functions from BaseExpandableListAdapter
- * 
- */
+
 /**
  * The Class AnswerListAdapter.
  * Connects a list of answers to the QAView. 
@@ -300,6 +296,11 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         return false;
     }
     
+	/**
+	 * Find question list.
+	 *
+	 * @return the question list
+	 */
 	private QuestionList findQuestionList() {
 		switch (fromFragment) {
 		case (HOME_SCREEN_FRAGMENT):

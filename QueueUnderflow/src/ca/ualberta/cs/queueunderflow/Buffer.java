@@ -5,8 +5,7 @@ import java.util.Vector;
 
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-// make a generic abstract buffer class interface then make this implement the buffer class 
-// interface with methods flushBuffer()
+
 
 /**
  * The Class Buffer.
@@ -20,6 +19,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  */
 public class Buffer {
 	
+	/** The instance. */
 	private static Buffer instance = null;
 
 	/** The fav buffer. */
@@ -41,7 +41,7 @@ public class Buffer {
 	}
 	
 	/**
-	 * Gets the instance
+	 * Gets the instance.
 	 *
 	 * @return instance The singleton instance of Buffer
 	 */
@@ -107,7 +107,7 @@ public class Buffer {
 	}
 
 	/**
-	 * Flush favorites buffer - removes all questions in the positions given in the buffer from the favorites list
+	 * Flush favorites buffer - removes all questions in the positions given in the buffer from the favorites list.
 	 */
 	public void flushFav() {
 		QuestionList questionList = ListHandler.getFavsList();
@@ -123,7 +123,7 @@ public class Buffer {
 	}
 
 	/**
-	 * Flush reading list buffer - removes all questions in the positions given in the buffer from the reading list
+	 * Flush reading list buffer - removes all questions in the positions given in the buffer from the reading list.
 	 */
 	public void flushReadingList() {
 		QuestionList questionList = ListHandler.getReadingList();

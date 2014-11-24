@@ -141,6 +141,11 @@ public class AskAQuestionActivity extends Activity{
 
 
 
+	/**
+	 * Adds the an answer test.
+	 *
+	 * @param imagePreviewBtn the image preview btn
+	 */
 	private void addAnAnswerTest(final ImageButton imagePreviewBtn)
 	//AddAnAnswer testing purposes only
 	{
@@ -179,6 +184,11 @@ public class AskAQuestionActivity extends Activity{
 
 
 
+	/**
+	 * Adds the from gallery.
+	 *
+	 * @param data the data
+	 */
 	private void addFromGallery(Intent data)
 	{
 
@@ -212,6 +222,9 @@ public class AskAQuestionActivity extends Activity{
 
 
 
+	/**
+	 * Adds the from camera.
+	 */
 	private void addFromCamera()
 	{
 

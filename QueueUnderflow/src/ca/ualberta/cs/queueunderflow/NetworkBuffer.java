@@ -14,16 +14,35 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 
 // implement generic buffer class?
 // This deals with all the actions that users do when they are offline
+/**
+ * The Class NetworkBuffer.
+ */
 public class NetworkBuffer {
 
+	/** The question buffer. */
 	ArrayList<Question> questionBuffer;
+	
+	/** The answer buffer. */
 	Map<UUID, Answer> answerBuffer;
+	
+	/** The question reply buffer. */
 	Map<UUID, Reply> questionReplyBuffer;
+	
+	/** The qa id buffer. */
 	Map<UUID, UUID> qaIDBuffer;
+	
+	/** The answer reply buffer. */
 	Map<UUID, Reply> answerReplyBuffer;
+	
+	/** The upvote q buffer. */
 	ArrayList<UUID> upvoteQBuffer;
+	
+	/** The upvote a buffer. */
 	Map<UUID, UUID> upvoteABuffer;
 	
+	/**
+	 * Instantiates a new network buffer.
+	 */
 	public NetworkBuffer() {
 		questionBuffer = new ArrayList<Question>();
 		answerBuffer = new Hashtable<UUID, Answer>();
@@ -34,34 +53,72 @@ public class NetworkBuffer {
 		upvoteABuffer = new Hashtable<UUID, UUID>();
 	}
 	
+	/**
+	 * Adds the question.
+	 *
+	 * @param question the question
+	 */
 	public void addQuestion(Question question) {
 		questionBuffer.add(question);
 		Log.d("network", "adding question to buffer: " + question.getName());
 	}
 	
 	// Problem : What is you add more than one answer while offline - dictionaries don't work anymore - Need to fix later
+	/**
+	 * Adds the answer.
+	 *
+	 * @param questionID the question id
+	 * @param answer the answer
+	 */
 	public void addAnswer(UUID questionID, Answer answer) {
 		answerBuffer.put(questionID, answer);
 		Log.d("network", "adding answer to buffer: " + answer.getName());
 	}
 	
+	/**
+	 * Adds the q reply.
+	 *
+	 * @param questionID the question id
+	 * @param reply the reply
+	 */
 	public void addQReply(UUID questionID, Reply reply) {
 		questionReplyBuffer.put(questionID, reply);
 	}
 	
+	/**
+	 * Adds the a reply.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 * @param reply the reply
+	 */
 	public void addAReply(UUID questionID, UUID answerID, Reply reply) {
 		qaIDBuffer.put(questionID, answerID);
 		answerReplyBuffer.put(answerID, reply);
 	}
 	
+	/**
+	 * Adds the q upvote.
+	 *
+	 * @param questionID the question id
+	 */
 	public void addQUpvote(UUID questionID) {
 		upvoteQBuffer.add(questionID);
 	}
 	
+	/**
+	 * Adds the a upvote.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 */
 	public void addAUpvote(UUID questionID, UUID answerID) {
 		upvoteABuffer.put(questionID, answerID);
 	}
 	
+	/**
+	 * Clear all.
+	 */
 	private void clearAll() {
 		questionBuffer.clear();
 		answerBuffer.clear();
@@ -72,6 +129,9 @@ public class NetworkBuffer {
 		upvoteABuffer.clear();
 	}
 	
+	/**
+	 * Flush all.
+	 */
 	public void flushAll() {
 		
 		NetworkController networkController = new NetworkController();
