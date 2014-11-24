@@ -89,32 +89,21 @@ public class Buffer {
 		readingListBuffer.remove(position);
 	}
 	
-	/**
-	 * Checks if the favorites buffer empty.
-	 *
-	 * @return true, if the favorites buffer is empty
-	 */
-	public boolean isFavBufferEmpty() {
-		return favBuffer.isEmpty();
+	
+	
+	public void flushAll() {
+		flush(ListHandler.getFavsList(), favBuffer);
+		flush(ListHandler.getReadingList(), readingListBuffer);
 	}
 	
+	
 	/**
-	 * Checks if the reading list buffer empty.
-	 *
-	 * @return true, if the reading list buffer is empty
+	 * Flush list buffer - removes all questions with the ids given in the buffer from the given list
 	 */
-	public boolean isReadingListBufferEmpty() {
-		return readingListBuffer.isEmpty();
-	}
-
-	/**
-	 * Flush favorites buffer - removes all questions in the positions given in the buffer from the favorites list
-	 */
-	public void flushFav() {
-		QuestionList questionList = ListHandler.getFavsList();
-		for(int i = 0; i < favBuffer.size(); i++) {
+	private void flush(QuestionList questionList, ArrayList<String> buffer) {
+		for(int i = 0; i < buffer.size(); i++) {
 			String id = favBuffer.get(i);
-			int index = ListHandler.getFavsList().getIndexFromID(UUID.fromString(id));
+			int index = questionList.getIndexFromID(UUID.fromString(id));
 			if (index != -1) {
 				questionList.set(index, null);
 			}
@@ -123,23 +112,10 @@ public class Buffer {
 		Vector<String> v = new Vector<String>(1);
 		v.add(null);
 		questionList.getQuestionList().removeAll(v);
-		favBuffer.clear();
 	}
-
-	/**
-	 * Flush reading list buffer - removes all questions in the positions given in the buffer from the reading list
-	 */
-	public void flushReadingList() {
-		QuestionList questionList = ListHandler.getReadingList();
-		for(int i = 0; i < readingListBuffer.size(); i++) {
-			String id =  readingListBuffer.get(i);
-			int index = ListHandler.getReadingList().getIndexFromID(UUID.fromString(id));
-			questionList.set(index, null);
-		}
-		
-		Vector<String> v = new Vector<String>(1);
-		v.add(null);
-		questionList.getQuestionList().removeAll(v);
+	
+	private void clearAll() {
+		favBuffer.clear();
 		readingListBuffer.clear();
 	}
 }

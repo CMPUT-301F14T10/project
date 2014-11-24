@@ -139,7 +139,7 @@ public class AskAnswerController {
     	this.encodedImage=encoded;
     }
 
-	public void addAnswer(int fromFragment, int position, String questionID, String answerName, String username, int hasPicture) {
+	public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
 			if (hasPicture == View.VISIBLE) {
@@ -161,6 +161,7 @@ public class AskAnswerController {
 			// For mimicking fake view
 			QuestionList questionList = findQuestionList(fromFragment);
 			Question question = questionList.get(position);
+			String questionID = question.getStringID();
 			question.addAnswer(newAnswer);
 			System.out.println("AddAnAnswerActivity ; fromFragment = " + fromFragment + " | position = " + position + " | questionID = " + questionID);
 			questionList.set(position, question);

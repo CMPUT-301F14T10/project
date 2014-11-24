@@ -99,7 +99,6 @@ public class AddAnAnswerActivity extends Activity
 		/* Get the position of the question and the fragment we clicked from */
 		final int position = intent.getIntExtra("question_position", -1); 	// -1 is the default value if nothing was retrieved
 		final int fromFragment = intent.getIntExtra("fromFragment", -1);
-		final String questionID = intent.getStringExtra("questionID");
 		
 		
 		Button addFromCameraBtn = (Button) findViewById(R.id.fromCamera);
@@ -156,7 +155,7 @@ public class AddAnAnswerActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				controller.addAnswer(fromFragment, position, questionID, answerInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());
+				controller.addAnswer(fromFragment, position, answerInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());
 			}
 		});
 	}

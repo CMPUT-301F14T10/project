@@ -71,12 +71,7 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		Buffer buffer = Buffer.getInstance();
 		System.out.println("FAV BUFFER FLUSHING : "  + buffer.favBuffer);
 		System.out.println("READINGLIST BUFFER FLUSHING : " + buffer.readingListBuffer);
-		if (buffer.isFavBufferEmpty() == false) {
-			buffer.flushFav();
-		}
-		if (buffer.isReadingListBufferEmpty() == false) {
-			buffer.flushReadingList();
-		}
+		buffer.flushAll();
 		//
 		
 	   	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
@@ -133,7 +128,6 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 				// Pass position of question selected & the fragment so we can retrieve the question & inflate it in QAView
 				intent.putExtra("position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("questionID", findQuestionList().get(position).getStringID());
 				startActivity(intent);
 			}
 			

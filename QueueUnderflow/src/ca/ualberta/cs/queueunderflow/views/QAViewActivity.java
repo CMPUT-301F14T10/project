@@ -79,7 +79,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		Intent intent = getIntent();
 		final int position = intent.getIntExtra("position", -1); 				// -1 is the default value if nothing was retrieved
 		fromFragment = intent.getIntExtra("fromFragment", -1);
-		questionID = intent.getStringExtra("questionID");
 		
 		// Determine which fragment we came from / where the question was selected
 		QuestionList questionList = null;
@@ -106,6 +105,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		}
 		
 		question = questionList.get(position);
+		questionID = question.getStringID();
+		
 		Boolean isFav = question.getIsFav();
 		Boolean isReadingList = question.getIsInReadingList();
 		if (NetworkManager.getInstance().isOnline(getApplicationContext())) {
@@ -173,7 +174,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("questionID", questionID);
 				startActivity(intent);
 				update(null);
 			}
@@ -244,7 +244,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	 */
 	@Override
 	public void update(QuestionList model) {
-		System.out.println("UPDATEING QAVIEW");
 		if (singleQAdapter != null && adapter != null) {
 			singleQAdapter.notifyDataSetChanged();
 			adapter.notifyDataSetChanged();
