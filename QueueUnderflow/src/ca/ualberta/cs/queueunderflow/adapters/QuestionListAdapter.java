@@ -107,6 +107,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		TextView dateDisplay = (TextView) view.findViewById(R.id.dateTextView);
 		dateDisplay.setText(DateFormat.format("MMM dd, yyyy", questionArray.get(position).getDate()));
 		
+		TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
+		locationDisplay.setText(questionArray.get(position).getLocation());
+		
 		TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 		upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
 		

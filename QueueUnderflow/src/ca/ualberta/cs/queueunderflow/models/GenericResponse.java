@@ -57,6 +57,8 @@ public class GenericResponse {
 	
 	private String encodedImage;
 	
+	protected String location;
+	
 	public GenericResponse (String name, String author) {
 		name = name.trim();
 		if (name.length() == 0) {
@@ -74,6 +76,8 @@ public class GenericResponse {
 		
 		this.isFav = false;
 		this.isInReadingList = false;
+		
+		this.location = "";
 		
 		//Set unique ID and convert to string to store in JSON form
 		uniqueID = UUID.randomUUID();
@@ -368,4 +372,16 @@ public class GenericResponse {
 	public String getEncodedImage() {
 		return this.encodedImage;
 	}
+
+
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
+	
 }

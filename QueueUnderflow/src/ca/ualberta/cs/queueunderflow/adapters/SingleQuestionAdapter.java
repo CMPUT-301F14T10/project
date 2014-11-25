@@ -179,7 +179,10 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
          
         TextView dateDisplay = (TextView) view.findViewById(R.id.dateTextView);
         dateDisplay.setText(DateFormat.format("MMM dd, yyyy", singleQuestionArray.get(groupPosition).getDate()));
-         
+        
+		TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
+		locationDisplay.setText(singleQuestionArray.get(groupPosition).getLocation());
+		
         TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
         upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
          

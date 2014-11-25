@@ -190,6 +190,9 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         TextView dateDisplay = (TextView) view.findViewById(R.id.dateTextView);
         dateDisplay.setText(DateFormat.format("MMM dd, yyyy", answerArray.get(groupPosition).getDate()));
          
+		TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
+		locationDisplay.setText(answerArray.get(groupPosition).getLocation());
+        
         TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
         upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
         
