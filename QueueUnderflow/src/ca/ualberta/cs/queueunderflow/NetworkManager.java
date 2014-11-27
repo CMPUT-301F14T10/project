@@ -38,6 +38,11 @@ public class NetworkManager {
 	public void flushBuffer() {
 		networkBuffer.flushAll();
 	}
+	
+	//Probably used to set the network buffer to that of shared preferences
+	public void setNetworkBuffer(NetworkBuffer networkBuffer) {
+		this.networkBuffer=networkBuffer;
+	}
 }
 
 
