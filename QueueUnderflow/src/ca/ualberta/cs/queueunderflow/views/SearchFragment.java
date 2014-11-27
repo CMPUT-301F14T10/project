@@ -60,8 +60,6 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
         // This is never called - can't figure out why
         if (id == android.R.id.home) {
         	Toast.makeText(getActivity(), "collapsing after click", Toast.LENGTH_SHORT).show();
-        	item.collapseActionView();
-        	getFragmentManager().popBackStack();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -70,8 +68,6 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_search, container, false);
 		
-		Toast.makeText(getActivity().getApplicationContext(), "oncreateview search frag", Toast.LENGTH_SHORT).show();
-		//resultsQuestionList = new QuestionList();
 		resultsQuestionList.clear();
 		resultsQuestionList.addView(this);
 		
@@ -100,7 +96,7 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 				// Pass position of question selected & the fragment so we can retrieve the question & inflate it in QAView
 				intent.putExtra("position", position);
 				intent.putExtra("fromFragment", MainActivity.SEARCH_FRAGMENT);
-				intent.putExtra("questionID", resultsQuestionList.get(position).getStringID());
+				//intent.putExtra("questionID", resultsQuestionList.get(position).getStringID());
 				startActivity(intent);
 			}
 			

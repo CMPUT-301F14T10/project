@@ -68,7 +68,7 @@ public class AskAnswerController {
 			if (User.getUseLocation()) {
 				String city= User.getCity();
 				String country= User.getCountry();
-				String location=city+","+country;
+				String location=city+", "+country;
 				newQuestion.setLocation(location);
 			}
 			if (hasPicture == View.VISIBLE) {

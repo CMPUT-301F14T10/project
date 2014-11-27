@@ -118,6 +118,9 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
          
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(singleQuestionArray.get(groupPosition).getReplyAt(childPosition).getAuthor());
+        
+        TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
+        locationDisplay.setText(singleQuestionArray.get(groupPosition).getReplyAt(childPosition).getLocation());
          
         return view;
     }
@@ -287,15 +290,14 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = singleQuestionArray.get(groupPosition);
 				question.setIsFav(isChecked);
-//				
-//				if (isChecked == true) {
-//					ListHandler.getFavsList().add(question);
-//					Log.d("test", "Added to favorites...");
-//				}
-//				else if (isChecked == false) {
-//					ListHandler.getFavsList().remove(question);
-//					Log.d("test", "Removed from favorites...");
-//				}
+				
+				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
+				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getMyQsList().get(index).setIsFav(isChecked);
+					ListHandler.getMyQsList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsFav()));
+				}
 				
 				if (isChecked == true) {
 					System.out.println("favoriting normal");
@@ -338,6 +340,14 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = singleQuestionArray.get(groupPosition);
 				question.setIsInReadingList(isChecked);
+				
+				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
+				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getMyQsList().get(index).setIsInReadingList(isChecked);
+					ListHandler.getMyQsList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsInReadingList()));
+				}
 				
 				if (isChecked == true) {
 					ListHandler.getReadingList().add(question);

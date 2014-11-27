@@ -82,6 +82,9 @@ public class WriteReplyController {
 		Reply newReply;
 		try {
 			newReply = new Reply(replyText.getText().toString(), User.getUserName());
+			if (User.getUseLocation()) {
+				newReply.setLocation(User.getCity() + ", " + User.getCountry());
+			}
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 			return;

@@ -223,6 +223,22 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = questionArray.get(position);
 				question.setIsFav(isChecked);
+				
+				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
+				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getMyQsList().get(index).setIsFav(isChecked);
+					ListHandler.getMyQsList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsFav()));
+				}
+
+				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
+				index = ListHandler.getReadingList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getReadingList().get(index).setIsFav(isChecked);
+					ListHandler.getReadingList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getReadingList().getFromStringID(question.getStringID()).getIsFav()));
+				}
 
 				if (fromFragment == MainActivity.FAVORITES_FRAGMENT) {
 					Buffer buffer = Buffer.getInstance();
@@ -287,27 +303,74 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				Question question = questionArray.get(position);
 				question.setIsInReadingList(isChecked);
+
+				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
+				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getMyQsList().get(index).setIsInReadingList(isChecked);
+					ListHandler.getMyQsList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsInReadingList()));
+				}
+				
+				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
+				index = ListHandler.getFavsList().getIndexFromID(question.getID());
+				if (index != -1) {
+					ListHandler.getFavsList().get(index).setIsInReadingList(isChecked);
+					ListHandler.getFavsList().notifyViews();
+					System.out.println(Boolean.toString(ListHandler.getFavsList().getFromStringID(question.getStringID()).getIsInReadingList()));
+				}
 				
 				if (fromFragment == MainActivity.READING_LIST_FRAGMENT) {
 					Buffer buffer = Buffer.getInstance();
 					if (isChecked == false) {
+						System.out.println("unmarking from readinglist buffer");
 						buffer.addToReadingListBuffer(question.getStringID());
+						
+						//
+						System.out.println("READINGLISTBUFFER CONTENT");
+						System.out.println(buffer.readingListBuffer);
+						//
 					}
 					else {
+						System.out.println("marking as on readinglist buffer");
 						buffer.removeFromReadingListBuffer(question.getStringID());
+						
+						//
+						System.out.println("READINGLISTBUFFER CONTENT");
+						System.out.println(buffer.readingListBuffer);
+						//
 					}
 				}
 				
 				else {
 					if (isChecked == true) {
+						System.out.println("marking as readinglist normal");
 						ListHandler.getReadingList().add(question);
+						
+						//
+						System.out.println("READINGLIST CONTENT");
+						ArrayList<String> readingListIDs = new ArrayList<String>();
+						for (Question q : ListHandler.getReadingList().getQuestionList()) {
+							readingListIDs.add(q.getStringID());
+						}
+						System.out.println(readingListIDs);
+						//
 					}
 					else if (isChecked == false) {
+						System.out.println("unreadinglist normal");
 						ListHandler.getReadingList().remove(question);
+						
+						//
+						System.out.println("READINGLIST CONTENT");
+						ArrayList<String> readingListIDs = new ArrayList<String>();
+						for (Question q : ListHandler.getReadingList().getQuestionList()) {
+							readingListIDs.add(q.getStringID());
+						}
+						System.out.println(readingListIDs);
+						//
 					}
 				}
-				
-				//Mark as unsaved changes.
+				//Mark as unsaved changes,
 				LoadSave.unsavedChanges = true;
 			}
 		});

@@ -128,6 +128,9 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
          
         TextView authorDisplay = (TextView) view.findViewById(R.id.authorTextView);
         authorDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getAuthor());
+        
+        TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
+        locationDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getLocation());
          
         return view;
     }

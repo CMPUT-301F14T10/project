@@ -2,9 +2,6 @@ package ca.ualberta.cs.queueunderflow.views;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,16 +9,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnActionExpandListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
-import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
@@ -147,6 +142,7 @@ public class MainActivity extends Activity {
         Log.d("test", "loading favorites...");
         lSave.loadMyQuestions();
         lSave.loadFavorites();
+        lSave.LoadReadingList();
         lSave.loadUseLocation();
         lSave.loadCity();
         lSave.loadCountry();
@@ -243,9 +239,22 @@ public class MainActivity extends Activity {
         	return true;
         
         case R.id.searchMenu:
-        	SearchView searchView = (SearchView) item.getActionView();
-        	selectSearchFragment(searchView);
-        	questionList = ListHandler.getResultsList();
+           	item.setOnActionExpandListener(new OnActionExpandListener() {
+    			
+        			@Override
+        			public boolean onMenuItemActionExpand(MenuItem item) {
+        	        	SearchView searchView = (SearchView) item.getActionView();
+        	        	selectSearchFragment(searchView);
+        	        	questionList = ListHandler.getResultsList();
+        				return true;
+        			}
+        			
+        			@Override
+        			public boolean onMenuItemActionCollapse(MenuItem item) {
+        				selectItem(0);
+        				return true;
+        			}
+        		});
         	return true;
         }
         return super.onOptionsItemSelected(item);
@@ -254,7 +263,8 @@ public class MainActivity extends Activity {
     
     private void selectSearchFragment(SearchView searchView) {
     	Fragment fragment = new SearchFragment(searchView);
-    	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+    	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+    	//getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
 	}
 
 	// This is called when we call invalidateOptionsMenu()

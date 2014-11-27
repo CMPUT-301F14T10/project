@@ -102,7 +102,7 @@ public class Buffer {
 	 */
 	private void flush(QuestionList questionList, ArrayList<String> buffer) {
 		for(int i = 0; i < buffer.size(); i++) {
-			String id = favBuffer.get(i);
+			String id = buffer.get(i);
 			int index = questionList.getIndexFromID(UUID.fromString(id));
 			if (index != -1) {
 				questionList.set(index, null);
