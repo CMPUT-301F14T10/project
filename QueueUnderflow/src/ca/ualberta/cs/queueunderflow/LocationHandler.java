@@ -1,8 +1,19 @@
 package ca.ualberta.cs.queueunderflow;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.location.Address;
@@ -11,6 +22,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 
 public class LocationHandler implements LocationListener{
@@ -55,6 +67,86 @@ public class LocationHandler implements LocationListener{
 	 * @param longitude
 	 * @return Returns in format "City|Country". Returns null if unable to find one.
 	 */
+	public String getLocationFromCoordinates(double latitude, double longitude)
+	{
+		//Only use this on another thread...
+		//Requires an internet connection, etc.
+		
+		//Some of this is taken from http://stackoverflow.com/questions/13196234/simple-parse-json-from-url-on-android for inspiration
+		//author: Asok
+		
+		String sLatitude = Double.toString(latitude);
+		String sLongitude = Double.toString(longitude);
+		
+		String sCountry;
+		String sCity;
+		
+		String urlString = "http://nominatim.openstreetmap.org/reverse?format=json&lat="+latitude+"&lon="+longitude+"&zoom=18&addressdetails=1";
+		String jsonString = null;
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		HttpGet httpget = new HttpGet(urlString);
+		try {
+			HttpResponse httpResponse = httpClient.execute(httpget);
+			HttpEntity he = httpResponse.getEntity();
+			InputStream is = he.getContent();
+			
+			//Convert this to a string.
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+			StringBuilder sBuilder = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				sBuilder.append(line);
+			}
+			
+			jsonString = sBuilder.toString();
+			
+		} catch (Exception e) {
+			return "Unknown|Unknown";
+		}
+		
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(jsonString);
+		} catch (JSONException e) {
+			//Failed to convert to jsonObject. Return unknown
+			return "Unknown|Unknown";
+		}
+		
+		JSONObject address = null;
+		try {
+			address = jsonObject.getJSONObject("address");
+		} catch (JSONException e) {
+			// No address value returned... return Unknown
+			return "Unknown|Unknown";
+		}
+		
+		Log.d("lolol", address.toString());
+		
+		if(address.has("country")) {
+			sCountry = address.optString("country");
+		}else{
+			//No country, return unknown
+			return "Unknown|Unknown";
+		}
+		
+		//Depending on where the user is, city may be named something else...
+		//Try a bunch
+		sCity = address.optString("city");
+		if(sCity.equals("")) sCity = address.optString("town");
+		if(sCity.equals("")) sCity = address.optString("hamlet");
+		
+		//No city at all? set to unknown
+		if(sCity.equals("")) sCity = "Unknown";
+		
+		//http://nominatim.openstreetmap.org/reverse?format=json&lat=53.526797&lon=-113.5273&zoom=18&addressdetails=1
+		
+		
+		return sCity + "|" + sCountry;
+	}
+	
+	/*
 	public String getLocationFromCoordinates(double latitude, double longitude)
 	{
 		//This returns a string formated like "CITY, COUNTRY"
@@ -102,7 +194,7 @@ public class LocationHandler implements LocationListener{
 			
 		}
 		
-	}
+	}*/
 	
 	/**
 	 * Tell Location to stop listening for GPS update events.
