@@ -23,29 +23,29 @@ public class UseCase20 extends ActivityInstrumentationTestCase2<MainActivity>
 		super(MainActivity.class);
 	}
 	
-	public void testLocationNear() throws Throwable { 
-		
-
-		// Start the SetLocationFragment
-		Intent intent = new Intent();
-		intent.putExtra("returnFragment", MainActivity.SET_USERNAME_FRAGMENT);
-		setActivityIntent(intent);
-		MainActivity activity = (MainActivity) getActivity();
-		
-		//Checks if the locations of the question and user are the same
-		LocationHandler loc = new LocationHandler(getActivity());
-		User me= new User();
-		
-		QuestionList questionList= new QuestionList();
-		String questionName= "How does this work?";
-		String author = "Ondra";
-		String location= "Edmonton";
-		
-		
-		me.setUserName(author);
-		me.setLocation(location);
-		Question questionTest= new Question(questionName,me.getUserName());
-		questionList.add(questionTest);
-		assertTrue("Locations are near", questionTest.getLocation().equals(me.getLocation()));
-	}
+//	public void testLocationNear() throws Throwable { 
+//		
+//
+//		// Start the SetLocationFragment
+//		Intent intent = new Intent();
+//		intent.putExtra("returnFragment", MainActivity.SET_USERNAME_FRAGMENT);
+//		setActivityIntent(intent);
+//		MainActivity activity = (MainActivity) getActivity();
+//		
+//		//Checks if the locations of the question and user are the same
+//		LocationHandler loc = new LocationHandler(getActivity());
+//		User me= new User();
+//		
+//		QuestionList questionList= new QuestionList();
+//		String questionName= "How does this work?";
+//		String author = "Ondra";
+//		String location= "Edmonton";
+//		
+//		
+//		me.setUserName(author);
+//		me.setLocation(location);
+//		Question questionTest= new Question(questionName,me.getUserName());
+//		questionList.add(questionTest);
+//		assertTrue("Locations are near", questionTest.getLocation().equals(me.getLocation()));
+//	}
 }

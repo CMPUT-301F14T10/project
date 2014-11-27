@@ -84,7 +84,6 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		if (networkManager.isOnline(getActivity().getApplicationContext()) && fromFragment == HOME_SCREEN_FRAGMENT) {
     		System.out.println("Starting populateMasterList");
     		NetworkController networkController = new NetworkController();
-    		//networkController.populateMasterList();
     		networkController.populateList(ListHandler.getMasterQList(), "");
     		System.out.println("Finished populateMasterList");
 		}

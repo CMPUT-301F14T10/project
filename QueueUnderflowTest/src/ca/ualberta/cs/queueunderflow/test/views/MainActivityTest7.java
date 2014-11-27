@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -16,6 +17,12 @@ public class MainActivityTest7 extends ActivityInstrumentationTestCase2<MainActi
 
 	public MainActivityTest7() {
 		super(MainActivity.class);
+	}
+	
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 	
 	// Test : Check that a question which is preset to be in the reading list is in fact in there & visible in the ReadingList Fragment view

@@ -1,20 +1,27 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
+import android.test.ActivityInstrumentationTestCase2;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
-import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivityTest1 extends ActivityInstrumentationTestCase2<MainActivity>{
 
 	public MainActivityTest1() {
 		super(MainActivity.class);
+	}
+	
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 	
 	public void testBrowseQuestionsDisplay() {

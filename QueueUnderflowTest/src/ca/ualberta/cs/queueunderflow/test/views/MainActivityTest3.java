@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -26,6 +27,11 @@ public class MainActivityTest3 extends ActivityInstrumentationTestCase2<MainActi
 	}
 	
 	public void setUp() {
+		
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
+		
 		ListHandler.getMasterQList().getQuestionList().clear();
 		
 		String questionName= "Oldest question";

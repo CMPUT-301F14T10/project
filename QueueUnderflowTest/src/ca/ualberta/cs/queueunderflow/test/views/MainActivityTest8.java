@@ -1,22 +1,31 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
-import ca.ualberta.cs.queueunderflow.models.Question;
-import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
+import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
+import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.views.MainActivity;
 
 public class MainActivityTest8 extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	public MainActivityTest8() {
 		super(MainActivity.class);
 	}
+	
+
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
+	}
+	
 	// Test : Check that a question which is preset to be favorited is in fact in there & visible in the FavoritesFragment view
 	public void testFavoritesDisplay1() {
 		

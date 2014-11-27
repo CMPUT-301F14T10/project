@@ -73,8 +73,8 @@ public class AskAQuestionActivity extends Activity{
 		//For AddAnAnswer activity testing only, should never go here in normal circumstances
 		addAnAnswerTest(imagePreviewBtn);
 		
+		
 		askBtn.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				controller.askQuestion(questionInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());

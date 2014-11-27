@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.ReadingList;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
@@ -19,6 +20,12 @@ public class UseCase15 extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	public UseCase15() {
 		super(MainActivity.class);
+	}
+
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 	
 	// Test : Check that a question which is preset to be in the reading list is in fact in there & visible in the ReadingList Fragment view

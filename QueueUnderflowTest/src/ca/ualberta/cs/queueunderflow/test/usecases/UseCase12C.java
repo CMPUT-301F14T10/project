@@ -12,12 +12,19 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import ca.ualberta.cs.queueunderflow.views.QAViewActivity;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 
 public class UseCase12C extends ActivityInstrumentationTestCase2<QAViewActivity> {
 
 	public UseCase12C() {
 		super(QAViewActivity.class);
+	}
+	
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 	
 	//Use CASE 12 (incorporates user stories 13) - Testing sort by most upvoted ANSWERS display

@@ -121,6 +121,13 @@ public class MainActivity extends Activity {
         
         drawerLayout.setDrawerListener(drawerToggle);
 
+        // For going to a specific fragment on starting the main activity - used in tests
+        int returnFragment = getIntent().getIntExtra("returnFragment", -1);
+        if (returnFragment != -1) {
+        	fragmentPosition = returnFragment - 1;
+        	selectItem(returnFragment-1);
+        }
+        
         if (savedInstanceState == null) {
         	selectItem(0);
         }
@@ -347,28 +354,7 @@ public class MainActivity extends Activity {
     	
     	switch(position) {
     	case 0:
-    		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);
-        	
-//    		// Put in controller - This must be done first before populating list else it still has old favs marked - might move this later
-//    		Buffer buffer = Buffer.getInstance();
-//    		System.out.println("FAV BUFFER FLUSHING : "  + buffer.favBuffer);
-//    		System.out.println("READINGLIST BUFFER FLUSHING : " + buffer.readingListBuffer);
-//    		if (buffer.isFavBufferEmpty() == false) {
-//    			buffer.flushFav();
-//    		}
-//    		if (buffer.isReadingListBufferEmpty() == false) {
-//    			buffer.flushReadingList();
-//    		}
-//    		//
-//    		
-//    		if (NetworkManager.getInstance().isOnline(getApplicationContext())) {
-//        		// Refresh the masterlist
-//        		System.out.println("Starting populateMasterList");
-//        		NetworkController networkController = new NetworkController();
-//        		networkController.populateMasterList();
-//        		System.out.println("Finished populateMasterList");
-//    		}
-    		
+    		fragment = new SuperFragment(HOME_SCREEN_FRAGMENT);		
     		questionList = ListHandler.getMasterQList();
     		break;
     	case 1:

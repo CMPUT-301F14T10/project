@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -75,6 +76,10 @@ public class UseCase1 extends ActivityInstrumentationTestCase2<MainActivity>
 		questionList.add(question1);
 		questionList.add(question2);
 		questionList.add(question3);
+		
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 		
 		// Start activity & get the listview & adapter
 		MainActivity activity = getActivity();

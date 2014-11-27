@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -26,6 +27,10 @@ public class UseCase11B extends ActivityInstrumentationTestCase2<MainActivity> {
 	}
 	
 	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
+		
 		ListHandler.getMasterQList().getQuestionList().clear();
 		
 		// new questions & answers always start with an upvote of 0
