@@ -17,7 +17,6 @@
         android:layout_alignLeft="@+id/replyTextView"
         android:layout_below="@+id/replyTextView"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
         android:paddingTop="5dp" >
 
         <TextView

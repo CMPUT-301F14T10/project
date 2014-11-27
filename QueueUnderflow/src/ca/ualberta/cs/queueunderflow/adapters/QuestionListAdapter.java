@@ -188,7 +188,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				intent.putExtra("questionID", questionArray.get(position).getStringID());
+				//intent.putExtra("questionID", questionArray.get(position).getStringID());
 				activity.startActivity(intent);
 				//update(null);
 			}
@@ -204,7 +204,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", position);
-				args.putString("questionID", questionArray.get(position).getStringID());
+				//args.putString("questionID", questionArray.get(position).getStringID());
 				args.putInt("type", TYPE_QUESTION);
 				
 				// Create & display reply dialog + attach arguments

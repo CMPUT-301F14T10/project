@@ -117,7 +117,7 @@ public class WriteReplyController {
 				networkBuffer.addAReply(question.getStringID(), answer.getStringID(), newReply);
 			}
 			
-			Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Reply will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Reply will automatically be pushed online when connected.", Toast.LENGTH_LONG).show();
 			return;
 		}
 		else { // if online

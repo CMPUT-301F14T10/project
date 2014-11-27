@@ -95,7 +95,7 @@ public class AskAnswerController {
 			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 				networkBuffer.addQuestion(newQuestion);
-				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Question will automatically be pushed online when connected.", Toast.LENGTH_LONG).show();
 				activity.finish();
 				return; // add to buffer
 			}
@@ -149,6 +149,13 @@ public class AskAnswerController {
 	public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
+			//If the user wants to display location, add the location to the answer
+			if (User.getUseLocation()) {
+				String city= User.getCity();
+				String country= User.getCountry();
+				String location=city+", "+country;
+				newAnswer.setLocation(location);
+			}
 			if (hasPicture == View.VISIBLE) {
 				//Exception check: check if image >64kb
 				try {
@@ -178,7 +185,7 @@ public class AskAnswerController {
 			if ( !networkManager.isOnline(activity.getApplicationContext()) ) {
 				NetworkBuffer networkBuffer = networkManager.getNetworkBuffer();
 				networkBuffer.addAnswer(question.getStringID(), newAnswer);
-				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will automatically be pushed online when connected.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity.getApplicationContext(), "Not connected to the network. Answer will automatically be pushed online when connected.", Toast.LENGTH_LONG).show();
 				activity.finish();
 				return;
 			}
