@@ -80,9 +80,10 @@
 	    android:id="@+id/buttonGetLocation"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/textView1"
-	    android:layout_alignRight="@+id/txtCountry"
-	    android:layout_centerVertical="true"
+	    android:layout_alignLeft="@+id/textView2"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/txtCountry"
+	    android:layout_marginTop="34dp"
 	    android:onClick="GPSButtonClicked"
 	    android:text="Get Location From GPS" />
 

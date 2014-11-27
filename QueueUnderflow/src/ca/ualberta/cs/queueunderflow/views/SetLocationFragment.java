@@ -98,7 +98,24 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	final EditText country = (EditText) getActivity().findViewById(R.id.txtCountry);
     	
     	//Set fields to data in user...
-    	useLocation.setChecked(User.getUseLocation());
+    	//useLocation.setChecked(User.getUseLocation());
+    	
+    	//Use an on click listener to detect whether checkbox is checked or not
+    	//Source: http://www.mkyong.com/android/android-checkbox-example/
+    	//Source: http://stackoverflow.com/questions/8386832/android-checkbox-listener
+    	useLocation.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (useLocation.isChecked()) {
+					Toast.makeText(getActivity(), "Using location data", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Toast.makeText(getActivity(), "Not using location data",Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+    	
     	city.setText(User.getCity());
     	country.setText(User.getCountry());
     	

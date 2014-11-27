@@ -10,15 +10,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="Reply" />
- 
+
     <RelativeLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/replyTextView"
         android:layout_below="@+id/replyTextView"
         android:orientation="horizontal"
+        android:paddingLeft="10dp"
         android:paddingTop="5dp" >
- 
+
         <TextView
             android:id="@+id/authorTextView"
             android:layout_width="wrap_content"
@@ -26,6 +27,15 @@
             android:text="Author"
             android:textSize="10sp" />
 
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/authorTextView"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@+id/authorTextView"
+            android:text="Location"
+            android:textSize="10sp" />
     </RelativeLayout>
     
 </RelativeLayout>
