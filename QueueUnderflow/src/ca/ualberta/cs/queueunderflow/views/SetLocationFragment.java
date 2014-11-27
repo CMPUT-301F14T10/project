@@ -56,10 +56,10 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	lHandler = new LocationHandler(getActivity());
     	
     	//See if GPS is enabled.
-    	if(!lHandler.isGPSEnabled())
+    	if(!lHandler.isNetworkEnabled() && !lHandler.isGPSEnabled())
     	{
     		error = true;
-    		Toast.makeText(getActivity(), "GPS is disabled. Enable it and try again.", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(getActivity(), "GPS or network access is disabled. Enable either and try again.", Toast.LENGTH_SHORT).show();
     	}
     	
     	
@@ -79,7 +79,7 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     		lHandler.GetGPSLocation();
     		gpsThread = new GetGPSBackground();
     		gpsThread.execute();
-    		status.setText("Waiting for response from GPS...");
+    		status.setText("Waiting for response from GPS/Network...");
     	}
     	
     }

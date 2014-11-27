@@ -54,11 +54,16 @@ public class LocationHandler implements LocationListener{
 	 */
 	public boolean isGPSEnabled()
 	{
-		if(!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			//GPS is not enabled.
-			return false;
-		}
-		return true;
+		return locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+	}
+	
+	/**
+	 * Checks if you can get your location from your network. Returns true if it is, false if it isn't
+	 * @return Boolean that states if network location is valid.
+	 */
+	public boolean isNetworkEnabled()
+	{
+		return locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 	}
 	
 	/**
@@ -211,7 +216,6 @@ public class LocationHandler implements LocationListener{
 	{
 		Double latitude = location.getLatitude();
 		Double longitude = location.getLongitude();
-		
 		LocationHandler.latitude = latitude;
 		LocationHandler.longitude = longitude;
 		LocationHandler.listeningGPS = false;
@@ -223,9 +227,9 @@ public class LocationHandler implements LocationListener{
 	 */
 	public void GetGPSLocation()
 	{
-		//ONLY USE THIS IN ANOTHER THREAD
 		LocationHandler.listeningGPS = true;
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minGPSUpdateTime, 0, this);
+		if(this.isGPSEnabled()) locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minGPSUpdateTime, 0, this);
+		if(this.isNetworkEnabled()) locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minGPSUpdateTime, 0, this);
 	}
 	
 	//Useless functions we don't need.
