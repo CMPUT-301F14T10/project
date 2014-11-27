@@ -103,15 +103,22 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	//Use an on click listener to detect whether checkbox is checked or not
     	//Source: http://www.mkyong.com/android/android-checkbox-example/
     	//Source: http://stackoverflow.com/questions/8386832/android-checkbox-listener
+    	useLocation.setChecked(User.displayCheckbox());
     	useLocation.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				if (useLocation.isChecked()) {
+					//If checked, use the location
 					Toast.makeText(getActivity(), "Using location data", Toast.LENGTH_SHORT).show();
+					User.setUseLocation(true);
+					User.setCheckbox(true);
 				}
 				else {
+					//If not, don't use the location
 					Toast.makeText(getActivity(), "Not using location data",Toast.LENGTH_SHORT).show();
+					User.setUseLocation(false);
+					User.setCheckbox(false);
 				}
 			}
 		});
@@ -127,9 +134,19 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 				
 				String sCity = city.getText().toString();
 				String sCountry = country.getText().toString();
+				
+				//Below two if statements are if a user leaves location fields empty
+				//Can change later, commented out because with it, the app doesn't crash but stalls when opening up
+				/*if (sCity=="") {
+					sCity="Unknown";
+				}
+				
+				if (sCountry=="") {
+					sCountry="Unknown";
+				}*/
 				boolean isChecked = useLocation.isChecked();
 				
-				User.setUseLocation(isChecked);
+				//User.setUseLocation(isChecked);
 				User.setCity(sCity);
 				User.setCountry(sCountry);
 			

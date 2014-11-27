@@ -14,12 +14,8 @@ public class Reply {
 	/** The author. */
 	protected String author;
 	
-	/** The city of author */
-	protected String city;
-	
-	/** The country of author */
-	protected String country;
-	
+	/** The location of author */
+	protected String location;
 	/**
 	 * Instantiates a new reply.
 	 *
@@ -85,20 +81,14 @@ public class Reply {
 		return true;
 	}
 	
-	public void setCity(String city) {
-		this.city=city;
+	/** Get the location of the author*/
+	public String getLocation() {
+		return location;
 	}
 	
-	public void setCountry(String country) {
-		this.country=country;
-	}
-	
-	public String getCountry() {
-		return this.country;
-	}
-	
-	public String getCity() {
-		return this.city;
+	/** Set the location of the author*/
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 	

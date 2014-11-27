@@ -59,6 +59,7 @@ public class GenericResponse {
 	
 	protected String location;
 	
+	
 	public GenericResponse (String name, String author) {
 		name = name.trim();
 		if (name.length() == 0) {
@@ -382,6 +383,8 @@ public class GenericResponse {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+
 	
 	
 }

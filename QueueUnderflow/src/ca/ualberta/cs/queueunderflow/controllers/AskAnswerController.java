@@ -64,6 +64,13 @@ public class AskAnswerController {
 	public void askQuestion(String questionName, String username, int hasPicture) {
 		try {
 			Question newQuestion = new Question(questionName, username);
+			//If the user wants to display location, add the location to the question
+			if (User.getUseLocation()) {
+				String city= User.getCity();
+				String country= User.getCountry();
+				String location=city+","+country;
+				newQuestion.setLocation(location);
+			}
 			if (hasPicture == View.VISIBLE) {
 				try {
 					newQuestion.setImagePath(imagePath);

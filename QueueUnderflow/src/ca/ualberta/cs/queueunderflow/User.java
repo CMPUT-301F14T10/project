@@ -14,6 +14,9 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
  */
 public class User {
 
+	//This is to maintain state of checkbox in the setLocationFragment
+	protected static boolean displayCheckbox;
+	
 	/** The username. */
 	protected static String username;
 	
@@ -21,10 +24,10 @@ public class User {
 	protected static boolean use_location;
 	
 	/** User's city */
-	protected static String city;
+	protected static String city="Unknown";
 	
 	/** User's country */
-	protected static String country;
+	protected static String country="Unknown";
 	
 	/** The upvoted questions. */
 	protected ArrayList <Question> upvotedQuestions;
@@ -39,6 +42,12 @@ public class User {
 		this.username="Anonymous";
 		this.upvotedQuestions= new ArrayList<Question>();
 		this.upvotedAnswers= new ArrayList<Answer>();
+		
+		//By default, the user's city and country is set to Unknown
+		// in case the user clicks on the location checkbox but doesn't do anything else
+		//this.country="Unknown";
+		//this.city="Unknown";
+		this.displayCheckbox=false;
 	}
 	
 	/**
@@ -157,6 +166,14 @@ public class User {
 	
 		return this.upvotedAnswers.contains(answer);
 
+	}
+	
+	public static boolean displayCheckbox() {
+		return User.displayCheckbox;
+	}
+	
+	public static void setCheckbox(boolean value) {
+		User.displayCheckbox=value;
 	}
 	
 }

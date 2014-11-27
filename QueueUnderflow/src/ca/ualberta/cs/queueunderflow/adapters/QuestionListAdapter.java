@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -98,6 +99,10 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			view = inflater.inflate(layoutID, parent, false);
 		}
 		
+		//By default, display an empty location textview
+		//TextView locationDisplay= (TextView) view.findViewById(R.id.locationTextView);
+		//locationDisplay.setText("");
+		
 		TextView questionDisplay = (TextView) view.findViewById(R.id.questionTextView);
 		questionDisplay.setText(questionArray.get(position).getName());
 		
@@ -151,7 +156,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				}
 
 			}	
-		});		
+		});	
+		
+		if (User.getUseLocation()) {
+			//String city= User.getCity();
+			//String country=User.getCountry();
+			//String location= city+","+country;
+			String location= questionArray.get(position).getLocation();
+			locationDisplay.setText(location);
+		}
 		
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
