@@ -132,30 +132,69 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 			@Override
 			public void onClick(View v) {
 				
-				String sCity = city.getText().toString();
-				String sCountry = country.getText().toString();
+				//To check if the user sets a whitespace only location, use trim on the string
+				String sCity = city.getText().toString().trim();
+				String sCountry = country.getText().toString().trim();
 				
-				//Below two if statements are if a user leaves location fields empty
-				//Can change later, commented out because with it, the app doesn't crash but stalls when opening up
-				/*if (sCity=="") {
-					sCity="Unknown";
+				boolean validCity= sCity.length()>0;
+				boolean validCountry=sCountry.length()>0;
+				
+				if (validCity && validCountry) {
+				
+					boolean isChecked = useLocation.isChecked();
+				
+					//User.setUseLocation(isChecked);
+					User.setCity(sCity);
+					User.setCountry(sCountry);
+
+					LoadSave ls = LoadSave.getInstance();
+					ls.saveCity(sCity);
+					ls.saveCountry(sCountry);
+					ls.saveUseLocation(isChecked);
+
+					Toast.makeText(getActivity(), "Location data successfully saved!", Toast.LENGTH_SHORT).show();
 				}
-				
-				if (sCountry=="") {
-					sCountry="Unknown";
-				}*/
-				boolean isChecked = useLocation.isChecked();
-				
-				//User.setUseLocation(isChecked);
-				User.setCity(sCity);
-				User.setCountry(sCountry);
-			
-				LoadSave ls = LoadSave.getInstance();
-				ls.saveCity(sCity);
-				ls.saveCountry(sCountry);
-				ls.saveUseLocation(isChecked);
-				
-				Toast.makeText(getActivity(), "Location data successfully saved!", Toast.LENGTH_SHORT).show();
+				else {
+					if (validCity) {
+						
+						boolean isChecked = useLocation.isChecked();
+						User.setCity(sCity);
+						User.setCountry("Unknown");
+
+						LoadSave ls = LoadSave.getInstance();
+						ls.saveCity(sCity);
+						ls.saveCountry("Unknown");
+						ls.saveUseLocation(isChecked);
+
+						Toast.makeText(getActivity(), "City location saved!, country is invalid and set to Unknown", Toast.LENGTH_SHORT).show();
+					}
+					else if (validCountry) {
+						boolean isChecked = useLocation.isChecked();
+						User.setCity("Unknown");
+						User.setCountry(sCountry);
+
+						LoadSave ls = LoadSave.getInstance();
+						ls.saveCity("Unknown");
+						ls.saveCountry(sCountry);
+						ls.saveUseLocation(isChecked);
+
+						Toast.makeText(getActivity(), "Country location saved!, city is invalid and set to Unknown", Toast.LENGTH_SHORT).show();
+					}
+					
+					else {
+						boolean isChecked=useLocation.isChecked();
+						User.setCity("Unknown");
+						User.setCountry("Unknown");
+						
+						LoadSave ls = LoadSave.getInstance();
+						ls.saveCity("Unknown");
+						ls.saveCountry("Unknown");
+						ls.saveUseLocation(isChecked);
+
+						Toast.makeText(getActivity(), "Both country and city are invalid, both set to Unknown", Toast.LENGTH_SHORT).show();
+					}
+					
+				}
 				
 			}
     		

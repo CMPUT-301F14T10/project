@@ -34,6 +34,7 @@ public class ListHandler {
 	/** The search results list. */
 	private static QuestionList resultsList;
 	
+	
 	/** The user. */
 	private static User user;
 	

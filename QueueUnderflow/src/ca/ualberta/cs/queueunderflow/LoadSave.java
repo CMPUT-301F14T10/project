@@ -55,6 +55,9 @@ public class LoadSave {
 	/** The reading list key. */
 	final String readingListKey = "readinglist";
 	
+	/** The network buffer key. */
+	final String networkBufferKey= "networkBuffer";
+	
 	/** The loaded. */
 	public static boolean loaded = false;
 	
@@ -296,5 +299,28 @@ public class LoadSave {
 		Log.d("test", "printing string now...");
 		Log.d("test", gsonString);
 		this.saveData(favsKey, gsonString);
+	}
+	
+	public void loadNetworkBuffer()
+	{
+		//load and set the network buffer
+		String gsonString = loadData(networkBufferKey);
+	
+		Gson gson = new Gson();
+		NetworkBuffer networkBuffer = gson.fromJson(gsonString, NetworkBuffer.class);
+		NetworkManager networkManager= NetworkManager.getInstance();
+		networkManager.setNetworkBuffer(networkBuffer);
+
+	}
+	
+	
+	public void SaveNetworkBuffer() {
+	
+		//save network buffer to sharedpreferences
+		Gson gson= new Gson();
+		//Not sure if we need a serializer for this but too lazy to make one unless we need it
+		NetworkBuffer networkBuffer= NetworkManager.getInstance().getNetworkBuffer();
+		String json= gson.toJson(networkBuffer);
+		this.saveData(networkBufferKey,json);
 	}
 }

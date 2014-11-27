@@ -45,13 +45,15 @@ public class NetworkManager {
 		networkBuffer.flushAll();
 	}
 	
+<<<<<<< HEAD
 	// For changing network status in tests
 	public void setOnline(boolean onlineStatus) {
 		this.onlineStatus = Boolean.toString(onlineStatus);
-
+=======
 	//Probably used to set the network buffer to that of shared preferences
 	public void setNetworkBuffer(NetworkBuffer networkBuffer) {
 		this.networkBuffer=networkBuffer;
+>>>>>>> 1837b9db49926731b0b72daa18a51d265cbe7782
 	}
 }
 
