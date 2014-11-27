@@ -69,18 +69,6 @@ public class ESManager {
 		}
 	}*/
 	
-	
-	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
-	public String getEntityContent(HttpResponse response) throws IOException {
-		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-		StringBuffer result = new StringBuffer();
-		String line = "";
-		while ((line = rd.readLine()) != null) {
-			result.append(line);
-		}
-		return result.toString();
-	}
-	
 	//Get the questionlist from the server, commented out until it is needed or not
 	
 	/*public QuestionList getQuestionList() {
@@ -127,6 +115,17 @@ public class ESManager {
 		return null;
 	}
 	*/
+	
+	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
+	public String getEntityContent(HttpResponse response) throws IOException {
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		StringBuffer result = new StringBuffer();
+		String line = "";
+		while ((line = rd.readLine()) != null) {
+			result.append(line);
+		}
+		return result.toString();
+	}
 	
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
@@ -320,7 +319,7 @@ public class ESManager {
 
 
 	
-	// Below is from the AndroidElasticSearch Lab
+	// Below is very slightly modified from the AndroidElasticSearch Lab
 	/**
 	 * Get Questions with the specified search string. If the search does not
 	 * specify fields, it searches on all the fields.

@@ -175,10 +175,12 @@ public class MainActivity extends Activity {
     	
     	//This code does not yet work though, so for now the application will save whenever you return to the main activity.
     	
+    	/* I moved this to onPause else it doesn't save favs/readinglist actions if onResume is called again before user exits the app
     	LoadSave ls = LoadSave.getInstance();
     	ls.SaveFavorites();
     	ls.saveMyQuestions();
     	ls.SaveReadingList();
+    	*/
     	
     	/*
     	if(LoadSave.unsavedChanges)
@@ -199,8 +201,18 @@ public class MainActivity extends Activity {
     	
     }
 
+    
         
     @Override
+	protected void onPause() {
+		super.onPause();
+    	LoadSave ls = LoadSave.getInstance();
+    	ls.SaveFavorites();
+    	ls.saveMyQuestions();
+    	ls.SaveReadingList();
+	}
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);

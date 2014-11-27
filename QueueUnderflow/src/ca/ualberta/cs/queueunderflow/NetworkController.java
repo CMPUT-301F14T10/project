@@ -9,8 +9,6 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
 // Implement an interface?
-// NOTE : This assumes that the MasterList in ListHandler is always completely online, thus we add to that list
-// to ensure that there are no conflicts
 public class NetworkController {
 
 	private ESManager esManager;
@@ -28,16 +26,13 @@ public class NetworkController {
 	public void addQuestion(Question newQuestion) {
 		Thread thread = new AddQThread(newQuestion);
 		thread.start();
-		
-//		ListHandler.getMasterQList().add(newQuestion);
-//		ListHandler.getMyQsList().add(newQuestion);
 	}
 
 	public Question getQuestion(String questionID) {
 		Thread thread = new GetQuestionThread(questionID);
 		thread.start();
 		
-    	// Make sure populateThread is done and we retrived the results from network before we continue
+    	// Make sure populateThread is done and we retrieved the results from network before we continue to ensure we're not returning null
     	while (getQuestionThreadFinished != true) {
     	}
     	
@@ -56,7 +51,6 @@ public class NetworkController {
 
 		@Override
 		public void run() {
-			//QuestionList masterList = ListHandler.getMasterQList();
 			tempQuestion = esManager.getQuestion(questionID);
 			
 			// PRINTING FOR ME
@@ -68,18 +62,6 @@ public class NetworkController {
 
 	}
 	
-//	public void populateMasterList() {
-//		Thread thread = new PopulateListThread("");
-//		thread.start();
-//		fillQuestionList(ListHandler.getMasterQList());
-//	}
-    
-//	public void populateSearchResultsList(QuestionList resultsList, String search) {
-//		Thread thread = new PopulateListThread(search);
-//		thread.start();
-//		fillQuestionList(resultsList);
-//	}
-	
 	public void populateList(QuestionList list, String search) {
 		Thread thread = new PopulateListThread(search);
 		thread.start();
@@ -89,7 +71,7 @@ public class NetworkController {
     private void fillQuestionList(QuestionList questionList) {
     	System.out.println("INSIDE fillQuestionList");
     	
-    	// Make sure populateThread is done and we retrived the results from network before we continue
+    	// Make sure populateThread is done and we retrieved the results from network before we continue
     	while (populateThreadFinished != true) {
     	}
     	
@@ -105,7 +87,6 @@ public class NetworkController {
     		return;
     	}
     	
-    	//QuestionList questionList = ListHandler.getMasterQList();
 		ArrayList<Question> list = questionList.getQuestionList();
 		list.clear();
 		
@@ -125,13 +106,15 @@ public class NetworkController {
 			list.add(q);
 		}
 		
-		// PRINTINT FOR GEM
+		// PRINTINT FOR DEBUGGING
 		for (int i = 0 ; i < questionList.size(); i++) {
 			System.out.println("QuestionName : " + questionList.get(i).getName());
 		}
 		
 		System.out.println("DONE fillQuestionList");
 		
+		// Sort list by most recent
+		questionList.sortBy("most recent");
 		questionList.notifyViews();
 	}
 
@@ -168,7 +151,6 @@ public class NetworkController {
 
 		@Override
 		public void run() {
-			//QuestionList masterList = ListHandler.getMasterQList();
 			tempList = esManager.searchQuestions(search, null);
 			
 			// PRINTING FOR ME
