@@ -305,11 +305,17 @@ public class LoadSave {
 	{
 		//load and set the network buffer
 		String gsonString = loadData(networkBufferKey);
-	
-		Gson gson = new Gson();
-		NetworkBuffer networkBuffer = gson.fromJson(gsonString, NetworkBuffer.class);
-		NetworkManager networkManager= NetworkManager.getInstance();
-		networkManager.setNetworkBuffer(networkBuffer);
+		if (gsonString=="") {
+			NetworkManager networkManager= NetworkManager.getInstance();
+			NetworkBuffer networkBuffer= new NetworkBuffer();
+			networkManager.setNetworkBuffer(networkBuffer);
+		}
+		else {
+			Gson gson = new Gson();
+			NetworkBuffer networkBuffer = gson.fromJson(gsonString, NetworkBuffer.class);
+			NetworkManager networkManager= NetworkManager.getInstance();
+			networkManager.setNetworkBuffer(networkBuffer);
+		}
 
 	}
 	

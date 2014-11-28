@@ -153,6 +153,7 @@ public class MainActivity extends Activity {
         lSave.loadUseLocation();
         lSave.loadCity();
         lSave.loadCountry();
+        lSave.loadNetworkBuffer();
         LoadSave.loaded = true;
         }
 	}
@@ -217,6 +218,7 @@ public class MainActivity extends Activity {
     	ls.SaveFavorites();
     	ls.saveMyQuestions();
     	ls.SaveReadingList();
+    	ls.SaveNetworkBuffer();
 	}
 
 	@Override
