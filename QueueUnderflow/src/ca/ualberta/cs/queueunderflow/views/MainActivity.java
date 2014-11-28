@@ -19,6 +19,7 @@ import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
+import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
 
@@ -157,8 +158,15 @@ public class MainActivity extends Activity {
    
         lSave.loadUpvotedQuestions();
         lSave.loadUpvotedAnswers();
+        lSave.loadUseLocationCheckBox();
         LoadSave.loaded = true;
         }
+		
+		//Added flush buffer here as well
+    	NetworkManager networkManager = NetworkManager.getInstance();
+    	if (networkManager.isOnline(getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
 	}
 
     /* (non-Javadoc)
@@ -221,6 +229,12 @@ public class MainActivity extends Activity {
     	ls.SaveFavorites();
     	ls.saveMyQuestions();
     	ls.SaveReadingList();
+    	
+        ls.saveUseLocation(User.getUseLocation());
+        ls.saveUseLocationCheckBox(User.displayCheckbox());
+        ls.saveCity(User.getCity());
+        ls.saveCountry(User.getCountry());
+        
     	ls.SaveNetworkBuffer();
     	ls.saveUpvotedQuestions();
     	ls.saveUpvotedAnswers();

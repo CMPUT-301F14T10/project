@@ -60,6 +60,8 @@ public class LoadSave {
 	/** The network buffer key. */
 	final String networkBufferKey= "networkBuffer";
 	
+	final String useLocationCheckBox= "useLocationCheckBox";
+	
 	final String upvotedQuestionsKey="upvotedQuestions";
 	
 	final String upvotedAnswersKey="upvotedAnswers";
@@ -265,6 +267,28 @@ public class LoadSave {
 	 *
 	 * @param username the username
 	 */
+	public void saveUseLocationCheckBox(boolean value) {
+		if (value) {
+			saveData(useLocationCheckBox,"1");
+		}
+		else {
+			saveData(useLocationCheckBox,"0");
+		}
+	}
+	
+	public void loadUseLocationCheckBox() {
+		String checkBox= loadData(useLocationCheckBox);
+		if (checkBox.equals("1")) {
+			User.setCheckbox(true);
+			Log.d("test", "checkbox is checked");
+
+		}
+		else {
+			User.setCheckbox(false);
+			Log.d("test", "checkbox isn't checked");
+
+		}
+	}
 	public void saveUsername(String username)
 	{
 		saveData(usernameKey, username);
