@@ -42,7 +42,7 @@ public final class R {
         public static final int user_pic=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080039;
+        public static final int action_settings=0x7f08003a;
         public static final int addABtn=0x7f080001;
         public static final int addAnAnswerBtn=0x7f080013;
         public static final int answerBtn=0x7f08002f;
@@ -78,6 +78,7 @@ public final class R {
         public static final int locationTextView=0x7f08001d;
         public static final int mostRecentMenu=0x7f080034;
         public static final int mostUpvotesMenu=0x7f080036;
+        public static final int nearbyQuestionsMenu=0x7f080039;
         public static final int newUsername=0x7f080023;
         public static final int noPictureMenu=0x7f080038;
         public static final int offlineBtn=0x7f080029;
@@ -141,6 +142,7 @@ public final class R {
         public static final int leastRecent=0x7f050006;
         public static final int mostRecent=0x7f050005;
         public static final int mostUpvotes=0x7f050007;
+        public static final int nearbyQuestions=0x7f050018;
         public static final int noPicture=0x7f050009;
         public static final int search=0x7f05000b;
         public static final int sortBy=0x7f05000a;

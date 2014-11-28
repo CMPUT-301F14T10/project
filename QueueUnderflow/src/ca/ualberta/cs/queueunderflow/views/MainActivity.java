@@ -259,6 +259,10 @@ public class MainActivity extends Activity {
         	questionList.sortBy("no pictures");
         	return true;
         
+        case R.id.nearbyQuestionsMenu:
+        	questionList.sortBy("nearby questions");
+        	return true;
+        
         case R.id.searchMenu:
            	item.setOnActionExpandListener(new OnActionExpandListener() {
     			

@@ -10,6 +10,7 @@ import android.view.ViewStub;
 
 import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
+import ca.ualberta.cs.queueunderflow.User;
 
 /**
  * The Class QuestionList.
@@ -246,6 +247,24 @@ public class QuestionList extends TModel<TView>{
 			}
 		};
 		
+		// Sort by nearby location, questions with nearby location appear at the top
+		Comparator<Question> nearbyComparator = new Comparator<Question>() {
+
+			@Override
+			public int compare(Question lhs, Question rhs) {
+				String city= User.getCity();
+				String country= User.getCountry();
+				String location= city+", "+country;
+				if (lhs.getLocation().equals(location) && !rhs.getLocation().equals(location)) {
+					return 1;
+				}
+				else if (!lhs.getLocation().equals(location) && rhs.getLocation().equals(location)) {
+					return -1;
+				}
+				return 0;
+			}
+		};
+		
 		if (method.equals("most recent")) {
 			Collections.sort(questionList, mostRecentComparator);
 		}
@@ -260,6 +279,9 @@ public class QuestionList extends TModel<TView>{
 		}
 		else if (method.equals("no pictures")) {
 			Collections.sort(questionList, noPicturesComparator);
+		}
+		else if (method.equals("nearby questions")) {
+			Collections.sort(questionList,nearbyComparator);
 		}
 		
 		notifyViews();
