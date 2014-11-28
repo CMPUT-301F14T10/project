@@ -204,13 +204,13 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
              
             @Override
             public void onClick(View v) {
-            	User user= ListHandler.getUser();
+            	//User user= ListHandler.getUser();
             	Answer answer= answerArray.get(groupPosition);
-    			if (user.alreadyUpvotedAnswer(answer)) {
+    			if (User.alreadyUpvotedAnswer(answer.getID())) {
 					Toast.makeText(activity.getApplicationContext(), "Answer was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					user.addUpvotedAnswer(answerArray.get(groupPosition));
+					User.addUpvotedAnswer(answerArray.get(groupPosition).getID());
 					
 					// To mimic
 					answerArray.get(groupPosition).upvoteResponse();

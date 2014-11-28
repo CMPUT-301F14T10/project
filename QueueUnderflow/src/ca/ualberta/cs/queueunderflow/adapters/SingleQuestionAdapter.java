@@ -194,16 +194,16 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
              
             @Override
             public void onClick(View v) {
-            	User user= ListHandler.getUser();
+            	//User user= ListHandler.getUser();
             	Question question= singleQuestionArray.get(groupPosition);
-    			if (user.alreadyUpvotedQuestion(question)) {
+    			if (User.alreadyUpvotedQuestion(question.getID())) {
 					Toast.makeText(activity.getApplicationContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();			// This should be in the model?
 				}
 				else {
 				        boolean isInFavorites = false;
 				        if(ListHandler.getFavsList().getQuestionList().contains(singleQuestionArray.get(groupPosition))) isInFavorites = true;
 				    
-					user.addUpvotedQuestion(singleQuestionArray.get(groupPosition));
+					User.addUpvotedQuestion(singleQuestionArray.get(groupPosition).getID());
 					
 					// To mimic fake view updates
 					question.upvoteResponse();

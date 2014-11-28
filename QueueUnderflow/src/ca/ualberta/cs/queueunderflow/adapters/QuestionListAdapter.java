@@ -125,9 +125,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			@Override
 			public void onClick(View v) {
 				
-				User user= ListHandler.getUser();
+				//User user= ListHandler.getUser();
 				Question question= questionArray.get(position);
-				if (user.alreadyUpvotedQuestion(question)) {
+				if (User.alreadyUpvotedQuestion(question.getID())) {
 					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {
@@ -135,7 +135,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
                     if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
 				    
                     // FIX THIS TO ADD ONLY THE QUESTION ID INSTEAD OF THE ENTIRE QUESTION
-					user.addUpvotedQuestion(questionArray.get(position));
+					User.addUpvotedQuestion(questionArray.get(position).getID());
 					
 					// To mimic fake view updates
 					questionArray.get(position).upvoteResponse();

@@ -1,6 +1,7 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -29,20 +30,27 @@ public class User {
 	/** User's country */
 	protected static String country="Unknown";
 	
-	/** The upvoted questions. */
-	protected ArrayList <Question> upvotedQuestions;
+	/** The upvoted questions. Depreciated*/
+	//protected ArrayList <Question> upvotedQuestions;
 	
-	/** The upvoted answers. */
-	protected ArrayList <Answer> upvotedAnswers;
+	/** The upvoted answers. Depreciated*/
+	//protected ArrayList <Answer> upvotedAnswers;
+	
+	//Applied static to these arraylist
+	protected static ArrayList <UUID> upvotedQuestions;
+	
+	protected static ArrayList <UUID> upvotedAnswers;
 	
 	/**
 	 * Instantiates a new user.
 	 */
 	public User() {
 		this.username="Anonymous";
-		this.upvotedQuestions= new ArrayList<Question>();
-		this.upvotedAnswers= new ArrayList<Answer>();
+		//this.upvotedQuestions= new ArrayList<Question>();
+		//this.upvotedAnswers= new ArrayList<Answer>();
 		
+		this.upvotedQuestions= new ArrayList <UUID>();
+		this.upvotedAnswers= new ArrayList<UUID>();
 		//By default, the user's city and country is set to Unknown
 		// in case the user clicks on the location checkbox but doesn't do anything else
 		//this.country="Unknown";
@@ -62,8 +70,10 @@ public class User {
 			throw new IllegalArgumentException("Invalid username. Username is set to Anonymous.");
 		}
 		this.username=tempUserName;
-		this.upvotedQuestions= new ArrayList<Question>();
-		this.upvotedAnswers= new ArrayList<Answer>();
+		//this.upvotedQuestions= new ArrayList<Question>();
+		//this.upvotedAnswers= new ArrayList<Answer>();
+		this.upvotedQuestions= new ArrayList <UUID>();
+		this.upvotedAnswers= new ArrayList<UUID>();
 	}
 	
 	/**
@@ -132,8 +142,11 @@ public class User {
 	 *
 	 * @param question the question
 	 */
-	public void addUpvotedQuestion(Question question) {
-		upvotedQuestions.add(question);
+	
+	
+	public static void addUpvotedQuestion(UUID uuid) {
+		//upvotedQuestions.add(question);
+		upvotedQuestions.add(uuid);
 	}
 	
 	/**
@@ -141,8 +154,8 @@ public class User {
 	 *
 	 * @param answer the answer
 	 */
-	public void addUpvotedAnswer(Answer answer) {
-		upvotedAnswers.add(answer);
+	public static void addUpvotedAnswer(UUID uuid) {
+		upvotedAnswers.add(uuid);
 	}
 	
 	/**
@@ -151,9 +164,9 @@ public class User {
 	 * @param question the question
 	 * @return true, if successful
 	 */
-	public boolean alreadyUpvotedQuestion(Question question){
+	public static boolean alreadyUpvotedQuestion(UUID uuid){
 		
-		return this.upvotedQuestions.contains(question);
+		return upvotedQuestions.contains(uuid);
 	}
 	
 	/**
@@ -162,10 +175,26 @@ public class User {
 	 * @param answer the answer
 	 * @return true, if successful
 	 */
-	public boolean alreadyUpvotedAnswer(Answer answer){
+	public static boolean alreadyUpvotedAnswer(UUID uuid){
 	
-		return this.upvotedAnswers.contains(answer);
+		return upvotedAnswers.contains(uuid);
 
+	}
+	
+	public ArrayList <UUID> getUpvotedQuestions() {
+		return User.upvotedQuestions;
+	}
+	
+	public void setUpvotedQuestions(ArrayList <UUID> questions) {
+		User.upvotedQuestions=questions;
+	}
+	
+	public ArrayList <UUID> getUpvotedAnswers() {
+		return User.upvotedAnswers;
+	}
+	
+	public void setUpvotedAnswers(ArrayList <UUID> answers) {
+		User.upvotedAnswers=answers;
 	}
 	
 	public static boolean displayCheckbox() {

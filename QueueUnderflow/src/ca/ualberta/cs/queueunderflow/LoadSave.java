@@ -1,6 +1,8 @@
 package ca.ualberta.cs.queueunderflow;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.UUID;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -57,6 +59,10 @@ public class LoadSave {
 	
 	/** The network buffer key. */
 	final String networkBufferKey= "networkBuffer";
+	
+	final String upvotedQuestionsKey="upvotedQuestions";
+	
+	final String upvotedAnswersKey="upvotedAnswers";
 	
 	/** The loaded. */
 	public static boolean loaded = false;
@@ -284,6 +290,50 @@ public class LoadSave {
         	}
         }
         return true;
+	}
+	
+	public void saveUpvotedQuestions() {
+		ArrayList <UUID> upvotedQuestions= User.upvotedQuestions;
+		Gson gson= new Gson();
+		String gsonString= gson.toJson(upvotedQuestions);
+		this.saveData(upvotedQuestionsKey, gsonString);
+	}
+	
+	public void loadUpvotedQuestions() {
+		String gsonString= loadData(upvotedQuestionsKey);
+		if (gsonString=="") {
+			ArrayList <UUID> upvotedQuestions= new ArrayList <UUID> ();
+			User.upvotedQuestions=upvotedQuestions;
+		}
+		else {
+			Gson gson= new Gson();
+			Type listOfTestObject = new TypeToken<ArrayList<UUID>>(){}.getType();
+			//ArrayList <Question> questionList2= gson2.fromJson(json2,listOfTestObject);
+			ArrayList <UUID> upvotedQuestions= gson.fromJson(gsonString,listOfTestObject);
+			User.upvotedQuestions=upvotedQuestions;
+		}
+	}
+	
+	public void saveUpvotedAnswers() {
+		ArrayList <UUID> upvotedAnswers= User.upvotedAnswers;
+		Gson gson= new Gson();
+		String gsonString= gson.toJson(upvotedAnswers);
+		this.saveData(upvotedAnswersKey, gsonString);
+	}
+	
+	public void loadUpvotedAnswers() {
+		String gsonString= loadData(upvotedAnswersKey);
+		if (gsonString=="") {
+			ArrayList <UUID> upvotedAnswers= new ArrayList <UUID> ();
+			User.upvotedAnswers=upvotedAnswers;
+		}
+		else {
+			Gson gson= new Gson();
+			Type listOfTestObject = new TypeToken<ArrayList<UUID>>(){}.getType();
+			//ArrayList <Question> questionList2= gson2.fromJson(json2,listOfTestObject);
+			ArrayList <UUID> upvotedAnswers= gson.fromJson(gsonString,listOfTestObject);
+			User.upvotedAnswers=upvotedAnswers;
+		}
 	}
 	
 	/**

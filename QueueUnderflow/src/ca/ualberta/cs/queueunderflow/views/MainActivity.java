@@ -154,6 +154,9 @@ public class MainActivity extends Activity {
         lSave.loadCity();
         lSave.loadCountry();
         lSave.loadNetworkBuffer();
+   
+        lSave.loadUpvotedQuestions();
+        lSave.loadUpvotedAnswers();
         LoadSave.loaded = true;
         }
 	}
@@ -219,6 +222,8 @@ public class MainActivity extends Activity {
     	ls.saveMyQuestions();
     	ls.SaveReadingList();
     	ls.SaveNetworkBuffer();
+    	ls.saveUpvotedQuestions();
+    	ls.saveUpvotedAnswers();
 	}
 
 	@Override
