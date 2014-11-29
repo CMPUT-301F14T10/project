@@ -18,7 +18,7 @@ public class UseCase11 extends TestCase {
 		//Add question_replies
 		Question questionTest= new Question(questionName, author);
 		questionTest.upvoteResponse();
-		user.addUpvotedQuestion(questionTest);
+		user.addUpvotedQuestion(questionTest.getID());
 		assertTrue("Question upvoted by 1", questionTest.getUpvotes()==1);
 		
 		//Adding an answer
@@ -29,12 +29,12 @@ public class UseCase11 extends TestCase {
 		
 		Answer testAnswer= new Answer(answerName,author2);
 		testAnswer.upvoteResponse();
-		user.addUpvotedAnswer(testAnswer);
+		user.addUpvotedAnswer(testAnswer.getID());
 		assertTrue("Answer upvoted by 1", testAnswer.getUpvotes()==1);
 		
 		//Exception: User already upvoted question/answer
-		assertTrue("Question already upvoted", user.alreadyUpvotedQuestion(questionTest));
-		assertTrue("Answer already upvoted", user.alreadyUpvotedAnswer(testAnswer));
+		assertTrue("Question already upvoted", user.alreadyUpvotedQuestion(questionTest.getID()));
+		assertTrue("Answer already upvoted", user.alreadyUpvotedAnswer(testAnswer.getID()));
 	}
 
 }

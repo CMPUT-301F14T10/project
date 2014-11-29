@@ -141,6 +141,12 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		super.onResume();
 		adapter.notifyDataSetChanged();
 		
+	   	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
+    	NetworkManager networkManager = NetworkManager.getInstance();
+		if (networkManager.isOnline(getActivity().getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
+		
 	}
 
 	@Override

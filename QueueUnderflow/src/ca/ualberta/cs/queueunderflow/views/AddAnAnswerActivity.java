@@ -155,7 +155,7 @@ public class AddAnAnswerActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				controller.addAnswer(fromFragment, position, answerInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());
+				controller.addAnswer(fromFragment, position, answerInput.getText().toString(), User.getUserName(), imagePreviewBtn);
 			}
 		});
 	}

@@ -77,7 +77,7 @@ public class AskAQuestionActivity extends Activity{
 		askBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				controller.askQuestion(questionInput.getText().toString(), User.getUserName(), imagePreviewBtn.getVisibility());
+				controller.askQuestion(questionInput.getText().toString(), User.getUserName(), imagePreviewBtn);
 			}
 		});
 		
@@ -146,7 +146,7 @@ public class AskAQuestionActivity extends Activity{
 			test_question="This is a question";
 		}
 		if (test_question!=null) {
-			controller.askQuestion(test_question,"test user",imagePreviewBtn.getVisibility());
+			controller.askQuestion(test_question,"test user",imagePreviewBtn);
 		}
 	}
 	

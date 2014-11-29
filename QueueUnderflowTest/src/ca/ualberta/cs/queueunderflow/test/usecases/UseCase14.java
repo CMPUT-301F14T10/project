@@ -50,8 +50,13 @@ public class UseCase14 extends ActivityInstrumentationTestCase2<MainActivity> {
 				intent.putExtra("returnFragment", MainActivity.HOME_SCREEN_FRAGMENT);
 				setActivityIntent(intent);
 				MainActivity activity = (MainActivity) getActivity();
+				
+				// No picture attached
+				ImageButton imagePreviewBtn = new ImageButton(activity);
+				imagePreviewBtn.setVisibility(View.INVISIBLE);
+				
 				AskAnswerController controller = new AskAnswerController(activity);
-				controller.askQuestion("This is a question", User.getUserName(), View.INVISIBLE);
+				controller.askQuestion("This is a question", User.getUserName(), imagePreviewBtn);
 			}
 		});
 		

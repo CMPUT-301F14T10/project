@@ -2,6 +2,7 @@ package ca.ualberta.cs.queueunderflow.controllers;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
@@ -9,6 +10,7 @@ import ca.ualberta.cs.queueunderflow.NetworkController;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
@@ -33,6 +35,9 @@ public class AskAnswerController {
 	
 	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
+	
+	public static final int ATTACH_PHOTO_TRY_AGAIN = 0;
+	public static final int SETUP_SUCCESS = 1;
 	
 	/** The activity. */
 	private Activity activity;	// This is so we can make Toast messages
@@ -59,32 +64,15 @@ public class AskAnswerController {
 	 *
 	 * @param question the question name
 	 * @param username the username
-	 * @param hasPicture the has picture
+	 * @param imagePreviewBtn the has picture
 	 */
-	public void askQuestion(String questionName, String username, int hasPicture) {
+	public void askQuestion(String questionName, String username, ImageButton imagePreviewBtn) {
 		try {
 			Question newQuestion = new Question(questionName, username);
-			//If the user wants to display location, add the location to the question
-			if (User.getUseLocation()) {
-				String city= User.getCity();
-				String country= User.getCountry();
-				String location=city+", "+country;
-				newQuestion.setLocation(location);
+			int setUpStatus = setUpResponse(newQuestion, imagePreviewBtn);
+			if (setUpStatus == ATTACH_PHOTO_TRY_AGAIN) {
+				return;
 			}
-			if (hasPicture == View.VISIBLE) {
-				try {
-					newQuestion.setImagePath(imagePath);
-				} catch (IllegalArgumentException e){
-					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-					return;
-				}
-				
-				newQuestion.setHasPicture(true);
-				//New here
-				//newQuestion.setImagePath(imagePath);
-				newQuestion.setEncodedImage(encodedImage);
-			}
-			
 			
 			// For mimicking fake view
 			ListHandler.getMasterQList().add(newQuestion);
@@ -146,30 +134,12 @@ public class AskAnswerController {
     	this.encodedImage=encoded;
     }
 
-	public void addAnswer(int fromFragment, int position, String answerName, String username, int hasPicture) {
+	public void addAnswer(int fromFragment, int position, String answerName, String username, ImageButton imagePreviewBtn) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
-			//If the user wants to display location, add the location to the answer
-			if (User.getUseLocation()) {
-				String city= User.getCity();
-				String country= User.getCountry();
-				String location=city+", "+country;
-				newAnswer.setLocation(location);
-			}
-			if (hasPicture == View.VISIBLE) {
-				//Exception check: check if image >64kb
-				try {
-					newAnswer.setImagePath(imagePath);
-				} catch (IllegalArgumentException e){
-					Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-					return;
-				}
-				
-				
-				newAnswer.setHasPicture(true);
-				//New here
-				//newAnswer.setImagePath(imagePath);
-				newAnswer.setEncodedImage(encodedImage);
+			int setUpStatus = setUpResponse(newAnswer, imagePreviewBtn);
+			if (setUpStatus == ATTACH_PHOTO_TRY_AGAIN) {
+				return;
 			}
 			
 			// For mimicking fake view
@@ -199,6 +169,34 @@ public class AskAnswerController {
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(activity.getApplicationContext(), "Invalid answer. Please re-enter an answer.", Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	
+	private int setUpResponse(GenericResponse response, ImageButton imagePreviewBtn) {
+		//If the user wants to display location, add the location to the question
+		if (User.getUseLocation()) {
+			String city= User.getCity();
+			String country= User.getCountry();
+			String location=city+", "+country;
+			response.setLocation(location);
+		}
+		if (imagePreviewBtn.getVisibility() == View.VISIBLE) {
+			//Exception check: check if image >64kb
+			try {
+				response.setImagePath(imagePath);
+			} catch (IllegalArgumentException e){
+				Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+				imagePreviewBtn.setVisibility(View.INVISIBLE);
+				return ATTACH_PHOTO_TRY_AGAIN;
+			}
+			response.setHasPicture(true);
+			//New here
+			//newQuestion.setImagePath(imagePath);
+			response.setEncodedImage(encodedImage);
+		}
+		
+		return SETUP_SUCCESS;
+		
 	}
 
 }
