@@ -3,11 +3,13 @@ package ca.ualberta.cs.queueunderflow.adapters;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.R.color;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -113,11 +115,30 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 		dateDisplay.setText(DateFormat.format("MMM dd, yyyy", questionArray.get(position).getDate()));
 		
 		TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
-		locationDisplay.setText(questionArray.get(position).getLocation());
 		
+		TextView nearbyDisplay= (TextView) view.findViewById(R.id.nearbyTextView);
+		nearbyDisplay.setTextColor(Color.BLUE);
+		String location= questionArray.get(position).getLocation();
+		String nearby= User.getCity()+", "+User.getCountry();
+
+		//If the user decides to use location, display it , else do not display anything
+		if (User.getUseLocation()) {
+			locationDisplay.setText(questionArray.get(position).getLocation());
+			
+			if (location.equals(nearby)) {
+				nearbyDisplay.setText("Nearby");
+			}
+			else {
+				nearbyDisplay.setText("");
+			}
+		}
+		
+		else {
+			locationDisplay.setText("");
+			nearbyDisplay.setText("");
+		}
 		TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
 		upvoteDisplay.setText(Integer.toString(questionArray.get(position).getUpvotes()));
-		
 		
 		final ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
 		upvoteBtn.setOnClickListener(new OnClickListener() {
@@ -162,7 +183,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			//String city= User.getCity();
 			//String country=User.getCountry();
 			//String location= city+","+country;
-			String location= questionArray.get(position).getLocation();
+			//String location= questionArray.get(position).getLocation();
 			locationDisplay.setText(location);
 		}
 		

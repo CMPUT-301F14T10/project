@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -130,8 +131,28 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         authorDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getAuthor());
         
         TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
-        locationDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getLocation());
-         
+        TextView nearbyDisplay= (TextView) view.findViewById(R.id.nearbyTextView);
+        nearbyDisplay.setTextColor(Color.BLUE);
+        
+		//If the user decides to use location services, then display location info else do not
+        String location= answerArray.get(groupPosition).getReplyAt(childPosition).getLocation();
+        String nearby= User.getCity()+", " +User.getCountry();
+        if (User.getUseLocation()) {
+        	locationDisplay.setText(answerArray.get(groupPosition).getReplyAt(childPosition).getLocation());
+        	if (location.equals(nearby)) {
+        		nearbyDisplay.setText("Nearby");
+        	}
+        	else {
+        		nearbyDisplay.setText("");
+        	}
+        }
+        else {
+        	locationDisplay.setText("");
+        	nearbyDisplay.setText("");
+        }
+        
+        
+        
         return view;
     }
  
@@ -194,8 +215,26 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
         dateDisplay.setText(DateFormat.format("MMM dd, yyyy", answerArray.get(groupPosition).getDate()));
          
 		TextView locationDisplay = (TextView) view.findViewById(R.id.locationTextView);
-		locationDisplay.setText(answerArray.get(groupPosition).getLocation());
-        
+		TextView nearbyDisplay= (TextView) view.findViewById(R.id.nearbyTextView);
+		nearbyDisplay.setTextColor(Color.BLUE);
+		String location= answerArray.get(groupPosition).getLocation();
+		String nearby= User.getCity()+", "+User.getCountry();
+
+		//If the user decides to use location services, then display location info else do not
+		if (User.getUseLocation()) {
+			locationDisplay.setText(answerArray.get(groupPosition).getLocation());
+			if (location.equals(nearby)) {
+				nearbyDisplay.setText("Nearby");
+			}
+			else {
+				nearbyDisplay.setText("");
+			}	
+		}
+		else {
+			locationDisplay.setText("");
+			nearbyDisplay.setText("");
+			
+		}
         TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
         upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
         

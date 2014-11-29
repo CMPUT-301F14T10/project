@@ -84,16 +84,6 @@
                 android:text="Location"
                 android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/nearbyTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/authorTextView"
-                android:layout_marginLeft="18dp"
-                android:layout_toRightOf="@+id/locationTextView"
-                android:text="Nearby"
-                android:textSize="10sp" />
-
         </RelativeLayout>
 
         <LinearLayout
@@ -169,6 +159,17 @@
                 android:clickable="false"
                 android:src="@drawable/item_picture_indicator"
                 android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/nearbyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/answerBtn"
+                android:layout_marginRight="24dp"
+                android:layout_toLeftOf="@+id/hasPictureIcon"
+                android:text="Nearby"
+                android:textSize="10sp" />
+
         </RelativeLayout>
 
     </LinearLayout>
