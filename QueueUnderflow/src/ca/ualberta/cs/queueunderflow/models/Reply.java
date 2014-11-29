@@ -29,6 +29,7 @@ public class Reply {
 		}
 		this.reply=reply;
 		this.author=author;
+		this.location="";
 	}
 	
 	/**

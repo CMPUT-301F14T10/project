@@ -179,13 +179,13 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			}	
 		});	
 		
-		if (User.getUseLocation()) {
+		//if (User.getUseLocation()) {
 			//String city= User.getCity();
 			//String country=User.getCountry();
 			//String location= city+","+country;
 			//String location= questionArray.get(position).getLocation();
-			locationDisplay.setText(location);
-		}
+		//	locationDisplay.setText(location);
+		//}
 		
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
