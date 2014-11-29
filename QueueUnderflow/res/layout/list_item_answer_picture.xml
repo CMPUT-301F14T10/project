@@ -60,6 +60,16 @@
                 android:text="Location"
                 android:textSize="10sp" />
 
+            <TextView
+                android:id="@+id/nearbyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/authorTextView"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@+id/locationTextView"
+                android:text="Nearby"
+                android:textSize="10sp" />
+
         </RelativeLayout>
 
         <LinearLayout

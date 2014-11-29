@@ -135,12 +135,37 @@ public class MainActivity extends Activity {
         
         //----- Load data from phone memory (move this into a controller somewhere, maybe)
 
-        loadOnce();
+        //loadOnce();
+		if(!LoadSave.loaded) //Make sure this only loads once!
+        {
+        LoadSave lSave = LoadSave.getInstance();
+        lSave.loadUsername();
+        Log.d("test", "loading favorites...");
+        lSave.loadMyQuestions();
+        lSave.loadFavorites();
+        lSave.LoadReadingList();
+        lSave.loadUseLocation();
+        lSave.loadCity();
+        Log.d("loading city test", User.getCity());
+        lSave.loadCountry();
+        lSave.loadNetworkBuffer();
+   
+        lSave.loadUpvotedQuestions();
+        lSave.loadUpvotedAnswers();
+        lSave.loadUseLocationCheckBox();
+        LoadSave.loaded = true;
+        }
+		
+		//Added flush buffer here as well
+    	NetworkManager networkManager = NetworkManager.getInstance();
+    	if (networkManager.isOnline(getApplicationContext())) {
+    		networkManager.flushBuffer();
+    	}
 
         //----- Done loading data from phone memory
     }
 
-	private void loadOnce()
+/*	private void loadOnce()
 	{
 
 		if(!LoadSave.loaded) //Make sure this only loads once!
@@ -168,7 +193,7 @@ public class MainActivity extends Activity {
     	if (networkManager.isOnline(getApplicationContext())) {
     		networkManager.flushBuffer();
     	}
-	}
+	}*/
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
