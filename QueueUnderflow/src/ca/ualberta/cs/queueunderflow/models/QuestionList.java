@@ -256,10 +256,10 @@ public class QuestionList extends TModel<TView>{
 				String country= User.getCountry();
 				String location= city+", "+country;
 				if (lhs.getLocation().equals(location) && !rhs.getLocation().equals(location)) {
-					return 1;
+					return -1;
 				}
 				else if (!lhs.getLocation().equals(location) && rhs.getLocation().equals(location)) {
-					return -1;
+					return 1;
 				}
 				return 0;
 			}

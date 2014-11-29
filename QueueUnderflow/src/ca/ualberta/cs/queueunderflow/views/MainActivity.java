@@ -153,6 +153,7 @@ public class MainActivity extends Activity {
         lSave.LoadReadingList();
         lSave.loadUseLocation();
         lSave.loadCity();
+        Log.d("loading city test", User.getCity());
         lSave.loadCountry();
         lSave.loadNetworkBuffer();
    

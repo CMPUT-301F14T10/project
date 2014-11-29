@@ -104,6 +104,11 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	//Source: http://www.mkyong.com/android/android-checkbox-example/
     	//Source: http://stackoverflow.com/questions/8386832/android-checkbox-listener
     	useLocation.setChecked(User.displayCheckbox());
+    	
+    	if (useLocation.isChecked()) {
+			User.setUseLocation(true);
+    	}
+    	
     	useLocation.setOnClickListener(new OnClickListener() {
 			
 			@Override
