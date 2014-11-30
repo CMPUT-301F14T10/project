@@ -136,6 +136,9 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 
 	
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onResume()
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -149,6 +152,9 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onDestroyView()
+	 */
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

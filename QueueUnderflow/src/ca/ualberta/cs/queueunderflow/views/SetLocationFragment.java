@@ -20,11 +20,20 @@ import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 
+/**
+ * The Class SetLocationFragment.
+ */
 public class SetLocationFragment extends Fragment implements OnClickListener{
 
+	/** The l handler. */
 	LocationHandler lHandler;
+	
+	/** The gps thread. */
 	private GetGPSBackground gpsThread;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onStop()
+	 */
 	@Override
 	public void onStop() {
 		super.onStop();
@@ -34,12 +43,18 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 		if(lHandler != null) lHandler.GPSUnlisten();
 	}
 	
+    /* (non-Javadoc)
+     * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getActionBar().setTitle("Home");
         return inflater.inflate(R.layout.activity_set_location_fragment, container, false);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     public void onClick(View view)
     {
     	//Occurs when the get GPS button is clicked.
@@ -84,6 +99,9 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     	
     }
     
+    /* (non-Javadoc)
+     * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -208,8 +226,14 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
     }
     
     //GPS thread.
+    /**
+     * The Class GetGPSBackground.
+     */
     public class GetGPSBackground extends AsyncTask<String, String, String> {
 
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 */
 		@Override
 		protected String doInBackground(String... params) {
 			while(LocationHandler.listeningGPS){
@@ -226,6 +250,9 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 			return locationString;
 		}
     	
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
 		protected void onPostExecute(String result) {
 			
 			String city = null;
@@ -256,6 +283,9 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 			
 		}
 		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+		 */
 		protected void onProgressUpdate(String... result) {
 			TextView status = (TextView) getActivity().findViewById(R.id.textViewStatus);
 			status.setText(result[0]);

@@ -1,6 +1,1 @@
-ca.ualberta.cs.queueunderflow
-ca.ualberta.cs.queueunderflow.adapters
-ca.ualberta.cs.queueunderflow.controllers
-ca.ualberta.cs.queueunderflow.models
-ca.ualberta.cs.queueunderflow.serializers
 ca.ualberta.cs.queueunderflow.views

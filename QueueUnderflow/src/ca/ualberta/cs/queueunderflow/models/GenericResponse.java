@@ -12,6 +12,7 @@ import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 
 
+// TODO: Auto-generated Javadoc
 /**
 * The Class GenericResponse.
 * Holds all the basic attributes of a response
@@ -50,18 +51,27 @@ public class GenericResponse {
 	/** The is in reading list indicator. */
 	transient protected boolean isInReadingList;
 	
-	/** The unique ID */
+	/**  The unique ID. */
 	protected UUID uniqueID;
 	//protected String uniqueID;
 	
 	//The image path (where the image is)
+	/** The image path. */
 	private String imagePath;
 	
+	/** The encoded image. */
 	private String encodedImage;
 	
+	/** The location. */
 	protected String location;
 	
 	
+	/**
+	 * Instantiates a new generic response.
+	 *
+	 * @param name the name
+	 * @param author the author
+	 */
 	public GenericResponse (String name, String author) {
 		name = name.trim();
 		if (name.length() == 0) {
@@ -101,23 +111,28 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Sets the ID
-	 * 
-	 * @param uid
+	 * Sets the ID.
+	 *
+	 * @param uid the new id
 	 */
 	
 	public void setID(UUID uid) {
 	    this.uniqueID = uid;
 	}
 	
+	/**
+	 * Sets the string id.
+	 *
+	 * @param ID the new string id
+	 */
 	public void setStringID(String ID) {
 		this.uniqueID=UUID.fromString(ID);
 	}
 	
 
 	/**
-	 * Returns the unique ID
-	 * 
+	 * Returns the unique ID.
+	 *
 	 * @return the unique ID
 	 */
 	
@@ -125,6 +140,11 @@ public class GenericResponse {
 	    return this.uniqueID;
 	}
 	
+	/**
+	 * Gets the string id.
+	 *
+	 * @return the string id
+	 */
 	public String getStringID() {
 	    return this.uniqueID.toString();
 	}
@@ -150,7 +170,7 @@ public class GenericResponse {
 	
 	
     /**
-     * Gets the reply at the specified location in this array
+     * Gets the reply at the specified location in this array.
      *
      * @param position the position of the element to return
      * @return the reply at the specified position
@@ -160,7 +180,7 @@ public class GenericResponse {
     }
     
 	/**
-	 * Adds the specified reply to to the beginning of the array
+	 * Adds the specified reply to to the beginning of the array.
 	 *
 	 * @param reply the reply to add
 	 */
@@ -170,7 +190,7 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the list of replies
+	 * Gets the list of replies.
 	 *
 	 * @return the replies
 	 */
@@ -184,7 +204,7 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the number of replies
+	 * Gets the number of replies.
 	 *
 	 * @return the number of replies
 	 */
@@ -265,7 +285,7 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Gets the checks if the response is favorited
+	 * Gets the checks if the response is favorited.
 	 *
 	 * @return true if the response is favorited, false otherwise
 	 */
@@ -274,7 +294,7 @@ public class GenericResponse {
 	}
 	
 	/**
-	 * Sets the checks about whether the response is is favorited
+	 * Sets the checks about whether the response is is favorited.
 	 *
 	 * @param isChecked the new checks if is fav
 	 */
@@ -285,6 +305,7 @@ public class GenericResponse {
 	/**
 	 * Gets the checks if the response is in reading list.
 	 *
+	 * @return the checks if is in reading list
 	 * @returntrue if the response is in the reading list, false otherwise
 	 */
 	public boolean getIsInReadingList() {
@@ -303,7 +324,7 @@ public class GenericResponse {
 	/**
 	 * Sets the response name.
 	 *
-	 * @param newReponse the new response name
+	 * @param newName the new name
 	 */
 	public void setName(String newName) {
 		this.name=newName;
@@ -357,6 +378,11 @@ public class GenericResponse {
 		return true;
 	}
 	
+	/**
+	 * Sets the image path.
+	 *
+	 * @param path the new image path
+	 */
 	public void setImagePath(String path) {
 		//Using this to check if pictures >64kb
 		
@@ -373,24 +399,50 @@ public class GenericResponse {
 		this.imagePath=path;
 
 	}
+	
+	/**
+	 * Gets the image path.
+	 *
+	 * @return the image path
+	 */
 	public String getImagePath() {
 		return this.imagePath;
 	}
 	
+	/**
+	 * Sets the encoded image.
+	 *
+	 * @param encoded the new encoded image
+	 */
 	public void setEncodedImage(String encoded) {
 		this.encodedImage=encoded;
 	}
 	
+	/**
+	 * Gets the encoded image.
+	 *
+	 * @return the encoded image
+	 */
 	public String getEncodedImage() {
 		return this.encodedImage;
 	}
 
 
 
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
 	public String getLocation() {
 		return location;
 	}
 
+	/**
+	 * Sets the location.
+	 *
+	 * @param location the new location
+	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}

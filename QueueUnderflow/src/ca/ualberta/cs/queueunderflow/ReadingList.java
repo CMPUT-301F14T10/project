@@ -24,7 +24,7 @@ public class ReadingList {
 	}
 	
 	/**
-	 * Adds the specified question
+	 * Adds the specified question.
 	 *
 	 * @param question the question
 	 */

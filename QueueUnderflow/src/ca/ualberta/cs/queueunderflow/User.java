@@ -15,19 +15,19 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
  */
 public class User {
 
-	//This is to maintain state of checkbox in the setLocationFragment
+	/** The display checkbox. */
 	protected static boolean displayCheckbox;
 	
 	/** The username. */
 	protected static String username;
 	
-	/** Should we use the user's location data */
+	/**  Should we use the user's location data. */
 	protected static boolean use_location;
 	
-	/** User's city */
+	/**  User's city. */
 	protected static String city="Unknown";
 	
-	/** User's country */
+	/**  User's country. */
 	protected static String country="Unknown";
 	
 	/** The upvoted questions. Depreciated*/
@@ -39,6 +39,7 @@ public class User {
 	//Applied static to these arraylist
 	protected static ArrayList <UUID> upvotedQuestions;
 	
+	/** The upvoted answers. */
 	protected static ArrayList <UUID> upvotedAnswers;
 	
 	/**
@@ -77,7 +78,8 @@ public class User {
 	}
 	
 	/**
-	 * Set the user's city
+	 * Set the user's city.
+	 *
 	 * @param sCity User's city
 	 */
 	public static void setCity(String sCity) {
@@ -85,7 +87,8 @@ public class User {
 	}
 	
 	/**
-	 * Set the user's country
+	 * Set the user's country.
+	 *
 	 * @param sCountry User's country
 	 */
 	public static void setCountry(String sCountry) {
@@ -101,7 +104,8 @@ public class User {
 	}
 	
 	/**
-	 * Get the user's city
+	 * Get the user's city.
+	 *
 	 * @return User's city
 	 */
 	public static String getCity() {
@@ -109,7 +113,8 @@ public class User {
 	}
 	
 	/**
-	 * Get whether the user wants to use location data
+	 * Get whether the user wants to use location data.
+	 *
 	 * @return true or false
 	 */
 	public static boolean getUseLocation() {
@@ -117,7 +122,8 @@ public class User {
 	}
 	
 	/**
-	 * Set whether or not to use location data
+	 * Set whether or not to use location data.
+	 *
 	 * @param value true or false
 	 */
 	public static void setUseLocation(boolean value) {
@@ -140,7 +146,7 @@ public class User {
 	/**
 	 * Adds the upvoted question.
 	 *
-	 * @param question the question
+	 * @param uuid the uuid
 	 */
 	
 	
@@ -152,7 +158,7 @@ public class User {
 	/**
 	 * Adds the upvoted answer.
 	 *
-	 * @param answer the answer
+	 * @param uuid the uuid
 	 */
 	public static void addUpvotedAnswer(UUID uuid) {
 		upvotedAnswers.add(uuid);
@@ -161,7 +167,7 @@ public class User {
 	/**
 	 * Already upvoted question.
 	 *
-	 * @param question the question
+	 * @param uuid the uuid
 	 * @return true, if successful
 	 */
 	public static boolean alreadyUpvotedQuestion(UUID uuid){
@@ -172,7 +178,7 @@ public class User {
 	/**
 	 * Already upvoted answer.
 	 *
-	 * @param answer the answer
+	 * @param uuid the uuid
 	 * @return true, if successful
 	 */
 	public static boolean alreadyUpvotedAnswer(UUID uuid){
@@ -181,26 +187,56 @@ public class User {
 
 	}
 	
+	/**
+	 * Gets the upvoted questions.
+	 *
+	 * @return the upvoted questions
+	 */
 	public ArrayList <UUID> getUpvotedQuestions() {
 		return User.upvotedQuestions;
 	}
 	
+	/**
+	 * Sets the upvoted questions.
+	 *
+	 * @param questions the new upvoted questions
+	 */
 	public void setUpvotedQuestions(ArrayList <UUID> questions) {
 		User.upvotedQuestions=questions;
 	}
 	
+	/**
+	 * Gets the upvoted answers.
+	 *
+	 * @return the upvoted answers
+	 */
 	public ArrayList <UUID> getUpvotedAnswers() {
 		return User.upvotedAnswers;
 	}
 	
+	/**
+	 * Sets the upvoted answers.
+	 *
+	 * @param answers the new upvoted answers
+	 */
 	public void setUpvotedAnswers(ArrayList <UUID> answers) {
 		User.upvotedAnswers=answers;
 	}
 	
+	/**
+	 * Display checkbox.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean displayCheckbox() {
 		return User.displayCheckbox;
 	}
 	
+	/**
+	 * Sets the checkbox.
+	 *
+	 * @param value the new checkbox
+	 */
 	public static void setCheckbox(boolean value) {
 		User.displayCheckbox=value;
 	}

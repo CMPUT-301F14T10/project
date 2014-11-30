@@ -16,7 +16,6 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
-
 /**
  * The Class WriteReplyController.
  * The controller that handles adding replies to questions and answers.
@@ -49,6 +48,7 @@ public class WriteReplyController {
 	/** The view. */
 	private View view;
 	
+	/** The network manager. */
 	private NetworkManager networkManager = NetworkManager.getInstance();
 	
 	/**

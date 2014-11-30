@@ -60,6 +60,7 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	/** The question. */
 	private Question question;
 	
+	/** The question id. */
 	private String questionID;
 	
 	/* (non-Javadoc)

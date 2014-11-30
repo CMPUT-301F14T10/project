@@ -31,13 +31,23 @@ import com.google.gson.reflect.TypeToken;
 
 //Adapted from elasticsearch in 301 labs
 
+/**
+ * The Class ESManager.
+ */
 public class ESManager {
 
+	/** The Constant SEARCH_URL. */
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/_search";
+	
+	/** The Constant RESOURCE_URL. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/";
 	
+	/** The gson. */
 	private Gson gson;
 	
+	/**
+	 * Instantiates a new ES manager.
+	 */
 	public ESManager() {
 		gson = new Gson();
 	}
@@ -117,6 +127,13 @@ public class ESManager {
 	*/
 	
 	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
+	/**
+	 * Gets the entity content.
+	 *
+	 * @param response the response
+	 * @return the entity content
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 		StringBuffer result = new StringBuffer();
@@ -127,6 +144,11 @@ public class ESManager {
 		return result.toString();
 	}
 	
+	/**
+	 * Adds the question.
+	 *
+	 * @param newQuestion the new question
+	 */
 	public void addQuestion(Question newQuestion) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -155,6 +177,12 @@ public class ESManager {
 		}
 	}
 
+	/**
+	 * Adds the answer.
+	 *
+	 * @param questionID the question id
+	 * @param newAnswer the new answer
+	 */
 	public void addAnswer(String questionID, Answer newAnswer) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDANSWER METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -183,6 +211,11 @@ public class ESManager {
 		}
 	}
 	
+	/**
+	 * Upvote question.
+	 *
+	 * @param questionID the question id
+	 */
 	public void upvoteQuestion(String questionID) {
 		System.out.println("INSIDE NETWORK MANAGER -UPVOTEQUESTION METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -227,6 +260,12 @@ public class ESManager {
 	}
 	
 
+	/**
+	 * Upvote answer.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 */
 	public void upvoteAnswer(String questionID, String answerID) {
 		System.out.println("INSIDE NETWORK MANAGER - UPVOTE ANSWER METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -257,6 +296,12 @@ public class ESManager {
 		}
 	}
 	
+	/**
+	 * Adds the q reply.
+	 *
+	 * @param questionID the question id
+	 * @param newReply the new reply
+	 */
 	public void addQReply(String questionID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDQREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -286,6 +331,13 @@ public class ESManager {
 		}
 	}
 	
+	/**
+	 * Adds the a reply.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 * @param newReply the new reply
+	 */
 	public void addAReply(String questionID, String answerID, Reply newReply) {
 		System.out.println("INSIDE NETWORK MANAGER - ADDAREPLY METHOD");
 		HttpClient httpClient = new DefaultHttpClient();
@@ -323,6 +375,10 @@ public class ESManager {
 	/**
 	 * Get Questions with the specified search string. If the search does not
 	 * specify fields, it searches on all the fields.
+	 *
+	 * @param searchString the search string
+	 * @param field the field
+	 * @return the list
 	 */
 	public List<Question> searchQuestions(String searchString, String field) {
 		List<Question> result = new ArrayList<Question>();
@@ -365,7 +421,12 @@ public class ESManager {
 	
 	
 	/**
-	 * Creates a search request from a search string and a field
+	 * Creates a search request from a search string and a field.
+	 *
+	 * @param searchString the search string
+	 * @param field the field
+	 * @return the http post
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
 	private HttpPost createSearchRequest(String searchString, String field)	throws UnsupportedEncodingException {
 		
@@ -392,7 +453,11 @@ public class ESManager {
 	}
 	
 	/**
-	 * Parses the response of a search
+	 * Parses the response of a search.
+	 *
+	 * @param response the response
+	 * @return the search response
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private SearchResponse<Question> parseSearchResponse(HttpResponse response) throws IOException {
 		String json;
@@ -407,6 +472,12 @@ public class ESManager {
 	}
 
 
+	/**
+	 * Gets the question.
+	 *
+	 * @param questionID the question id
+	 * @return the question
+	 */
 	public Question getQuestion(String questionID) {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
@@ -423,6 +494,12 @@ public class ESManager {
 		return null;
 	}
 	
+	/**
+	 * Parses the question hit.
+	 *
+	 * @param response the response
+	 * @return the search hit
+	 */
 	private SearchHit<Question> parseQuestionHit(HttpResponse response) {
 		
 		try {

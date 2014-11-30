@@ -25,12 +25,13 @@ import com.google.gson.reflect.TypeToken;
  */
 public class LoadSave {
 	
+	/** The instance. */
 	private static LoadSave instance = null;
 	
 	/** The context. */
 	public static Context context;
 	
-	/** Indicates unsaved changes */
+	/**  Indicates unsaved changes. */
 	public static boolean unsavedChanges = false;
 	
 	/** The save file. */
@@ -45,13 +46,13 @@ public class LoadSave {
 	/** The username key. */
 	final String usernameKey = "username";
 	
-	/** The city key */
+	/**  The city key. */
 	final String cityKey = "city";
 	
-	/** The country key */
+	/**  The country key. */
 	final String countryKey = "country";
 	
-	/** The use location key */
+	/**  The use location key. */
 	final String useLocationKey = "useLocation";
 	
 	/** The reading list key. */
@@ -60,20 +61,31 @@ public class LoadSave {
 	/** The network buffer key. */
 	final String networkBufferKey= "networkBuffer";
 	
+	/** The use location check box. */
 	final String useLocationCheckBox= "useLocationCheckBox";
 	
+	/** The upvoted questions key. */
 	final String upvotedQuestionsKey="upvotedQuestions";
 	
+	/** The upvoted answers key. */
 	final String upvotedAnswersKey="upvotedAnswers";
 	
 	/** The loaded. */
 	public static boolean loaded = false;
 	
 	//Constructor
+	/**
+	 * Instantiates a new load save.
+	 */
 	protected LoadSave() {
 		
 	}
 	
+	/**
+	 * Gets the single instance of LoadSave.
+	 *
+	 * @return single instance of LoadSave
+	 */
 	public static LoadSave getInstance() {
 		if (instance == null) {
 			instance = new LoadSave();
@@ -108,6 +120,9 @@ public class LoadSave {
 		return lData;
 	}
 	
+    /**
+     * Save reading list.
+     */
     public void SaveReadingList ()
     {
             GsonBuilder gsonbuild = new GsonBuilder();
@@ -120,6 +135,9 @@ public class LoadSave {
             this.saveData(readingListKey, gsonString);
     }
 	
+	/**
+	 * Load reading list.
+	 */
 	public void LoadReadingList()
 	{
 		String gsonString = loadData(readingListKey);
@@ -206,8 +224,9 @@ public class LoadSave {
 	}
 
 	/**
-	 * Save city
-	 * @param city
+	 * Save city.
+	 *
+	 * @param city the city
 	 */
 	public void saveCity(String city)
 	{
@@ -215,8 +234,9 @@ public class LoadSave {
 	}
 	
 	/**
-	 * Save country
-	 * @param country
+	 * Save country.
+	 *
+	 * @param country the country
 	 */
 	public void saveCountry(String country)
 	{
@@ -224,8 +244,9 @@ public class LoadSave {
 	}
 	
 	/**
-	 * Save Use Location boolean
-	 * @param useLocation
+	 * Save Use Location boolean.
+	 *
+	 * @param useLocation the use location
 	 */
 	public void saveUseLocation(boolean useLocation)
 	{
@@ -236,6 +257,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load country.
+	 */
 	public void loadCountry() {
 		String loaded = loadData(countryKey);
 		if(loaded.length() != 0)
@@ -244,6 +268,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load city.
+	 */
 	public void loadCity() {
 		String loaded = loadData(cityKey);
 		if(loaded.length() != 0)
@@ -252,6 +279,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load use location.
+	 */
 	public void loadUseLocation() {
 		String loadedB = loadData(useLocationKey);
 		if(loadedB.equals("1"))
@@ -265,7 +295,7 @@ public class LoadSave {
 	/**
 	 * Save username.
 	 *
-	 * @param username the username
+	 * @param value the value
 	 */
 	public void saveUseLocationCheckBox(boolean value) {
 		if (value) {
@@ -276,6 +306,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Load use location check box.
+	 */
 	public void loadUseLocationCheckBox() {
 		String checkBox= loadData(useLocationCheckBox);
 		if (checkBox.equals("1")) {
@@ -289,6 +322,12 @@ public class LoadSave {
 
 		}
 	}
+	
+	/**
+	 * Save username.
+	 *
+	 * @param username the username
+	 */
 	public void saveUsername(String username)
 	{
 		saveData(usernameKey, username);
@@ -316,6 +355,9 @@ public class LoadSave {
         return true;
 	}
 	
+	/**
+	 * Save upvoted questions.
+	 */
 	public void saveUpvotedQuestions() {
 		ArrayList <UUID> upvotedQuestions= User.upvotedQuestions;
 		Gson gson= new Gson();
@@ -323,6 +365,9 @@ public class LoadSave {
 		this.saveData(upvotedQuestionsKey, gsonString);
 	}
 	
+	/**
+	 * Load upvoted questions.
+	 */
 	public void loadUpvotedQuestions() {
 		String gsonString= loadData(upvotedQuestionsKey);
 		if (gsonString=="") {
@@ -338,6 +383,9 @@ public class LoadSave {
 		}
 	}
 	
+	/**
+	 * Save upvoted answers.
+	 */
 	public void saveUpvotedAnswers() {
 		ArrayList <UUID> upvotedAnswers= User.upvotedAnswers;
 		Gson gson= new Gson();
@@ -345,6 +393,9 @@ public class LoadSave {
 		this.saveData(upvotedAnswersKey, gsonString);
 	}
 	
+	/**
+	 * Load upvoted answers.
+	 */
 	public void loadUpvotedAnswers() {
 		String gsonString= loadData(upvotedAnswersKey);
 		if (gsonString=="") {
@@ -375,6 +426,9 @@ public class LoadSave {
 		this.saveData(favsKey, gsonString);
 	}
 	
+	/**
+	 * Load network buffer.
+	 */
 	public void loadNetworkBuffer()
 	{
 		//load and set the network buffer
@@ -394,6 +448,9 @@ public class LoadSave {
 	}
 	
 	
+	/**
+	 * Save network buffer.
+	 */
 	public void SaveNetworkBuffer() {
 	
 		//save network buffer to sharedpreferences

@@ -6,24 +6,55 @@ import java.util.Comparator;
 
 import ca.ualberta.cs.queueunderflow.User;
 
+/**
+ * The Class ReplyList.
+ */
 public class ReplyList {
 
+	/** The reply list. */
 	protected ArrayList <Reply> replyList;
 	
+	/**
+	 * Instantiates a new reply list.
+	 */
 	public ReplyList() {
 		this.replyList= new ArrayList <Reply> ();
 	}
+	
+	/**
+	 * Adds the.
+	 *
+	 * @param reply the reply
+	 */
 	public void add(Reply reply) {
 		replyList.add(0, reply);
 	}
+	
+	/**
+	 * Gets the.
+	 *
+	 * @param i the i
+	 * @return the reply
+	 */
 	public Reply get(int i) {
 		return replyList.get(i);
 	}
 	
+	/**
+	 * Gets the reply list.
+	 *
+	 * @return the reply list
+	 */
 	public ArrayList <Reply> getReplyList() {
 		return this.replyList;
 	}
 	
+	/**
+	 * Equals.
+	 *
+	 * @param replyList2 the reply list2
+	 * @return true, if successful
+	 */
 	public boolean equals(ReplyList replyList2) {
 		if (replyList2.size()!=replyList.size()) {
 			return false;
@@ -38,18 +69,39 @@ public class ReplyList {
 		return true;
 	}
 	
+	/**
+	 * Sets the reply list.
+	 *
+	 * @param replyList the new reply list
+	 */
 	public void setReplyList(ArrayList<Reply> replyList) {
 		this.replyList=replyList;
 	}
 	
+	/**
+	 * Size.
+	 *
+	 * @return the int
+	 */
 	public int size() {
 		return replyList.size();
 	}
 	
+	/**
+	 * Contains.
+	 *
+	 * @param reply the reply
+	 * @return true, if successful
+	 */
 	public boolean contains(Reply reply) {
 		return replyList.contains(reply);
 	}
 	
+	/**
+	 * Sort by.
+	 *
+	 * @param method the method
+	 */
 	public void sortBy(String method) {
 		
 		// Sort by date

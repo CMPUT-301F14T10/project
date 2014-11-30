@@ -65,6 +65,8 @@ public class AddAnAnswerActivity extends Activity
 	
 	/** The Constant SELECT_PICTURE CODE. */
 	private static final int SELECT_PICTURE= 1;
+    
+    /** The selected image path. */
     private String selectedImagePath;
     
 	/** The image uri file. */

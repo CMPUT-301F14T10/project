@@ -16,18 +16,23 @@ public class Reply {
 	/** The author. */
 	protected String author;
 	
-	/** The location of author */
+	/**  The location of author. */
 	protected String location;
+	
+	/**
+	 * Instantiates a new reply.
+	 *
+	 */
+	
+	//Added date to use sorting method
+	protected Date date;
+	
 	/**
 	 * Instantiates a new reply.
 	 *
 	 * @param reply the reply
 	 * @param author the author
 	 */
-	
-	//Added date to use sorting method
-	protected Date date;
-	
 	public Reply (String reply, String author) {
 		reply = reply.trim();
 		if (reply.length() == 0) {
@@ -89,16 +94,29 @@ public class Reply {
 		return true;
 	}
 	
-	/** Get the location of the author*/
+	/**
+	 *  Get the location of the author.
+	 *
+	 * @return the location
+	 */
 	public String getLocation() {
 		return location;
 	}
 	
-	/** Set the location of the author*/
+	/**
+	 *  Set the location of the author.
+	 *
+	 * @param location the new location
+	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
 	
+	/**
+	 * Gets the date.
+	 *
+	 * @return the date
+	 */
 	public Date getDate() {
 		return this.date;
 	}

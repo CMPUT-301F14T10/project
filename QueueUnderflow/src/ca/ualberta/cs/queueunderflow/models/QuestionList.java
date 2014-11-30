@@ -51,7 +51,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Toggles the online indicator
+	 * Toggles the online indicator.
 	 */
 	public void setOnline() {
 		if (this.online==false) {
@@ -77,7 +77,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Adds the specified question to the beginning of the list
+	 * Adds the specified question to the beginning of the list.
 	 *
 	 * @param question the question to add
 	 */
@@ -117,7 +117,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Gets the question at the specified location in the list
+	 * Gets the question at the specified location in the list.
 	 *
 	 * @param index the index of the question to return
 	 * @return the question at the specified location
@@ -129,7 +129,7 @@ public class QuestionList extends TModel<TView>{
 	// Everytime we update anything within a questionlist (ie add an answer to a question, add a reply to a question, add a reply to an answer), we use SET
 	// Although b/c of references in java, it isn't necessary. this is the only way that the list knows to call the notify views method to refresh the view/screen right now
 	/**
-	 * Sets the question at the specified location with the specified question
+	 * Sets the question at the specified location with the specified question.
 	 *
 	 * @param index the index to put the specified question
 	 * @param question the question to add
@@ -184,7 +184,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Sorts the list of questions by the specified method
+	 * Sorts the list of questions by the specified method.
 	 *
 	 * @param method the method to sort by
 	 */
@@ -288,7 +288,7 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	/**
-	 * Removes the first occurrence of the specified question in the list
+	 * Removes the first occurrence of the specified question in the list.
 	 *
 	 * @param question the question to remove
 	 */
@@ -307,6 +307,12 @@ public class QuestionList extends TModel<TView>{
 	}
 	
 	// Returns -1 if not found
+	/**
+	 * Gets the index from id.
+	 *
+	 * @param id the id
+	 * @return the index from id
+	 */
 	public int getIndexFromID(UUID id) {
 		System.out.println("WANTED ID : " + id.toString());
 		for (int i = 0; i < questionList.size(); i++) {
@@ -321,6 +327,12 @@ public class QuestionList extends TModel<TView>{
 		return -1;
 	}
 	
+	/**
+	 * Gets the from string id.
+	 *
+	 * @param id the id
+	 * @return the from string id
+	 */
 	public Question getFromStringID(String id) {
 		System.out.println("WANTED ID : " + id.toString());
 		for (Question q : questionList) {
@@ -334,6 +346,9 @@ public class QuestionList extends TModel<TView>{
 		return null;
 	}
 
+	/**
+	 * Clear.
+	 */
 	public void clear() {
 		questionList.clear();
 		clearViews();

@@ -26,20 +26,38 @@ import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
+/**
+ * The Class SearchFragment.
+ */
 public class SearchFragment extends Fragment implements TView<QuestionList>{
 
+	/** The search view. */
 	private SearchView searchView;
+	
+	/** The list view. */
 	private ListView listView;
+	
+	/** The adapter. */
 	private QuestionListAdapter adapter;
+	
+	/** The results question list. */
 	private QuestionList resultsQuestionList;
 	
 	
 	
+	/**
+	 * Instantiates a new search fragment.
+	 *
+	 * @param searchView the search view
+	 */
 	public SearchFragment(SearchView searchView) {
 		this.searchView = searchView;
 		resultsQuestionList = ListHandler.getResultsList();
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
@@ -64,6 +82,9 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
         return super.onOptionsItemSelected(item);
     }
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_search, container, false);
@@ -80,6 +101,9 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		
@@ -129,11 +153,17 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 
 	
 	
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.queueunderflow.TView#update(java.lang.Object)
+	 */
 	@Override
 	public void update(QuestionList model) {
 		adapter.notifyDataSetChanged();
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onDestroyView()
+	 */
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

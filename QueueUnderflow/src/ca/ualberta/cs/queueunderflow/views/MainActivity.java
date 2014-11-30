@@ -22,7 +22,6 @@ import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 
-
 /**
  * The Class MainActivity.
  * Handles clicks & swipes relating to switching between fragments via the navigation drawer.
@@ -248,6 +247,9 @@ public class MainActivity extends Activity {
 
     
         
+    /* (non-Javadoc)
+     * @see android.app.Activity#onPause()
+     */
     @Override
 	protected void onPause() {
 		super.onPause();
@@ -266,6 +268,9 @@ public class MainActivity extends Activity {
     	ls.saveUpvotedAnswers();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -331,6 +336,11 @@ public class MainActivity extends Activity {
     }
 
     
+    /**
+     * Select search fragment.
+     *
+     * @param searchView the search view
+     */
     private void selectSearchFragment(SearchView searchView) {
     	Fragment fragment = new SearchFragment(searchView);
     	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
@@ -396,7 +406,7 @@ public class MainActivity extends Activity {
     
     // Sets the view to the fragment of the user selection from the nav drawer
     /**
-     * Switches to the specified fragment & inflates it
+     * Switches to the specified fragment & inflates it.
      *
      * @param position the position of the fragment to switch to
      */

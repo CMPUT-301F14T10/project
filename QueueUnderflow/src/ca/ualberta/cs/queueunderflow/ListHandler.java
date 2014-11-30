@@ -17,6 +17,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  */
 public class ListHandler {
 
+	/** The instance. */
 	private static ListHandler instance = null;
 	
 	/** The q list. */
@@ -38,10 +39,18 @@ public class ListHandler {
 	/** The user. */
 	private static User user;
 	
+	/** The fav i ds. */
 	private static ArrayList<String> favIDs;
+	
+	/** The reading list i ds. */
 	private static ArrayList<String> readingListIDs;
+	
+	/** The my qi ds. */
 	private static ArrayList<String> myQIDs;
 	
+	/**
+	 * Instantiates a new list handler.
+	 */
 	private ListHandler() {
 		qList = new QuestionList();
 		favQList = new QuestionList();
@@ -56,6 +65,11 @@ public class ListHandler {
 		
 	}
 	
+	/**
+	 * Gets the single instance of ListHandler.
+	 *
+	 * @return single instance of ListHandler
+	 */
 	public ListHandler getInstance() {
 		if (instance == null) {
 			instance = new ListHandler();
@@ -127,6 +141,12 @@ public class ListHandler {
 		return user; 
 	}
 
+	/**
+	 * Checks if is in favs.
+	 *
+	 * @param questionID the question id
+	 * @return true, if is in favs
+	 */
 	public static boolean isInFavs(String questionID) {
 		favIDs = new ArrayList<String>();
 		for (Question q : getFavsList().getQuestionList()) {
@@ -142,6 +162,12 @@ public class ListHandler {
 		}
 	}
 	
+	/**
+	 * Checks if is in reading list.
+	 *
+	 * @param questionID the question id
+	 * @return true, if is in reading list
+	 */
 	public static boolean isInReadingList(String questionID) {
 		readingListIDs = new ArrayList<String>();
 		for (Question q : getReadingList().getQuestionList()) {

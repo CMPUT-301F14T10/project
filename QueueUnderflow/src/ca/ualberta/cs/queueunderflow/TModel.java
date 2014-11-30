@@ -6,9 +6,9 @@ import java.util.ArrayList;
 /**
  * The Class TModel.
  *
- * @param <V> the value type
  * @author group 10
  * @version 0.5
+ * @param <V> the value type
  */
 public abstract class TModel<V extends TView> {
 
@@ -43,7 +43,7 @@ public abstract class TModel<V extends TView> {
 	}
 	
 	/**
-	 * Notify views to update
+	 * Notify views to update.
 	 */
 	public void notifyViews() {
 		for (V view : views) {
@@ -52,7 +52,7 @@ public abstract class TModel<V extends TView> {
 	}
 	
 	/**
-	 * Clears all views
+	 * Clears all views.
 	 */
 	public void clearViews() {
 		views.clear();

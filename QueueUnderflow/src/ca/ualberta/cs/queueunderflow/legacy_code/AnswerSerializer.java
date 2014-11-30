@@ -13,7 +13,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-
 /**
  * The Class AnswerSerializer.
  * @author group 10

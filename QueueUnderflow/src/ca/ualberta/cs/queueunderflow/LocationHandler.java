@@ -25,24 +25,40 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+/**
+ * The Class LocationHandler.
+ */
 public class LocationHandler implements LocationListener{
 
 	/* Use the LocationManager class to obtain GPS locations */
 	//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 	//LocationListener locListener = new MyLocationListener();
 	
+	/** The loc manager. */
 	LocationManager locManager;
+	
+	/** The ctx. */
 	Context ctx;
 	
-	//Static variables.
+	/** The longitude. */
 	public static double longitude;
+	
+	/** The latitude. */
 	public static double latitude;
+	
+	/** The listening gps. */
 	public static boolean listeningGPS = false;
 	
+	/** The min gps update time. */
 	final long minGPSUpdateTime = 0; //This is how often GPS will check for new position in milliseconds.
 										  //Lower values drains battery apparently
 	
-	public LocationHandler(Context context)
+	/**
+  										 * Instantiates a new location handler.
+  										 *
+  										 * @param context the context
+  										 */
+  										public LocationHandler(Context context)
 	{
 		ctx = context;
 		locManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
@@ -67,9 +83,10 @@ public class LocationHandler implements LocationListener{
 	}
 	
 	/**
-	 * Return a string indicating the location from GPS coordinates
-	 * @param latitude
-	 * @param longitude
+	 * Return a string indicating the location from GPS coordinates.
+	 *
+	 * @param latitude the latitude
+	 * @param longitude the longitude
 	 * @return Returns in format "City|Country". Returns null if unable to find one.
 	 */
 	public String getLocationFromCoordinates(double latitude, double longitude)
@@ -211,6 +228,8 @@ public class LocationHandler implements LocationListener{
 	
 	/**
 	 * Tell Location to listen for GPS update events. New data is stored in latitude/longitude.
+	 *
+	 * @param location the location
 	 */
 	public void onLocationChanged(Location location)
 	{
@@ -223,7 +242,7 @@ public class LocationHandler implements LocationListener{
 	}
 	
 	/**
-	 * Listen for GPS updates (only updates ONCE)
+	 * Listen for GPS updates (only updates ONCE).
 	 */
 	public void GetGPSLocation()
 	{
@@ -233,8 +252,19 @@ public class LocationHandler implements LocationListener{
 	}
 	
 	//Useless functions we don't need.
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onProviderDisabled(java.lang.String)
+	 */
 	public void onProviderDisabled(String arg) {}
+	
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onProviderEnabled(java.lang.String)
+	 */
 	public void onProviderEnabled(String arg) {}
+	
+	/* (non-Javadoc)
+	 * @see android.location.LocationListener#onStatusChanged(java.lang.String, int, android.os.Bundle)
+	 */
 	public void onStatusChanged(String arg, int arg2, Bundle arg3) {}
 	
 }

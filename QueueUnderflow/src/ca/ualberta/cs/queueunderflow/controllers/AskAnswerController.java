@@ -36,7 +36,10 @@ public class AskAnswerController {
 	/** The Constant READING_LIST_FRAGMENT. */
 	public static final int READING_LIST_FRAGMENT = 4;
 	
+	/** The Constant ATTACH_PHOTO_TRY_AGAIN. */
 	public static final int ATTACH_PHOTO_TRY_AGAIN = 0;
+	
+	/** The Constant SETUP_SUCCESS. */
 	public static final int SETUP_SUCCESS = 1;
 	
 	/** The activity. */
@@ -48,6 +51,7 @@ public class AskAnswerController {
 	/** The image encoded in base64. */
 	private String encodedImage;
 	
+	/** The network manager. */
 	private NetworkManager networkManager = NetworkManager.getInstance();
 
 	/**
@@ -62,7 +66,7 @@ public class AskAnswerController {
 	/**
 	 * Ask question.
 	 *
-	 * @param question the question name
+	 * @param questionName the question name
 	 * @param username the username
 	 * @param imagePreviewBtn the has picture
 	 */
@@ -130,10 +134,25 @@ public class AskAnswerController {
     public void setImagePath(String path) {
     	this.imagePath = path;
     }
+    
+    /**
+     * Sets the encoded image.
+     *
+     * @param encoded the new encoded image
+     */
     public void setEncodedImage(String encoded) {
     	this.encodedImage=encoded;
     }
 
+	/**
+	 * Adds the answer.
+	 *
+	 * @param fromFragment the from fragment
+	 * @param position the position
+	 * @param answerName the answer name
+	 * @param username the username
+	 * @param imagePreviewBtn the image preview btn
+	 */
 	public void addAnswer(int fromFragment, int position, String answerName, String username, ImageButton imagePreviewBtn) {
 		try {
 			Answer newAnswer = new Answer(answerName, User.getUserName());
@@ -172,6 +191,13 @@ public class AskAnswerController {
 	}
 	
 	
+	/**
+	 * Sets the up response.
+	 *
+	 * @param response the response
+	 * @param imagePreviewBtn the image preview btn
+	 * @return the int
+	 */
 	private int setUpResponse(GenericResponse response, ImageButton imagePreviewBtn) {
 		//If the user wants to display location, add the location to the question
 		if (User.getUseLocation()) {

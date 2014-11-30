@@ -11,18 +11,36 @@ import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 
-// implement generic buffer class?
-// This deals with all the actions that users do when they are offline
+
+/**
+ * The Class NetworkBuffer.
+ */
 public class NetworkBuffer {
 
+	/** The question buffer. */
 	ArrayList<Question> questionBuffer;
+	
+	/** The answer buffer. */
 	Map<String, ArrayList<Answer>> answerBuffer;
+	
+	/** The question reply buffer. */
 	Map<String, ArrayList<Reply>> questionReplyBuffer;
+	
+	/** The qa id buffer. */
 	Map<String, ArrayList<String>> qaIDBuffer;
+	
+	/** The answer reply buffer. */
 	Map<String, ArrayList<Reply>> answerReplyBuffer;
+	
+	/** The upvote q buffer. */
 	ArrayList<String> upvoteQBuffer;
+	
+	/** The upvote a buffer. */
 	Map<String, String> upvoteABuffer;
 	
+	/**
+	 * Instantiates a new network buffer.
+	 */
 	public NetworkBuffer() {
 		questionBuffer = new ArrayList<Question>();
 		answerBuffer = new Hashtable<String, ArrayList<Answer>>();
@@ -33,11 +51,22 @@ public class NetworkBuffer {
 		upvoteABuffer = new Hashtable<String, String>();
 	}
 	
+	/**
+	 * Adds the question.
+	 *
+	 * @param question the question
+	 */
 	public void addQuestion(Question question) {
 		questionBuffer.add(question);
 		Log.d("network", "adding question to buffer: " + question.getName());
 	}
 	
+	/**
+	 * Adds the answer.
+	 *
+	 * @param questionID the question id
+	 * @param answer the answer
+	 */
 	public void addAnswer(String questionID, Answer answer) {
 		ArrayList<Answer> answersList = answerBuffer.get(questionID);
 		if (answersList == null) {
@@ -47,6 +76,12 @@ public class NetworkBuffer {
 		answerBuffer.put(questionID, answersList);
 	}
 	
+	/**
+	 * Adds the q reply.
+	 *
+	 * @param questionID the question id
+	 * @param reply the reply
+	 */
 	public void addQReply(String questionID, Reply reply) {
 		ArrayList<Reply> repliesList = questionReplyBuffer.get(questionID);
 		if (repliesList == null) {
@@ -56,6 +91,13 @@ public class NetworkBuffer {
 		questionReplyBuffer.put(questionID, repliesList);
 	}
 	
+	/**
+	 * Adds the a reply.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 * @param reply the reply
+	 */
 	public void addAReply(String questionID, String answerID, Reply reply) {
 		ArrayList<String> answersIDs = qaIDBuffer.get(questionID);
 		if (answersIDs == null) {
@@ -72,14 +114,28 @@ public class NetworkBuffer {
 		answerReplyBuffer.put(answerID, replies);
 	}
 	
+	/**
+	 * Adds the q upvote.
+	 *
+	 * @param questionID the question id
+	 */
 	public void addQUpvote(String questionID) {
 		upvoteQBuffer.add(questionID);
 	}
 	
+	/**
+	 * Adds the a upvote.
+	 *
+	 * @param questionID the question id
+	 * @param answerID the answer id
+	 */
 	public void addAUpvote(String questionID, String answerID) {
 		upvoteABuffer.put(questionID, answerID);
 	}
 	
+	/**
+	 * Clear all.
+	 */
 	private void clearAll() {
 		questionBuffer.clear();
 		answerBuffer.clear();
@@ -90,6 +146,9 @@ public class NetworkBuffer {
 		upvoteABuffer.clear();
 	}
 	
+	/**
+	 * Flush all.
+	 */
 	public void flushAll() {
 		
 		NetworkController networkController = new NetworkController();

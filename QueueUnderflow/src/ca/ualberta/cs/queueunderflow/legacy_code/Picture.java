@@ -1,7 +1,6 @@
 package ca.ualberta.cs.queueunderflow.legacy_code;
 
 
-
 /**
  * The Class Picture. Suppose to hold an image.
  * @author group 10

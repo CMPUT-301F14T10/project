@@ -73,7 +73,9 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
      * Instantiates a new single question adapter.
      *
      * @param activity the activity
-     * @param questionArray the question array
+     * @param question the question
+     * @param fromFragment the from fragment
+     * @param position the position
      */
     public SingleQuestionAdapter(Activity activity, Question question, int fromFragment, int position) {
         super();
