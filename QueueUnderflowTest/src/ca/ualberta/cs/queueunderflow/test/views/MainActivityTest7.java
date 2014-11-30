@@ -32,6 +32,7 @@ public class MainActivityTest7 extends ActivityInstrumentationTestCase2<MainActi
 			Question question1 = new Question("Hello", "Me");
 			question1.setIsInReadingList(true);
 			ListHandler.getReadingList().add(question1);
+			assertEquals(1, ListHandler.getReadingList().size());
 			
 			// Start the activity
 			Intent intent1 = new Intent();

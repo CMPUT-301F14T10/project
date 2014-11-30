@@ -10,7 +10,7 @@ public class ListHandlerTest extends TestCase {
 
 	public void testListHandler() {
 		//master question list test
-		ListHandler.getMasterQList();
+		ListHandler.getMasterQList().clear();
 		assertTrue("contorller initilized the list", ListHandler.getMasterQList().size() == 0);
 		Question question1 = new Question("1", "a");
 		ListHandler.getMasterQList().add(question1);
@@ -20,7 +20,7 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getMasterQList().remove(question2);
 		assertTrue("contorller got the same list1", ListHandler.getMasterQList().size() == 1);
 		//favourites list test
-		ListHandler.getFavsList();
+		ListHandler.getFavsList().clear();
 		assertTrue("contorller initilized the list", ListHandler.getFavsList().size() == 0);
 		ListHandler.getFavsList().add(question1);
 		assertTrue("contorller got the list", ListHandler.getFavsList().size() == 1);
@@ -28,7 +28,7 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getFavsList().remove(question2);
 		assertTrue("contorller got the same list2", ListHandler.getFavsList().size() == 1);
 		//Reading list test
-		ListHandler.getReadingList();
+		ListHandler.getReadingList().clear();
 		assertTrue("contorller initilized the list", ListHandler.getReadingList().size() == 0);
 		ListHandler.getReadingList().add(question1);
 		assertTrue("contorller got the list", ListHandler.getReadingList().size() == 1);
@@ -36,7 +36,7 @@ public class ListHandlerTest extends TestCase {
 		ListHandler.getReadingList().remove(question2);
 		assertTrue("contorller got the same list3", ListHandler.getReadingList().size() == 1);
 		//my question list test
-		ListHandler.getMyQsList();
+		ListHandler.getMyQsList().clear();
 		assertTrue("contorller initilized the list", ListHandler.getMyQsList().size() == 0);
 		ListHandler.getMyQsList().add(question1);
 		assertTrue("contorller got the list", ListHandler.getMyQsList().size() == 1);

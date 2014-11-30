@@ -1,6 +1,8 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -16,6 +18,10 @@ public class QAViewActivityTest4 extends ActivityInstrumentationTestCase2<QAView
 
 	public QAViewActivityTest4() {
 		super(QAViewActivity.class);
+		
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 	public void testSeeMostUpvotedAnswersDisplay() throws Throwable {
 		Question question = new Question("A question", "Geneva");

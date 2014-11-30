@@ -1,5 +1,7 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
+import java.util.List;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.ListView;
@@ -22,6 +24,8 @@ public class MainActivityTest1 extends ActivityInstrumentationTestCase2<MainActi
 		// Set network connectivity to false, else it'll grab the list from the network
 		NetworkManager networkManager = NetworkManager.getInstance();
 		networkManager.setOnline(false);
+		
+		ListHandler.getMasterQList().clear();
 	}
 	
 	public void testBrowseQuestionsDisplay() {
@@ -40,7 +44,7 @@ public class MainActivityTest1 extends ActivityInstrumentationTestCase2<MainActi
 		QuestionListAdapter adapter = (QuestionListAdapter) listView.getAdapter();
 		
 		// Check that the number if items in the adapter is correct
-		assertTrue(adapter.getCount() == 3);
+		assertEquals(3, adapter.getCount());
 		
 		// Check that the view for each Question / List Item is correctly displayed
 		View view1 = adapter.getView(0, null, null);
