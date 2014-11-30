@@ -2,6 +2,7 @@ package ca.ualberta.cs.queueunderflow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
@@ -12,15 +13,33 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 public class NetworkController {
 
 	private ESManager esManager;
-	private List<Question> tempList;
-	private Boolean populateThreadFinished = false;
 	
+	// For retrieving a list or a question
+	private List<Question> tempList;
 	private Question tempQuestion;
-	private Boolean getQuestionThreadFinished = false;
+	
+	 /*	Index Location - What it tracks
+	  * 0 - populateListThread
+	  * 1 - addQuestionThread - not used
+	  * 2 - getQuestionThread
+	  * 3 - addAnswerThread
+	  * 4 - addQReplyThread
+	  * 5 - addAReplyThread
+	  * 6 - upvoteQuestionThread - not used
+	  * 7 - upvoteAnswerThread
+	  * 
+	  * Note : Some are not used but are in the vector in case it may be needed in the future & to keep the logical groupings
+	  */
+	private Vector<Boolean> isThreadFinished;
 	
 	public NetworkController() {
 		esManager = new ESManager();
 		tempList = new ArrayList<Question>();
+		
+		isThreadFinished = new Vector<Boolean>(8);
+		for (int i = 0; i < 8; i++) {
+			isThreadFinished.add(false);
+		}
 	}
 	
 	public void addQuestion(Question newQuestion) {
@@ -33,10 +52,10 @@ public class NetworkController {
 		thread.start();
 		
     	// Make sure populateThread is done and we retrieved the results from network before we continue to ensure we're not returning null
-    	while (getQuestionThreadFinished != true) {
+    	while (isThreadFinished.get(2) != true) {
     	}
     	
-    	getQuestionThreadFinished = false;
+    	isThreadFinished.set(2, false);
     	
     	
 		return tempQuestion;
@@ -57,7 +76,8 @@ public class NetworkController {
 			if (tempQuestion != null) {
 				System.out.println("getQuestionThread : questionName ---> " + tempQuestion.getName());
 			}
-			getQuestionThreadFinished = true;
+			
+			isThreadFinished.set(2, true);
 		}
 
 	}
@@ -72,10 +92,9 @@ public class NetworkController {
     	System.out.println("INSIDE fillQuestionList");
     	
     	// Make sure populateThread is done and we retrieved the results from network before we continue
-    	while (populateThreadFinished != true) {
+    	while (isThreadFinished.get(0) != true) {
     	}
-    	
-    	populateThreadFinished = false;
+    	isThreadFinished.set(0, false);
     	
 		// PRINTING FOR ME
 		System.out.println("tempList size --> " + tempList.size());
@@ -159,7 +178,7 @@ public class NetworkController {
 				System.out.println("-- Question --> " + q.getName());
 			}
 			
-			populateThreadFinished = true;
+			isThreadFinished.set(0, true);
 		}
 
 	}
@@ -183,6 +202,10 @@ public class NetworkController {
 		System.out.println("in NetworkController - addAnswer - questionID --> " + questionID);
 		Thread thread = new AddAThread(questionID, newAnswer);
 		thread.start();
+		
+		while (isThreadFinished.get(3) != true) {
+		}
+		isThreadFinished.set(3, false);
 	}
 
 	class AddAThread extends Thread {
@@ -199,6 +222,7 @@ public class NetworkController {
 		public void run() {
 			esManager.addAnswer(questionID, answer);
 			
+			isThreadFinished.set(3, true);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -239,6 +263,11 @@ public class NetworkController {
 	public void upvoteAnswer(String questionID, String answerID) {
 		Thread thread = new UpvoteAnswerThread(questionID, answerID);
 		thread.start();
+		
+		while (isThreadFinished.get(7) != true) {
+		}
+		
+		isThreadFinished.set(7, false);
 	}
 	
 	class UpvoteAnswerThread extends Thread {
@@ -255,6 +284,8 @@ public class NetworkController {
 		public void run() {
 			esManager.upvoteAnswer(questionID, answerID);
 
+			isThreadFinished.set(7, true);
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -267,6 +298,11 @@ public class NetworkController {
 	public void addQReply(String questionID, Reply newReply) {
 		Thread thread = new AddQReplyThread(questionID, newReply);
 		thread.start();
+		
+		while (isThreadFinished.get(4) != true) {
+		}
+		
+		isThreadFinished.set(4, false);
 	}
 	
 	class AddQReplyThread extends Thread {
@@ -283,6 +319,8 @@ public class NetworkController {
 		public void run() {
 			esManager.addQReply(questionID, reply);
 
+			isThreadFinished.set(4, true);
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -296,6 +334,11 @@ public class NetworkController {
 	public void addAReply(String questionID, String answerID, Reply reply) {
 		Thread thread = new AddAReplyThread(questionID, answerID, reply);
 		thread.start();
+		
+		while (isThreadFinished.get(5) != true) {
+		}
+		
+		isThreadFinished.set(5,  false);
 	}
     
 	class AddAReplyThread extends Thread {
@@ -314,6 +357,8 @@ public class NetworkController {
 		public void run() {
 			esManager.addAReply(questionID, answerID, reply);
 
+			isThreadFinished.set(5, true);
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -323,4 +368,7 @@ public class NetworkController {
 		
 	}
 
+	public Vector<Boolean> getThreadStatus() {
+		return isThreadFinished;
+	}
 }
