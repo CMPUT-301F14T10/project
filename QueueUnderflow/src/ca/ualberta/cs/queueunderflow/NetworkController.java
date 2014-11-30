@@ -367,8 +367,4 @@ public class NetworkController {
 		}
 		
 	}
-
-	public Vector<Boolean> getThreadStatus() {
-		return isThreadFinished;
-	}
 }

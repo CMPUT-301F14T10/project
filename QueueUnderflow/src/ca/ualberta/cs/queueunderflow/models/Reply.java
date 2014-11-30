@@ -82,7 +82,7 @@ public class Reply {
 	public boolean equals(Object o) {
 		Reply reply = (Reply) o;
 		
-		if (reply.getReply() != this.reply || reply.getAuthor() != this.author) {
+		if ((!reply.getReply().equals(this.reply)) || (!reply.getAuthor().equals(this.author))) {
 			return false;
 		}
 		
