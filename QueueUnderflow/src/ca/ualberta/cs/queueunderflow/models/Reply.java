@@ -1,5 +1,7 @@
 package ca.ualberta.cs.queueunderflow.models;
 
+import java.util.Date;
+
 /**
  * The Class Reply.
  * Models a reply with the reply content and the author.
@@ -22,6 +24,10 @@ public class Reply {
 	 * @param reply the reply
 	 * @param author the author
 	 */
+	
+	//Added date to use sorting method
+	protected Date date;
+	
 	public Reply (String reply, String author) {
 		reply = reply.trim();
 		if (reply.length() == 0) {
@@ -30,6 +36,7 @@ public class Reply {
 		this.reply=reply;
 		this.author=author;
 		this.location="";
+		this.date=new Date();
 	}
 	
 	/**
@@ -90,6 +97,10 @@ public class Reply {
 	/** Set the location of the author*/
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public Date getDate() {
+		return this.date;
 	}
 	
 	

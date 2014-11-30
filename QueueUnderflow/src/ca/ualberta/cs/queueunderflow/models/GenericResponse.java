@@ -25,7 +25,9 @@ public class GenericResponse {
 	protected String name;
 	
 	/** The response replies. */
-	protected ArrayList <Reply> replies;
+	//protected ArrayList <Reply> replies;
+	
+	protected ReplyList replies;
 	
 	/** The author. */
 	protected String author;
@@ -66,7 +68,8 @@ public class GenericResponse {
 			throw new IllegalArgumentException("Not a valid repsonse. Please enter another response.");
 		}
 		this.name=name;
-		this.replies= new ArrayList<Reply> ();
+		//this.replies= new ArrayList<Reply> ();
+		this.replies= new ReplyList();
 		this.author=author;
 		this.upvote=0;
 		this.hasPicture=false;
@@ -162,7 +165,8 @@ public class GenericResponse {
 	 * @param reply the reply to add
 	 */
 	public void addReply(Reply reply) {
-		replies.add(0, reply);
+		//replies.add(0, reply);
+		replies.add(reply);
 	}
 	
 	/**
@@ -170,9 +174,13 @@ public class GenericResponse {
 	 *
 	 * @return the replies
 	 */
-	public ArrayList<Reply> getReplies() {
-		return this.replies;
+	//public ArrayList<Reply> getReplies() {
+		//return this.replies;
 		
+	//}
+	
+	public ReplyList getReplies() {
+		return this.replies;
 	}
 	
 	/**
@@ -307,9 +315,12 @@ public class GenericResponse {
 	 *
 	 * @param replyList the new reply list
 	 */
-	public void setReplyList(ArrayList<Reply> replyList) {
-		this.replies= replyList;
+	//public void setReplyList(ArrayList<Reply> replyList) {
+		//this.replies= replyList;
 		
+	//}
+	public void setReplyList(ReplyList replyList) {
+		this.replies=replyList;
 	}
 
 	/**

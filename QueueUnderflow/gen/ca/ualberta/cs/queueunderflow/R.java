@@ -78,7 +78,7 @@ public final class R {
         public static final int locationTextView=0x7f08001d;
         public static final int mostRecentMenu=0x7f080035;
         public static final int mostUpvotesMenu=0x7f080037;
-        public static final int nearbyAnswersMenu=0x7f08003b;
+        public static final int nearbyPostsMenu=0x7f08003b;
         public static final int nearbyQuestionsMenu=0x7f08003a;
         public static final int nearbyTextView=0x7f08001e;
         public static final int newUsername=0x7f080024;
@@ -144,7 +144,7 @@ public final class R {
         public static final int leastRecent=0x7f050006;
         public static final int mostRecent=0x7f050005;
         public static final int mostUpvotes=0x7f050007;
-        public static final int nearbyAnswers=0x7f050019;
+        public static final int nearbyPosts=0x7f050019;
         public static final int nearbyQuestions=0x7f050018;
         public static final int noPicture=0x7f050009;
         public static final int search=0x7f05000b;

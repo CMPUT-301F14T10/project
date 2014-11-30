@@ -8,6 +8,7 @@ import java.util.Date;
 import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.models.ReplyList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,9 +45,9 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	    final boolean isFavorite= jsonQuestion.get("isFav").getAsBoolean();
 	    
 	    
-		Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
-	    ArrayList<Reply> replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"), listType);
-	    
+		//Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
+	    //ArrayList<Reply> replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"), listType);
+	   // ReplyList replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"),listType);
 	    final GsonBuilder gsonBuilder = new GsonBuilder();
 	    
 	    Gson gson2=gsonBuilder.create();
@@ -58,11 +59,11 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	
 		
 		JsonElement jsonAnswerList= jsonQuestion.get("answerList");
-
+		JsonElement jsonReplyList= jsonQuestion.get("questionReplies");
 
 
 	    AnswerList answerList= context.deserialize(jsonAnswerList, AnswerList.class);
-	    
+	    ReplyList replyList= context.deserialize(jsonReplyList,ReplyList.class);
 	    String uniqueID= jsonQuestion.get("uniqueID").getAsString();
 
 	    String imagePath= jsonQuestion.get("imagePath").getAsString();
