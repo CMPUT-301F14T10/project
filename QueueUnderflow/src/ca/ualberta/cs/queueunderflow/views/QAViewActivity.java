@@ -234,7 +234,13 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         	question.getAnswerList().sortBy("no pictures");
         	adapter.notifyDataSetChanged();
         	return true;
+        	
+        case R.id.nearbyAnswersMenu:
+        	question.getAnswerList().sortBy("nearby answers");
+        	adapter.notifyDataSetChanged();
+        	return true;
         }
+
 		return super.onOptionsItemSelected(item);
 	}
 

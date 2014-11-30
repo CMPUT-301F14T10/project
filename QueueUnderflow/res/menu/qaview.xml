@@ -11,6 +11,7 @@
             <item android:id="@+id/mostUpvotesMenu" android:title="@string/mostUpvotes"/>
             <item android:id="@+id/hasPictureMenu" android:title="@string/hasPicture"/>
             <item android:id="@+id/noPictureMenu" android:title="@string/noPicture"/>
+            <item android:id="@+id/nearbyAnswersMenu" android:title="@string/nearbyAnswers"/>
         </menu>
     </item>
     

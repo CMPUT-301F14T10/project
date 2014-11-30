@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
+import ca.ualberta.cs.queueunderflow.User;
+
 
 /**
  * The Class AnswerList.
@@ -160,6 +162,24 @@ protected ArrayList <Answer> answerList;
 			}
 		};
 		
+		// Sort by nearby location, answers with nearby location appear at the top
+		Comparator<Answer> nearbyComparator = new Comparator<Answer>() {
+
+			@Override
+			public int compare(Answer lhs, Answer rhs) {
+				String city= User.getCity();
+				String country= User.getCountry();
+				String location= city+", "+country;
+				if (lhs.getLocation().equals(location) && !rhs.getLocation().equals(location)) {
+					return -1;
+				}
+				else if (!lhs.getLocation().equals(location) && rhs.getLocation().equals(location)) {
+					return 1;
+				}
+				return 0;
+			}
+		};
+		
 		if (method.equals("most recent")) {
 			Collections.sort(answerList, mostRecentComparator);
 		}
@@ -174,6 +194,9 @@ protected ArrayList <Answer> answerList;
 		}
 		else if (method.equals("no pictures")) {
 			Collections.sort(answerList, noPicturesComparator);
+		}
+		else if (method.equals("nearby answers")) {
+			Collections.sort(answerList,nearbyComparator);
 		}
 	}
 
