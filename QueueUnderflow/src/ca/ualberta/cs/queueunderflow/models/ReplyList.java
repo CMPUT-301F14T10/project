@@ -24,8 +24,30 @@ public class ReplyList {
 		return this.replyList;
 	}
 	
+	public boolean equals(ReplyList replyList2) {
+		if (replyList2.size()!=replyList.size()) {
+			return false;
+		}
+		for (int i=0; i<replyList.size();i++) {
+			Reply replyA= replyList2.get(i);
+			Reply replyB= replyList2.get(i);
+			if (replyA.equals(replyB)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void setReplyList(ArrayList<Reply> replyList) {
+		this.replyList=replyList;
+	}
+	
 	public int size() {
 		return replyList.size();
+	}
+	
+	public boolean contains(Reply reply) {
+		return replyList.contains(reply);
 	}
 	
 	public void sortBy(String method) {

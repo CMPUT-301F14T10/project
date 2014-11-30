@@ -7,6 +7,7 @@ import java.util.Date;
 import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.models.ReplyList;
 import junit.framework.TestCase;
 
 
@@ -46,7 +47,8 @@ public class GenericResponseModelTest extends TestCase{
 	}
 	
 	public void testGetReplyListMethod() {
-		ArrayList <Reply> noReplies= testResponse.getReplies();
+		//ArrayList <Reply> noReplies= testResponse.getReplies();
+		ReplyList noReplies= testResponse.getReplies();
 		assertTrue("No replies yet since none were added", noReplies.size()==0);
 	}
 	public void testSetReplyListMethod() {
@@ -54,13 +56,13 @@ public class GenericResponseModelTest extends TestCase{
 		Reply reply2=new Reply("2","Paul");
 		Reply reply3= new Reply("3", "Paul");
 		
-		ArrayList <Reply> three_replies= new ArrayList<Reply>();
+		ReplyList three_replies= new ReplyList();
 		three_replies.add(reply1);
 		three_replies.add(reply2);
 		three_replies.add(reply3);
 
 		testResponse.setReplyList(three_replies);
-		ArrayList <Reply> expected= testResponse.getReplies();
+		ReplyList expected= testResponse.getReplies();
 		assertTrue("The reply list of response was set by the setter method", expected.size()==3);
 		
 	}

@@ -65,8 +65,10 @@ public class UseCase4 extends ActivityInstrumentationTestCase2<AskAQuestionActiv
 		// Check that the question asked is in the masterlist of questions & in the myQuestions asked list & that it's at the top since its the most recent question
 		Question question = new Question("This is my question.", "Me");
 		
-		assertEquals(question, ListHandler.getMasterQList().get(0));
-		assertEquals(question, ListHandler.getMyQsList().get(0));
+		assertTrue("question equals the one in masterlist", question.equals(ListHandler.getMasterQList().get(0)));
+		assertTrue("question equals the one in myquestions list",question.equals(ListHandler.getMyQsList().get(0)));
+		//assertEquals(question, ListHandler.getMasterQList().get(0));
+		//assertEquals(question, ListHandler.getMyQsList().get(0));
 	}
 	
 	public void testAskQuestion() {
