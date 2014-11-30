@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -318,6 +321,70 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 				replyDialog.setArguments(args);
 				replyDialog.show(activity.getFragmentManager(), null);
 				
+			}
+		});
+        
+        CheckBox favBtn = (CheckBox) view.findViewById(R.id.favBtn);
+        favBtn.setChecked(answerArray.get(groupPosition).getIsFav());
+        favBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				QuestionList tempList = findQuestionList();
+				Question tempQuestion = tempList.get(questionPosition);
+				if(!ListHandler.isInFavs(tempQuestion.getStringID())) {
+					answerArray.get(groupPosition).setIsFav(true);
+					notifyDataSetChanged();
+					
+					tempQuestion.setIsFav(true);
+					ListHandler.getFavsList().add(tempQuestion);
+					tempList.set(tempList.getIndexFromID(tempQuestion.getID()), tempQuestion);
+					
+					// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
+					int index = ListHandler.getMyQsList().getIndexFromID(tempQuestion.getID());
+					if (index != -1) {
+						ListHandler.getMyQsList().get(index).setIsFav(true);
+						ListHandler.getMyQsList().notifyViews();
+						System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(tempQuestion.getStringID()).getIsFav()));
+					}
+				}
+				else {
+					answerArray.get(groupPosition).setIsFav(false);
+					notifyDataSetChanged();
+					Toast.makeText(activity, "Already favorited!", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+        
+        CheckBox readingListBtn = (CheckBox) view.findViewById(R.id.offlineBtn);
+        readingListBtn.setChecked(answerArray.get(groupPosition).getIsInReadingList());
+        readingListBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {				
+				QuestionList tempList = findQuestionList();
+				Question tempQuestion = tempList.get(questionPosition);
+				if(!ListHandler.isInReadingList(tempQuestion.getStringID())) {
+					answerArray.get(groupPosition).setIsInReadingList(true);
+					notifyDataSetChanged();
+					
+					tempQuestion.setIsInReadingList(true);
+					ListHandler.getReadingList().add(tempQuestion);
+					tempList.set(tempList.getIndexFromID(tempQuestion.getID()), tempQuestion);
+					
+					// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
+					int index = ListHandler.getMyQsList().getIndexFromID(tempQuestion.getID());
+					if (index != -1) {
+						ListHandler.getMyQsList().get(index).setIsInReadingList(true);
+						ListHandler.getMyQsList().notifyViews();
+						System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(tempQuestion.getStringID()).getIsInReadingList()));
+					}
+				}
+				else {
+					answerArray.get(groupPosition).setIsInReadingList(false);
+					notifyDataSetChanged();
+					Toast.makeText(activity, "Already added to the reading list!", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
         
