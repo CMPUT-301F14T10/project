@@ -32,6 +32,7 @@ public class QuestionSerializer implements JsonSerializer<Question>{
 		
 		questionObject.addProperty("author",question.getAuthor());
      
+	    questionObject.addProperty("location",question.getLocation());
 	    
 		questionObject.addProperty("upvote", question.getUpvotes());
 		questionObject.addProperty("hasPicture",question.hasPicture());

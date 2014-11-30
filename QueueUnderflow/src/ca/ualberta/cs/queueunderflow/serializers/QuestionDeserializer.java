@@ -69,6 +69,8 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	    String imagePath= jsonQuestion.get("imagePath").getAsString();
 		String encodedImage= jsonQuestion.get("encodedImage").getAsString();
 		
+		String location=jsonQuestion.get("location").getAsString();
+		
 		Question deserialized= new Question("Name","Author");
 		deserialized.setName(question_content);
 		deserialized.setAuthor(author);
@@ -80,7 +82,7 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 		deserialized.setIsInReadingList(inReadingList);
 		deserialized.setAnswerList(answerList);
 		deserialized.setStringID(uniqueID);
-		
+		deserialized.setLocation(location);
 		if (!imagePath.equals("none")) {
 			deserialized.setImagePath(imagePath);
 
