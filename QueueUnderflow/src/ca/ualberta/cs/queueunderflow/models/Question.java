@@ -86,6 +86,10 @@ public class Question extends GenericResponse {
 			return false;
 		}
 		
+		if (!response.getLocation().equals(this.location)) {
+			return false;
+		}
+		
 		if (response.getStringID().equals(this.getStringID())) {
 			return true;
 		}

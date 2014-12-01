@@ -120,6 +120,11 @@ public class Reply {
 	public Date getDate() {
 		return this.date;
 	}
+
+	public void setDate(Date newDate) {
+		this.date=newDate;
+		
+	}
 	
 	
 }
