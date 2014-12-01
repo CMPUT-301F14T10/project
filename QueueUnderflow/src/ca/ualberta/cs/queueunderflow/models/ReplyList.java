@@ -6,8 +6,12 @@ import java.util.Comparator;
 
 import ca.ualberta.cs.queueunderflow.singletons.User;
 
+
 /**
  * The Class ReplyList.
+ * 
+ * @author group 10
+ * @version 1.0
  */
 public class ReplyList {
 
@@ -31,7 +35,7 @@ public class ReplyList {
 	}
 	
 	/**
-	 * Gets the.
+	 * Gets the reply list.
 	 *
 	 * @param i the i
 	 * @return the reply
