@@ -22,16 +22,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.NetworkBuffer;
-import ca.ualberta.cs.queueunderflow.NetworkController;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.controllers.NetworkController;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
  
 /**

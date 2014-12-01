@@ -6,12 +6,12 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 
 public class MainActivityTest1 extends ActivityInstrumentationTestCase2<MainActivity>{

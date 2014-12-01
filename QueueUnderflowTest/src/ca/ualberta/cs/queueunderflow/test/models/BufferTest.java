@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
-import ca.ualberta.cs.queueunderflow.Buffer;
 import ca.ualberta.cs.queueunderflow.Favorites;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.Buffer;
 
 // NOTE : This test is under models but Buffer is a singleton
 public class BufferTest extends TestCase

@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.elasticsearch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +23,7 @@ import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionDeserializer;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

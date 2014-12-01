@@ -1,5 +1,6 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.elasticsearch;
 import java.util.List;
+
 
 /**
  * The Class Hits.

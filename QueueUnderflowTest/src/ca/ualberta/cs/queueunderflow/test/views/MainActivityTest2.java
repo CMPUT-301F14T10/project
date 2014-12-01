@@ -1,10 +1,10 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;

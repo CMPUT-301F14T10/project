@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.singletons;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;

@@ -1,6 +1,6 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -12,6 +12,11 @@ public class MainActivityTest9 extends ActivityInstrumentationTestCase2<MainActi
 
 	public MainActivityTest9() {
 		super(MainActivity.class);
+	}
+	
+	public void setUp() {
+		User user = new User();
+		user.setUserName("Anonymous");
 	}
 	public void testSetUsernameDisplay() throws Throwable {
 

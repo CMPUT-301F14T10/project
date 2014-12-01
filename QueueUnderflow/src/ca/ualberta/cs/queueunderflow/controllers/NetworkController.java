@@ -1,13 +1,15 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import ca.ualberta.cs.queueunderflow.elasticsearch.ESManager;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
 
 
 /**
@@ -106,12 +108,6 @@ public class NetworkController {
 		@Override
 		public void run() {
 			tempQuestion = esManager.getQuestion(questionID);
-			
-			// PRINTING FOR ME
-			if (tempQuestion != null) {
-				System.out.println("getQuestionThread : questionName ---> " + tempQuestion.getName());
-			}
-			
 			isThreadFinished.set(2, true);
 		}
 
@@ -141,12 +137,6 @@ public class NetworkController {
     	while (isThreadFinished.get(0) != true) {
     	}
     	isThreadFinished.set(0, false);
-    	
-		// PRINTING FOR ME
-		System.out.println("tempList size --> " + tempList.size());
-		for (Question q : tempList) {
-			System.out.println("-- Question --> " + q.getName());
-		}
 		
     	if (tempList.size() == 0) {
     		return;
@@ -170,13 +160,6 @@ public class NetworkController {
 			}
 			list.add(q);
 		}
-		
-		// PRINTINT FOR DEBUGGING
-		for (int i = 0 ; i < questionList.size(); i++) {
-			System.out.println("QuestionName : " + questionList.get(i).getName());
-		}
-		
-		System.out.println("DONE fillQuestionList");
 		
 		// Sort list by most recent
 		questionList.sortBy("most recent");
@@ -242,32 +225,10 @@ public class NetworkController {
 		@Override
 		public void run() {
 			tempList = esManager.searchQuestions(search, null);
-			
-			// PRINTING FOR ME
-			System.out.println("tempList size --> " + tempList.size());
-			for (Question q : tempList) {
-				System.out.println("-- Question --> " + q.getName());
-			}
-			
 			isThreadFinished.set(0, true);
 		}
 
 	}
-	
-//	class SearchThread extends Thread {
-//		private String search;
-//	
-//		public SearchThread(String s) {
-//			search = s;
-//		}
-//
-//		@Override
-//		public void run() {
-//			QuestionList searchResultsList = new QuestionList();
-//			
-//		}
-//
-//	}
 	
 	/**
  * Adds the answer.

@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.singletons;
 
 import java.util.ArrayList;
 import java.util.UUID;

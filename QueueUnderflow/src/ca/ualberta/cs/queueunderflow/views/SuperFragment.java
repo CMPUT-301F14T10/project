@@ -13,14 +13,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.Buffer;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkController;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
+import ca.ualberta.cs.queueunderflow.controllers.NetworkController;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.singletons.Buffer;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 
 
 /**
@@ -69,8 +69,6 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 		// Put in controller - This must be done first before inflating the view & adding the view to the model else it may crash
 		Buffer buffer = Buffer.getInstance();
-		System.out.println("FAV BUFFER FLUSHING : "  + buffer.favBuffer);
-		System.out.println("READINGLIST BUFFER FLUSHING : " + buffer.readingListBuffer);
 		buffer.flushAll();
 		//
 		
@@ -82,10 +80,8 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 		
 		// Refresh the masterlist - if in HomeScreenFragment
 		if (networkManager.isOnline(getActivity().getApplicationContext()) && fromFragment == HOME_SCREEN_FRAGMENT) {
-    		System.out.println("Starting populateMasterList");
     		NetworkController networkController = new NetworkController();
     		networkController.populateList(ListHandler.getMasterQList(), "");
-    		System.out.println("Finished populateMasterList");
 		}
 		
 		View view = inflater.inflate(R.layout.fragment_home_screen, container, false);

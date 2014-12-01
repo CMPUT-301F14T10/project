@@ -3,11 +3,11 @@ package ca.ualberta.cs.queueunderflow.test.controllers;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.ImageButton;
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.AskAQuestionActivity;
 
 public class AskAnswerControllerTest extends ActivityInstrumentationTestCase2<AskAQuestionActivity>{

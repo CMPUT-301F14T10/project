@@ -1,10 +1,10 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -23,6 +23,8 @@ public class MainActivityTest7 extends ActivityInstrumentationTestCase2<MainActi
 		// Set network connectivity to false, else it'll grab the list from the network
 		NetworkManager networkManager = NetworkManager.getInstance();
 		networkManager.setOnline(false);
+		
+		ListHandler.getReadingList().clear();
 	}
 	
 	// Test : Check that a question which is preset to be in the reading list is in fact in there & visible in the ReadingList Fragment view

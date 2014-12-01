@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.singletons;
 
 import java.io.BufferedReader;
 import java.io.IOException;

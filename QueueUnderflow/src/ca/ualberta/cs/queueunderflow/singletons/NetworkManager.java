@@ -1,5 +1,6 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.singletons;
 
+import ca.ualberta.cs.queueunderflow.NetworkBuffer;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

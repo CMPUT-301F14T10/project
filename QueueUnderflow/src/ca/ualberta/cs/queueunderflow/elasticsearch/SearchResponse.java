@@ -1,4 +1,5 @@
-package ca.ualberta.cs.queueunderflow;
+package ca.ualberta.cs.queueunderflow.elasticsearch;
+
 
 /**
  * The Class SearchResponse.

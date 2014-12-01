@@ -13,17 +13,17 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkController;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
+import ca.ualberta.cs.queueunderflow.controllers.NetworkController;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 
 /**
  * The Class QAViewActivity.
@@ -120,7 +120,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 			question.setIsInReadingList(isReadingList);
 			questionList.set(position, question);
 		}
-		// NEED TO HANDLE WHEN IF NOT ONLINE / CONNECTED 
 		
 		// Put some of this in a controller - BELOW
 		
@@ -209,10 +208,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		// Go back to MainActivity when the up caret is clicked
 		if (id == android.R.id.home) {
 			finish();
-//			Intent intent = NavUtils.getParentActivityIntent(this);
-//			// This is so we go back to the proper fragment that we came from in the main activity
-//			intent.putExtra("returnFragment", fromFragment);
-//			//NavUtils.navigateUpTo(this, intent);
 			return true;
 		}
 		

@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 
 public class MainActivityTest8 extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -21,9 +21,11 @@ public class MainActivityTest8 extends ActivityInstrumentationTestCase2<MainActi
 	
 
 	public void setUp() {
-		// Set network connectivity to false, else it'll grab the list from the network
+		// Set network connectivity to false to show favs can be accessed offline
 		NetworkManager networkManager = NetworkManager.getInstance();
 		networkManager.setOnline(false);
+		
+		ListHandler.getFavsList().clear();
 	}
 	
 	// Test : Check that a question which is preset to be favorited is in fact in there & visible in the FavoritesFragment view
@@ -90,9 +92,9 @@ public class MainActivityTest8 extends ActivityInstrumentationTestCase2<MainActi
 				View view = listView.getChildAt(0);
 				CheckBox favBox = (CheckBox) view.findViewById(R.id.favBtn);
 				assertEquals(false, favBox.isChecked());
-				assertTrue(ListHandler.getReadingList().size() == 0);
+				assertTrue(ListHandler.getFavsList().size() == 0);
 				
-				favBox.performClick();	// CLICK TO ADD TO READING LIST
+				favBox.performClick();	// CLICK TO ADD TO FAVORITES
 				
 				// Check that a question was favorited when the button was clicked
 				assertTrue(ListHandler.getFavsList().size() == 1);

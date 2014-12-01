@@ -5,14 +5,14 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.singletons.LocationHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
-import ca.ualberta.cs.queueunderflow.LocationHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 
 //Use CASE 20(incorporates user story 27)

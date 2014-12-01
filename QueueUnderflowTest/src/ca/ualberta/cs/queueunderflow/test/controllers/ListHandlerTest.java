@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.test.controllers;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
 import junit.framework.TestCase;
 
 //test for singleton implementation of list controller

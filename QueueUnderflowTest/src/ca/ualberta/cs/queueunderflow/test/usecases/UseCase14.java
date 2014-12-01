@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
 import ca.ualberta.cs.queueunderflow.controllers.AskAnswerController;
 import ca.ualberta.cs.queueunderflow.models.Answer;
@@ -20,6 +18,8 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListDeserializer;
 import ca.ualberta.cs.queueunderflow.serializers.QuestionListSerializer;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.MainActivity;
 
 import com.google.gson.Gson;
@@ -31,60 +31,7 @@ public class UseCase14 extends ActivityInstrumentationTestCase2<MainActivity> {
         public UseCase14() {
                 super(MainActivity.class);
         }
-        
-        public void testQuestionsAskedDisplay() throws Throwable {
-                
-                getActivity();
-                
-                // Set Username
-                User user = new User();
-                user.setUserName("Me");
-                
-                runTestOnUiThread(new Runnable() {
-                        
-                        @Override
-                        public void run() {
-                                // Ask a new question in any fragment - HomeScreenFragment
-                                Intent intent = new Intent();
-                                intent.putExtra("returnFragment", MainActivity.HOME_SCREEN_FRAGMENT);
-                                setActivityIntent(intent);
-                                MainActivity activity = (MainActivity) getActivity();
-                                
-                                // No picture attached
-                                ImageButton imagePreviewBtn = new ImageButton(activity);
-                                imagePreviewBtn.setVisibility(View.INVISIBLE);
-                                
-                                AskAnswerController controller = new AskAnswerController(activity);
-                                controller.askQuestion("This is a question", User.getUserName(), imagePreviewBtn);
-                        }
-                });
-                
-                // Check that the new question is in Questions Asked Fragment
-                Intent intent2 = new Intent();
-                intent2.putExtra("returnFragment", MainActivity.MY_QUESTIONS_FRAGMENT);
-                setActivityIntent(intent2);
-                MainActivity activity = (MainActivity) getActivity();
-                
-                ListView listView = (ListView) activity.findViewById(R.id.homeListView);
-                QuestionListAdapter adapter = (QuestionListAdapter) listView.getAdapter();
-                
-                // Check that the view for the Question / List Item is correctly displayed
-                View view1 = adapter.getView(0, null, null);
-                TextView questionText1 = (TextView) view1.findViewById(R.id.questionTextView);
-                TextView authorUsername1 = (TextView) view1.findViewById(R.id.authorTextView);
-                ImageButton hasPictureIndicator = (ImageButton) view1.findViewById(R.id.hasPictureIcon);
-                
-                assertEquals("This is a question", questionText1.getText().toString());
-                assertEquals("Me", authorUsername1.getText().toString());
-                assertEquals(View.INVISIBLE, hasPictureIndicator.getVisibility());
-                
-                Question question = new Question("This is a question", "Me");
-                question.setHasPicture(false);
-                
-                assertEquals(question, ListHandler.getMasterQList().get(0));
-                assertEquals(question, ListHandler.getMyQsList().get(0));
-        }
-        
+
         public void testQuestionsAsked() {
                 
                 /* Old test for project part 2
