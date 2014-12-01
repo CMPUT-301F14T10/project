@@ -148,7 +148,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				
 				//User user= ListHandler.getUser();
 				Question question= questionArray.get(position);
-				if (User.alreadyUpvotedQuestion(question.getID())) {
+				if (question.hasUserUpvoted()) {
 					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
 				}
 				else {

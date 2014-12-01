@@ -239,7 +239,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
             	//User user= ListHandler.getUser();
             	Question question= singleQuestionArray.get(groupPosition);
-    			if (User.alreadyUpvotedQuestion(question.getID())) {
+    			if (question.hasUserUpvoted()) {
 					Toast.makeText(activity.getApplicationContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();			// This should be in the model?
 				}
 				else {

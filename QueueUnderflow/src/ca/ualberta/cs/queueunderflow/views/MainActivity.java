@@ -132,28 +132,8 @@ public class MainActivity extends Activity {
         	selectItem(0);
         }
         
-        //----- Load data from phone memory (move this into a controller somewhere, maybe)
-
-        //loadOnce();
-		if(!LoadSave.loaded) //Make sure this only loads once!
-        {
         LoadSave lSave = LoadSave.getInstance();
-        lSave.loadUsername();
-        Log.d("test", "loading favorites...");
-        lSave.loadMyQuestions();
-        lSave.loadFavorites();
-        lSave.LoadReadingList();
-        lSave.loadUseLocation();
-        lSave.loadCity();
-        Log.d("loading city test", User.getCity());
-        lSave.loadCountry();
-        lSave.loadNetworkBuffer();
-   
-        lSave.loadUpvotedQuestions();
-        lSave.loadUpvotedAnswers();
-        lSave.loadUseLocationCheckBox();
-        LoadSave.loaded = true;
-        }
+        lSave.loadAll();
 		
 		//Added flush buffer here as well
     	NetworkManager networkManager = NetworkManager.getInstance();
@@ -161,38 +141,7 @@ public class MainActivity extends Activity {
     		networkManager.flushBuffer();
     	}
 
-        //----- Done loading data from phone memory
     }
-
-/*	private void loadOnce()
-	{
-
-		if(!LoadSave.loaded) //Make sure this only loads once!
-        {
-        LoadSave lSave = LoadSave.getInstance();
-        lSave.loadUsername();
-        Log.d("test", "loading favorites...");
-        lSave.loadMyQuestions();
-        lSave.loadFavorites();
-        lSave.LoadReadingList();
-        lSave.loadUseLocation();
-        lSave.loadCity();
-        Log.d("loading city test", User.getCity());
-        lSave.loadCountry();
-        lSave.loadNetworkBuffer();
-   
-        lSave.loadUpvotedQuestions();
-        lSave.loadUpvotedAnswers();
-        lSave.loadUseLocationCheckBox();
-        LoadSave.loaded = true;
-        }
-		
-		//Added flush buffer here as well
-    	NetworkManager networkManager = NetworkManager.getInstance();
-    	if (networkManager.isOnline(getApplicationContext())) {
-    		networkManager.flushBuffer();
-    	}
-	}*/
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
@@ -252,20 +201,9 @@ public class MainActivity extends Activity {
      */
     @Override
 	protected void onPause() {
-		super.onPause();
-    	LoadSave ls = LoadSave.getInstance();
-    	ls.SaveFavorites();
-    	ls.saveMyQuestions();
-    	ls.SaveReadingList();
-    	
-        ls.saveUseLocation(User.getUseLocation());
-        ls.saveUseLocationCheckBox(User.displayCheckbox());
-        ls.saveCity(User.getCity());
-        ls.saveCountry(User.getCountry());
-        
-    	ls.SaveNetworkBuffer();
-    	ls.saveUpvotedQuestions();
-    	ls.saveUpvotedAnswers();
+            super.onPause();
+            LoadSave ls = LoadSave.getInstance();
+            ls.saveAll();
 	}
 
 	/* (non-Javadoc)

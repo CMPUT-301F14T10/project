@@ -448,6 +448,48 @@ public class LoadSave {
 	}
 	
 	
+	public void saveAll()
+	{
+	    this.SaveFavorites();
+	    this.saveMyQuestions();
+	    this.SaveReadingList();
+	           
+	    this.saveUseLocation(User.getUseLocation());
+	    this.saveUseLocationCheckBox(User.displayCheckbox());
+	    this.saveCity(User.getCity());
+	    this.saveCountry(User.getCountry());
+	           
+	    this.SaveNetworkBuffer();
+	    this.saveUpvotedQuestions();
+	    this.saveUpvotedAnswers();
+	}
+	
+	/**
+	 * Load all data required.
+	 */
+	public void loadAll()
+	{
+	    if(!LoadSave.loaded) //Make sure this only loads once!
+	    {
+	        LoadSave lSave = LoadSave.getInstance();
+                lSave.loadUsername();
+                Log.d("test", "loading favorites...");
+                lSave.loadMyQuestions();
+                lSave.loadFavorites();
+                lSave.LoadReadingList();
+                lSave.loadUseLocation();
+                lSave.loadCity();
+                Log.d("loading city test", User.getCity());
+                lSave.loadCountry();
+                lSave.loadNetworkBuffer();
+
+                lSave.loadUpvotedQuestions();
+                lSave.loadUpvotedAnswers();
+                lSave.loadUseLocationCheckBox();
+                LoadSave.loaded = true;
+	    }
+	}
+	
 	/**
 	 * Save network buffer.
 	 */

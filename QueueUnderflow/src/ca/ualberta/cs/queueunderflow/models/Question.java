@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.models;
 
-import android.net.Uri;
 import android.text.format.DateFormat;
+import ca.ualberta.cs.queueunderflow.User;
 
 
 /**
@@ -16,6 +16,11 @@ public class Question extends GenericResponse {
 	
 	/** The answer list. */
 	protected AnswerList answerList;
+	
+	public boolean hasUserUpvoted()
+	{
+            return User.alreadyUpvotedQuestion(this.uniqueID);
+	}
 	
 	/**
 	 * Instantiates a new question.
