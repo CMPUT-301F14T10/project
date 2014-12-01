@@ -10,7 +10,7 @@ import android.view.ViewStub;
 
 import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class QuestionList.

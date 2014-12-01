@@ -4,9 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import ca.ualberta.cs.queueunderflow.views.AskAQuestionActivity;
 
 

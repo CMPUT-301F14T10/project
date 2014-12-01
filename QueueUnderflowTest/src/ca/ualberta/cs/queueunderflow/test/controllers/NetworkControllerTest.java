@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.test.controllers;
 
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cs.queueunderflow.NetworkController;
+import ca.ualberta.cs.queueunderflow.controllers.NetworkController;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;

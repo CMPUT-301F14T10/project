@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class ReplyList.

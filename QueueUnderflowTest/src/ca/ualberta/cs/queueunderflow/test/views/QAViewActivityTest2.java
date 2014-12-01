@@ -1,73 +1,79 @@
 package ca.ualberta.cs.queueunderflow.test.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
+import android.content.Intent;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.ExpandableListView;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 import ca.ualberta.cs.queueunderflow.views.QAViewActivity;
-import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
 
 public class QAViewActivityTest2 extends ActivityInstrumentationTestCase2<QAViewActivity>{
 
+	Reply qReply;
+	Reply aReply;
+	
 	public QAViewActivityTest2() {
 		super(QAViewActivity.class);
 	}
+
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
+		
+		ListHandler.getMasterQList().clear();
+		addTestQuestion();
+	}
+	
 	public void testReplyDisplay() {
-		ListHandler.getMasterQList().getQuestionList().clear();
-		
-		Question question = new Question("Another Question", "Me");
-		Answer answer1 = new Answer("Answer #1", "You");
-		Answer answer2 = new Answer("Answer #2", "Him");
-		Reply aReply = new Reply("Answer Reply", "Her");
-		Reply qReply = new Reply("Question Reply", "Them");
-		answer1.addReply(aReply);
-		question.addReply(qReply);
-		question.addAnswer(answer1);
-		question.addAnswer(answer2);
-		ListHandler.getMasterQList().add(question);
-		
-		// Start the activity
 		Intent intent = new Intent();
 		intent.putExtra("fromFragment", QAViewActivity.HOME_SCREEN_FRAGMENT);
 		intent.putExtra("position", 0);
 		setActivityIntent(intent);
 		QAViewActivity activity = (QAViewActivity) getActivity();
 		
-		// Check question reply display
-		ExpandableListView qListView = (ExpandableListView) activity.findViewById(R.id.questionExpListView);
-		SingleQuestionAdapter singleQAdapter = (SingleQuestionAdapter) qListView.getExpandableListAdapter();
+		ExpandableListView questionListView = (ExpandableListView) activity.findViewById(R.id.questionExpListView);
+		ExpandableListView answersListView = (ExpandableListView) activity.findViewById(R.id.answersExpListView);
 		
-		assertEquals(question, singleQAdapter.getGroup(0));
-		assertEquals(1, singleQAdapter.getChildrenCount(0));
+		assertTrue(questionListView.getCount() == 1);
+		assertTrue(answersListView.getCount() == 1);
+	
+		SingleQuestionAdapter singleQAdapter = (SingleQuestionAdapter) questionListView.getExpandableListAdapter();
+		Question question = singleQAdapter.getGroup(0);
+		assertTrue(singleQAdapter.getChildrenCount(0) == 1);
+		Reply resultQReply = singleQAdapter.getChild(0, 0);
+		assertEquals(resultQReply, qReply);
 		
-		View replyView = singleQAdapter.getChildView(0, 0, true, null, null);
-		TextView replyText = (TextView) replyView.findViewById(R.id.replyTextView);
-		TextView authorUsername = (TextView) replyView.findViewById(R.id.authorTextView);
-		assertEquals("Question Reply", replyText.getText().toString());
-		assertEquals("Them", authorUsername.getText().toString());
+		AnswerListAdapter answersAdapter = (AnswerListAdapter) answersListView.getExpandableListAdapter();
+		Answer answer = answersAdapter.getGroup(0);
+		assertTrue(answersAdapter.getChildrenCount(0) == 1);
+		Reply resultAReply = answersAdapter.getChild(0, 0);
+		assertEquals(resultAReply, aReply);
+	}
+	
+	public void tearDown() {
+		ListHandler.getMasterQList().clear();
+	}
+	
+	private void addTestQuestion() {
+		Question question = new Question("Main Question", "UserA");
+		qReply = new Reply("A question reply", "UserB");
+		Answer answer = new Answer("An answer", "UserC");
+		aReply = new Reply("An answer reply", "UserD");
 		
+		question.addReply(qReply);
+		answer.addReply(aReply);
+		question.addAnswer(answer);
 		
-		// Check answer reply display
-		ExpandableListView aListView = (ExpandableListView) activity.findViewById(R.id.answersExpListView);
-		AnswerListAdapter aAdapter = (AnswerListAdapter) aListView.getExpandableListAdapter();
+		ListHandler.getMasterQList().add(question);
 		
-		assertEquals(answer1, aAdapter.getGroup(1));
-		assertEquals(1, aAdapter.getChildrenCount(1));
-		
-		View replyView1 = aAdapter.getChildView(1, 0, true, null, null);
-		TextView replyText1 = (TextView) replyView1.findViewById(R.id.replyTextView);
-		TextView authorUsername1 = (TextView) replyView1.findViewById(R.id.authorTextView);
-		assertEquals("Answer Reply", replyText1.getText().toString());
-		assertEquals("Her", authorUsername1.getText().toString());
-		
-		activity.finish();
+		assertTrue(ListHandler.getMasterQList().size() == 1);
 	}
 
 }

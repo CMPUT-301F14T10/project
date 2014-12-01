@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class SetUsernameFragment.

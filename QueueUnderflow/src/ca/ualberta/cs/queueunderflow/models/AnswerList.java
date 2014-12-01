@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 
 /**

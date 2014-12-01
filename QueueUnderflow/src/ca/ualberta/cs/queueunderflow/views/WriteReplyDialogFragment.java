@@ -1,14 +1,14 @@
 package ca.ualberta.cs.queueunderflow.views;
 
-import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.R.id;
 import ca.ualberta.cs.queueunderflow.R.layout;
 import ca.ualberta.cs.queueunderflow.R.string;
 import ca.ualberta.cs.queueunderflow.controllers.WriteReplyController;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.Question;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

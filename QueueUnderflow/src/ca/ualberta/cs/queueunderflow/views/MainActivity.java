@@ -16,12 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.LoadSave;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.LoadSave;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class MainActivity.
@@ -129,6 +129,7 @@ public class MainActivity extends Activity {
         	selectItem(fragmentPosition);
         }
         else {
+        	// if no return fragment is specified, go to the main (home) screen
         	selectItem(0);
         }
         

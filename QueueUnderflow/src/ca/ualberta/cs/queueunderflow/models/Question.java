@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.models;
 
 import android.text.format.DateFormat;
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 
 /**

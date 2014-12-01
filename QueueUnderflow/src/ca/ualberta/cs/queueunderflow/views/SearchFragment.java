@@ -17,14 +17,14 @@ import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkController;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.TView;
 import ca.ualberta.cs.queueunderflow.adapters.QuestionListAdapter;
+import ca.ualberta.cs.queueunderflow.controllers.NetworkController;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 
 /**
  * The Class SearchFragment.

@@ -14,11 +14,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import ca.ualberta.cs.queueunderflow.LoadSave;
-import ca.ualberta.cs.queueunderflow.LocationHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
-import ca.ualberta.cs.queueunderflow.User;
+import ca.ualberta.cs.queueunderflow.singletons.LoadSave;
+import ca.ualberta.cs.queueunderflow.singletons.LocationHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class SetLocationFragment.

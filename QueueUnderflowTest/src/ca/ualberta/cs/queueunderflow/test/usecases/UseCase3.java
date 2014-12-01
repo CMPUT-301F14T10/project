@@ -5,8 +5,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import ca.ualberta.cs.queueunderflow.ListHandler;
-import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
@@ -15,6 +13,8 @@ import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
+import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
+import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 import ca.ualberta.cs.queueunderflow.views.QAViewActivity;
 import junit.framework.TestCase;
 
