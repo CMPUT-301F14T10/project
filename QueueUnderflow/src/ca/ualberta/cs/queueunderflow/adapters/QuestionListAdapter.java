@@ -170,6 +170,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 						return;
 					}
 					else { // if online
+						
 						NetworkController  networkController = new NetworkController();
 						networkController.upvoteQuestion(questionArray.get(position).getStringID());
 					}

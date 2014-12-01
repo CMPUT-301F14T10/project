@@ -61,6 +61,8 @@ public class AskAQuestionActivity extends Activity{
 		
 		// Display the up caret to go back to the MainActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		// Hide the name of the activity
+		getActionBar().setDisplayShowTitleEnabled(false);
 		
 		TextView authorUsername = (TextView) findViewById(R.id.authorBox);
 		authorUsername.setText(User.getUserName());

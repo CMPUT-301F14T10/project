@@ -72,15 +72,12 @@ public class Question extends GenericResponse {
 	public boolean equals(Object o) {
 		Question response = (Question) o;
 		if (response == null) {
-			//System.out.println("response is NULL");
 			return false;
 		}
 		if (response.getDate() == null) {
-			//System.out.println("response.getDate() == null)");
 			return false;
 		}
 		if (this.date == null) {
-			//System.out.println("this.date == null");
 			return false;
 		}
 		
@@ -88,7 +85,6 @@ public class Question extends GenericResponse {
 			return true;
 		}
 		
-		//System.out.println("DATE --> " + response.getDate() + " | " + this.date);
 		if (!DateFormat.format("MMM dd, yyyy", response.getDate()).equals(DateFormat.format("MMM dd, yyyy", this.date))) {
 			return false;
 		}

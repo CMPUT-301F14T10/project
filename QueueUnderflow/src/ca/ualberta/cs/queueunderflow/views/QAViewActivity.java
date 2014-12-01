@@ -74,6 +74,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 		// Display the up caret to go back to the MainActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		// Hide the name of the activity
+		getActionBar().setDisplayShowTitleEnabled(false);
 		
 		// Retrieve the position of the question selected & the fragment where it was selected from
 		// The fragment where it was selected from informs us of which list to use from the ListHandler to inflate the view

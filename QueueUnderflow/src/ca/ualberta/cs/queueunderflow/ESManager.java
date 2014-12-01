@@ -37,10 +37,10 @@ import com.google.gson.reflect.TypeToken;
 public class ESManager {
 
 	/** The Constant SEARCH_URL. */
-	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/_search";
+	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/_search";
 	
 	/** The Constant RESOURCE_URL. */
-	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/myquestions/";
+	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301f14t10/questions/";
 	
 	/** The gson. */
 	private Gson gson;

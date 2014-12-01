@@ -89,6 +89,9 @@ public class AddAnAnswerActivity extends Activity
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		// Hide the name of the activity
+		getActionBar().setDisplayShowTitleEnabled(false);
+		
 		TextView authorUsername = (TextView) findViewById(R.id.authorBox);
 		authorUsername.setText(User.getUserName());
 		
