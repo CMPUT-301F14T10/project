@@ -59,15 +59,21 @@ public class ReplyList {
 		if (replyList2.size()!=replyList.size()) {
 			return false;
 		}
-		for (int i=0; i<replyList.size();i++) {
-			Reply replyA= replyList2.get(i);
-			Reply replyB= replyList2.get(i);
-			if (replyA.equals(replyB)) {
+		for (int i = 0; i < replyList.size(); i++) {
+			if (!replyList2.get(i).equals(replyList.get(i))) {
 				return false;
 			}
 		}
 		return true;
 	}
+//		for (int i=0; i<replyList.size();i++) {
+//			Reply replyA= replyList2.get(i);
+//			Reply replyB= replyList2.get(i);
+//			if (replyA.equals(replyB)) {
+//				return false;
+//			}
+//		}
+//		return true;
 	
 	/**
 	 * Sets the reply list.

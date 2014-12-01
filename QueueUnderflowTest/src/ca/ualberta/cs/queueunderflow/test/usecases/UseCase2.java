@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import ca.ualberta.cs.queueunderflow.ListHandler;
+import ca.ualberta.cs.queueunderflow.NetworkManager;
 import ca.ualberta.cs.queueunderflow.R;
 import ca.ualberta.cs.queueunderflow.adapters.AnswerListAdapter;
 import ca.ualberta.cs.queueunderflow.adapters.SingleQuestionAdapter;
@@ -18,6 +19,12 @@ public class UseCase2 extends ActivityInstrumentationTestCase2<QAViewActivity> {
 
 	public UseCase2() {
 		super(QAViewActivity.class);
+	}
+	
+	public void setUp() {
+		// Set network connectivity to false, else it'll grab the list from the network
+		NetworkManager networkManager = NetworkManager.getInstance();
+		networkManager.setOnline(false);
 	}
 
 	//Use CASE 2 (incorporates user stories 2, 14 and 22)
