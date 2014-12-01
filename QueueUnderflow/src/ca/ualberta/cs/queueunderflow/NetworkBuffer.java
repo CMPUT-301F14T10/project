@@ -21,25 +21,25 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 public class NetworkBuffer {
 
 	/** The question buffer. */
-	ArrayList<Question> questionBuffer;
+	private ArrayList<Question> questionBuffer;
 	
 	/** The answer buffer. */
-	Map<String, ArrayList<Answer>> answerBuffer;
+	private Map<String, ArrayList<Answer>> answerBuffer;
 	
 	/** The question reply buffer. */
-	Map<String, ArrayList<Reply>> questionReplyBuffer;
+	private Map<String, ArrayList<Reply>> questionReplyBuffer;
 	
 	/** The qa id buffer. */
-	Map<String, ArrayList<String>> qaIDBuffer;
+	private Map<String, ArrayList<String>> qaIDBuffer;
 	
 	/** The answer reply buffer. */
-	Map<String, ArrayList<Reply>> answerReplyBuffer;
+	private Map<String, ArrayList<Reply>> answerReplyBuffer;
 	
 	/** The upvote q buffer. */
-	ArrayList<String> upvoteQBuffer;
+	private ArrayList<String> upvoteQBuffer;
 	
 	/** The upvote a buffer. */
-	Map<String, String> upvoteABuffer;
+	private Map<String, String> upvoteABuffer;
 	
 	/**
 	 * Instantiates a new network buffer.

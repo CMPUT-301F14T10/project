@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.elasticsearch;
 
 /**
- * The Class SearchHit.
+ * The Class SearchHit. Data Class.
  *
  * @param <T> the generic type
  * @author group 10

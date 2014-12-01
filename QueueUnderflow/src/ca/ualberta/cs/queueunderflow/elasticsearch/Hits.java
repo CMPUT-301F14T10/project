@@ -3,7 +3,7 @@ import java.util.List;
 
 
 /**
- * The Class Hits.
+ * The Class Hits. Data Class.
  * @author group 10
  * @version 1.0
  * @param <T> the generic type

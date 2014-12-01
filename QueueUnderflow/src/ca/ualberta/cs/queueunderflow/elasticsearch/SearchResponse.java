@@ -2,7 +2,7 @@ package ca.ualberta.cs.queueunderflow.elasticsearch;
 
 
 /**
- * The Class SearchResponse.
+ * The Class SearchResponse. Data Class
  * @author group 10
  * @version 1.0
  * @param <T> the generic type
