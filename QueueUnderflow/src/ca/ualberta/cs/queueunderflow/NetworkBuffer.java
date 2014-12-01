@@ -15,6 +15,8 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 
 /**
  * The Class NetworkBuffer.
+ * @author group 10
+ * @version 1.0
  */
 public class NetworkBuffer {
 

@@ -14,6 +14,8 @@ import ca.ualberta.cs.queueunderflow.singletons.ListHandler;
 
 /**
  * The Class NetworkController.
+ * @author group 10
+ * @version 1.0
  */
 public class NetworkController {
 

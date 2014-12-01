@@ -28,6 +28,8 @@ import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
 
 /**
  * The Class SearchFragment.
+ *  @author group 10
+ * @version 1.0
  */
 public class SearchFragment extends Fragment implements TView<QuestionList>{
 

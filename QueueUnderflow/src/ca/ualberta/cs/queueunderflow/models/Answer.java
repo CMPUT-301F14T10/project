@@ -4,7 +4,7 @@ package ca.ualberta.cs.queueunderflow.models;
  * The Class Answer.
  * An answer to a question. Contains the title, author, rating, date, any replies, etc (via inheritance from GenericResponse)
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class Answer extends GenericResponse {
 

@@ -28,7 +28,7 @@ import ca.ualberta.cs.queueunderflow.singletons.User;
  * Handles clicks & swipes relating to switching between fragments via the navigation drawer.
  * Also handles calling the load/save functions.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class MainActivity extends Activity {
 

@@ -4,7 +4,7 @@ package ca.ualberta.cs.queueunderflow;
 /**
  * The Interface TView.
  *@author group 10
- * @version 0.5
+ * @version 1.0
  * @param <M> the generic type
  */
 public interface TView<M> {

@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
  * The Class LoadSave.
  * Singleton. Handles loading & saving.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class LoadSave {
 	

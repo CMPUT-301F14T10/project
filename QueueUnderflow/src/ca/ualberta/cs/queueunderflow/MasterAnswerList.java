@@ -9,7 +9,7 @@ import ca.ualberta.cs.queueunderflow.models.Answer;
 /**
  * The Class MasterAnswerList.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class MasterAnswerList {
 	

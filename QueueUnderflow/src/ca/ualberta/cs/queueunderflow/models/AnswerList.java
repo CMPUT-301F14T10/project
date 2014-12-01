@@ -12,7 +12,7 @@ import ca.ualberta.cs.queueunderflow.singletons.User;
  * The Class AnswerList.
  * Holds a collection of answers
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class AnswerList {
 

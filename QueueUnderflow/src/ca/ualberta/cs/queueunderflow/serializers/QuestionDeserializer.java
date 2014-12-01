@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 /**
  * The Class QuestionDeserializer.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class QuestionDeserializer implements JsonDeserializer<Question> {
 

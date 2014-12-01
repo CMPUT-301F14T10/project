@@ -15,7 +15,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  *  This is in case the user unfavorites then favorites the same question again while in the Favorites fragment (in this case the
  *  buffer does not remove the question from the list), analogous for the reading list.
  *@author Group 10
- *@version 0.5
+ *@version 1.0
  */
 public class Buffer {
 	

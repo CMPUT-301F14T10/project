@@ -11,7 +11,7 @@ import ca.ualberta.cs.queueunderflow.models.Reply;
 /**
  * The Class User.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class User {
 

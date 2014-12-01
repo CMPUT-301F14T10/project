@@ -6,7 +6,7 @@ import java.util.Date;
  * The Class Reply.
  * Models a reply with the reply content and the author.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class Reply {
 	

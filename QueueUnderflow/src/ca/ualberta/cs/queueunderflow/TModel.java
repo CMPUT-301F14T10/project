@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The Class TModel.
  *
  * @author group 10
- * @version 0.5
+ * @version 1.0
  * @param <V> the value type
  */
 public abstract class TModel<V extends TView> {

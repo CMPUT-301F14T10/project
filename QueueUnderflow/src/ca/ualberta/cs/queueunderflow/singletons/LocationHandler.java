@@ -27,6 +27,8 @@ import android.util.Log;
 
 /**
  * The Class LocationHandler.
+ * @author group 10
+ * @version 1.0
  */
 public class LocationHandler implements LocationListener{
 

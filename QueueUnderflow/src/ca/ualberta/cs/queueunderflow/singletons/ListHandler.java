@@ -12,7 +12,7 @@ import ca.ualberta.cs.queueunderflow.models.QuestionList;
  * The Class ListHandler.
  * Singleton.  Main access point of the various lists for each fragment. Also holds the user.
  @author group 10
- * @version 0.5
+ * @version 1.0
  * 
  */
 public class ListHandler {

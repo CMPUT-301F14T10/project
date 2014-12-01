@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 /**
  * The Class NetworkManager.
  * Singleton.
+ * @author group 10
+ * @version 1.0
  */
 public class NetworkManager {
 

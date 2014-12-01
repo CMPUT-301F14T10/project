@@ -22,6 +22,8 @@ import ca.ualberta.cs.queueunderflow.singletons.User;
 
 /**
  * The Class SetLocationFragment.
+ *  @author group 10
+ * @version 1.0
  */
 public class SetLocationFragment extends Fragment implements OnClickListener{
 

@@ -27,7 +27,7 @@ import ca.ualberta.cs.queueunderflow.singletons.NetworkManager;
  * The Class SuperFragment.
  * Handles displaying the Home screen / main screen, Favorites screen, ReadingList screen, & MyQuestions screen
  *@author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class SuperFragment extends Fragment implements TView<QuestionList>{
 	

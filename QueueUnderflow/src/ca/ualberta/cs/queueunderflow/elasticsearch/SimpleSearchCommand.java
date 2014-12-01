@@ -2,6 +2,8 @@ package ca.ualberta.cs.queueunderflow.elasticsearch;
 
 /**
  * The Class SimpleSearchCommand.
+ * @author group 10
+ * @version 1.0
  */
 public class SimpleSearchCommand {
 

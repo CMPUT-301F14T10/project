@@ -4,7 +4,8 @@ import java.util.List;
 
 /**
  * The Class Hits.
- *
+ * @author group 10
+ * @version 1.0
  * @param <T> the generic type
  */
 public class Hits<T> {

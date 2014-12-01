@@ -40,7 +40,7 @@ import ca.ualberta.cs.queueunderflow.views.WriteReplyDialogFragment;
  * Handles favoriting & adding to the reading list - Not yet implemented. 
  * Handles calling the WriteReplyDialogFragment to be displayed
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class AnswerListAdapter extends BaseExpandableListAdapter {
  

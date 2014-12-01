@@ -34,6 +34,8 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * The Class ESManager.
+ * @author group 10
+ * @version 1.0
  */
 public class ESManager {
 

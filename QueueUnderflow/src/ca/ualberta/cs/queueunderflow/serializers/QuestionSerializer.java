@@ -13,7 +13,7 @@ import com.google.gson.JsonSerializer;
 /**
  * The Class QuestionSerializer.
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class QuestionSerializer implements JsonSerializer<Question>{
 

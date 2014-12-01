@@ -17,7 +17,7 @@ import ca.ualberta.cs.queueunderflow.singletons.User;
  * The Class AddAnAnswerActivity.
  * Allows the user to input an answer to add and optionally attach a photo 
  * @author group 10
- * @version 0.5
+ * @version 1.0
  */
 public class AddAnAnswerActivity extends GenericAddActivity {
 	/* (non-Javadoc)
