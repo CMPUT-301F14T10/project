@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 
 /**
  * The Class NetworkManager.
+ * Singleton.
  */
 public class NetworkManager {
 
@@ -41,12 +42,11 @@ public class NetworkManager {
 		return instance;
 	}
 	
-	// should we call this hasConnection instead of isOnline? - This returns true if we're connected and false otherwise - Note this only checks for 3g network and not wifi I think
 	/**
 	 * Checks if is online.
 	 *
 	 * @param context the context
-	 * @return true, if is online
+	 * @return true, if is online. false otherwise
 	 */
 	public boolean isOnline(Context context) {
 		if (onlineStatus != null) {

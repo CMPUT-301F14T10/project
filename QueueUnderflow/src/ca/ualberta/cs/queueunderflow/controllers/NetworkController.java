@@ -131,8 +131,6 @@ public class NetworkController {
      * @param questionList the question list
      */
     private void fillQuestionList(QuestionList questionList) {
-    	System.out.println("INSIDE fillQuestionList");
-    	
     	// Make sure populateThread is done and we retrieved the results from network before we continue
     	while (isThreadFinished.get(0) != true) {
     	}
@@ -167,7 +165,6 @@ public class NetworkController {
 	}
 
 
-	// BELOW - Maybe move this somewhere else later
 	// This is modified from https://github.com/dfserrano/AndroidElasticSearch 11-15-2014
 	/**
 	 * The Class AddQThread.

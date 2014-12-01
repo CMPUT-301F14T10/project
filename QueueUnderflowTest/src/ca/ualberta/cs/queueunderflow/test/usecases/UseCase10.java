@@ -1,17 +1,16 @@
 package ca.ualberta.cs.queueunderflow.test.usecases;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cs.queueunderflow.User;
+import junit.framework.TestCase;
 import ca.ualberta.cs.queueunderflow.models.Answer;
 import ca.ualberta.cs.queueunderflow.models.AnswerList;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.models.ReplyList;
-import junit.framework.TestCase;
+import ca.ualberta.cs.queueunderflow.singletons.User;
 
 public class UseCase10 extends TestCase {
 

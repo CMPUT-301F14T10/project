@@ -53,80 +53,6 @@ public class ESManager {
 		gson = new Gson();
 	}
 	
-	
-	//This is to push the questionList to the server, commented out for now though until decided whether needed or not
-	
-/*	public void addQuestionList(QuestionList questionList) {
-		System.out.print("INSIDE NETWORK MANAGER - ADDQUESTIONLIST METHOD");
-		HttpClient httpClient = new DefaultHttpClient();
-		
-		try {
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + "/_questionList");
-
-			final GsonBuilder gsonBuilder2= new GsonBuilder();
-			gsonBuilder2.registerTypeAdapter(QuestionList.class,new QuestionListSerializer());
-			StringEntity stringEntity = new StringEntity(gson.toJson(questionList));
-			addRequest.setEntity(stringEntity);
-			
-			// Execute the request
-			HttpResponse response = httpClient.execute(addRequest);
-			String status = response.getStatusLine().toString();
-			System.out.println("ADDQUESTIONLIST - HTTP STATUS ----- " + status);
-			
-			
-		} catch (Exception e) {
-			System.out.println("ADD QUESTION FAILED");
-			e.printStackTrace();
-		}
-	}*/
-	
-	//Get the questionlist from the server, commented out until it is needed or not
-	
-	/*public QuestionList getQuestionList() {
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(RESOURCE_URL + "/_questionList");
-		HttpResponse response;
-		try {
-			response = httpClient.execute(httpGet);
-			String json = getEntityContent(response);
-
-			final GsonBuilder gsonBuilder= new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionListDeserializer());
-			Gson gson= gsonBuilder.create();
-			QuestionList deserialized= gson.fromJson(json,QuestionList.class);
-			return deserialized;
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}*/
-	
-	/* This method is for potential future use; pulling questions from the server
-	public Question getQuestion(int questionID) {
-		
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(RESOURCE_URL + questionID);
-		
-		HttpResponse response;
-		try {
-			response = httpClient.execute(httpGet);
-			String json = getEntityContent(response);
-
-			final GsonBuilder gsonBuilder= new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(QuestionList.class,new QuestionDeserializer());
-			Gson gson= gsonBuilder.create();
-			Question deserialized= gson.fromJson(json,Question.class);
-			return deserialized;
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	*/
-	
 	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
 	/**
 	 * Gets the entity content.
@@ -156,13 +82,6 @@ public class ESManager {
 		
 		try {
 			HttpPost addRequest = new HttpPost(RESOURCE_URL + newQuestion.getID().toString());
-			
-			/* Can be used later or not
-			GsonBuilder gsonBuilder= new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(Question.class, new QuestionSerializer());
-			gson= gsonBuilder.create();
-			*/
-			
 			StringEntity stringEntity = new StringEntity(gson.toJson(newQuestion));
 			addRequest.setEntity(stringEntity);
 			
@@ -196,7 +115,6 @@ public class ESManager {
 			Question question = getQuestion(questionID);
 			question.addAnswer(newAnswer);
 	
-			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
 			StringEntity stringEntity = new StringEntity("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}}");
 			addRequest.setEntity(stringEntity);
 			
@@ -229,22 +147,6 @@ public class ESManager {
 			Question question = getQuestion(questionID);
 			question.upvoteResponse();
 			
-			// For Testing Checks
-			System.out.println("WANTED ID : " + questionID);
-			for(Question q : ListHandler.getMasterQList().getQuestionList()) {
-				System.out.println("-- New Question --");
-				System.out.println("ID : " + q.getStringID());
-				System.out.println("Name : " + q.getName());
-				System.out.println("Author : " + q.getAuthor());
-				System.out.println("Upvotes : " + q.getUpvotes());
-				System.out.println("    ANSWERS");
-				for (Answer a : q.getAnswerList().getAnswerList()) {
-					System.out.println("New Answer -- > " + a.getName());
-				}
-				System.out.println();
-			}
-			
-			System.out.println("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}");
 			StringEntity stringEntity = new StringEntity("{\"doc\": {\"upvote\":" + gson.toJson(question.getUpvotes()) + "}}");
 			addRequest.setEntity(stringEntity);
 			
@@ -281,7 +183,6 @@ public class ESManager {
 
 			answer.upvoteResponse();
 			
-			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
 			StringEntity stringEntity = new StringEntity("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}}");
 			addRequest.setEntity(stringEntity);
 			
@@ -316,7 +217,6 @@ public class ESManager {
 			question.addReply(newReply);
 			
 			// serialize the replies with the newly added reply
-			System.out.println("{\"doc\": {\"replies\":" + gson.toJson(question.getReplies()) + "}}");
 			StringEntity stringEntity = new StringEntity("{\"doc\": {\"replies\":" + gson.toJson(question.getReplies()) + "}}");
 			addRequest.setEntity(stringEntity);
 			
@@ -354,7 +254,6 @@ public class ESManager {
 			answer.addReply(newReply);
 			
 			// serialize the entire answerList again
-			System.out.println("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}");
 			StringEntity stringEntity = new StringEntity("{\"doc\": {\"answerList\":" + gson.toJson(question.getAnswerList()) + "}}");
 			addRequest.setEntity(stringEntity);
 			
