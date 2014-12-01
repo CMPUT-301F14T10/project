@@ -1,4 +1,4 @@
-package ca.ualberta.cs.queueunderflow.legacy_code;
+package ca.ualberta.cs.queueunderflow.models;
 
 
 /**

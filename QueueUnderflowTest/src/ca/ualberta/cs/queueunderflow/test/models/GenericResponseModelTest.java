@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 import ca.ualberta.cs.queueunderflow.models.GenericResponse;
+import ca.ualberta.cs.queueunderflow.models.Picture;
 import ca.ualberta.cs.queueunderflow.models.Reply;
 import ca.ualberta.cs.queueunderflow.models.ReplyList;
 import junit.framework.TestCase;

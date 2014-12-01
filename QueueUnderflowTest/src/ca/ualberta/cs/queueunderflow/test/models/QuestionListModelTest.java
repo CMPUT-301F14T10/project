@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
+import ca.ualberta.cs.queueunderflow.models.Picture;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import ca.ualberta.cs.queueunderflow.models.QuestionList;
 import junit.framework.TestCase;

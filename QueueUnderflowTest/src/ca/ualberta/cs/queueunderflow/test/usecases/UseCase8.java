@@ -1,8 +1,8 @@
 package ca.ualberta.cs.queueunderflow.test.usecases;
 
 import ca.ualberta.cs.queueunderflow.User;
-import ca.ualberta.cs.queueunderflow.legacy_code.Picture;
 import ca.ualberta.cs.queueunderflow.models.Answer;
+import ca.ualberta.cs.queueunderflow.models.Picture;
 import ca.ualberta.cs.queueunderflow.models.Question;
 import junit.framework.TestCase;
 
