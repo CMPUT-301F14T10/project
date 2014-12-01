@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 import ca.ualberta.cs.queueunderflow.ListHandler;
 import ca.ualberta.cs.queueunderflow.LoadSave;
 import ca.ualberta.cs.queueunderflow.NetworkManager;
@@ -125,10 +126,9 @@ public class MainActivity extends Activity {
         int returnFragment = getIntent().getIntExtra("returnFragment", -1);
         if (returnFragment != -1) {
         	fragmentPosition = returnFragment - 1;
-        	selectItem(returnFragment-1);
+        	selectItem(fragmentPosition);
         }
-        
-        if (savedInstanceState == null) {
+        else {
         	selectItem(0);
         }
         
