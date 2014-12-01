@@ -49,48 +49,44 @@ public class UseCase11B extends ActivityInstrumentationTestCase2<MainActivity> {
 	public void testUpvoteDisplay() throws Throwable {
 		getActivity();
 		
-		runTestOnUiThread(new Runnable() {
+
+		Intent intent = new Intent();
+		intent.putExtra("returnFragment", MainActivity.HOME_SCREEN_FRAGMENT);
+		setActivityIntent(intent);
+		MainActivity activity = (MainActivity) getActivity();
+				
+		// Get the listview & adapter
+		ListView listView = (ListView) activity.findViewById(R.id.homeListView);
+		QuestionListAdapter adapter = (QuestionListAdapter) listView.getAdapter();
 			
-			@Override
-			public void run() {
-				Intent intent = new Intent();
-				intent.putExtra("returnFragment", MainActivity.HOME_SCREEN_FRAGMENT);
-				setActivityIntent(intent);
-				MainActivity activity = (MainActivity) getActivity();
+		// Check that the number if items in the adapter is correct
+		assertTrue(adapter.getCount() == 2);
 				
-				// Get the listview & adapter
-				ListView listView = (ListView) activity.findViewById(R.id.homeListView);
-				QuestionListAdapter adapter = (QuestionListAdapter) listView.getAdapter();
+		// Get layout for the 1st question from the top in the listview
+		View view = adapter.getView(0, null, null);
+		assertEquals(anotherQuestion,adapter.getItem(0));
+	
+		// Check that the upvote is initially at 0
+		TextView upvoteCount = (TextView) view.findViewById(R.id.upvoteDisplay);
+		assertEquals(Integer.toString(0), upvoteCount.getText().toString());
 				
-				// Check that the number if items in the adapter is correct
-				assertTrue(adapter.getCount() == 2);
+		// Perform a click which should increase the upvote by 1
+		ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
+		upvoteBtn.performClick();
 				
-				// Get layout for the 1st question from the top in the listview
-				View view = adapter.getView(0, null, null);
-				assertEquals(anotherQuestion,adapter.getItem(0));
-				
-				// Check that the upvote is initially at 0
-				TextView upvoteCount = (TextView) view.findViewById(R.id.upvoteDisplay);
-				assertEquals(Integer.toString(0), upvoteCount.getText().toString());
-				
-				// Perform a click which should increase the upvote by 1
-				ImageButton upvoteBtn = (ImageButton) view.findViewById(R.id.upvoteBtn);
-				upvoteBtn.performClick();
-				
-				// Check that the upvote has increased by 1
-				assertEquals(Integer.toString(1), upvoteCount.getText().toString());
-				
-				// Check that the other question's upvote has not changed - ensuring that we're upvoting the correct question
-				View view1 = adapter.getView(1, null, null);
-				assertEquals(question,adapter.getItem(1));
-				
-				// Check that the upvote is still at 0
-				TextView upvoteCount1 = (TextView) view1.findViewById(R.id.upvoteDisplay);
-				assertEquals(Integer.toString(0), upvoteCount1.getText().toString());
-				
-				activity.finish();
-			}
-		});
+		// Check that the upvote has increased by 1
+		assertEquals(Integer.toString(1), upvoteCount.getText().toString());
+		
+		// Check that the other question's upvote has not changed - ensuring that we're upvoting the correct question
+		View view1 = adapter.getView(1, null, null);
+		assertEquals(question,adapter.getItem(1));
+		
+		// Check that the upvote is still at 0
+		TextView upvoteCount1 = (TextView) view1.findViewById(R.id.upvoteDisplay);
+		assertEquals(Integer.toString(0), upvoteCount1.getText().toString());
+		
+		activity.finish();
+
 
 	}
 	
