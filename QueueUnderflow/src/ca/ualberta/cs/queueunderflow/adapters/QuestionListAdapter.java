@@ -101,9 +101,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			view = inflater.inflate(layoutID, parent, false);
 		}
 		
-		//By default, display an empty location textview
-		//TextView locationDisplay= (TextView) view.findViewById(R.id.locationTextView);
-		//locationDisplay.setText("");
 		
 		TextView questionDisplay = (TextView) view.findViewById(R.id.questionTextView);
 		questionDisplay.setText(questionArray.get(position).getName());
@@ -146,7 +143,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			@Override
 			public void onClick(View v) {
 				
-				//User user= ListHandler.getUser();
 				Question question= questionArray.get(position);
 				if (question.hasUserUpvoted()) {
 					Toast.makeText(getContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();
@@ -155,7 +151,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					boolean isInFavorites = false;
                     if(ListHandler.getFavsList().getQuestionList().contains(questionArray.get(position))) isInFavorites = true;
 				    
-                    // FIX THIS TO ADD ONLY THE QUESTION ID INSTEAD OF THE ENTIRE QUESTION
 					User.addUpvotedQuestion(questionArray.get(position).getID());
 					
 					// To mimic fake view updates
@@ -180,22 +175,13 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 			}	
 		});	
 		
-		//if (User.getUseLocation()) {
-			//String city= User.getCity();
-			//String country=User.getCountry();
-			//String location= city+","+country;
-			//String location= questionArray.get(position).getLocation();
-		//	locationDisplay.setText(location);
-		//}
 		
 		if (questionArray.get(position).hasPicture() == true) {
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
 			hasPictureIcon.setVisibility(View.VISIBLE);
 			
 			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
-			// TODO set imagePreview to the photo
-			//String imagePath= questionArray.get(position).getImagePath();
-			//imagePreview.setImageURI(Uri.parse(imagePath));
+
 			String encodedImage= questionArray.get(position).getEncodedImage();
 			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
 			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
@@ -210,9 +196,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				//Pass the position of the question to the new activity
 				intent.putExtra("question_position", position);
 				intent.putExtra("fromFragment", fromFragment);
-				//intent.putExtra("questionID", questionArray.get(position).getStringID());
 				activity.startActivity(intent);
-				//update(null);
 			}
 		});
 		
@@ -226,7 +210,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", position);
-				//args.putString("questionID", questionArray.get(position).getStringID());
 				args.putInt("type", TYPE_QUESTION);
 				
 				// Create & display reply dialog + attach arguments
@@ -246,7 +229,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Question question = questionArray.get(position);
 				question.setIsFav(isChecked);
 				
-				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
 				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getMyQsList().get(index).setIsFav(isChecked);
@@ -254,7 +236,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsFav()));
 				}
 
-				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
 				index = ListHandler.getReadingList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getReadingList().get(index).setIsFav(isChecked);
@@ -268,19 +249,19 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 						System.out.println("unfavoriting from fav buffer");
 						buffer.addToFavBuffer(question.getStringID());
 						
-						//
+						
 						System.out.println("FAVLISTBUFFER CONTENT");
 						System.out.println(buffer.favBuffer);
-						//
+						
 					}
 					else {
 						System.out.println("favoriting from fav buffer");
 						buffer.removeFromFavBuffer(question.getStringID());
 						
-						//
+						
 						System.out.println("FAVLISTBUFFER CONTENT");
 						System.out.println(buffer.favBuffer);
-						//
+						
 					}
 				}
 				
@@ -289,27 +270,27 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 						System.out.println("favoriting normal");
 						ListHandler.getFavsList().add(question);
 						
-						//
+						
 						System.out.println("FAVLIST CONTENT");
 						ArrayList<String> favIDs = new ArrayList<String>();
 						for (Question q : ListHandler.getFavsList().getQuestionList()) {
 							favIDs.add(q.getStringID());
 						}
 						System.out.println(favIDs);
-						//
+						
 					}
 					else if (isChecked == false) {
 						System.out.println("unfavoriting normal");
 						ListHandler.getFavsList().remove(question);
 						
-						//
+						
 						System.out.println("FAVLIST CONTENT");
 						ArrayList<String> favIDs = new ArrayList<String>();
 						for (Question q : ListHandler.getFavsList().getQuestionList()) {
 							favIDs.add(q.getStringID());
 						}
 						System.out.println(favIDs);
-						//
+						
 					}
 				}
 				//Mark as unsaved changes,
@@ -326,7 +307,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 				Question question = questionArray.get(position);
 				question.setIsInReadingList(isChecked);
 
-				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
 				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getMyQsList().get(index).setIsInReadingList(isChecked);
@@ -334,7 +314,6 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 					System.out.println(Boolean.toString(ListHandler.getMyQsList().getFromStringID(question.getStringID()).getIsInReadingList()));
 				}
 				
-				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
 				index = ListHandler.getFavsList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getFavsList().get(index).setIsInReadingList(isChecked);
@@ -348,19 +327,19 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 						System.out.println("unmarking from readinglist buffer");
 						buffer.addToReadingListBuffer(question.getStringID());
 						
-						//
+						
 						System.out.println("READINGLISTBUFFER CONTENT");
 						System.out.println(buffer.readingListBuffer);
-						//
+						
 					}
 					else {
 						System.out.println("marking as on readinglist buffer");
 						buffer.removeFromReadingListBuffer(question.getStringID());
 						
-						//
+						
 						System.out.println("READINGLISTBUFFER CONTENT");
 						System.out.println(buffer.readingListBuffer);
-						//
+						
 					}
 				}
 				
@@ -369,27 +348,27 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 						System.out.println("marking as readinglist normal");
 						ListHandler.getReadingList().add(question);
 						
-						//
+						
 						System.out.println("READINGLIST CONTENT");
 						ArrayList<String> readingListIDs = new ArrayList<String>();
 						for (Question q : ListHandler.getReadingList().getQuestionList()) {
 							readingListIDs.add(q.getStringID());
 						}
 						System.out.println(readingListIDs);
-						//
+						
 					}
 					else if (isChecked == false) {
 						System.out.println("unreadinglist normal");
 						ListHandler.getReadingList().remove(question);
 						
-						//
+						
 						System.out.println("READINGLIST CONTENT");
 						ArrayList<String> readingListIDs = new ArrayList<String>();
 						for (Question q : ListHandler.getReadingList().getQuestionList()) {
 							readingListIDs.add(q.getStringID());
 						}
 						System.out.println(readingListIDs);
-						//
+						
 					}
 				}
 				//Mark as unsaved changes,

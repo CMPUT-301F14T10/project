@@ -44,10 +44,6 @@ public class QuestionDeserializer implements JsonDeserializer<Question> {
 	    final boolean inReadingList= jsonQuestion.get("isInReadingList").getAsBoolean();
 	    final boolean isFavorite= jsonQuestion.get("isFav").getAsBoolean();
 	    
-	    
-		//Type listType = new TypeToken<ArrayList<Reply>>() {}.getType();
-	    //ArrayList<Reply> replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"), listType);
-	   // ReplyList replyList= new Gson().fromJson(jsonQuestion.get("questionReplies"),listType);
 	    final GsonBuilder gsonBuilder = new GsonBuilder();
 	    
 	    Gson gson2=gsonBuilder.create();

@@ -75,7 +75,6 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         
-        // This is never called - can't figure out why
         if (id == android.R.id.home) {
         	Toast.makeText(getActivity(), "collapsing after click", Toast.LENGTH_SHORT).show();
         }
@@ -130,7 +129,6 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 			
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				//String query = searchView.getQuery().toString();
 				System.out.println("Query = " + query);
 				
 				if (!NetworkManager.getInstance().isOnline(getActivity())) {
@@ -144,7 +142,6 @@ public class SearchFragment extends Fragment implements TView<QuestionList>{
 			
 			@Override
 			public boolean onQueryTextChange(String newText) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 		});

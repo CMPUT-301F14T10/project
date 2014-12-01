@@ -19,7 +19,6 @@ public class AnswerList {
 /** The answer list. */
 protected ArrayList <Answer> answerList;
     
-    // sets a new arraylist
 	/**
      * Instantiates a new answer list.
      */
@@ -33,11 +32,9 @@ protected ArrayList <Answer> answerList;
 	 * @param answer the answer
 	 */
 	public void add (Answer answer) {
-		// Add at position 0, so that freshest A is always first
 		answerList.add(0, answer);	
 	}
 	
-	//returns the size of answerlist. So you can keep track of number of answers
 	/**
 	 * Size.
 	 *
@@ -47,7 +44,6 @@ protected ArrayList <Answer> answerList;
 		return answerList.size();
 	}
 	
-	//grabs the answer
 	/**
 	 * Gets the answer at the specified location in the list.
 	 *
@@ -58,7 +54,6 @@ protected ArrayList <Answer> answerList;
 		return answerList.get(i);
 	}
 	
-	// returns the arraylist of answers
 	/**
 	 * Gets the answer list.
 	 *

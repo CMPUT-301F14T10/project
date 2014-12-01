@@ -30,13 +30,7 @@ public class User {
 	/**  User's country. */
 	protected static String country="Unknown";
 	
-	/** The upvoted questions. Depreciated*/
-	//protected ArrayList <Question> upvotedQuestions;
-	
-	/** The upvoted answers. Depreciated*/
-	//protected ArrayList <Answer> upvotedAnswers;
-	
-	//Applied static to these arraylist
+	/** The upvoted questions.*/
 	protected static ArrayList <UUID> upvotedQuestions;
 	
 	/** The upvoted answers. */
@@ -47,15 +41,11 @@ public class User {
 	 */
 	public User() {
 		this.username="Anonymous";
-		//this.upvotedQuestions= new ArrayList<Question>();
-		//this.upvotedAnswers= new ArrayList<Answer>();
+
 		
 		this.upvotedQuestions= new ArrayList <UUID>();
 		this.upvotedAnswers= new ArrayList<UUID>();
-		//By default, the user's city and country is set to Unknown
-		// in case the user clicks on the location checkbox but doesn't do anything else
-		//this.country="Unknown";
-		//this.city="Unknown";
+
 		this.displayCheckbox=false;
 	}
 	
@@ -71,8 +61,7 @@ public class User {
 			throw new IllegalArgumentException("Invalid username. Username is set to Anonymous.");
 		}
 		this.username=tempUserName;
-		//this.upvotedQuestions= new ArrayList<Question>();
-		//this.upvotedAnswers= new ArrayList<Answer>();
+
 		this.upvotedQuestions= new ArrayList <UUID>();
 		this.upvotedAnswers= new ArrayList<UUID>();
 	}
@@ -151,7 +140,6 @@ public class User {
 	
 	
 	public static void addUpvotedQuestion(UUID uuid) {
-		//upvotedQuestions.add(question);
 		upvotedQuestions.add(uuid);
 	}
 	

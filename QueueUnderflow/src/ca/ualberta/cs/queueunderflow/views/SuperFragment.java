@@ -118,8 +118,10 @@ public class SuperFragment extends Fragment implements TView<QuestionList>{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				
 				// Go to QAViewActivity to see the Q & A
 				Intent intent = new Intent(getActivity(), QAViewActivity.class);
+				
 				// Pass position of question selected & the fragment so we can retrieve the question & inflate it in QAView
 				intent.putExtra("position", position);
 				intent.putExtra("fromFragment", fromFragment);

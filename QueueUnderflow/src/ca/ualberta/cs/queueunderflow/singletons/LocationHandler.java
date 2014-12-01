@@ -31,8 +31,6 @@ import android.util.Log;
 public class LocationHandler implements LocationListener{
 
 	/* Use the LocationManager class to obtain GPS locations */
-	//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-	//LocationListener locListener = new MyLocationListener();
 	
 	/** The loc manager. */
 	LocationManager locManager;
@@ -54,11 +52,11 @@ public class LocationHandler implements LocationListener{
 										  //Lower values drains battery apparently
 	
 	/**
-  										 * Instantiates a new location handler.
-  										 *
-  										 * @param context the context
-  										 */
-  										public LocationHandler(Context context)
+  	* Instantiates a new location handler.
+  	*
+  	* @param context the context
+  	*/
+  	public LocationHandler(Context context)
 	{
 		ctx = context;
 		locManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
@@ -154,7 +152,6 @@ public class LocationHandler implements LocationListener{
 		}
 		
 		//Depending on where the user is, city may be named something else...
-		//Try a bunch
 		sCity = address.optString("city");
 		if(sCity.equals("")) sCity = address.optString("town");
 		if(sCity.equals("")) sCity = address.optString("hamlet");
@@ -168,56 +165,7 @@ public class LocationHandler implements LocationListener{
 		return sCity + "|" + sCountry;
 	}
 	
-	/*
-	public String getLocationFromCoordinates(double latitude, double longitude)
-	{
-		//This returns a string formated like "CITY, COUNTRY"
-		//eg. "Edmonton,Canada"
-		
-		//This REQUIRES an Internet connection to run.
-		
-		
-		//Lots of this is taken from http://developer.android.com/training/location/display-address.html
-		Geocoder geocoder = new Geocoder(ctx, Locale.getDefault());
-		List<Address> addresses = null;
-		
-		try {
-			addresses = geocoder.getFromLocation(latitude, longitude, 1);
-		} catch (IOException e1) {
-			// IOException. No idea when this will run.
-			return null;
-		} catch (IllegalArgumentException e2) {
-			//Illegal arguments! Something wrong with the coordinates passed.
-			//Most likely longitude and latitude is unset with no values available.
-			//For now, let's just say the user is at "Unknown"
-			return null;
-		}
-		
-		if (addresses != null && addresses.size() > 0) {
-			
-			//It returned an address.
-			
-			String addressString;
-			
-			Address address = addresses.get(0);
-			addressString = String.format("%s|%s", address.getLocality(), address.getCountryName());
-			return addressString;
-			
-		} else {
-			
-			//If getFromLocation returns no addresses at all.......
-			//This happens if the user isn't in a country
-			//example: adding questions while in the middle of the Atlantic ocean.
-			
-			//In this situation what are we supposed to do?
-			//For now, return unknown. (maybe return coordinates later)?
-			
-			return null;
-			
-		}
-		
-	}*/
-	
+
 	/**
 	 * Tell Location to stop listening for GPS update events.
 	 */

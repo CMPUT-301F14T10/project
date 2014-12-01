@@ -326,7 +326,6 @@ public void addAnswer(String questionID, Answer newAnswer) {
 		}
 	}
 	
-	// UPVOTE ANSWER
 	/**
 	 * Upvote answer.
 	 *
@@ -382,7 +381,6 @@ public void addAnswer(String questionID, Answer newAnswer) {
 		}
 	}
 	
-	// ADD QUESTION REPLY
 	/**
 	 * Adds the q reply.
 	 *
@@ -439,7 +437,6 @@ public void addAnswer(String questionID, Answer newAnswer) {
 		
 	}
 	
-	// ADD ANSWER REPLY
 	/**
 	 * Adds the a reply.
 	 *

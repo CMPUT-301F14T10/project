@@ -77,7 +77,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
     /** The question position. */
     private int questionPosition;
     
-    //creates the AnswerListAdapter
     /**
      * Instantiates a new answer list adapter.
      *
@@ -271,28 +270,15 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 					
 
 				}
-            	/*
-                TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-                upvoteDisplay.setText(Integer.toString(answerArray.get(groupPosition).getUpvotes()));
-                */
+
             }
         });
 		
         if (answerArray.get(groupPosition).hasPicture() == true) {
-            //ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
-           // hasPictureIcon.setVisibility(0);
-            
-			//ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
-			// TODO set imagePreview to the photo
-			//String imagePath= answerArray.get(groupPosition).getImagePath();
-			//imagePreview.setImageURI(Uri.parse(imagePath));
-        	
+
 			ImageButton hasPictureIcon = (ImageButton) view.findViewById(R.id.hasPictureIcon);
 			hasPictureIcon.setVisibility(0);
 			ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
-			// TODO set imagePreview to the photo
-
-            //Changed this because using setting the image to be displayed as bitmap, not by uri 
 			String encodedImage= answerArray.get(groupPosition).getEncodedImage();
 			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
 			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
@@ -309,8 +295,7 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", questionPosition);
 				args.putInt("answerPosition", groupPosition);
-				//args.putString("questionID", findQuestionList().get(questionPosition).getStringID());
-				//args.putString("answerID", answerArray.get(groupPosition).getStringID());
+
 				args.putInt("type", TYPE_ANSWER);
 				
 				// Create & display reply dialog + attach arguments
@@ -337,7 +322,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 					ListHandler.getFavsList().add(tempQuestion);
 					tempList.set(tempList.getIndexFromID(tempQuestion.getID()), tempQuestion);
 					
-					// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
 					int index = ListHandler.getMyQsList().getIndexFromID(tempQuestion.getID());
 					if (index != -1) {
 						ListHandler.getMyQsList().get(index).setIsFav(true);
@@ -369,7 +353,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
 					ListHandler.getReadingList().add(tempQuestion);
 					tempList.set(tempList.getIndexFromID(tempQuestion.getID()), tempQuestion);
 					
-					// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
 					int index = ListHandler.getMyQsList().getIndexFromID(tempQuestion.getID());
 					if (index != -1) {
 						ListHandler.getMyQsList().get(index).setIsInReadingList(true);
@@ -393,7 +376,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public boolean hasStableIds() {
-        // TODO Auto-generated method stub
         return false;
     }
  
@@ -402,7 +384,6 @@ public class AnswerListAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        // TODO Auto-generated method stub
         return false;
     }
     

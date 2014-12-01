@@ -53,7 +53,7 @@ public class ESManager {
 		gson = new Gson();
 	}
 	
-	//Gets content from HTTP response, adapted from elasticsearch in 301 lab again
+	//adapted from elasticsearch in 301 lab again
 	/**
 	 * Gets the entity content.
 	 *
@@ -283,7 +283,6 @@ public class ESManager {
 	public List<Question> searchQuestions(String searchString, String field) {
 		List<Question> result = new ArrayList<Question>();
 
-		// TODO: Implement search Questions using ElasticSearch
 		if (searchString == null || "".equals(searchString)) {
 			searchString = "*"; // wildcard - search for everything
 		}

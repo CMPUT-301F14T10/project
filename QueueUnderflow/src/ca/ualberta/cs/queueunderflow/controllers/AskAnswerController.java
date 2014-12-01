@@ -45,7 +45,7 @@ public class AskAnswerController {
 	private Activity activity;	// This is so we can make Toast messages
 	
 	/** The image path. */
-	private String imagePath; // Not used yet
+	private String imagePath; 
 	
 	/** The image encoded in base64. */
 	private String encodedImage;
@@ -215,8 +215,6 @@ public class AskAnswerController {
 				return ATTACH_PHOTO_TRY_AGAIN;
 			}
 			response.setHasPicture(true);
-			//New here
-			//newQuestion.setImagePath(imagePath);
 			response.setEncodedImage(encodedImage);
 		}
 		

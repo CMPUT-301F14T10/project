@@ -41,14 +41,12 @@ public class SetUsernameFragment extends Fragment {
 		final EditText newUsername = (EditText) view.findViewById(R.id.newUsername);
 		Button submitBtn = (Button) view.findViewById(R.id.submitBtn);
 		
-		/* Need to put some of this in a controller later */
 		currentUsername.setText(User.getUserName());
 		submitBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				String username = newUsername.getText().toString();
-				//User user = new User();
 				User user= ListHandler.getUser();
 				
 				int flag = 0;

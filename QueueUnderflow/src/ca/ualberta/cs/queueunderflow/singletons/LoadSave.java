@@ -169,8 +169,6 @@ public class LoadSave {
         gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
         Gson gson = gsonbuild.create();
             
-        //Type qlType = new TypeToken<QuestionList>() {}.getType();
-        //QuestionList qList = gson.fromJson(gsonString, qlType);
         QuestionList qList = gson.fromJson(gsonString, QuestionList.class);
     
             if(qList != null)
@@ -207,8 +205,6 @@ public class LoadSave {
 		gsonbuild.registerTypeAdapter(QuestionList.class, new QuestionListDeserializer());
 		Gson gson = gsonbuild.create();
 		
-		//Type qlType = new TypeToken<QuestionList>() {}.getType();
-		//QuestionList qList = gson.fromJson(gsonString, qlType);
 		QuestionList qList = gson.fromJson(gsonString, QuestionList.class);
 
 		if(qList != null)
@@ -498,7 +494,6 @@ public class LoadSave {
 	
 		//save network buffer to sharedpreferences
 		Gson gson= new Gson();
-		//Not sure if we need a serializer for this but too lazy to make one unless we need it
 		NetworkBuffer networkBuffer= NetworkManager.getInstance().getNetworkBuffer();
 		String json= gson.toJson(networkBuffer);
 		this.saveData(networkBufferKey,json);

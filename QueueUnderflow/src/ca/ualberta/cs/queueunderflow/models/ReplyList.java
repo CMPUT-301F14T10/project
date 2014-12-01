@@ -120,7 +120,7 @@ public class ReplyList {
 				}
 		};
 		
-		// Sort by nearby location, Replys with nearby location appear at the top
+		// Sort by nearby location, Replies with nearby location appear at the top
 		Comparator<Reply> nearbyComparator = new Comparator<Reply>() {
 
 			@Override

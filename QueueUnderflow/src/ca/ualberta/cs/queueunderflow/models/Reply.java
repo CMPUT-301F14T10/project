@@ -18,13 +18,8 @@ public class Reply {
 	
 	/**  The location of author. */
 	protected String location;
-	
-	/**
-	 * Instantiates a new reply.
-	 *
-	 */
-	
-	//Added date to use sorting method
+
+	/** Date of reply*/
 	protected Date date;
 	
 	/**

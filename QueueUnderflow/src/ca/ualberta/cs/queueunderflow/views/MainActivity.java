@@ -153,39 +153,9 @@ public class MainActivity extends Activity {
     	//This executes whenever the main activity resumes.
     	//Examples: after adding a question, returning to the main screen after favoriting, etc
     	
-    	//I used this instead of onPause() because I think it works better for knowing when to save.
-    	//With onPause it wouldn't save after adding a question unless specifically clicking on another question
     	super.onResume();
     	Log.d("Test", "On resume executed!"); //Debugging purposes.
 
-    	//I have implemented LoadSave.unsavedChanges as a static boolean to be set as true whenever there are
-    	//changes in favorites, myquestions, or reading list that need to be saved to the phone's memory. Constantly
-    	//saving data to the phone whenever you return to the main activity may lose us marks in the future?
-    	
-    	//However, since we don't currently have unique ID's for questions or unique ID's for users, it's very
-    	//difficult to determine if new replies/answers to a question belong to one the user wants saved.
-    	//I'm going to assume there WILL be unique ID's in the future, so I implemented the basics in various controllers
-    	//that will inform LoadSave that there are changes that need to be saved.
-    	
-    	//This code does not yet work though, so for now the application will save whenever you return to the main activity.
-    	
-    	/* I moved this to onPause else it doesn't save favs/readinglist actions if onResume is called again before user exits the app
-    	LoadSave ls = LoadSave.getInstance();
-    	ls.SaveFavorites();
-    	ls.saveMyQuestions();
-    	ls.SaveReadingList();
-    	*/
-    	
-    	/*
-    	if(LoadSave.unsavedChanges)
-    	{
-    		LoadSave ls = new LoadSave();
-    		ls.SaveFavorites();
-    		ls.saveMyQuestions();
-    		LoadSave.unsavedChanges = false;
-    	}
-    	*/
-    	
     	// Below deals with pushing Questions, Answers & Replies that weren't posted online while the device was offline
     	NetworkManager networkManager = NetworkManager.getInstance();
     	if (networkManager.isOnline(getApplicationContext())) {
@@ -283,7 +253,6 @@ public class MainActivity extends Activity {
     private void selectSearchFragment(SearchView searchView) {
     	Fragment fragment = new SearchFragment(searchView);
     	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-    	//getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
 	}
 
 	// This is called when we call invalidateOptionsMenu()
@@ -343,7 +312,6 @@ public class MainActivity extends Activity {
 		}
     }
     
-    // Sets the view to the fragment of the user selection from the nav drawer
     /**
      * Switches to the specified fragment & inflates it.
      *

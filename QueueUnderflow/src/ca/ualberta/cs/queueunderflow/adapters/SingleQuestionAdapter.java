@@ -97,13 +97,12 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
         return singleQuestionArray.get(groupPosition).getReplyAt(childPosition);
     }
  
-    //grabs ChildID. Still needs to be done.
+    //grabs ChildID. 
     /* (non-Javadoc)
      * @see android.widget.ExpandableListAdapter#getChildId(int, int)
      */
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        // TODO Auto-generated method stub
         return 0;
     }
  
@@ -237,7 +236,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
              
             @Override
             public void onClick(View v) {
-            	//User user= ListHandler.getUser();
             	Question question= singleQuestionArray.get(groupPosition);
     			if (question.hasUserUpvoted()) {
 					Toast.makeText(activity.getApplicationContext(), "Question was already upvoted", Toast.LENGTH_SHORT).show();			// This should be in the model?
@@ -267,10 +265,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 
 
 				}
-            	/*
-                TextView upvoteDisplay = (TextView) view.findViewById(R.id.upvoteDisplay);
-                upvoteDisplay.setText(Integer.toString(singleQuestionArray.get(groupPosition).getUpvotes()));
-                */
+
             }
         });
          
@@ -279,11 +274,7 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
             hasPictureIcon.setVisibility(0);
             
             ImageView imagePreview = (ImageView) view.findViewById(R.id.imagePreview);
-            // TODO set imagePreview to the photo
-			//String imagePath= singleQuestionArray.get(groupPosition).getImagePath();
-			//imagePreview.setImageURI(Uri.parse(imagePath));
-			
-            //Changed this because using setting the image to be displayed as bitmap, not by uri 
+
 			String encodedImage= singleQuestionArray.get(groupPosition).getEncodedImage();
 			byte [] imageBytes= Base64.decode(encodedImage.getBytes(), Base64.DEFAULT);
 			imagePreview.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length));
@@ -299,7 +290,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Bundle args = new Bundle();
 				args.putInt("fromFragment", fromFragment);
 				args.putInt("questionPosition", questionPosition);
-				//args.putString("questionID", singleQuestionArray.get(groupPosition).getStringID());
 				args.putInt("type", TYPE_QUESTION);
 				
 				// Create & display reply dialog + attach arguments
@@ -321,7 +311,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				intent.putExtra("fromFragment", fromFragment);
 				intent.putExtra("questionID", singleQuestionArray.get(groupPosition).getStringID());
 				activity.startActivity(intent);
-				//update(null);
 			}
 		});
 
@@ -334,7 +323,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Question question = singleQuestionArray.get(groupPosition);
 				question.setIsFav(isChecked);
 				
-				// To fix the bug where Q's favorited are not being shown as favorited in myQs fragment. - not the best way to handle it but due to limited time this will work
 				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getMyQsList().get(index).setIsFav(isChecked);
@@ -346,27 +334,27 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 					System.out.println("favoriting normal");
 					ListHandler.getFavsList().add(question);
 					
-					//
+					
 					System.out.println("FAVLIST CONTENT");
 					ArrayList<String> favIDs = new ArrayList<String>();
 					for (Question q : ListHandler.getFavsList().getQuestionList()) {
 						favIDs.add(q.getStringID());
 					}
 					System.out.println(favIDs);
-					//
+					
 				}
 				else if (isChecked == false) {
 					System.out.println("unfavoriting normal");
 					ListHandler.getFavsList().remove(question);
 					
-					//
+					
 					System.out.println("FAVLIST CONTENT");
 					ArrayList<String> favIDs = new ArrayList<String>();
 					for (Question q : ListHandler.getFavsList().getQuestionList()) {
 						favIDs.add(q.getStringID());
 					}
 					System.out.println(favIDs);
-					//
+					
 				}
 				
 				//Mark as unsaved changes.
@@ -384,7 +372,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
 				Question question = singleQuestionArray.get(groupPosition);
 				question.setIsInReadingList(isChecked);
 				
-				// To fix the bug where Q's marked as in reading list are not being shown as marked in myQs fragment. - not the best way to handle it but due to limited time this will work
 				int index = ListHandler.getMyQsList().getIndexFromID(question.getID());
 				if (index != -1) {
 					ListHandler.getMyQsList().get(index).setIsInReadingList(isChecked);
@@ -412,7 +399,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public boolean hasStableIds() {
-        // TODO Auto-generated method stub
         return false;
     }
  
@@ -421,7 +407,6 @@ public class SingleQuestionAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        // TODO Auto-generated method stub
         return false;
     }
  

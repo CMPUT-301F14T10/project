@@ -39,6 +39,7 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 		super.onStop();
 		//Stop thread from continuing before we leave the activity
 		if(gpsThread != null) gpsThread.cancel(true);
+		
 		//Stop GPS from listening before we leave the activity.
 		if(lHandler != null) lHandler.GPSUnlisten();
 	}
@@ -113,10 +114,7 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 
     	final CheckBox useLocation = (CheckBox) getActivity().findViewById(R.id.use_location_data);
     	final EditText city = (EditText) getActivity().findViewById(R.id.txtCity);
-    	final EditText country = (EditText) getActivity().findViewById(R.id.txtCountry);
-    	
-    	//Set fields to data in user...
-    	//useLocation.setChecked(User.getUseLocation());
+    	final EditText country = (EditText) getActivity().findViewById(R.id.txtCountry);   	
     	
     	//Use an on click listener to detect whether checkbox is checked or not
     	//Source: http://www.mkyong.com/android/android-checkbox-example/
@@ -166,7 +164,6 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 				
 					boolean isChecked = useLocation.isChecked();
 				
-					//User.setUseLocation(isChecked);
 					User.setCity(sCity);
 					User.setCountry(sCountry);
 
@@ -240,7 +237,6 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 				//Waiting for response...
 			}
 			
-			//publishProgress("GPS Location Found!");
 			
 			//Now get city name...
 			publishProgress("Getting locale information...");
@@ -260,7 +256,7 @@ public class SetLocationFragment extends Fragment implements OnClickListener{
 			
 			if(result == null)
 			{
-				//No idea where the user is. Set everything to unknown. Show coordinates maybe?
+				//No idea where the user is. Set everything to unknown. 
 				city = "Unknown";
 				country = "Unknown";
 			}else{

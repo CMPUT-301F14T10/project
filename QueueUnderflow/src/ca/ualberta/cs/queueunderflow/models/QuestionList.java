@@ -23,7 +23,7 @@ public class QuestionList extends TModel<TView>{
 	/** The question list. */
 	protected ArrayList <Question> questionList;
 	//QuestionList 2 is used in sort by pictures, questionlist 3 is used in the other sort by categories
-	//Is subject to change
+
 	/** The question list2. */
 	protected ArrayList <Question> questionList2;
 	
@@ -317,7 +317,6 @@ public class QuestionList extends TModel<TView>{
 		System.out.println("WANTED ID : " + id.toString());
 		for (int i = 0; i < questionList.size(); i++) {
 			System.out.println(i + " " + questionList.get(i).getID() + "  EQUALS " + Boolean.toString(questionList.get(i).getID() == id) + " VS " + Boolean.toString(questionList.get(i).getStringID().equals(id.toString())));
-			//if (questionList.get(i).getID() == id) {
 			if (questionList.get(i).getStringID().equals(id.toString())) {
 				System.out.println("QuestionList getIndexFromID --> returning index : " + i);
 				return i;

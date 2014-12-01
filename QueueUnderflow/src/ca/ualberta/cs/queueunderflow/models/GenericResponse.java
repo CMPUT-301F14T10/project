@@ -11,7 +11,6 @@ import ca.ualberta.cs.queueunderflow.TModel;
 import ca.ualberta.cs.queueunderflow.TView;
 
 
-// TODO: Auto-generated Javadoc
 /**
 * The Class GenericResponse.
 * Holds all the basic attributes of a response
@@ -24,9 +23,7 @@ public class GenericResponse {
 	/** The response name. */
 	protected String name;
 	
-	/** The response replies. */
-	//protected ArrayList <Reply> replies;
-	
+	/** The response replies. */	
 	protected ReplyList replies;
 	
 	/** The author. */
@@ -52,9 +49,7 @@ public class GenericResponse {
 	
 	/**  The unique ID. */
 	protected UUID uniqueID;
-	//protected String uniqueID;
 	
-	//The image path (where the image is)
 	/** The image path. */
 	private String imagePath;
 	
@@ -77,7 +72,6 @@ public class GenericResponse {
 			throw new IllegalArgumentException("Not a valid repsonse. Please enter another response.");
 		}
 		this.name=name;
-		//this.replies= new ArrayList<Reply> ();
 		this.replies= new ReplyList();
 		this.author=author;
 		this.upvote=0;
@@ -94,7 +88,6 @@ public class GenericResponse {
 		
 		//Set unique ID and convert to string to store in JSON form
 		uniqueID = UUID.randomUUID();
-//		this.uniqueID = UUID.randomUUID().toString();
 
 	}
 	
@@ -193,11 +186,6 @@ public class GenericResponse {
 	 *
 	 * @return the replies
 	 */
-	//public ArrayList<Reply> getReplies() {
-		//return this.replies;
-		
-	//}
-	
 	public ReplyList getReplies() {
 		return this.replies;
 	}
@@ -335,10 +323,7 @@ public class GenericResponse {
 	 *
 	 * @param replyList the new reply list
 	 */
-	//public void setReplyList(ArrayList<Reply> replyList) {
-		//this.replies= replyList;
-		
-	//}
+
 	public void setReplyList(ReplyList replyList) {
 		this.replies=replyList;
 	}
@@ -384,9 +369,7 @@ public class GenericResponse {
 	 */
 	public void setImagePath(String path) {
 		//Using this to check if pictures >64kb
-		
-		//this.imagePath=path;
-		
+
 		File imageFile = new File(path);
 		//Get size of the file in bytes, 1024 bytes in a kilobyte
 		long size = imageFile.length();

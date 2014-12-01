@@ -59,7 +59,8 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
 	
 	/** The question. */
 	private Question question;
-	
+    // Sets the view to the fragment of the user selection from the nav drawer
+
 	/** The question id. */
 	private String questionID;
 	
@@ -215,27 +216,23 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         switch(id) {
         case R.id.mostRecentMenu:
         	question.getAnswerList().sortBy("most recent");
-        	//NEW: IF sort by most recent in QAView, also sort all replies by most recent (for consistency with sort by location)
         	question.getReplies().sortBy("most recent");
         	for (int i=0; i<question.getAnswerList().size(); i++) {
         		Answer answer= question.getAnswerList().getAnswer(i);
         		answer.getReplies().sortBy("most recent");
         	}
         	adapter.notifyDataSetChanged();
-        	//Added this to make sure the question replies update on QAView
         	singleQAdapter.notifyDataSetChanged();
         	return true;
         case R.id.leastRecentMenu:
         	question.getAnswerList().sortBy("least recent");
         	
-        	//New: If sort by least recent in QAView, also sort the replies of both question and answer
         	question.getReplies().sortBy("least recent");
         	for (int i=0; i<question.getAnswerList().size(); i++) {
         		Answer answer= question.getAnswerList().getAnswer(i);
         		answer.getReplies().sortBy("least recent");
         	}
         	adapter.notifyDataSetChanged();
-        	//Added this to make sure the question replies update on QAView
         	singleQAdapter.notifyDataSetChanged();
 
         	return true;
@@ -254,7 +251,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         	
         case R.id.nearbyPostsMenu:
         	question.getAnswerList().sortBy("nearby answers");
-        	//Sort replies (question and answer) by location as well if you sort answers by location
         	
         	question.getReplies().sortBy("nearby replies");
         	for (int i=0; i<question.getAnswerList().size(); i++) {
@@ -262,7 +258,6 @@ public class QAViewActivity extends Activity implements TView<QuestionList>{
         		answer.getReplies().sortBy("nearby replies");
         	}
         	adapter.notifyDataSetChanged();
-         	//Added this to make sure the question replies update on QAView
         	singleQAdapter.notifyDataSetChanged();
         	return true;
         }

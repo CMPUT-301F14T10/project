@@ -59,10 +59,7 @@ public class ListHandler {
 		resultsList = new QuestionList();
 		user = new User();
 		
-//		favIDs = new ArrayList<String>();
-//		readingListIDs = new ArrayList<String>();
-//		myQIDs = new ArrayList<String>();
-		
+
 	}
 	
 	/**
@@ -97,7 +94,6 @@ public class ListHandler {
 	static public QuestionList getMyQsList() {
 		if (myQList == null) {
 			myQList = new QuestionList();
-//			myQIDs = new ArrayList<String>();
 		}
 		return myQList;
 	}
@@ -110,7 +106,6 @@ public class ListHandler {
 	static public QuestionList getFavsList() {
 		if (favQList == null) {
 			favQList = new QuestionList();
-//			favIDs = new ArrayList<String>();
 		}
 		return favQList;
 	}
@@ -123,7 +118,6 @@ public class ListHandler {
 	static public QuestionList getReadingList() {
 		if (readingList == null) {
 			readingList = new QuestionList();
-//			readingListIDs = new ArrayList<String>();
 		}
 		return readingList;
 	}
