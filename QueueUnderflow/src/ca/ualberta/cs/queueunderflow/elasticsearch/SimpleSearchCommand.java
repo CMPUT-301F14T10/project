@@ -1,5 +1,6 @@
 package ca.ualberta.cs.queueunderflow.elasticsearch;
 
+//This class is entirely taken directly from 301 AndroidElasticSearch Lab : https://github.com/dfserrano/AndroidElasticSearch
 /**
  * The Class SimpleSearchCommand.
  * @author group 10

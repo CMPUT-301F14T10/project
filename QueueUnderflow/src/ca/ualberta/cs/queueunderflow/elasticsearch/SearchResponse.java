@@ -1,6 +1,6 @@
 package ca.ualberta.cs.queueunderflow.elasticsearch;
 
-
+//This class is entirely taken directly from 301 AndroidElasticSearch Lab : https://github.com/dfserrano/AndroidElasticSearch
 /**
  * The Class SearchResponse. Data Class
  * @author group 10

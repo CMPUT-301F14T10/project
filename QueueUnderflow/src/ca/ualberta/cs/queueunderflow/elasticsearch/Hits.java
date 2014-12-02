@@ -1,7 +1,7 @@
 package ca.ualberta.cs.queueunderflow.elasticsearch;
 import java.util.List;
 
-
+// This class is entirely taken directly from 301 AndroidElasticSearch Lab : https://github.com/dfserrano/AndroidElasticSearch
 /**
  * The Class Hits. Data Class.
  * @author group 10
